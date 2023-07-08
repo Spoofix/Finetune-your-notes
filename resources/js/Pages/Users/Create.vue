@@ -2,7 +2,14 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, router, useForm } from '@inertiajs/vue3';
 import Swal from 'sweetalert2'
+import {Link} from "@inertiajs/vue3"
+import { defineComponent } from 'vue';
 
+defineComponent({
+  components: {
+    Link
+  },
+});
 const Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
@@ -67,8 +74,8 @@ function submit() {
         <div class="block block-rounded">
             <div class="block-header block-header-default">
                 <h3 class="block-title">Create User </h3>
-                <a :href="route('users.list.pending')" class="btn btn-info mr-3">Pending User</a>
-                <a :href="route('users.list')" class="btn btn-outline-info mr-3">Users</a>
+                <Link :href="route('users.list.pending')" class="btn btn-info mr-3">Pending User</Link>
+                <Link :href="route('users.list')" class="btn btn-outline-info mr-3">Users</Link>
             </div>
 
             <div class="block-content">

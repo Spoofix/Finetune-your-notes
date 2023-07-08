@@ -2,7 +2,14 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
 import Swal from 'sweetalert2'
+import {Link} from "@inertiajs/vue3"
+import { defineComponent } from 'vue';
 
+defineComponent({
+  components: {
+    Link
+  },
+});
 const Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
@@ -23,10 +30,10 @@ const Toast = Swal.mixin({
         <div class="col-md-12">
             <div class="block block-rounded">
                 <div class="block-header px-5">
-                    <a class="btn btn-secondary mr-3 text-capitalize" :href="route('dashboard')">Back</a>
+                    <Link class="btn btn-secondary mr-3 text-capitalize" :href="route('dashboard')">Back</Link>
                     <h2 class="block-title" style="font-size: 20px; text-transform: uppercase;">Profile</h2>
-                    <a class="btn btn-info mr-3 text-capitalize" :href="route('profile.change-password')">Change Password</a>
-                    <a class="btn btn-info mr-3 text-capitalize" :href="route('profile.edit')">Update Profile</a>
+                    <Link class="btn btn-info mr-3 text-capitalize" :href="route('profile.change-password')">Change Password</Link>
+                    <Link class="btn btn-info mr-3 text-capitalize" :href="route('profile.edit')">Update Profile</Link>
                 </div>
                 <div class="block-content pb-5 px-5">
 

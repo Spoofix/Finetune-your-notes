@@ -2,7 +2,14 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, router, useForm } from '@inertiajs/vue3';
 import Swal from 'sweetalert2'
+import {Link} from "@inertiajs/vue3"
+import { defineComponent } from 'vue';
 
+defineComponent({
+  components: {
+    Link
+  },
+});
 const Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
@@ -194,21 +201,21 @@ function activate(id) {
                                     <ul class="pagination pagination-sm">
                                         <template v-for="(link, p) in $page.props.organizations.links" :key="p">
                                             <li class="page-item" v-if="link.label.includes('Previous')">
-                                                <a class="page-link" :href="link.url" tabindex="-1" aria-label="Previous">
+                                                <Link class="page-link" :href="link.url" tabindex="-1" aria-label="Previous">
                                                     <span aria-hidden="true" class="">
                                                         <i class="fa fa-angle-double-left mr-2"></i> Previous
                                                     </span>
-                                                </a>
+                                                </Link>
                                             </li>
                                             <li class="page-item" v-else-if="link.label.includes('Next')">
-                                                <a class="page-link" :href="link.url" aria-label="Next">
+                                                <Link class="page-link" :href="link.url" aria-label="Next">
                                                     <span aria-hidden="true" class="">
                                                         Next<i class="fa fa-angle-double-right ml-2"></i>
                                                     </span>
-                                                </a>
+                                                </Link>
                                             </li>
                                             <li class="page-item" :class="{ active: link.active }" v-else>
-                                                <a class="page-link" :href="link.url">{{ link.label }}</a>
+                                                <Link class="page-link" :href="link.url">{{ link.label }}</Link>
                                             </li>
                                         </template>
                                      </ul>

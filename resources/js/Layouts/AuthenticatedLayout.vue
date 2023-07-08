@@ -6,7 +6,13 @@ import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import { Link } from '@inertiajs/vue3';
+import { defineComponent } from 'vue';
 
+defineComponent({
+  components: {
+    Link
+  },
+});
 const showingNavigationDropdown = ref(false);
 </script>
 
@@ -24,11 +30,11 @@ const showingNavigationDropdown = ref(false);
                   <span class="smini-visible fw-bold tracking-wide fs-lg">
                     ye<span class="text-primary">s</span>
                   </span>
-                  <a class="link-fx fw-bold tracking-wide mx-auto" :href="route('dashboard')">
+                  <Link class="link-fx fw-bold tracking-wide mx-auto" :href="route('dashboard')">
                     <span class="smini-hidden">
                       <span class="fs-4 text-dual">ye</span><span class="fs-4 text-primary">spoff</span>
                     </span>
-                  </a>
+                  </Link>
                 </div>
                 <!-- END Logo -->
 
@@ -50,16 +56,16 @@ const showingNavigationDropdown = ref(false);
                 <div class="content-side content-side-full">
                   <ul class="nav-main">
                     <li class="nav-main-item">
-                      <a class="nav-main-link" :href="route('dashboard')">
+                      <Link class="nav-main-link" :href="route('dashboard')">
                         <i class="nav-main-link-icon fa fa-house-user"></i>
                         <span class="nav-main-link-name">Dashboard</span>
-                      </a>
+                      </Link>
                     </li>
                     <li class="nav-main-item" v-if="$page.props.auth.user.role_id == 1">
-                      <a class="nav-main-link" :href="route('users.list')">
+                      <Link class="nav-main-link" :href="route('users.list')">
                         <i class="nav-main-link-icon fa fa-grip-vertical"></i>
                         <span class="nav-main-link-name">Users</span>
-                      </a>
+                      </Link>
                     </li>
                     <!-- <li class="nav-main-item">
                       <a class="nav-main-link" :href="route('domain.list')">
@@ -110,15 +116,15 @@ const showingNavigationDropdown = ref(false);
                       </h5>
                     </div>
                     <div class="p-2">
-                      <a class="dropdown-item d-flex align-items-center justify-content-between space-x-1" :href="route('profile')">
+                      <Link class="dropdown-item d-flex align-items-center justify-content-between space-x-1" :href="route('profile')">
                         <span>Profile</span>
                         <i class="fa fa-fw fa-user opacity-25"></i>
-                      </a>
+                      </Link>
 
-                      <a class="dropdown-item d-flex align-items-center justify-content-between space-x-1" :href="route('organization')" data-toggle="layout" data-action="side_overlay_toggle">
+                      <Link class="dropdown-item d-flex align-items-center justify-content-between space-x-1" :href="route('organization')" data-toggle="layout" data-action="side_overlay_toggle">
                         <span>Organization</span>
                         <i class="fa fa-fw fa-wrench opacity-25"></i>
-                      </a>
+                      </Link>
 
                       <div class="dropdown-divider"></div>
                       <Link class="dropdown-item d-flex align-items-center justify-content-between space-x-1" :href="route('logout')" method="post" >

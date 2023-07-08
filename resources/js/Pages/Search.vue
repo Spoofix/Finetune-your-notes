@@ -1,6 +1,13 @@
 <script setup>
 import { Head, Link, router, useForm } from '@inertiajs/vue3';
 
+import { defineComponent } from 'vue';
+
+defineComponent({
+  components: {
+    Link
+  },
+});
 defineProps({
     domain: {
         type: Object,
@@ -11,17 +18,20 @@ const form = useForm({
     domain: "",
 });
 
+
 let data = 'Here';
 
 const search = () => {
     form.post(route('search.domain'), {
         onFinish: ($response) => {
-            console.log($response);
+            // console.log($response);
             data = $response
         },
         onSuccess: () => { },
     });
 }
+
+
 </script>
 
 <template>
@@ -29,7 +39,7 @@ const search = () => {
 
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm p-0" id="mainNav">
-        <div class="container-fluid px-5 py-5 navbar-top">
+        <div class="container-fluid px-5 py-2 navbar-top">
             <!-- <a class="navbar-brand fw-bold" href="#page-top">Yespoff</a> -->
             <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
                 <!-- <li class="nav-item"><a class="nav-link me-lg-3" href="#download">Download</a></li> -->
@@ -39,53 +49,54 @@ const search = () => {
                     <span class="large text-black text-uppercase font-bolder">Contact Us</span>
                 </span>
             </a>
-            <a class="btn btn-secondary px-3 mb-2 mb-lg-0 mr-5" :href="route('login')" style="background-color: black; ">
+            <Link class="btn btn-secondary px-3 mb-2 mb-lg-0 mr-5" :href="route('register')" style="background-color: black; ">
                 <span class="d-flex align-items-center">
                     <span class="large">Sign Up</span>
                 </span>
-            </a>
-            <a class="btn btn-secondary px-3 mb-2 mb-lg-0" :href="route('login')" style="background-color: black; ">
+            </Link>
+            <Link class="btn btn-secondary px-3 mb-2 mb-lg-0" :href="route('login')" style="background-color: black; ">
                 <span class="d-flex align-items-center">
                     <span class="large">Login</span>
                 </span>
-            </a>
+            </Link>
         </div>
     </nav>
     <!-- Mashead header-->
     <header class="masthead">
-        <div class="container px-5 py-8">
+        <div class="px-5 ">
             <div class="row gx-5 align-items-center">
                 <div class="col-lg-6">
                     <!-- Mashead text and app badges-->
                     <div class="mb-5 mb-lg-0 text-center text-lg-start">
                         <h1 class="display-1 lh-base mb-3 text-white text-uppercase"
-                            style="font-weight: 900; font-size: 100px;">Spoffing<br> Spoofng</h1>
+                            style="font-weight: 900; font-size: 80px;">Spoffing<br> Spoofng</h1>
                         <p class="lead fw-normal text-white mb-5" style="font-weight: 900; font-size: 30px;">Detect and
                             report Spoofing websites!</p>
-                        <div class="d-flex flex-column flex-lg-row align-items-center">
-                            <form>
-                                <div class="input-group w-[550px] ">
-                                    <input type="text" class="form-control py-3 text-black" placeholder="Search Domain"
-                                        v-model="form.domain">
-                                    <button type="button" class="btn btn-secondary px-5" style="background-color: black; "
-                                        @click="search">
-                                        <div class="spinner-grow spinner-border-sm text-white" role="status"
-                                            v-if="form.processing">
-                                            <span class="sr-only">Loading...</span>
-                                        </div>
-                                        Submit
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <!-- Masthead device mockup feature-->
-                    <div class="masthead-device-mockup">
+                    <!-- class="masthead-device-mockup" -->
+                    <div  style="max-width: 500px; margin: auto;">
                         <img class="img-fluid" src="assets/media/photos/expre.svg" alt="Hero Promo">
                     </div>
                 </div>
+            </div>
+            <div class="d-flex flex-column flex-lg-row align-items-center my-5">
+                <form>
+                    <div class="input-group w-[550px] ">
+                        <input type="text" class="form-control py-3 text-black rounded" placeholder="Search Domain"
+                            v-model="form.domain">
+                        <button type="button" class="btn btn-secondary px-5" style="background-color: black; "
+                            @click="search">
+                            <div class="spinner-grow spinner-border-sm text-white" role="status"
+                                v-if="form.processing">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                            Submit
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </header>
@@ -106,7 +117,7 @@ const search = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(item, index) in domain">
+                        <tr v-for="(item, index) in domain" :key="index" :style="{ background: index % 2 === 0 ? 'white' : 'rgba(25, 0, 0, 0.1)'}">
                             <th class="text-center" scope="row">{{ ++index }}</th>
                             <td>{{ item }}</td>
                         </tr>
@@ -132,8 +143,27 @@ const search = () => {
 
 .masthead {
     background-color: red;
-    height: 100vh;
+
+    height: max-content;
 }
+@media screen and (max-width: 70rem) {
+  .masthead {
+    /* background-color: black; */
+    height: max-content;
+    padding-top: 50px;
+    padding-bottom: 2px;
+
+  }
+}
+@media screen and (max-width: 50rem) {
+  .masthead {
+    /* background-color: lightgreen; */
+    padding-top: 50px;
+    padding-bottom: 2px;
+  }
+}
+
+
 
 .navbar-top {
     background-color: red;

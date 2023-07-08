@@ -15,6 +15,8 @@ class SearchController extends Controller
         ]);
         $domain = OpenSquat::find($request->domain);
 
+        // dd($domain);
+
         return Inertia::render('Search', [
             'domain' => $domain,
         ]);

@@ -2,7 +2,14 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, router, useForm } from '@inertiajs/vue3';
 import Swal from 'sweetalert2'
+import {Link} from "@inertiajs/vue3"
+import { defineComponent } from 'vue';
 
+defineComponent({
+  components: {
+    Link
+  },
+});
 const Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
@@ -58,13 +65,13 @@ domain();
         <div class="col-md-12">
             <div class="block block-rounded">
                 <div class="block-header px-5">
-                    <a class="btn btn-info mr-3 text-capitalize" :href="route('organization')">Back</a>
+                    <Link class="btn btn-info mr-3 text-capitalize" :href="route('organization')">Back</Link>
                     <h1 class="block-title" style="font-size: 30px;">{{ props.domain.name }}</h1>
 
                      <div class="spinner-grow spinner-border-sm text-dark" role="status" v-if="form.processing">
                         <span class="sr-only">Loading...</span>
                       </div>
-                    <a class="btn btn-danger mr-3 pull-left"  :href="route('report', [props.domain.name, props.domain.id])">Report Domain</a>
+                    <Link class="btn btn-danger mr-3 pull-left"  :href="route('report', [props.domain.name, props.domain.id])">Report Domain</Link>
                 </div>
             </div>
             <!-- {{ JSON.parse(props.details?.links) }} -->

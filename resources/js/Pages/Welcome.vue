@@ -39,27 +39,27 @@ const search = () => {
     <Head title="Welcome" />
 
             <!-- Navigation-->
-            <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm p-0" id="mainNav">
-                <div class="container-fluid px-5 py-5 navbar-top">
+            <nav class="p-0 shadow-sm navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+                <div class="px-5 py-3 container-fluid navbar-top">
                     <!-- <a class="navbar-brand fw-bold" href="#page-top">Yespoff</a> -->
-                    <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
+                    <ul class="my-3 navbar-nav ms-auto me-4 my-lg-0">
                         <!-- <li class="nav-item"><a class="nav-link me-lg-3" href="#download">Download</a></li> -->
                     </ul>
-                    <a class=" px-3 mb-2 mb-lg-0 mr-5">
+                    <Link class="px-3 mb-2 mr-5 mb-lg-0">
                         <span class="d-flex align-items-center">
-                            <span class="large text-black text-uppercase font-bolder">Contact Us</span>
+                            <span class="text-black large text-uppercase font-bolder">Contact Us</span>
                         </span>
-                    </a>
-                    <a class="btn btn-secondary px-3 mb-2 mb-lg-0 mr-5" :href="route('login')"  style="background-color: black; ">
+                    </Link>
+                    <Link class="px-3 mb-2 mr-5 btn btn-secondary mb-lg-0" :href="route('register')"  style="background-color: black; ">
                         <span class="d-flex align-items-center">
                             <span class="large">Sign Up</span>
                         </span>
-                    </a>
-                    <a class="btn btn-secondary px-3 mb-2 mb-lg-0" :href="route('login')" style="background-color: black; ">
+                    </Link>
+                    <Link class="px-3 mb-2 btn btn-secondary mb-lg-0" :href="route('login')" style="background-color: black; ">
                         <span class="d-flex align-items-center">
                             <span class="large">Login</span>
                         </span>
-                    </a>
+                    </Link>
                 </div>
             </nav>
             <!-- Mashead header-->
@@ -68,15 +68,15 @@ const search = () => {
                     <div class="row gx-5 align-items-center">
                         <div class="col-lg-6">
                             <!-- Mashead text and app badges-->
-                            <div class="mb-5 mb-lg-0 text-center text-lg-start">
-                                <h1 class="display-1 lh-base mb-3 text-white text-uppercase" style="font-weight: 900; font-size: 100px;">Spoffing<br> Spoofng</h1>
-                                <p class="lead fw-normal text-white mb-5" style="font-weight: 900; font-size: 30px;">Detect and report Spoofing websites!</p>
+                            <div class="mb-5 text-center mb-lg-0 text-lg-start">
+                                <h1 class="mb-3 text-white display-1 lh-base text-uppercase" style="font-weight: 900; font-size: 100px;">Spoffing<br> Spoofng</h1>
+                                <p class="mb-5 text-white lead fw-normal" style="font-weight: 900; font-size: 30px;">Detect and report Spoofing websites!</p>
                                 <div class="d-flex flex-column flex-lg-row align-items-center">
                                     <form>
                                         <div class="input-group w-[550px] ">
-                                            <input type="text" class="form-control py-3 text-black" placeholder="Search Domain" v-model="form.domain">
-                                            <button type="button" class="btn btn-secondary px-5" style="background-color: black; " @click="search">
-                                                <div class="spinner-grow spinner-border-sm text-white" role="status" v-if="form.processing">
+                                            <input type="text" class="py-3 text-black form-control" placeholder="Search Domain" v-model="form.domain">
+                                            <button type="button" class="px-5 btn btn-secondary" style="background-color: black; " @click="search">
+                                                <div class="text-white spinner-grow spinner-border-sm" role="status" v-if="form.processing">
                                                     <span class="sr-only">Loading...</span>
                                                 </div>
                                                 Submit
@@ -104,11 +104,11 @@ const search = () => {
             <!-- Header Content -->
             <div class="content-header">
               <!-- Left Section -->
-              <div class="space-x-1 d-flex align-items-center space-x-2">
+              <div class="space-x-2 d-flex align-items-center">
                 <!-- Logo -->
-                <a class="fw-bold" href="#">
+                <Link class="fw-bold" href="#">
                     <span class="fs-4 text-dual">ye</span><span class="fs-4 text-primary">spoff</span>
-                </a>
+                </Link>
                 <!-- END Logo -->
 
               </div>
@@ -116,9 +116,9 @@ const search = () => {
 
               <!-- Right Section -->
               <div class="space-x-1">
-                <a class="btn btn-alt-primary px-3" :href="route('dashboard')">
+                <Link class="px-3 btn btn-alt-primary" :href="route('dashboard')">
                   <span class="ms-1 d-none d-sm-inline-block">Login</span>
-                </a>
+                </Link>
               </div>
               <!-- END Right Section -->
             </div>
@@ -133,24 +133,24 @@ const search = () => {
             <div class="bg-body-extra-light hero-bubbles">
               <div class="position-relative d-flex align-items-center">
                 <div class="content content-full">
-                  <div class="row g-6 w-100 py-7 overflow-hidden">
-                    <div class="col-md-7 order-md-last py-4 d-md-flex align-items-md-center justify-content-md-end">
+                  <div class="overflow-hidden row g-6 w-100 py-7">
+                    <div class="py-4 col-md-7 order-md-last d-md-flex align-items-md-center justify-content-md-end">
                       <img class="img-fluid" src="assets/media/photos/expre.svg" alt="Hero Promo">
                     </div>
-                    <div class="col-md-5 py-4 d-flex align-items-center">
+                    <div class="py-4 col-md-5 d-flex align-items-center">
                       <div class="text-center text-md-start">
-                        <h1 class="fw-bold fs-1 mb-3">
+                        <h1 class="mb-3 fw-bold fs-1">
                           Spoffing
                         </h1>
-                        <h1 class="fw-bold fs-2 mb-3">
+                        <h1 class="mb-3 fw-bold fs-2">
                           Spoofng
                         </h1>
-                        <p class="text-muted fw-medium mb-4">
+                        <p class="mb-4 text-muted fw-medium">
                            Beware the wicked wiles of spoofers!
                         </p>
-                        <a class="btn btn-alt-primary py-3 px-4" :href="route('register')">
-                          <i class="fa fa-arrow-right opacity-50 me-1"></i> Sign up
-                        </a>
+                        <Link class="px-4 py-3 btn btn-alt-primary" :href="route('register')">
+                          <i class="opacity-50 fa fa-arrow-right me-1"></i> Sign up
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -161,17 +161,17 @@ const search = () => {
 
             <!-- Call to Action -->
             <div class="bg-body-extra-light">
-              <div class="content content-full text-center overflow-hidden">
+              <div class="overflow-hidden text-center content content-full">
                 <div class="py-7">
-                  <h2 class="fw-bold mb-2">
+                  <h2 class="mb-2 fw-bold">
                     Built by yieldexchange
                   </h2>
-                  <h3 class="h4 fw-medium text-muted mb-5">
+                  <h3 class="mb-5 h4 fw-medium text-muted">
 
                   </h3>
-                  <a class="btn btn-sm btn-alt-primary mb-2 py-3 px-4" :href="route('dashboard')">
+                  <Link class="px-4 py-3 mb-2 btn btn-sm btn-alt-primary" :href="route('dashboard')">
                     Login
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -179,12 +179,12 @@ const search = () => {
 
             <!-- Footer -->
             <footer id="page-footer" class="bg-body-dark">
-              <div class="content py-5">
+              <div class="py-5 content">
                 <div class="row fs-sm">
-                  <div class="col-sm-6 order-sm-2 py-1 text-center text-sm-end">
+                  <div class="py-1 text-center col-sm-6 order-sm-2 text-sm-end">
 
                   </div>
-                  <div class="col-sm-6 order-sm-1 py-1 text-center text-sm-start">
+                  <div class="py-1 text-center col-sm-6 order-sm-1 text-sm-start">
 
                   </div>
                 </div>
@@ -196,9 +196,9 @@ const search = () => {
         </div>
 
     <div v-if="false"
-        class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white"
+        class="relative min-h-screen bg-gray-100 bg-center sm:flex sm:justify-center sm:items-center bg-dots-darker dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white"
     >
-        <div v-if="canLogin" class="sm:fixed sm:top-0 sm:right-0 p-6 text-right">
+        <div v-if="canLogin" class="p-6 text-right sm:fixed sm:top-0 sm:right-0">
             <Link
                 v-if="$page.props.auth.user"
                 :href="route('dashboard')"
@@ -222,13 +222,13 @@ const search = () => {
             </template>
         </div>
 
-        <div class="max-w-7xl mx-auto p-6 lg:p-8">
+        <div class="p-6 mx-auto max-w-7xl lg:p-8">
             <div class="flex justify-center">
                 <svg
                     viewBox="0 0 62 65"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
-                    class="h-16 w-auto bg-gray-100 dark:bg-gray-900"
+                    class="w-auto h-16 bg-gray-100 dark:bg-gray-900"
                 >
                     <path
                         d="M61.8548 14.6253C61.8778 14.7102 61.8895 14.7978 61.8897 14.8858V28.5615C61.8898 28.737 61.8434 28.9095 61.7554 29.0614C61.6675 29.2132 61.5409 29.3392 61.3887 29.4265L49.9104 36.0351V49.1337C49.9104 49.4902 49.7209 49.8192 49.4118 49.9987L25.4519 63.7916C25.3971 63.8227 25.3372 63.8427 25.2774 63.8639C25.255 63.8714 25.2338 63.8851 25.2101 63.8913C25.0426 63.9354 24.8666 63.9354 24.6991 63.8913C24.6716 63.8838 24.6467 63.8689 24.6205 63.8589C24.5657 63.8389 24.5084 63.8215 24.456 63.7916L0.501061 49.9987C0.348882 49.9113 0.222437 49.7853 0.134469 49.6334C0.0465019 49.4816 0.000120578 49.3092 0 49.1337L0 8.10652C0 8.01678 0.0124642 7.92953 0.0348998 7.84477C0.0423783 7.8161 0.0598282 7.78993 0.0697995 7.76126C0.0884958 7.70891 0.105946 7.65531 0.133367 7.6067C0.152063 7.5743 0.179485 7.54812 0.20192 7.51821C0.230588 7.47832 0.256763 7.43719 0.290416 7.40229C0.319084 7.37362 0.356476 7.35243 0.388883 7.32751C0.425029 7.29759 0.457436 7.26518 0.498568 7.2415L12.4779 0.345059C12.6296 0.257786 12.8015 0.211853 12.9765 0.211853C13.1515 0.211853 13.3234 0.257786 13.475 0.345059L25.4531 7.2415H25.4556C25.4955 7.26643 25.5292 7.29759 25.5653 7.32626C25.5977 7.35119 25.6339 7.37362 25.6625 7.40104C25.6974 7.43719 25.7224 7.47832 25.7523 7.51821C25.7735 7.54812 25.8021 7.5743 25.8196 7.6067C25.8483 7.65656 25.8645 7.70891 25.8844 7.76126C25.8944 7.78993 25.9118 7.8161 25.9193 7.84602C25.9423 7.93096 25.954 8.01853 25.9542 8.10652V33.7317L35.9355 27.9844V14.8846C35.9355 14.7973 35.948 14.7088 35.9704 14.6253C35.9792 14.5954 35.9954 14.5692 36.0053 14.5405C36.0253 14.4882 36.0427 14.4346 36.0702 14.386C36.0888 14.3536 36.1163 14.3274 36.1375 14.2975C36.1674 14.2576 36.1923 14.2165 36.2272 14.1816C36.2559 14.1529 36.292 14.1317 36.3244 14.1068C36.3618 14.0769 36.3942 14.0445 36.4341 14.0208L48.4147 7.12434C48.5663 7.03694 48.7383 6.99094 48.9133 6.99094C49.0883 6.99094 49.2602 7.03694 49.4118 7.12434L61.3899 14.0208C61.4323 14.0457 61.4647 14.0769 61.5021 14.1055C61.5333 14.1305 61.5694 14.1529 61.5981 14.1803C61.633 14.2165 61.6579 14.2576 61.6878 14.2975C61.7103 14.3274 61.7377 14.3536 61.7551 14.386C61.7838 14.4346 61.8 14.4882 61.8199 14.5405C61.8312 14.5692 61.8474 14.5954 61.8548 14.6253ZM59.893 27.9844V16.6121L55.7013 19.0252L49.9104 22.3593V33.7317L59.8942 27.9844H59.893ZM47.9149 48.5566V37.1768L42.2187 40.4299L25.953 49.7133V61.2003L47.9149 48.5566ZM1.99677 9.83281V48.5566L23.9562 61.199V49.7145L12.4841 43.2219L12.4804 43.2194L12.4754 43.2169C12.4368 43.1945 12.4044 43.1621 12.3682 43.1347C12.3371 43.1097 12.3009 43.0898 12.2735 43.0624L12.271 43.0586C12.2386 43.0275 12.2162 42.9888 12.1887 42.9539C12.1638 42.9203 12.1339 42.8916 12.114 42.8567L12.1127 42.853C12.0903 42.8156 12.0766 42.7707 12.0604 42.7283C12.0442 42.6909 12.023 42.656 12.013 42.6161C12.0005 42.5688 11.998 42.5177 11.9931 42.4691C11.9881 42.4317 11.9781 42.3943 11.9781 42.3569V15.5801L6.18848 12.2446L1.99677 9.83281ZM12.9777 2.36177L2.99764 8.10652L12.9752 13.8513L22.9541 8.10527L12.9752 2.36177H12.9777ZM18.1678 38.2138L23.9574 34.8809V9.83281L19.7657 12.2459L13.9749 15.5801V40.6281L18.1678 38.2138ZM48.9133 9.14105L38.9344 14.8858L48.9133 20.6305L58.8909 14.8846L48.9133 9.14105ZM47.9149 22.3593L42.124 19.0252L37.9323 16.6121V27.9844L43.7219 31.3174L47.9149 33.7317V22.3593ZM24.9533 47.987L39.59 39.631L46.9065 35.4555L36.9352 29.7145L25.4544 36.3242L14.9907 42.3482L24.9533 47.987Z"
@@ -238,14 +238,14 @@ const search = () => {
             </div>
 
             <div class="mt-16">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+                <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8">
                     <a
                         href="https://laravel.com/docs"
                         class="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500"
                     >
                         <div>
                             <div
-                                class="h-16 w-16 bg-red-50 dark:bg-red-800/20 flex items-center justify-center rounded-full"
+                                class="flex items-center justify-center w-16 h-16 rounded-full bg-red-50 dark:bg-red-800/20"
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -264,7 +264,7 @@ const search = () => {
 
                             <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Documentation</h2>
 
-                            <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+                            <p class="mt-4 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
                                 Laravel has wonderful documentation covering every aspect of the framework. Whether you
                                 are a newcomer or have prior experience with Laravel, we recommend reading our
                                 documentation from beginning to end.
@@ -276,7 +276,7 @@ const search = () => {
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke-width="1.5"
-                            class="self-center shrink-0 stroke-red-500 w-6 h-6 mx-6"
+                            class="self-center w-6 h-6 mx-6 shrink-0 stroke-red-500"
                         >
                             <path
                                 stroke-linecap="round"
@@ -292,7 +292,7 @@ const search = () => {
                     >
                         <div>
                             <div
-                                class="h-16 w-16 bg-red-50 dark:bg-red-800/20 flex items-center justify-center rounded-full"
+                                class="flex items-center justify-center w-16 h-16 rounded-full bg-red-50 dark:bg-red-800/20"
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -310,7 +310,7 @@ const search = () => {
 
                             <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Laracasts</h2>
 
-                            <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+                            <p class="mt-4 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
                                 Laracasts offers thousands of video tutorials on Laravel, PHP, and JavaScript
                                 development. Check them out, see for yourself, and massively level up your development
                                 skills in the process.
@@ -322,7 +322,7 @@ const search = () => {
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke-width="1.5"
-                            class="self-center shrink-0 stroke-red-500 w-6 h-6 mx-6"
+                            class="self-center w-6 h-6 mx-6 shrink-0 stroke-red-500"
                         >
                             <path
                                 stroke-linecap="round"
@@ -338,7 +338,7 @@ const search = () => {
                     >
                         <div>
                             <div
-                                class="h-16 w-16 bg-red-50 dark:bg-red-800/20 flex items-center justify-center rounded-full"
+                                class="flex items-center justify-center w-16 h-16 rounded-full bg-red-50 dark:bg-red-800/20"
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -357,7 +357,7 @@ const search = () => {
 
                             <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Laravel News</h2>
 
-                            <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+                            <p class="mt-4 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
                                 Laravel News is a community driven portal and newsletter aggregating all of the latest
                                 and most important news in the Laravel ecosystem, including new package releases and
                                 tutorials.
@@ -369,7 +369,7 @@ const search = () => {
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke-width="1.5"
-                            class="self-center shrink-0 stroke-red-500 w-6 h-6 mx-6"
+                            class="self-center w-6 h-6 mx-6 shrink-0 stroke-red-500"
                         >
                             <path
                                 stroke-linecap="round"
@@ -384,7 +384,7 @@ const search = () => {
                     >
                         <div>
                             <div
-                                class="h-16 w-16 bg-red-50 dark:bg-red-800/20 flex items-center justify-center rounded-full"
+                                class="flex items-center justify-center w-16 h-16 rounded-full bg-red-50 dark:bg-red-800/20"
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -403,7 +403,7 @@ const search = () => {
 
                             <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Vibrant Ecosystem</h2>
 
-                            <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+                            <p class="mt-4 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
                                 Laravel's robust library of first-party tools and libraries, such as
                                 <a
                                     href="https://forge.laravel.com"
@@ -463,19 +463,19 @@ const search = () => {
                 </div>
             </div>
 
-            <div class="flex justify-center mt-16 px-6 sm:items-center sm:justify-between">
-                <div class="text-center text-sm text-gray-500 dark:text-gray-400 sm:text-left">
+            <div class="flex justify-center px-6 mt-16 sm:items-center sm:justify-between">
+                <div class="text-sm text-center text-gray-500 dark:text-gray-400 sm:text-left">
                     <div class="flex items-center gap-4">
                         <a
                             href="https://github.com/sponsors/taylorotwell"
-                            class="group inline-flex items-center hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                            class="inline-flex items-center group hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
                                 viewBox="0 0 24 24"
                                 stroke-width="1.5"
-                                class="-mt-px mr-1 w-5 h-5 stroke-gray-400 dark:stroke-gray-600 group-hover:stroke-gray-600 dark:group-hover:stroke-gray-400"
+                                class="w-5 h-5 mr-1 -mt-px stroke-gray-400 dark:stroke-gray-600 group-hover:stroke-gray-600 dark:group-hover:stroke-gray-400"
                             >
                                 <path
                                     stroke-linecap="round"
@@ -488,7 +488,7 @@ const search = () => {
                     </div>
                 </div>
 
-                <div class="ml-4 text-center text-sm text-gray-500 dark:text-gray-400 sm:text-right sm:ml-0">
+                <div class="ml-4 text-sm text-center text-gray-500 dark:text-gray-400 sm:text-right sm:ml-0">
                     Laravel v{{ laravelVersion }} (PHP v{{ phpVersion }})
                 </div>
             </div>

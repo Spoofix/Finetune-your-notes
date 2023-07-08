@@ -2,7 +2,14 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, router, useForm } from '@inertiajs/vue3';
 import Swal from 'sweetalert2'
+import {Link} from "@inertiajs/vue3"
+import { defineComponent } from 'vue';
 
+defineComponent({
+  components: {
+    Link
+  },
+});
 const Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
@@ -108,9 +115,9 @@ function submit() {
                                 <td><a class="fw-semibold">{{ organization.name }}</a></td>
                                 <td><a class="fw-semibold">{{ '0' }}</a></td>
                                 <td>
-                                    <a class="btn btn-sm btn-secondary" data-bs-toggle="tooltip" title="View Organization" :href="route('organization.view', [organization.name, organization.id] )">
+                                    <Link class="btn btn-sm btn-secondary" data-bs-toggle="tooltip" title="View Organization" :href="route('organization.view', [organization.name, organization.id] )">
                                       <i class="fa fa-pencil-alt"></i>
-                                    </a>
+                                    </Link>
                                 </td>
                             </tr>
                         </tbody>

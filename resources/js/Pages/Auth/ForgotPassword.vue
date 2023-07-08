@@ -1,6 +1,13 @@
 <script setup>
 import { Head, useForm } from '@inertiajs/vue3';
+import {Link} from "@inertiajs/vue3"
+import { defineComponent } from 'vue';
 
+defineComponent({
+  components: {
+    Link
+  },
+});
 defineProps({
     status: {
         type: String,
@@ -44,7 +51,7 @@ const submit = () => {
                                         </div>
                                         <div class="block-content">
                                             <div class="form-floating mb-4">
-                                                <input type="text" class="form-control"
+                                                <input type="text" class="form-control round"
                                                     :class="{ 'is-invalid': form.errors.email }" v-model="form.email" required
                                                     autofocus placeholder="Enter your email">
                                                 <label class="form-label">Email</label>
@@ -62,14 +69,14 @@ const submit = () => {
                                         </div>
                                         <div
                                             class="block-content block-content-full bg-body-light text-center d-flex justify-content-between">
-                                            <a class="fs-sm fw-medium link-fx text-muted me-2 mb-1 d-inline-block"
+                                            <Link class="fs-sm fw-medium link-fx text-muted me-2 mb-1 d-inline-block"
                                                 :href="route('register')">
                                                 <i class="fa fa-plus opacity-50 me-1"></i> Register
-                                            </a>
-                                            <a class="fs-sm fw-medium link-fx text-muted me-2 mb-1 d-inline-block"
+                                            </Link>
+                                            <Link class="fs-sm fw-medium link-fx text-muted me-2 mb-1 d-inline-block"
                                                 :href="route('login')">
                                                 Login
-                                            </a>
+                                            </Link>
                                         </div>
                                     </div>
                                 </form>
@@ -85,3 +92,14 @@ const submit = () => {
     </div>
 </template>
 
+<style>
+@media screen and (max-width: 50rem) {
+    .hide{
+        display: none;
+    }
+
+}
+.round{
+        border-radius: 30px;
+    }
+</style>

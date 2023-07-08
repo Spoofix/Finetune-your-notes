@@ -5,7 +5,14 @@ import UpdatePasswordForm from './Partials/UpdatePasswordForm.vue';
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm.vue';
 import { Head, useForm, router } from '@inertiajs/vue3';
 import Swal from 'sweetalert2'
+import {Link} from "@inertiajs/vue3"
+import { defineComponent } from 'vue';
 
+defineComponent({
+  components: {
+    Link
+  },
+});
 const props = defineProps({
     mustVerifyEmail: {
         type: Boolean,
@@ -73,7 +80,7 @@ function submit() {
         <div class="col-md-12">
             <div class="block block-rounded" href="javascript:void(0)">
                 <div class="block-header px-5">
-                    <a class="btn btn-info mr-3 text-capitalize" :href="route('profile')">Back</a>
+                    <Link class="btn btn-info mr-3 text-capitalize" :href="route('profile')">Back</Link>
                     <h2 class="block-title" style="font-size: 20px; text-transform: uppercase;">Update Profile</h2>
                 </div>
                 <div class="block-content pb-5 px-5">

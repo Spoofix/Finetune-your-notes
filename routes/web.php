@@ -22,7 +22,7 @@ use Inertia\Inertia;
  */
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
+    return Inertia::render('Search', [ //fix the Welcome : Search
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
@@ -34,8 +34,8 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/search-domain', [SearchController::class, 'index'])->name('search.domain');
 Route::post('/search-domain', [SearchController::class, 'index'])->name('search.domain');
-
 Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 

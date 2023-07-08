@@ -2,7 +2,14 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, router, useForm } from '@inertiajs/vue3';
 import Swal from 'sweetalert2'
+import {Link} from "@inertiajs/vue3"
+import { defineComponent } from 'vue';
 
+defineComponent({
+  components: {
+    Link
+  },
+});
 const Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
@@ -51,7 +58,7 @@ const sites = [
         <div class="col-md-12">
             <div class="block block-rounded">
                 <div class="block-header px-5">
-                    <a class="btn btn-info mr-3 text-capitalize" :href="route('organization')">Back</a>
+                    <Link class="btn btn-info mr-3 text-capitalize" :href="route('organization')">Back</Link>
                     <h2 class="block-title">Report</h2>
                 </div>
                 <div class="block-content pb-5 px-5">
@@ -67,7 +74,7 @@ const sites = [
                             <tr v-for="(site, index) in sites">
                                 <td><a class="fw-semibold">{{ ++index }}</a></td>
                                 <td><a class="fw-semibold">{{ site.name }}</a></td>
-                                <td><a class="fw-semibold btn btn-danger" :href="site.link" target="__blank">Goto site</a></td>
+                                <td><Link class="fw-semibold btn btn-danger" :href="site.link" target="__blank">Goto site</Link></td>
                             </tr>
 
                         </tbody>

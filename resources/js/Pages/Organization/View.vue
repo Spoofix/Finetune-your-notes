@@ -2,7 +2,14 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, router, useForm } from '@inertiajs/vue3';
 import Swal from 'sweetalert2'
+import {Link} from "@inertiajs/vue3"
+import { defineComponent } from 'vue';
 
+defineComponent({
+  components: {
+    Link
+  },
+});
 const Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
@@ -53,10 +60,10 @@ function search() {
         <div class="col-md-12">
             <div class="block block-rounded">
                 <div class="block-header px-5">
-                    <a class="btn btn-info mr-3 text-capitalize" :href="route('organization')">Back</a>
+                    <Link class="btn btn-info mr-3 text-capitalize" :href="route('organization')">Back</Link>
                     <h2 class="block-title" style="font-size: 30px;">{{ organization.name }} {{ (!$page.props.all) ? "domain for the last 24 hours" : "" }}</h2>
-                    <a class="btn btn-info mr-3 text-capitalize" :href="!$page.props.all ? route('organization.view', [organization.name, organization.id]) : '#'"  :class="{ 'opacity-25': $page.props.all }" :disabled="$page.props.all">All Domain</a>
-                    <a class="btn btn-info mr-3 text-capitalize" :href="$page.props.all ? route('organization.view.latest', [organization.name, organization.id]) : '#'" :class="{ 'opacity-25': !$page.props.all }"  v-bind:aria-disabled="$page.props.all">Last 24 Hours</a>
+                    <Link class="btn btn-info mr-3 text-capitalize" :href="!$page.props.all ? route('organization.view', [organization.name, organization.id]) : '#'"  :class="{ 'opacity-25': $page.props.all }" :disabled="$page.props.all">All Domain</Link>
+                    <Link class="btn btn-info mr-3 text-capitalize" :href="$page.props.all ? route('organization.view.latest', [organization.name, organization.id]) : '#'" :class="{ 'opacity-25': !$page.props.all }"  v-bind:aria-disabled="$page.props.all">Last 24 Hours</Link>
                 </div>
                 <div class="block-content pb-5 px-5">
 
@@ -74,9 +81,9 @@ function search() {
                                 <td><a class="fw-semibold">{{ ++index }}</a></td>
                                 <td><a class="fw-semibold">{{ domain.name }}</a></td>
                                 <td>
-                                    <a class="btn btn-sm btn-secondary" data-bs-toggle="tooltip" title="View domain" :href="route('domain', [organization.id, domain.id, domain.name] )">
+                                    <Link class="btn btn-sm btn-secondary" data-bs-toggle="tooltip" title="View domain" :href="route('domain', [organization.id, domain.id, domain.name] )">
                                       <i class="fa fa-pencil-alt"></i>
-                                    </a>
+                                    </Link>
                                 </td>
                             </tr>
 
@@ -88,21 +95,21 @@ function search() {
                         <ul class="pagination pagination-sm">
                             <template v-for="(link, p) in $page.props.domains.links" :key="p">
                                 <li class="page-item" v-if="link.label.includes('Previous')">
-                                    <a class="page-link" :href="link.url" tabindex="-1" aria-label="Previous">
+                                    <Link class="page-link" :href="link.url" tabindex="-1" aria-label="Previous">
                                         <span aria-hidden="true" class="">
                                             <i class="fa fa-angle-double-left mr-2"></i> Previous
                                         </span>
-                                    </a>
+                                    </Link>
                                 </li>
                                 <li class="page-item" v-else-if="link.label.includes('Next')">
-                                    <a class="page-link" :href="link.url" aria-label="Next">
+                                    <Link class="page-link" :href="link.url" aria-label="Next">
                                         <span aria-hidden="true" class="">
                                             Next<i class="fa fa-angle-double-right ml-2"></i>
                                         </span>
-                                    </a>
+                                    </Link>
                                 </li>
                                 <li class="page-item" :class="{ active: link.active }" v-else>
-                                    <a class="page-link" :href="link.url">{{ link.label }}</a>
+                                    <Link class="page-link" :href="link.url">{{ link.label }}</Link>
                                 </li>
                             </template>
                             </ul>
