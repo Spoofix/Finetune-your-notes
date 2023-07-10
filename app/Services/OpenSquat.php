@@ -22,7 +22,7 @@ class OpenSquat
     public static function search($name, $org_id)
     {
 
-        $main_file = base_path('opensquat\keywords.txt');
+        $main_file = base_path('opensquat/keywords.txt');
         $file = fopen($main_file, 'w');
         ftruncate($file, 0);
         fclose($file);
@@ -35,7 +35,7 @@ class OpenSquat
         //  base_path('opensquat');
         //  chdir($basePath);
         // Command
-        $command = 'python '.base_path('opensquat\opensquat.py');
+        $command = 'python '.base_path('opensquat/opensquat.py');
 
        $return = shell_exec($command);
        Log::alert("= ".$return);
@@ -43,7 +43,7 @@ class OpenSquat
 
 
 
-        $handle = fopen(base_path('opensquat\results.txt'), "r");
+        $handle = fopen(base_path('opensquat/results.txt'), "r");
         if ($handle) {
             $org = Organization::where("id", $org_id)->first();
             $domainList = [];
@@ -118,7 +118,7 @@ class OpenSquat
         // }
         
         //  return  executeCommandAndWait();
-       $command = 'python opensquat.py';
+       $command = 'python3 opensquat.py';
 
 
 
@@ -139,7 +139,7 @@ class OpenSquat
 
         // Log::error($return);
 
-        $handle = fopen(base_path('opensquat\results.txt'), "r");
+        $handle = fopen(base_path('opensquat/results.txt'), "r");
         if ($handle) {
 
             $domainList = [];

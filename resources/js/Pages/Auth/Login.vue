@@ -81,50 +81,30 @@ const submitToken = () => {
                     <h1 class="h3 fw-bold mt-4 mb-2">Login to your account</h1>
                 </div>
                     <div class="form-floating mb-4">
-                        <input
-                            type="text"
-                            class="form-control round"
-                            :class="{ 'is-invalid': form.errors.email }"
-                            v-model="form.email"
-                            required
-                            autofocus
-                            placeholder="Enter your email"
-                        />
-                        <label class="form-label" for="login-username"
-                            >Email</label
-                        >
-                        <div
-                            v-if="form.errors.email"
-                            class="invalid-feedback animated fadeIn"
-                        >
-                            {{ form.errors.email }}
+                        <div class="relative">
+                            <input type="text" id="login-username_outline" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-white rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" :class="{ 'is-invalid': form.errors.email}"
+                                   v-model="form.email"
+                                    required placeholder=" " />
+                            <label for="login-username_outline" class="absolute round text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Email</label>
+                            <small v-if="form.errors.email"
+                                   class="invalid-feedback animated fadeIn"
+                            >
+                                {{ form.errors.email }}</small>
                         </div>
                     </div>
-                    <div class="form-floating mb-4">
-                        <input
-                            type="password"
-                            class="form-control round"
-                            :class="{ 'is-invalid': form.errors.password }"
-                            v-model="form.password"
-                            required
-                            placeholder="Enter your password"
-                        />
-                        <label class="form-label" for="login-password"
-                            >Password</label
-                        >
-                        <div
-                            v-if="form.errors.password"
-                            class="invalid-feedback animated fadeIn"
-                        >
-                            {{ form.errors.password }}
-                        </div>
+                    <div class="relative">
+                        <input type="password" id="login-password_outlined"  v-model="form.password" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-white rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" :class="{ 'is-invalid': form.errors.password }" required  placeholder=" " />
+                        <label for="login-password_outlined" class="absolute round text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1" >Password</label>
+                        <small  v-if="form.errors.password" class="text-red-600 invalid-feedback animated fadeIn" >{{ form.errors.password }}</small>
                     </div>
+
                     <div class="row">
                         <div class="col-sm-6 d-sm-flex align-items-center push">
                             <div class="form-check">
                                 <input
                                     class="form-check-input"
                                     type="checkbox"
+                                    id="login-remember-me"
                                     v-model="form.remember"
                                 />
                                 <label
@@ -177,26 +157,12 @@ const submitToken = () => {
             <div class="block block-themed block-rounded block-fx-shadow" style="max-width: 600px;">
                 <div class="block-header bg-gd-dusk"></div>
                 <div class="block-content">
-                    <div class="form-floating mb-4">
-                        <input
-                            type="text"
-                            class="form-control round"
-                            :class="{ 'is-invalid': form.errors.otp }"
-                            v-model="form.otp"
-                            required
-                            autofocus
-                            placeholder="Enter your otp"
-                        />
-                        <label class="form-label" for="login-username"
-                            >Otp</label
-                        >
-                        <div
-                            v-if="form.errors.otp"
-                            class="invalid-feedback animated fadeIn"
-                        >
-                            {{ form.errors.otp }}
-                        </div>
+                    <div class="relative">
+                        <input type="text" id="login-username" :class="{ 'is-invalid': form.errors.otp }" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-white rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" v-model="form.otp" required  placeholder=" " />
+                        <label for="login-username" class="absolute round text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Otp</label>
+                        <small v-if="form.errors.otp" class="text-red-600 invalid-feedback animated fadeIn">{ {{ form.errors.otp }}</small>
                     </div>
+
                     <div class="row">
                         <div class="col-sm-12 text-sm-end push">
                             <button

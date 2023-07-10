@@ -36,27 +36,22 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'address' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
+            'organization' => 'required|string|max:255',
             'phone_number' => 'required|string|max:255',
-            'city' => 'required|string|max:255',
-            'province' => 'required|string|max:255',
-            'timezone' => 'required|string|max:255',
+            'email' => 'required|string|max:255',
+            'domains' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:' . User::class,
             'password' => ['required', 'confirmed', Password::defaults()],
             // 'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
         $user = User::create([
-            'name' => $request->first_name . " " . $request->last_name,
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'address' => $request->address,
+            'name' => $request->name,
+            'organization' => $request->organization,
             'phone_number' => $request->phone_number,
-            'city' => $request->city,
-            'province' => $request->province,
-            'timezone' => $request->timezone,
+            'email' => $request->city,
+            'domain' => $request->domain,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
