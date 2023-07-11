@@ -6,7 +6,7 @@ use App\Models\Domain;
 use App\Models\SpoofedDomain;
 use App\Services\OpenSquat;
 use Illuminate\Console\Command;
-
+use Illuminate\Support\Facades\Log;
 class ScanSpoofingDomains extends Command
 {
     /**
@@ -49,8 +49,11 @@ class ScanSpoofingDomains extends Command
             $domain->status = "PROCESSING";
             $domain->save();
 
-            $spoofed_domains = OpenSquat::find($domain->domain_name);
+            Log::info(json_encode(trim($domain->domain_name)));
+
+            $spoofed_domains = OpenSquat::find(trim($domain->domain_name));
             $fields_array = [];
+            Log::alert(json_encode( $spoofed_domains ));
             foreach ($spoofed_domains as $spoofed_domain){
                 array_push($fields_array,
                     [
@@ -60,6 +63,8 @@ class ScanSpoofingDomains extends Command
                     ]
                 );
             }
+
+
 
             SpoofedDomain::insert($fields_array);
             $domain->status = "SCANNED";

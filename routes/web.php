@@ -9,7 +9,8 @@ use App\Http\Controllers\UsersController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-
+use Illuminate\Support\Facades\Artisan;
+use App\Console\Commands\ScanSpoofingDomains;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,6 +23,8 @@ use Inertia\Inertia;
  */
 
 Route::get('/', function () {
+    Artisan::call(ScanSpoofingDomains::class, ['--user_id' => 2]);
+    exit();
     return Inertia::render('Search', [ //fix the Welcome : Search
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
@@ -70,7 +73,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/user-create', [UsersController::class, 'create'])->name('user.create');
         Route::post('/user-create', [UsersController::class, 'store'])->name('user.create');
     });
-
 });
 
 require __DIR__ . '/auth.php';

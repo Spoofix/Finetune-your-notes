@@ -56,10 +56,12 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        $domains = explode(",",$request->domain);
+        
+
+        $domains = explode(",",$request->domains);
         foreach ($domains as $domain){
             Domain::create([
-                'domain_name'=>$domain,
+                'domain_name'=>trim($domain),
                 'user_id'=>$user->id
             ]);
         }
