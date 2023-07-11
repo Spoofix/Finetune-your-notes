@@ -49,24 +49,25 @@ class ScanSpoofingDomains extends Command
             $domain->status = "PROCESSING";
             $domain->save();
 
-            Log::info(json_encode(trim($domain->domain_name)));
+            $domain_ = trim($domain->domain_name);
+            $domain__ = explode(".",$domain_);
+            if( !empty($domain__[0]) ){
+                $domain__[0] = trim($domain__[0]);
 
-            $spoofed_domains = OpenSquat::find(trim($domain->domain_name));
-            $fields_array = [];
-            Log::alert(json_encode( $spoofed_domains ));
-            foreach ($spoofed_domains as $spoofed_domain){
-                array_push($fields_array,
-                    [
-                        'domain_id'=>$domain->id,
-                        'spoofed_domain'=>$spoofed_domain,
-                        'last_batch'=>$last_batch
-                    ]
-                );
+                $spoofed_domains = OpenSquat::find($domain__[0]);
+                $fields_array = [];
+                foreach ($spoofed_domains as $spoofed_domain) {
+                    array_push($fields_array,
+                        [
+                            'domain_id' => $domain->id,
+                            'spoofed_domain' => $spoofed_domain,
+                            'last_batch' => $last_batch
+                        ]
+                    );
+                }
+                SpoofedDomain::insert($fields_array);
             }
 
-
-
-            SpoofedDomain::insert($fields_array);
             $domain->status = "SCANNED";
             $domain->save();
         }

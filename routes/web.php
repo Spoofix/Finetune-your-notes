@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UsersController;
+use App\Models\Domain;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -23,7 +24,11 @@ use App\Console\Commands\ScanSpoofingDomains;
  */
 
 Route::get('/', function () {
-    Artisan::call(ScanSpoofingDomains::class, ['--user_id' => 2]);
+//    Domain::create([
+//        'user_id'=>2,
+//        'domain_name'=>'google.com',
+//    ]);
+//    Artisan::call(ScanSpoofingDomains::class, ['--user_id' => 2]);
     exit();
     return Inertia::render('Search', [ //fix the Welcome : Search
         'canLogin' => Route::has('login'),
