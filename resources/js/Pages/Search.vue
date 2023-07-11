@@ -38,23 +38,23 @@ const search = () => {
     <Head title="Welcome" />
 
     <!-- Navigation-->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm p-0" id="mainNav">
-        <div class="container-fluid px-5 py-2 navbar-top">
+    <nav class="p-0 shadow-sm navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="px-5 py-2 container-fluid navbar-top">
             <!-- <a class="navbar-brand fw-bold" href="#page-top">Yespoff</a> -->
-            <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
+            <ul class="my-3 navbar-nav ms-auto me-4 my-lg-0">
                 <!-- <li class="nav-item"><a class="nav-link me-lg-3" href="#download">Download</a></li> -->
             </ul>
-            <a class=" px-3 mb-2 mb-lg-0 mr-5">
+            <a class="px-3 mb-2 mr-5 mb-lg-0">
                 <span class="d-flex align-items-center">
-                    <span class="large text-black text-uppercase font-bolder">Contact Us</span>
+                    <span class="text-black large text-uppercase font-bolder">Contact Us</span>
                 </span>
             </a>
-            <Link class="btn btn-secondary px-3 mb-2 mb-lg-0 mr-5" :href="route('register')" style="background-color: black; ">
+            <Link class="px-3 mb-2 mr-5 btn btn-secondary mb-lg-0" :href="route('register')" style="background-color: black; ">
                 <span class="d-flex align-items-center">
                     <span class="large">Sign Up</span>
                 </span>
             </Link>
-            <Link class="btn btn-secondary px-3 mb-2 mb-lg-0" :href="route('login')" style="background-color: black; ">
+            <Link class="px-3 mb-2 btn btn-secondary mb-lg-0" :href="route('login')" style="background-color: black; ">
                 <span class="d-flex align-items-center">
                     <span class="large">Login</span>
                 </span>
@@ -67,29 +67,29 @@ const search = () => {
             <div class="row gx-5 align-items-center">
                 <div class="col-lg-6">
                     <!-- Mashead text and app badges-->
-                    <div class="mb-5 mb-lg-0 text-center text-lg-start">
-                        <h1 class="display-1 lh-base mb-3 text-white text-uppercase"
-                            style="font-weight: 900; font-size: 80px;">Spoffing<br> Spoofng</h1>
-                        <p class="lead fw-normal text-white mb-5" style="font-weight: 900; font-size: 30px;">Detect and
-                            report Spoofing websites!</p>
+                    <div class="mb-5 text-center mb-lg-0 text-lg-start">
+                        <h1 class="mb-2 text-white display-1 lh-base text-uppercase"
+                            style="font-weight: 900; font-size: 110px;">TRACIKG<br> TRAKING</h1>
+                        <p class="mb-5 text-white lead fw-normal" style="font-weight: 900; font-size: 30px;">Detect and
+                            Report Spoofing Websites.</p>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <!-- Masthead device mockup feature-->
                     <!-- class="masthead-device-mockup" -->
-                    <div  style="max-width: 500px; margin: auto;">
-                        <img class="img-fluid" src="assets/media/photos/expre.svg" alt="Hero Promo">
+                    <div  style="max-width: 600px; margin: auto;">
+                        <img class="img-fluid" src="assets/media/photos/tracking.svg" alt="Hero Promo">
                     </div>
                 </div>
             </div>
-            <div class="d-flex flex-column flex-lg-row align-items-center my-5">
+            <div class="my-5 d-flex flex-column flex-lg-row align-items-center">
                 <form>
                     <div class="input-group w-[550px] ">
-                        <input type="text" class="form-control py-3 text-black rounded" placeholder="Search Domain"
+                        <input type="text" class="py-3 text-black rounded form-control" placeholder="Search Domain"
                             v-model="form.domain">
-                        <button type="button" class="btn btn-secondary px-5" style="background-color: black; "
+                        <button type="button" class="px-5 btn btn-secondary" style="background-color: black; "
                             @click="search">
-                            <div class="spinner-grow spinner-border-sm text-white" role="status"
+                            <div class="text-white spinner-grow spinner-border-sm" role="status"
                                 v-if="form.processing">
                                 <span class="sr-only">Loading...</span>
                             </div>
@@ -142,7 +142,7 @@ const search = () => {
 }
 
 .masthead {
-    background-color: red;
+    background-color: #F95124;
 
     height: max-content;
 }
@@ -166,6 +166,6 @@ const search = () => {
 
 
 .navbar-top {
-    background-color: red;
+    background-color: #F95124;
 }
 </style>

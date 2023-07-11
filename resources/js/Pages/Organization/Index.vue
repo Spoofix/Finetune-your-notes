@@ -122,13 +122,16 @@ function activate(id) {
     <AuthenticatedLayout>
         <div class="col-md-12">
             <div class="block block-rounded">
-                <div class="block-header px-5">
-                    <h2 class="block-title">Organization</h2>
-                    <a  class="btn btn-info mr-3 text-capitalize"   data-bs-toggle="modal" data-bs-target="#modal-normal">Add Organization</a>
-                    <div class="modal" id="modal-normal" tabindex="-1" role="dialog" aria-labelledby="modal-normal" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
+                <div class="px-5 block-header">
+                    <h2 class="block-title">Spoff for {{ domain }}</h2>
+                    <!-- <a  class="mr-3 btn btn-info text-capitalize"   data-bs-toggle="modal" data-bs-target="#modal-normal">Add Organization</a> -->
+                    <!-- <a  class="mr-3 btn btn-info text-capitalize"  >Generate all</a>
+                    <a  class="mr-3 btn btn-info text-capitalize"  >Generate 24hrs</a> -->
+                    <!-- notification i will use later -->
+                    <!-- <div class="modal" id="modal-normal" tabindex="-1" role="dialog" aria-labelledby="modal-normal" aria-hidden="true"> -->
+                        <!-- <div class="modal-dialog" role="document">
                             <div class="modal-content">
-                                <div class="block block-rounded shadow-none mb-0">
+                                <div class="block mb-0 shadow-none block-rounded">
                                     <div class="block-header block-header-default">
                                         <h3 class="block-title">Add Organization</h3>
                                         <div class="block-options">
@@ -141,7 +144,7 @@ function activate(id) {
                                         <form  @submit.prevent="submit">
 
                                             <div class="col-md-12">
-                                                <div class="row mb-4">
+                                                <div class="mb-4 row">
                                                     <div class="col-12">
                                                         <label class="form-label">Organization</label>
                                                         <input type="text" class="form-control form-control-lg"  v-model="form.name" placeholder="Enter your organization name..">
@@ -152,7 +155,7 @@ function activate(id) {
                                             <div class="mb-4">
                                                 <button class="btn btn-primary btn-primary-custom" type="submit" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                                                     <span class="spinner-border text-dark " v-if="form.processing"></span>
-                                                    <i class="fa fa-check opacity-50 me-1"></i>Create Organization
+                                                    <i class="opacity-50 fa fa-check me-1"></i>Create Organization
                                                 </button>
                                             </div>
 
@@ -160,57 +163,191 @@ function activate(id) {
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                        </div> -->
+                    <!-- </div> -->
+                
                 </div>
-                <div class="block-content pb-5 px-5">
+                <!-- <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css"> -->
+<!-- <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css"> -->
 
-                    <table class="table table-borderless table-striped">
+
+<section class="py-1 bg-blueGray-50">
+<div class="w-full px-4 mx-auto mt-3 mb-12 xl:w-12/12 xl:mb-0">
+  <div class="relative flex flex-col w-full min-w-0 mb-6 break-words bg-white rounded shadow-lg ">
+    <div class="px-4 py-3 mb-0 border-0 rounded-t">
+      <div class="flex flex-wrap items-center">
+        <div class="relative flex-1 flex-grow w-full max-w-full px-4">
+          <h3 class="text-base font-semibold text-blueGray-700">similer to{{ Domain-selected }}</h3>
+        </div>
+        <div class="relative flex-1 flex-grow w-full max-w-full px-4 text-right">
+          <button class="px-3 py-1 mb-1 mr-1 text-xs font-bold text-white uppercase transition-all duration-150 ease-linear bg-indigo-500 rounded outline-none active:bg-indigo-600 focus:outline-none" type="button">See all</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="block w-full overflow-x-auto">
+      <table class="items-center w-full bg-transparent border-collapse ">
+        <thead>
+          <tr>
+            <th class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid bg-blueGray-50 text-blueGray-500 border-blueGray-100 whitespace-nowrap">
+                          Domain
+                        </th>
+          <th class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid bg-blueGray-50 text-blueGray-500 border-blueGray-100 whitespace-nowrap">
+                          <i class="fa fa-thumbtack"></i> Pin
+                        </th>
+           <th class="px-6 py-3 text-xs font-semibold text-left text-red-500 uppercase align-middle border border-l-0 border-r-0 border-solid bg-blueGray-50 border-blueGray-100 whitespace-nowrap">
+                          Report
+                        </th>
+          <th class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid bg-blueGray-50 text-blueGray-500 border-blueGray-100 whitespace-nowrap">
+                       Rating
+                        </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <th class="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap text-blueGray-700 ">
+              google.com
+            </th>
+            <td class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap ">
+                <i class="fa fa-thumbtack"></i> 
+            </td>
+            <td class="p-4 px-6 text-xs border-t-0 border-l-0 border-r-0 align-center whitespace-nowrap">
+              Report
+            </td>
+            <td class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
+              <i class="mr-4 fas fa-arrow-up text-emerald-500"></i>
+              46,53%
+            </td>
+          </tr>
+          <tr>
+            <th class="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap text-blueGray-700">
+              /argon/index.html
+            </th>
+            <td class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
+              3,985
+            </td>
+            <td class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
+              319
+            </td>
+            <td class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
+              <i class="mr-4 text-orange-500 fas fa-arrow-down"></i>
+              46,53%
+            </td>
+          </tr>
+          <tr>
+            <th class="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap text-blueGray-700">
+              /argon/charts.html
+            </th>
+            <td class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
+              3,513
+            </td>
+            <td class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
+              294
+            </td>
+            <td class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
+              <i class="mr-4 text-orange-500 fas fa-arrow-down"></i>
+              36,49%
+            </td>
+          </tr>
+          <tr>
+            <th class="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap text-blueGray-700">
+              /argon/tables.html
+            </th>
+            <td class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
+              2,050
+            </td>
+            <td class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
+              147
+            </td>
+            <td class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
+              <i class="mr-4 fas fa-arrow-up text-emerald-500"></i>
+              50,87%
+            </td>
+          </tr>
+          <tr>
+            <th class="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap text-blueGray-700">
+              /argon/profile.html
+            </th>
+            <td class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
+              1,795
+            </td>
+            <td class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
+              190
+            </td>
+            <td class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
+              <i class="mr-4 text-red-500 fas fa-arrow-down"></i>
+              46,53%
+            </td>
+          </tr>
+        </tbody>
+
+      </table>
+    </div>
+  </div>
+</div>
+<footer class="relative pt-8 pb-6 mt-16">
+  <div class="container px-4 mx-auto">
+    <div class="flex flex-wrap items-center justify-center md:justify-between">
+      <div class="w-full px-4 mx-auto text-center md:w-6/12">
+        <div class="py-1 text-sm font-semibold text-blueGray-500">
+          Made with <a href="https://www.creative-tim.com/product/notus-js" class="text-blueGray-500 hover:text-gray-800" target="_blank">Notus JS</a> by <a href="https://www.creative-tim.com" class="text-blueGray-500 hover:text-blueGray-800" target="_blank"> Creative Tim</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+</section>
+                
+                <!-- <div class="px-5 pb-5 block-content">
+
+                     <table class="table table-borderless table-striped">
                         <thead>
                             <tr>
-                                <th>S/N</th>
-                                <th>Organization</th>
-                                <th>Other Domain </th>
-                                <th style="width: 200px;">Action</th>
+                                <th>NO</th>
+                                <th>SIMILAR DOMAINS </th>
+                                <th>Rating</th>
+                                <th style="width: 200px;">Report all</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="(organization, index) in $page.props.organizations.data" v-bind:key="organization">
+                            <tr v-for="(item, index) in $page.props.organizations.data" v-bind:key="item">
                                 <td><a class="fw-semibold">{{ ++index }}</a></td>
-                                <td><a class="fw-semibold">{{ organization.name }}</a></td>
-                                <td><a class="fw-semibold">{{ organization.domains.length }}</a></td>
+                                <td><a class="fw-semibold">{{ item  }}</a></td>
+                                <td><a class="fw-semibold">{{ rating }}</a></td>
+                                <td><a class="fw-semibold"> </a> {{ report }} </td>
                                 <td>
                                     <a class="btn btn-sm btn-secondary" data-bs-toggle="tooltip" title="View Organization" :href="route('organization.view', [organization.name, organization.id] )">
                                       <i class="fa fa-pencil-alt"></i>
                                     </a>
 
-                                    <a class="btn btn-sm btn-danger m-2" data-bs-toggle="tooltip" title="Cancel Organization" @click="cancel(organization.id)" v-if="organization.status == 'ACTIVE'">
+                                    <a class="m-2 btn btn-sm btn-danger" data-bs-toggle="tooltip" title="Cancel Organization" @click="cancel(organization.id)" v-if="organization.status == 'ACTIVE'">
                                         <i class="fa fa-times"></i>
                                     </a>
-                                    <a class="btn btn-sm btn-success m-2" data-bs-toggle="tooltip" title="Activate Organization" @click="activate(organization.id)" v-else>
+                                    <a class="m-2 btn btn-sm btn-success" data-bs-toggle="tooltip" title="Activate Organization" @click="activate(organization.id)" v-else>
                                         <i class="fa fa-check"></i>
                                     </a>
-                                </td>
+                                </td> 
                             </tr>
 
                         </tbody>
 
-                    </table>
+                    </table> -->
 
-                                <nav aria-label="Page navigation pull-right" v-if="$page.props.organizations.links.length > 3">
+                                <!-- <nav aria-label="Page navigation pull-right" v-if="$page.props.organizations.links.length > 3">
                                     <ul class="pagination pagination-sm">
                                         <template v-for="(link, p) in $page.props.organizations.links" :key="p">
                                             <li class="page-item" v-if="link.label.includes('Previous')">
                                                 <Link class="page-link" :href="link.url" tabindex="-1" aria-label="Previous">
                                                     <span aria-hidden="true" class="">
-                                                        <i class="fa fa-angle-double-left mr-2"></i> Previous
+                                                        <i class="mr-2 fa fa-angle-double-left"></i> Previous
                                                     </span>
                                                 </Link>
                                             </li>
                                             <li class="page-item" v-else-if="link.label.includes('Next')">
                                                 <Link class="page-link" :href="link.url" aria-label="Next">
                                                     <span aria-hidden="true" class="">
-                                                        Next<i class="fa fa-angle-double-right ml-2"></i>
+                                                        Next<i class="ml-2 fa fa-angle-double-right"></i>
                                                     </span>
                                                 </Link>
                                             </li>
@@ -219,8 +356,8 @@ function activate(id) {
                                             </li>
                                         </template>
                                      </ul>
-                                </nav>
-                </div>
+                                </nav> 
+                </div> -->
             </div>
         </div>
     </AuthenticatedLayout>

@@ -29,13 +29,13 @@ const Toast = Swal.mixin({
     <AuthenticatedLayout>
         <div class="col-md-12">
             <div class="block block-rounded">
-                <div class="block-header px-5">
-                    <Link class="btn btn-secondary mr-3 text-capitalize" :href="route('dashboard')">Back</Link>
+                <div class="px-5 block-header">
+                    <Link class="mr-3 btn btn-secondary text-capitalize" :href="route('dashboard')">Back</Link>
                     <h2 class="block-title" style="font-size: 20px; text-transform: uppercase;">Profile</h2>
-                    <Link class="btn btn-info mr-3 text-capitalize" :href="route('profile.change-password')">Change Password</Link>
-                    <Link class="btn btn-info mr-3 text-capitalize" :href="route('profile.edit')">Update Profile</Link>
+                    <Link class="mr-3 btn btn-info text-capitalize" :href="route('profile.change-password')">Change Password</Link>
+                    <Link class="mr-3 btn btn-info text-capitalize" :href="route('profile.edit')">Update Profile</Link>
                 </div>
-                <div class="block-content pb-5 px-5">
+                <div class="px-5 pb-5 block-content">
 
                       <table class="table table-borderless table-striped">
                         <thead>
@@ -54,25 +54,14 @@ const Toast = Swal.mixin({
                             <td><span class="fw-bold">{{ $page.props.auth.user.email }}</span> </td>
                           </tr>
                           <tr>
-                            <td><a class="fw-semibold">Address</a></td>
-                            <td><span class="fw-bold">{{ $page.props.auth.user.address }}</span> </td>
+                            <td><a class="fw-semibold">Organization</a></td>
+                            <td><span class="fw-bold">{{ $page.props.auth.user.organization }}</span> </td>
                           </tr>
                           <tr>
                             <td><a class="fw-semibold">Phone Number</a></td>
                             <td><span class="fw-bold">{{ $page.props.auth.user.phone_number }}</span> </td>
                           </tr>
-                          <tr>
-                            <td><a class="fw-semibold">City</a></td>
-                            <td><span class="fw-bold">{{ $page.props.auth.user.city }}</span> </td>
-                          </tr>
-                          <tr>
-                            <td><a class="fw-semibold">Province</a></td>
-                            <td><span class="fw-bold">{{ $page.props.auth.user.province }}</span> </td>
-                          </tr>
-                          <tr>
-                            <td><a class="fw-semibold">Timezone</a></td>
-                            <td><span class="fw-bold">{{ $page.props.auth.user.timezone }}</span> </td>
-                          </tr>
+                        
                         </tbody>
                       </table>
                 </div>

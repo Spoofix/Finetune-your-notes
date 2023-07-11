@@ -35,7 +35,6 @@ class OrganizationController extends Controller
             return Inertia::location(route('organization'));
         }
         return back();
-
     }
 
     public function view()
@@ -86,5 +85,4 @@ class OrganizationController extends Controller
             $organization->save();
         }
     }
-
 }

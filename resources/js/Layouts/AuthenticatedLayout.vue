@@ -27,10 +27,10 @@ const showingNavigationDropdown = ref(false);
               <div class="content-header justify-content-lg-center">
                 <!-- Logo -->
                 <div>
-                  <span class="smini-visible fw-bold tracking-wide fs-lg">
+                  <span class="tracking-wide smini-visible fw-bold fs-lg">
                     ye<span class="text-primary">s</span>
                   </span>
-                  <Link class="link-fx fw-bold tracking-wide mx-auto" :href="route('dashboard')">
+                  <Link class="mx-auto tracking-wide link-fx fw-bold" :href="route('dashboard')">
                     <span class="smini-hidden">
                       <span class="fs-4 text-dual">ye</span><span class="fs-4 text-primary">spoff</span>
                     </span>
@@ -85,8 +85,10 @@ const showingNavigationDropdown = ref(false);
 
           <!-- Header -->
           <header id="page-header">
+            
             <!-- Header Content -->
             <div class="content-header">
+              <div> <i class="px-5 text-2xl font-extrabold fa fa-bars fa-bounce :hover"></i></div>
               <!-- Left Section -->
               <div class="space-x-1">
                 <!-- Toggle Sidebar -->
@@ -100,36 +102,39 @@ const showingNavigationDropdown = ref(false);
               </div>
               <!-- END Left Section -->
 
+
               <!-- Right Section -->
+            
               <div class="space-x-1">
+               
                 <!-- User Dropdown -->
                 <div class="dropdown d-inline-block">
                   <button type="button" class="btn btn-sm btn-alt-secondary" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-user d-sm-none"></i>
                     <span class="d-none d-sm-inline-block fw-semibold">{{ $page.props.auth.user.name }}</span>
-                    <i class="fa fa-angle-down opacity-50 ms-1"></i>
+                    <i class="opacity-50 fa fa-angle-down ms-1"></i>
                   </button>
-                  <div class="dropdown-menu dropdown-menu-md dropdown-menu-end p-0" aria-labelledby="page-header-user-dropdown">
+                  <div class="p-0 dropdown-menu dropdown-menu-md dropdown-menu-end" aria-labelledby="page-header-user-dropdown">
                     <div class="px-2 py-3 bg-body-light rounded-top">
-                      <h5 class="h6 text-center mb-0">
+                      <h5 class="mb-0 text-center h6">
                         {{ $page.props.auth.user.name }}
                       </h5>
                     </div>
                     <div class="p-2">
-                      <Link class="dropdown-item d-flex align-items-center justify-content-between space-x-1" :href="route('profile')">
+                      <Link class="space-x-1 dropdown-item d-flex align-items-center justify-content-between" :href="route('profile')">
                         <span>Profile</span>
-                        <i class="fa fa-fw fa-user opacity-25"></i>
+                        <i class="opacity-25 fa fa-fw fa-user"></i>
                       </Link>
 
-                      <Link class="dropdown-item d-flex align-items-center justify-content-between space-x-1" :href="route('organization')" data-toggle="layout" data-action="side_overlay_toggle">
+                      <Link class="space-x-1 dropdown-item d-flex align-items-center justify-content-between" :href="route('organization')" data-toggle="layout" data-action="side_overlay_toggle" >
                         <span>Organization</span>
-                        <i class="fa fa-fw fa-wrench opacity-25"></i>
+                        <i class="opacity-25 fa fa-fw fa-wrench"></i>
                       </Link>
 
                       <div class="dropdown-divider"></div>
-                      <Link class="dropdown-item d-flex align-items-center justify-content-between space-x-1" :href="route('logout')" method="post" >
+                      <Link class="space-x-1 dropdown-item d-flex align-items-center justify-content-between" :href="route('logout')" method="post" >
                         <span>Log Out</span>
-                        <i class="fa fa-fw fa-sign-out-alt opacity-25"></i>
+                        <i class="opacity-25 fa fa-fw fa-sign-out-alt"></i>
                       </Link>
                     </div>
                   </div>
@@ -145,9 +150,9 @@ const showingNavigationDropdown = ref(false);
           <!-- END Header -->
 
           <!-- Main Container -->
-          <main id="main-container">
+          <main id="">
             <!-- Page Content -->
-            <div class="content">
+            <div class="">
 
 
                 <slot />
@@ -159,12 +164,12 @@ const showingNavigationDropdown = ref(false);
 
           <!-- Footer -->
           <footer id="page-footer">
-            <div class="content py-3">
+            <div class="py-3 content">
               <div class="row fs-sm">
-                <div class="col-sm-6 order-sm-2 py-1 text-center text-sm-end">
+                <div class="py-1 text-center col-sm-6 order-sm-2 text-sm-end">
 
                 </div>
-                <div class="col-sm-6 order-sm-1 py-1 text-center text-sm-start">
+                <div class="py-1 text-center col-sm-6 order-sm-1 text-sm-start">
 
                 </div>
               </div>
@@ -178,14 +183,14 @@ const showingNavigationDropdown = ref(false);
         <div class="min-h-screen bg-gray-100" v-if="false">
             <nav class="bg-white border-b border-gray-100">
                 <!-- Primary Navigation Menu -->
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div class="flex justify-between h-16">
                         <div class="flex">
                             <!-- Logo -->
-                            <div class="shrink-0 flex items-center">
+                            <div class="flex items-center shrink-0">
                                 <Link :href="route('dashboard')">
                                     <ApplicationLogo
-                                        class="block h-9 w-auto fill-current text-gray-800"
+                                        class="block w-auto text-gray-800 fill-current h-9"
                                     />
                                 </Link>
                             </div>
@@ -200,13 +205,13 @@ const showingNavigationDropdown = ref(false);
 
                         <div class="hidden sm:flex sm:items-center sm:ml-6">
                             <!-- Settings Dropdown -->
-                            <div class="ml-3 relative">
+                            <div class="relative ml-3">
                                 <Dropdown align="right" width="48">
                                     <template #trigger>
                                         <span class="inline-flex rounded-md">
                                             <button
                                                 type="button"
-                                                class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
+                                                class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out bg-white border border-transparent rounded-md hover:text-gray-700 focus:outline-none"
                                             >
                                                 {{ $page.props.auth.user.name }}
 
@@ -237,12 +242,12 @@ const showingNavigationDropdown = ref(false);
                         </div>
 
                         <!-- Hamburger -->
-                        <div class="-mr-2 flex items-center sm:hidden">
+                        <div class="flex items-center -mr-2 sm:hidden">
                             <button
                                 @click="showingNavigationDropdown = !showingNavigationDropdown"
-                                class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
+                                class="inline-flex items-center justify-center p-2 text-gray-400 transition duration-150 ease-in-out rounded-md hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500"
                             >
-                                <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                                <svg class="w-6 h-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                                     <path
                                         :class="{
                                             hidden: showingNavigationDropdown,
@@ -283,10 +288,10 @@ const showingNavigationDropdown = ref(false);
                     <!-- Responsive Settings Options -->
                     <div class="pt-4 pb-1 border-t border-gray-200">
                         <div class="px-4">
-                            <div class="font-medium text-base text-gray-800">
+                            <div class="text-base font-medium text-gray-800">
                                 {{ $page.props.auth.user.name }}
                             </div>
-                            <div class="font-medium text-sm text-gray-500">{{ $page.props.auth.user.email }}</div>
+                            <div class="text-sm font-medium text-gray-500">{{ $page.props.auth.user.email }}</div>
                         </div>
 
                         <div class="mt-3 space-y-1">
@@ -301,7 +306,7 @@ const showingNavigationDropdown = ref(false);
 
             <!-- Page Heading -->
             <header class="bg-white shadow" v-if="$slots.header">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <slot name="header" />
                 </div>
             </header>

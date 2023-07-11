@@ -46,13 +46,13 @@ const Toast = Swal.mixin({
 
 const form = useForm({
     user_id: props.auth_user.id,
-    first_name: props.auth_user.first_name,
-    last_name: props.auth_user.last_name,
-    address: props.auth_user.address,
+    // first_name: props.auth_user.first_name,
+    name: props.auth_user.name,
+    organization: props.auth_user.organization,
     phone_number: props.auth_user.phone_number,
-    city: props.auth_user.city,
-    province: props.auth_user.province,
-    timezone: props.auth_user.timezone,
+    email: props.auth_user.email,
+    // domain : props.auth_user.domain,
+    // timezone: props.auth_user.timezone,
 });
 
 function submit() {
@@ -79,47 +79,50 @@ function submit() {
     <AuthenticatedLayout>
         <div class="col-md-12">
             <div class="block block-rounded" href="javascript:void(0)">
-                <div class="block-header px-5">
-                    <Link class="btn btn-info mr-3 text-capitalize" :href="route('profile')">Back</Link>
+                <div class="px-5 block-header">
+                    <Link class="mr-3 btn btn-info text-capitalize" :href="route('profile')">Back</Link>
                     <h2 class="block-title" style="font-size: 20px; text-transform: uppercase;">Update Profile</h2>
                 </div>
-                <div class="block-content pb-5 px-5">
+                <div class="px-5 pb-5 block-content">
                     <form  @submit.prevent="submit">
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="row mb-4">
+                                <div class="mb-4 row">
                                     <div class="col-6">
-                                        <label class="form-label">Firstname </label>
-                                        <input type="text" class="form-control form-control-lg"  v-model="form.first_name" placeholder="Enter your firstname..">
+                                        <label class="form-label">Name</label>
+                                        <input type="text" class="form-control form-control-lg"  v-model="form.name" placeholder="Enter your name...">
                                     </div>
                                     <div class="col-6">
-                                        <label class="form-label">Lastname</label>
-                                        <input type="text" class="form-control form-control-lg"  v-model="form.last_name" placeholder="Enter your lastname..">
+                                        <label class="form-label">Organization</label>
+                                        <input type="text" class="form-control form-control-lg"  v-model="form.organization" placeholder="Enter your organization...">
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <div class="row mb-4">
+                            <!-- <div class="col-md-12">
+                                <div class="mb-4 row">
                                     <div class="col-12">
-                                        <label class="form-label">Address</label>
-                                        <input type="text" class="form-control form-control-lg"  v-model="form.address" placeholder="Enter your address..">
+                                        <label class="form-label">Your domains</label>
+                                        <input type="text" class="form-control form-control-lg"  v-model="form.domains" placeholder="Enter your domains comma ' , ' separated">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="row mb-4">
-                                    <div class="col-6">
-                                            <label class="form-label">City</label>
-                                            <input type="text" class="form-control form-control-lg"  v-model="form.city" placeholder="Enter your city..">
-                                    </div>
-                                    <div class="col-6">
-                                        <label class="form-label">Phone Number</label>
-                                        <input type="text" class="form-control form-control-lg"  v-model="form.phone_number" placeholder="Enter your phone number..">
-                                    </div>
+                            </div> -->
+                             <div class="col-md-12">
+                            <div class="mb-4 row">
+                                <div class="col-12">
+                                        <label class="form-label">Email</label>
+                                        <input type="text" class="form-control form-control-lg"  v-model="form.email" placeholder="Enter your city..">
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <div class="row mb-4">
+                             <div class="mb-5 col-md-12">
+                                <div class="col-12">
+                                    <label class="form-label">Phone Number</label>
+                                    <input type="text" class="form-control form-control-lg"  v-model="form.phone_number" placeholder="Enter your phone number..">
+                                </div>
+                            </div>
+                        </div>
+                        
+                            <!-- <div class="col-md-12">
+                                <div class="mb-4 row">
                                     <div class="col-6">
                                         <label class="form-label">Province</label>
                                         <select class="form-select" v-model="form.province">
@@ -135,12 +138,12 @@ function submit() {
                                         </select>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="mb-4">
                             <button class="btn btn-primary btn-primary-custom" type="submit" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                                 <span class="spinner-border text-dark me-1" v-if="form.processing"></span>
-                                <i class="fa fa-check opacity-50 me-1" v-else></i>
+                                <i class="opacity-50 fa fa-check me-1" v-else></i>
                                 Update Profile
                             </button>
                         </div>
@@ -150,8 +153,8 @@ function submit() {
         </div>
         <div v-if="false">
             <div class="py-12">
-                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-                    <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                <div class="mx-auto space-y-6 max-w-7xl sm:px-6 lg:px-8">
+                    <div class="p-4 bg-white shadow sm:p-8 sm:rounded-lg">
                         <UpdateProfileInformationForm
                             :must-verify-email="mustVerifyEmail"
                             :status="status"
@@ -159,11 +162,11 @@ function submit() {
                         />
                     </div>
 
-                    <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                    <div class="p-4 bg-white shadow sm:p-8 sm:rounded-lg">
                         <UpdatePasswordForm class="max-w-xl" />
                     </div>
 
-                    <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                    <div class="p-4 bg-white shadow sm:p-8 sm:rounded-lg">
                         <DeleteUserForm class="max-w-xl" />
                     </div>
                 </div>

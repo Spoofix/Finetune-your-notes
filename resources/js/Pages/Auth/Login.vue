@@ -58,7 +58,7 @@ const submitToken = () => {
 
 <template >
     <Head title="Log in" />
-    <div class=" rounded overflow-hidden lg:flex md:flex" style="width:fit-content; margin: auto; margin-top: 50px; " v-if="!$props.token">
+    <div class="overflow-hidden rounded lg:flex md:flex" style="width:fit-content; margin: auto; margin-top: 50px; " v-if="!$props.token">
 
             <div class="hide" style="max-width: 600px; min-width: 500px; min-height: 100%;">
                 <img
@@ -78,9 +78,9 @@ const submitToken = () => {
                 <div class="block-header bg-gd-dusk"></div>
                 <div class="block-content " >
                 <div class="py-4 text-center" >
-                    <h1 class="h3 fw-bold mt-4 mb-2">Login to your account</h1>
+                    <h1 class="mt-4 mb-2 h3 fw-bold">Login to your account</h1>
                 </div>
-                    <div class="form-floating mb-4">
+                    <div class="mb-4 form-floating">
                         <div class="relative">
                             <input type="text" id="login-username_outline" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-white rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" :class="{ 'is-invalid': form.errors.email}"
                                    v-model="form.email"
@@ -127,13 +127,13 @@ const submitToken = () => {
                     </div>
                 </div>
                 <div
-                    class="block-content block-content-full bg-body-light text-center d-flex justify-content-between"
+                    class="text-center block-content block-content-full bg-body-light d-flex justify-content-between"
                 >
-                    <Link class="fs-sm fw-medium link-fx text-muted me-2 mb-1 d-inline-block" :href="route('register')">
-                                    <i class="fa fa-plus opacity-50 me-1"></i> Create Account
+                    <Link class="mb-1 fs-sm fw-medium link-fx text-muted me-2 d-inline-block" :href="route('register')">
+                                    <i class="opacity-50 fa fa-plus me-1"></i> Create Account
                     </Link>
                     <Link
-                        class="fs-sm fw-medium link-fx text-muted me-2 mb-1 d-inline-block"
+                        class="mb-1 fs-sm fw-medium link-fx text-muted me-2 d-inline-block"
                         :href="route('password.request')"
                     >
                         Forgot Password
@@ -146,15 +146,15 @@ const submitToken = () => {
         <!-- END Sign In Form -->
 
 
-    <div class="content content-full overflow-hidden" v-else>
+    <div class="overflow-hidden content content-full" v-else>
         <!-- Header -->
-        <div class="py-4 text-center">
-            <h1 class="h3 fw-bold mt-4 mb-2">OTP Token</h1>
+        <div class="py-2 text-center ">
+            <h1 class="mt-4 mb-2 h3 fw-bold">OTP Token</h1>
         </div>
         <!-- END Header -->
 
-        <form class="" @submit.prevent="submitToken">
-            <div class="block block-themed block-rounded block-fx-shadow" style="max-width: 600px;">
+        <form class="m-auto" @submit.prevent="submitToken">
+            <div class="block block-themed block-fx-shadow" style="max-width: 600px;">
                 <div class="block-header bg-gd-dusk"></div>
                 <div class="block-content">
                     <div class="relative">
@@ -176,17 +176,17 @@ const submitToken = () => {
                     </div>
                 </div>
                 <div
-                    class="block-content block-content-full bg-body-light text-center d-flex justify-content-between"
+                    class="text-center block-content block-content-full bg-body-light d-flex justify-content-between"
                 >
                     <Link
-                        class="fs-sm fw-medium link-fx text-muted me-2 mb-1 d-inline-block"
+                        class="mb-1 fs-sm fw-medium link-fx text-muted me-2 d-inline-block"
                         :href="route('register')"
                     >
-                        <i class="fa fa-plus opacity-50 me-1"></i> Create
+                        <i class="opacity-50 fa fa-plus me-1"></i> Create
                         Account
                     </Link>
                     <Link
-                        class="fs-sm fw-medium link-fx text-muted me-2 mb-1 d-inline-block"
+                        class="mb-1 fs-sm fw-medium link-fx text-muted me-2 d-inline-block"
                         :href="route('password.request')"
                     >
                         Forgot Password

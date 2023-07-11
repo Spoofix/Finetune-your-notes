@@ -5,9 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DomainDetail extends Model
+class domain extends Model
 {
-   use HasFactory;
+    use HasFactory;
 
-   protected $guarded = [];
+    protected $fillable = [
+        'user-id', 'domains',
+    ];
 }
