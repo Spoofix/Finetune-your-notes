@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('generated_domains', function (Blueprint $table) {
+        Schema::create('spoofed_domains', function (Blueprint $table) {
             $table->id();
             $table->integer('domain_id');
-            $table->string('generated_domains');
+            $table->string('spoofed_domain');
+            $table->integer("last_batch");
             $table->timestamps();
         });
     }
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('generated_domains');
+        Schema::dropIfExists('spoofed_domains');
     }
 };

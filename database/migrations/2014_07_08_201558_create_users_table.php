@@ -11,21 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-                Schema::create('users', function (Blueprint $table) {
-                    $table->id();
-                    $table->string('name');
-                    $table->string('organization');
-                    $table->string('phone_number');
-                    $table->string('email')->unique();
-                    $table->string('password');
-                    $table->enum('requires_password_update', [true, false])->default('');
-                    $table->timestamp('email_verified_at')->nullable();
-                    $table->string('temp_password')->nullable();
-                    $table->integer('role_id')->default(2);
-                    $table->enum('status', ['PENDING', 'ACTIVE', 'LOCKED'])->default('PENDING');
-                    $table->rememberToken();
+        Schema::create('users', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('organization');
+            $table->string('phone_number');
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->enum('requires_password_update', [true, false])->default('');
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('temp_password')->nullable();
+            $table->integer('role_id')->default(2);
+            $table->enum('status', ['PENDING', 'ACTIVE', 'LOCKED'])->default('ACTIVE');
+            $table->rememberToken();
 
-                    $table->timestamps();
+            $table->timestamps();
         });
     }
 

@@ -76,7 +76,7 @@ class OpenSquat
        chdir( base_path('opensquat') );
 
         $main_file =  'keywords.txt';
-        Log::alert($main_file);
+//        Log::alert($main_file);
         $file = fopen($main_file, 'w');
         ftruncate($file, 0);
         fclose($file);
@@ -139,10 +139,10 @@ class OpenSquat
 
         // Log::error($return);
 
+        $domainList = [];
         $handle = fopen(base_path('opensquat/results.txt'), "r");
         if ($handle) {
 
-            $domainList = [];
             while (($file_line = fgets($handle)) !== false) {
                 // process the file_line read.
                 $file_line = str_replace(array("\r", "\n"), '', $file_line);

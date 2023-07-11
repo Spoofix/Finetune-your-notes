@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('domain', function (Blueprint $table) {
+        Schema::create('domains', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
-            $table->string('domains');
+            $table->unsignedBigInteger('user_id');
+            $table->string('domain_name');
+            $table->enum('status',['SCANNED','PROCESSING','NOT_SCANNED'])->default('NOT_SCANNED');
             $table->timestamps();
         });
     }
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('domain');
+        Schema::dropIfExists('domains');
     }
 };

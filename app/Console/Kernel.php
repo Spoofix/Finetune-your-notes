@@ -11,7 +11,7 @@ class Kernel extends ConsoleKernel
      * Define the application's command schedule.
      */
     protected $commands = [
-        Commands\SearchSimiliarDomain::class,
+        Commands\ScanSpoofingDomains::class,
         Commands\ExpireOtpCommand::class,
     ];
 
@@ -20,8 +20,8 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')->hourly();
 
         $schedule->command("app:expire-otp")->everyTwoMinutes();
-        $schedule->command('queue:work')->everyMinute();
-        $schedule->command("domain:search")->daily();
+//        $schedule->command('queue:work')->everyMinute();
+//        $schedule->command("domain:search")->daily();
 
     }
 

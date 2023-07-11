@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Domain extends Model
+class SpoofedDomain extends Model
 {
     use HasFactory;
 
-    protected $table="domains";
+    protected $table="spoofed_domains";
 
     protected $fillable = [
-        'user_id', 'domain_name', 'status'
+        'domain_id', 'spoofed_domain', 'last_batch'
     ];
 }
