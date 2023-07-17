@@ -1,17 +1,27 @@
-<script setup>
+<script setup >
 // import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 // import { Head } from '@inertiajs/vue3';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, router, useForm } from '@inertiajs/vue3';
 import Swal from 'sweetalert2'
 import {Link} from "@inertiajs/vue3"
-import { defineComponent } from 'vue';
+import { defineComponent, onMounted } from 'vue';
+import Chart from 'chart.js/auto';
+
+
+
+
 
 defineComponent({
+   name: 'App',
   components: {
     Link
   },
+  
 });
+
+
+
 const Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
@@ -28,6 +38,10 @@ const props = defineProps({
     organization: {
         type: Object,
     },
+    domainList: {
+        type:Object,
+    }
+    
 });
 
 const form = useForm({
@@ -75,7 +89,7 @@ function cancel(id) {
                 onFinish: (response) => {
                     Toast.fire({
                         icon: 'success',
-                        title: 'Organization Updated Successfully'
+                        title: 'Domain Updated Successfully'
                     })
                 },
                 onSuccess: () => { },
@@ -113,8 +127,63 @@ function activate(id) {
         }
     })
 
-}
+} 
+
+// const ctx = document.getElementById('myChart');
+
+// onMounted(() => {
+// new Chart(ctx, {
+//   type: 'bar',
+//   data: {
+//     labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+//     datasets: [{
+//       label: '# of Votes',
+//       data: [12, 19, 3, 5, 2, 3],
+//       borderWidth: 1
+//     }]
+//   },
+//   options: {
+//     scales: {
+//       y: {
+//         beginAtZero: true
+//       }
+//     }
+//   }
+// });
+   
+// })
+
+
+
+
+// window.onload = function () {
+
+// //Better to construct options first and then pass it as a parameter
+// var options = {
+// 	title: {
+// 		text: "Column Chart in jQuery CanvasJS"              
+// 	},
+// 	data: [              
+// 	{
+// 		// Change type to "doughnut", "line", "splineArea", etc.
+// 		type: "column",
+// 		dataPoints: [
+// 			{ label: "apple",  y: 10  },
+// 			{ label: "orange", y: 15  },
+// 			{ label: "banana", y: 25  },
+// 			{ label: "mango",  y: 30  },
+// 			{ label: "grape",  y: 28  }
+// 		]
+// 	}
+// 	]
+// };
+
+// $("#chartContainer").CanvasJSChart(options);
+// }
+
+
 </script>
+
 
 <template>
     <Head title="Dashboard" />
@@ -131,59 +200,59 @@ function activate(id) {
 
         <div class="row" v-if="$page.props.auth.user.role_id == 1">
 <!--            admin content-->
-<table class="min-w-full border-collapse block md:table">
+<table class="block min-w-full border-collapse md:table">
     <thead class="block md:table-header-group">
-        <tr class="border border-grey-500 md:border-none block md:table-row absolute -top-full md:top-auto -left-full md:left-auto  md:relative ">
-            <th class="bg-gray-600 p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">Name</th>
-            <th class="bg-gray-600 p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">User Name</th>
-            <th class="bg-gray-600 p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">Email Address</th>
-            <th class="bg-gray-600 p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">Mobile</th>
-            <th class="bg-gray-600 p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">Actions</th>
+        <tr class="absolute block border border-grey-500 md:border-none md:table-row -top-full md:top-auto -left-full md:left-auto md:relative ">
+            <th class="block p-2 font-bold text-left text-white bg-gray-600 md:border md:border-grey-500 md:table-cell">Name</th>
+            <th class="block p-2 font-bold text-left text-white bg-gray-600 md:border md:border-grey-500 md:table-cell">User Name</th>
+            <th class="block p-2 font-bold text-left text-white bg-gray-600 md:border md:border-grey-500 md:table-cell">Email Address</th>
+            <th class="block p-2 font-bold text-left text-white bg-gray-600 md:border md:border-grey-500 md:table-cell">Mobile</th>
+            <th class="block p-2 font-bold text-left text-white bg-gray-600 md:border md:border-grey-500 md:table-cell">Actions</th>
         </tr>
     </thead>
     <tbody class="block md:table-row-group">
-        <tr class="bg-gray-300 border border-grey-500 md:border-none block md:table-row">
-            <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span class="inline-block w-1/3 md:hidden font-bold">Name</span>Jamal Rios</td>
-            <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span class="inline-block w-1/3 md:hidden font-bold">User Name</span>jrios1</td>
-            <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span class="inline-block w-1/3 md:hidden font-bold">Email Address</span>jrios@icloud.com</td>
-            <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span class="inline-block w-1/3 md:hidden font-bold">Mobile</span>582-3X2-6233</td>
-            <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">
-                <span class="inline-block w-1/3 md:hidden font-bold">Actions</span>
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 border border-blue-500 rounded">Edit</button>
-                <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 border border-red-500 rounded">Delete</button>
+        <tr class="block bg-gray-300 border border-grey-500 md:border-none md:table-row">
+            <td class="block p-2 text-left md:border md:border-grey-500 md:table-cell"><span class="inline-block w-1/3 font-bold md:hidden">Name</span>Jamal Rios</td>
+            <td class="block p-2 text-left md:border md:border-grey-500 md:table-cell"><span class="inline-block w-1/3 font-bold md:hidden">User Name</span>jrios1</td>
+            <td class="block p-2 text-left md:border md:border-grey-500 md:table-cell"><span class="inline-block w-1/3 font-bold md:hidden">Email Address</span>jrios@icloud.com</td>
+            <td class="block p-2 text-left md:border md:border-grey-500 md:table-cell"><span class="inline-block w-1/3 font-bold md:hidden">Mobile</span>582-3X2-6233</td>
+            <td class="block p-2 text-left md:border md:border-grey-500 md:table-cell">
+                <span class="inline-block w-1/3 font-bold md:hidden">Actions</span>
+                <button class="px-2 py-1 font-bold text-white bg-blue-500 border border-blue-500 rounded hover:bg-blue-700">Edit</button>
+                <button class="px-2 py-1 font-bold text-white bg-red-500 border border-red-500 rounded hover:bg-red-700">Delete</button>
             </td>
         </tr>
-        <tr class="bg-white border border-grey-500 md:border-none block md:table-row">
-            <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span class="inline-block w-1/3 md:hidden font-bold">Name</span>Erwin Campbell</td>
-            <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span class="inline-block w-1/3 md:hidden font-bold">User Name</span>ecampbell088</td>
-            <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span class="inline-block w-1/3 md:hidden font-bold">Email Address</span>ecampbell088@hotmail.com</td>
-            <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span class="inline-block w-1/3 md:hidden font-bold">Mobile</span>318-685-X414</td>
-            <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">
-                <span class="inline-block w-1/3 md:hidden font-bold">Actions</span>
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 border border-blue-500 rounded">Edit</button>
-                <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 border border-red-500 rounded">Delete</button>
+        <tr class="block bg-white border border-grey-500 md:border-none md:table-row">
+            <td class="block p-2 text-left md:border md:border-grey-500 md:table-cell"><span class="inline-block w-1/3 font-bold md:hidden">Name</span>Erwin Campbell</td>
+            <td class="block p-2 text-left md:border md:border-grey-500 md:table-cell"><span class="inline-block w-1/3 font-bold md:hidden">User Name</span>ecampbell088</td>
+            <td class="block p-2 text-left md:border md:border-grey-500 md:table-cell"><span class="inline-block w-1/3 font-bold md:hidden">Email Address</span>ecampbell088@hotmail.com</td>
+            <td class="block p-2 text-left md:border md:border-grey-500 md:table-cell"><span class="inline-block w-1/3 font-bold md:hidden">Mobile</span>318-685-X414</td>
+            <td class="block p-2 text-left md:border md:border-grey-500 md:table-cell">
+                <span class="inline-block w-1/3 font-bold md:hidden">Actions</span>
+                <button class="px-2 py-1 font-bold text-white bg-blue-500 border border-blue-500 rounded hover:bg-blue-700">Edit</button>
+                <button class="px-2 py-1 font-bold text-white bg-red-500 border border-red-500 rounded hover:bg-red-700">Delete</button>
             </td>
         </tr>
-        <tr class="bg-gray-300 border border-grey-500 md:border-none block md:table-row">
-            <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span class="inline-block w-1/3 md:hidden font-bold">Name</span>Lillie Clark</td>
-            <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span class="inline-block w-1/3 md:hidden font-bold">User Name</span>lillie</td>
-            <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span class="inline-block w-1/3 md:hidden font-bold">Email Address</span>lillie.clark@gmail.com</td>
-            <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span class="inline-block w-1/3 md:hidden font-bold">Mobile</span>505-644-84X4</td>
-            <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">
-                <span class="inline-block w-1/3 md:hidden font-bold">Actions</span>
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 border border-blue-500 rounded">Edit</button>
-                <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 border border-red-500 rounded">Delete</button>
+        <tr class="block bg-gray-300 border border-grey-500 md:border-none md:table-row">
+            <td class="block p-2 text-left md:border md:border-grey-500 md:table-cell"><span class="inline-block w-1/3 font-bold md:hidden">Name</span>Lillie Clark</td>
+            <td class="block p-2 text-left md:border md:border-grey-500 md:table-cell"><span class="inline-block w-1/3 font-bold md:hidden">User Name</span>lillie</td>
+            <td class="block p-2 text-left md:border md:border-grey-500 md:table-cell"><span class="inline-block w-1/3 font-bold md:hidden">Email Address</span>lillie.clark@gmail.com</td>
+            <td class="block p-2 text-left md:border md:border-grey-500 md:table-cell"><span class="inline-block w-1/3 font-bold md:hidden">Mobile</span>505-644-84X4</td>
+            <td class="block p-2 text-left md:border md:border-grey-500 md:table-cell">
+                <span class="inline-block w-1/3 font-bold md:hidden">Actions</span>
+                <button class="px-2 py-1 font-bold text-white bg-blue-500 border border-blue-500 rounded hover:bg-blue-700">Edit</button>
+                <button class="px-2 py-1 font-bold text-white bg-red-500 border border-red-500 rounded hover:bg-red-700">Delete</button>
             </td>
         </tr>
-        <tr class="bg-white border border-grey-500 md:border-none block md:table-row">
-            <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span class="inline-block w-1/3 md:hidden font-bold">Name</span>Maribel Koch</td>
-            <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span class="inline-block w-1/3 md:hidden font-bold">User Name</span>maribelkoch</td>
-            <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span class="inline-block w-1/3 md:hidden font-bold">Email Address</span>mkoch@yahoo.com</td>
-            <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span class="inline-block w-1/3 md:hidden font-bold">Mobile</span>582-400-3X36</td>
-            <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">
-                <span class="inline-block w-1/3 md:hidden font-bold">Actions</span>
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 border border-blue-500 rounded">Edit</button>
-                <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 border border-red-500 rounded">Delete</button>
+        <tr class="block bg-white border border-grey-500 md:border-none md:table-row">
+            <td class="block p-2 text-left md:border md:border-grey-500 md:table-cell"><span class="inline-block w-1/3 font-bold md:hidden">Name</span>Maribel Koch</td>
+            <td class="block p-2 text-left md:border md:border-grey-500 md:table-cell"><span class="inline-block w-1/3 font-bold md:hidden">User Name</span>maribelkoch</td>
+            <td class="block p-2 text-left md:border md:border-grey-500 md:table-cell"><span class="inline-block w-1/3 font-bold md:hidden">Email Address</span>mkoch@yahoo.com</td>
+            <td class="block p-2 text-left md:border md:border-grey-500 md:table-cell"><span class="inline-block w-1/3 font-bold md:hidden">Mobile</span>582-400-3X36</td>
+            <td class="block p-2 text-left md:border md:border-grey-500 md:table-cell">
+                <span class="inline-block w-1/3 font-bold md:hidden">Actions</span>
+                <button class="px-2 py-1 font-bold text-white bg-blue-500 border border-blue-500 rounded hover:bg-blue-700">Edit</button>
+                <button class="px-2 py-1 font-bold text-white bg-red-500 border border-red-500 rounded hover:bg-red-700">Delete</button>
             </td>
         </tr>			
     </tbody>
@@ -240,11 +309,7 @@ function activate(id) {
             <div class="row" v-if="$page.props.auth.user.role_id == 2">
                 <div>
                     <div class="block block-rounded">
-<!--                        <div class="block-header block-header-default">-->
-<!--                            <h3 class="block-title">Domain List</h3>-->
-<!--                            <div class="block-options">-->
-<!--                            </div>-->
-<!--                        </div>-->
+
           <!-- notification i will use later -->
                              
           <div class="modal" id="modal-normal" tabindex="-1" role="dialog" aria-labelledby="modal-normal" aria-hidden="true"> 
@@ -285,10 +350,125 @@ function activate(id) {
             </div> 
         </div>
 
-        <section class="container px-4 mx-auto">
-            <a  class="mb-2 mr-3 btn btn-primary text-capitalize"   data-bs-toggle="modal" data-bs-target="#modal-normal">Add Domain</a>
+        <!-- hello -->
+        
+               <div class="relative pt-20 pb-3 bg-lightBlue-500">
+                  <div class="w-full px-4 mx-auto md:px-6">
+                     <div>
+                        <div class="flex flex-wrap">
+                           <div class="w-full px-4 lg:w-6/12 xl:w-3/12">
+                              <div class="relative flex flex-col min-w-0 mb-3 break-words bg-white rounded-lg shadow-lg xl:mb-0">
+                                 <div class="flex-auto p-4">
+                                    <div class="flex flex-wrap">
+                                       <div class="relative flex-1 flex-grow w-full max-w-full pr-4">
+                                          <h5 class="text-xs font-bold uppercase text-blueGray-400">Organization Domains</h5>
+                                          <span class="text-xl font-bold">3</span>
+                                       </div>
+                                       <div class="relative flex-initial w-auto pl-4">
+                                          <div class="inline-flex items-center justify-center w-12 h-12 p-3 text-center text-white bg-red-500 rounded-full shadow-lg"><i class="far fa-chart-bar"></i></div>
+                                       </div>
+                                    </div>
+                                    <p class="mt-4 text-sm text-blueGray-500"><span class="mr-2 text-emerald-500"></span><span class="whitespace-nowrap">view domains</span></p>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="w-full px-4 lg:w-6/12 xl:w-3/12">
+                              <div class="relative flex flex-col min-w-0 mb-3 break-words bg-white rounded-lg shadow-lg xl:mb-0">
+                                 <div class="flex-auto p-4">
+                                    <div class="flex flex-wrap">
+                                       <div class="relative flex-1 flex-grow w-full max-w-full pr-4">
+                                          <h5 class="text-xs font-bold uppercase text-blueGray-400">new Domains found for you.</h5>
+                                          <span class="text-xl font-bold">23</span>
+                                       </div>
+                                       <div class="relative flex-initial w-auto pl-4">
+                                          <div class="inline-flex items-center justify-center w-12 h-12 p-3 text-center text-white bg-orange-500 rounded-full shadow-lg"><i class="fas fa-chart-pie"></i></div>
+                                       </div>
+                                    </div>
+                                    <p class="mt-4 text-sm text-blueGray-500"><span class="mr-2 text-red-500"><i class="fas fa-arrow-up"></i> 3.48%</span><span class="whitespace-nowrap">Since last week</span></p>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="w-full px-4 lg:w-6/12 xl:w-3/12">
+                              <div class="relative flex flex-col min-w-0 mb-3 break-words bg-white rounded-lg shadow-lg xl:mb-0">
+                                 <div class="flex-auto p-4">
+                                    <div class="flex flex-wrap">
+                                       <div class="relative flex-1 flex-grow w-full max-w-full pr-4">
+                                          <h5 class="text-xs font-bold uppercase text-blueGray-400">...</h5>
+                                          <span class="text-xl font-bold">...</span>
+                                       </div>
+                                       <div class="relative flex-initial w-auto pl-4">
+                                          <div class="inline-flex items-center justify-center w-12 h-12 p-3 text-center text-white bg-pink-500 rounded-full shadow-lg"><i class="fas fa-users"></i></div>
+                                       </div>
+                                    </div>
+                                    <p class="mt-4 text-sm text-blueGray-500"><span class="mr-2 text-orange-500"> ...</span><span class="whitespace-nowrap">...</span></p>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="w-full px-4 lg:w-6/12 xl:w-3/12">
+                              <div class="relative flex flex-col min-w-0 mb-3 break-words bg-white rounded-lg shadow-lg xl:mb-0">
+                                 <div class="flex-auto p-4">
+                                    <div class="flex flex-wrap">
+                                       <div class="relative flex-1 flex-grow w-full max-w-full pr-4">
+                                          <h5 class="text-xs font-bold uppercase text-blueGray-400">Trend</h5>
+                                          <span class="text-xl font-bold">10</span>
+                                       </div>
+                                       <div class="relative flex-initial w-auto pl-4">
+                                          <div class="inline-flex items-center justify-center w-12 h-12 p-3 text-center text-white rounded-full shadow-lg bg-lightBlue-500"><i class="fas fa-percent"></i></div>
+                                       </div>
+                                    </div>
+                                    <p class="mt-4 text-sm text-blueGray-500"><span class="mr-2 text-red-500"><i class="fas fa-arrow-up"></i> 12%</span><span class="whitespace-nowrap">Since last 24hrs</span></p>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <!-- <div class="w-full px-4 mx-auto -mt-24 md:px-6"> -->
+                   <div class="flex flex-wrap">
+                     <div class="w-full px-4 xl:w-8/12">
+                        <div class="relative flex flex-col w-full min-w-0 mb-8 break-words rounded-lg shadow-lg bg-blueGray-800">
+                           <div class="px-4 py-3 mb-0 bg-transparent rounded-t">
+                              <div class="flex flex-wrap items-center">
+                                 <div class="relative flex-1 flex-grow w-full max-w-full">
+                                    <h6 class="mb-1 text-xs font-semibold uppercase text-blueGray-200">Domains</h6>
+                                    <h2 class="text-xl font-semibold text-white">Sales value</h2>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="flex-auto p-4">
+                              <div class="relative h-350-px">
+                                 <!-- <canvas id="myChart"></canvas> -->
+                                 <canvas id="myChart"></canvas><!-- <canvas width="221" height="291" style="display: block; box-sizing: border-box; height: 350px; width: 265.7px;" id="bar-chart"></canvas> -->
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <!-- <canvas id="myChart"></canvas> -->
+                     <div class="w-full px-4 xl:w-4/12">
+                        <div class="relative flex flex-col w-full min-w-0 mb-3 break-words bg-white rounded-lg shadow-lg">
+                           <div class="px-4 py-3 mb-0 bg-transparent rounded-t">
+                              <div class="flex flex-wrap items-center">
+                                 <div class="relative flex-1 flex-grow w-full max-w-full">
+                                    <h6 class="mb-1 text-xs font-semibold uppercase text-blueGray-500">Graph here</h6>
+                                    <h2 class="text-xl font-semibold text-blueGray-800">---</h2>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="flex-auto p-4">
+                              <div class="relative h-350-px">
+                                 <canvas id="myChart"></canvas><!-- <canvas width="221" height="291" style="display: block; box-sizing: border-box; height: 350px; width: 265.7px;" id="bar-chart"></canvas> -->
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  
+
+        <div class="px-4 mx-auto">
+            <a  class="mb-2 mr-3 btn btn-primary text-capitalize hover:bounce"   data-bs-toggle="modal" data-bs-target="#modal-normal">Add Domain</a>
             <div class="flex flex-col">
-                <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                <div class="-mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
                         <div class="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
                             <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
@@ -296,7 +476,7 @@ function activate(id) {
                                     <tr>
                                         <th scope="col" class="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                             <div class="flex items-center gap-x-3">
-                                                    <span>Number</span>
+                                                    <!-- <span>Number</span> -->
                                             </div>
                                         </th>
         
@@ -307,7 +487,9 @@ function activate(id) {
                                         <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                             Status
                                         </th>
-        
+                                        <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                            Last_scanned
+                                        </th>
         
                                         <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                             view
@@ -319,14 +501,14 @@ function activate(id) {
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
-                                    <tr v-for="(item, index) in domain" :key="index" :style="{ background: index % 2 === 0 ? 'white' : 'rgba(25, 0, 0, 0.1)'}">
+                                    <tr v-for="(domain, index) in domainList" :key="index" :style="{ background: index % 2 !== 0 ? 'white' : 'rgba(245, 245, 241)'}" class="transition-colors duration-300 hover:!bg-gray-300">
                                         <td class="px-4 py-4 text-sm font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap">
                                             <div class="inline-flex items-center gap-x-3">
-                                           1.
+                                           {{  index + 1 }}
                                             </div>
                                         </td>
                                         <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                            facebook.com
+                                            {{ domain.domain_name }}
                                         </td>
                                         <td class="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
                                             <div class="inline-flex items-center px-3 py-1 rounded-full gap-x-2 text-emerald-500 bg-emerald-100/60 dark:bg-gray-800">
@@ -334,125 +516,26 @@ function activate(id) {
                                                     <path d="M10 3L4.5 8.5L2 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                                 </svg>
         
-                                                <h2 class="text-sm font-normal">Ready</h2>
+                                                <h2 class="text-sm font-normal">{{ domain.status }}</h2>
                                             </div>
                                         </td>
-                                        
+                                        <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap" >
+                                            {{ domain.formated_updated_at }}
+                                        </td>
                                         <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                            view
+                                            <Link  :href="'/spoof/'+domain.id" class="px-1 py-1 mb-1 mr-1 text-xs font-bold text-white uppercase transition-all duration-150 ease-linear bg-blue-400 rounded outline-none active:fa-bounce hover:bg-blue-700 hover:text-black focus:outline-none visited:bg-green-500">
+                                                <span class="" type="button"><i class="fa fa-eye "></i> View</span>
+                                            </Link> 
+                                           
                                         </td>
                                         <td class="px-4 py-4 text-sm whitespace-nowrap">
                                             <div class="flex items-center gap-x-6">
-                                                <button class="text-gray-500 transition-colors duration-200 dark:hover:text-indigo-500 dark:text-gray-300 hover:text-indigo-500 focus:outline-none">
+                                                <Link class="text-gray-500 transition-colors duration-200 dark:hover:text-indigo-500 dark:text-gray-300 hover:text-indigo-500 focus:outline-none" :href="'/rescan-domain/'+domain.id">
                                                     Re-scan
-                                                </button>
+                                                </Link>
         
-                                                <button class="text-red-600 transition-colors duration-200 hover:text-red-500 focus:outline-none">
-                                                    Delete
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-        
-                                    <tr>
-                                        <td class="px-4 py-4 text-sm font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap">
-                                            <div class="inline-flex items-center gap-x-3">
-                                               2.
-                                            </div>
-                                        </td>
-                                        <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                            google.com
-                                        </td>
-                                        <td class="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
-                                            <div class="inline-flex items-center px-3 py-1 text-red-500 rounded-full gap-x-2 bg-red-100/60 dark:bg-gray-800">
-                                               
-        
-                                                <h2 class="text-sm font-normal">Processing</h2>
-                                            </div>
-                                        </td>
-                                        
-                                        <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                           view
-                                        </td>
-                                        <td class="px-4 py-4 text-sm whitespace-nowrap">
-                                            <div class="flex items-center gap-x-6">
-                                                <button class="text-gray-500 transition-colors duration-200 dark:hover:text-indigo-500 dark:text-gray-300 hover:text-indigo-500 focus:outline-none">
-                                                    Rescan
-                                                </button>
-        
-                                                <button class="text-red-600 transition-colors duration-200 hover:text-red-500 focus:outline-none">
-                                                    Delete
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-        
-                                    <tr>
-                                        <td class="px-4 py-4 text-sm font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap">
-                                            <div class="inline-flex items-center gap-x-3">
-                                               
-        
-                                                3
-                                            </div>
-                                        </td>
-                                        <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                           amazon.com
-                                        </td>
-                                        <td class="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
-                                            <div class="inline-flex items-center px-3 py-1 rounded-full gap-x-2 text-emerald-500 bg-emerald-100/60 dark:bg-gray-800">
-                                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M10 3L4.5 8.5L2 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                </svg>
-        
-                                                <h2 class="text-sm font-normal">Ready</h2>
-                                            </div>
-                                        </td>
-                                      
-                                        <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                           view
-                                        </td>
-                                        <td class="px-4 py-4 text-sm whitespace-nowrap">
-                                            <div class="flex items-center gap-x-6">
-                                                <button class="text-gray-500 transition-colors duration-200 dark:hover:text-indigo-500 dark:text-gray-300 hover:text-indigo-500 focus:outline-none">
-                                                    rescan
-                                                </button>
-        
-                                                <button class="text-red-600 transition-colors duration-200 hover:text-red-500 focus:outline-none">
-                                                    Delete
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-        
-               
-                                    <tr>
-                                        <td class="px-4 py-4 text-sm font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap">
-                                            <div class="inline-flex items-center gap-x-3">
-                                              
-        
-                                                4
-                                            </div>
-                                        </td>
-                                        <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">Jan 4, 2022</td>
-                                        <td class="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
-                                            <div class="inline-flex items-center px-3 py-1 text-gray-500 rounded-full gap-x-2 bg-gray-100/60 dark:bg-gray-800">
-                                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M4.5 7L2 4.5M2 4.5L4.5 2M2 4.5H8C8.53043 4.5 9.03914 4.71071 9.41421 5.08579C9.78929 5.46086 10 5.96957 10 6.5V10" stroke="#667085" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                </svg>
-        
-                                                <h2 class="text-sm font-normal">Re-scan</h2>
-                                            </div>
-                                        </td>
-                                       
-                                        <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">Monthly subscription</td>
-                                        <td class="px-4 py-4 text-sm whitespace-nowrap">
-                                            <div class="flex items-center gap-x-6">
-                                                <button class="text-gray-500 transition-colors duration-200 dark:hover:text-indigo-500 dark:text-gray-300 hover:text-indigo-500 focus:outline-none">
-                                                    rescan
-                                                </button>
-        
-                                                <button class="text-red-600 transition-colors duration-200 hover:text-red-500 focus:outline-none">
-                                                    Delete
+                                                <button class="text-gray-400 transition-colors duration-200 hover:text-red-500 focus:outline-none hover:fa-bounce">
+                                                    <i class="fa-solid fa-trash-can"></i>
                                                 </button>
                                             </div>
                                         </td>
@@ -491,118 +574,16 @@ function activate(id) {
                     </svg>
                 </a>
             </div>
-        </section>
+        </div>
                 
-                    <!-- <div class="flex flex-col">
-                        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-                            <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
-                                <div class="overflow-hidden">
-                                    <table class="min-w-full text-sm font-light text-left">
-                                    <thead class="font-medium border-b dark:border-neutral-500">
-                                      <tr>
-                                        <th scope="col" class="px-6 py-4">#</th>
-                                        <th scope="col" class="px-6 py-4">Your domain</th>
-                                        <th scope="col" class="px-6 py-4">View</th>
-                                        <th scope="col" class="px-6 py-4">Status</th>
-                                        <th scope="col" class="px-6 py-4">Re-scan</th>
-                                        <th scope="col" class="px-6 py-4">Delete</th>
-                                      
-                                      </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr  class="border-b dark:border-neutral-500" v-for="(item, index) in domain" :key="index" :style="{ background: index % 2 === 0 ? 'white' : 'rgba(25, 0, 0, 0.1)'}">
-                                        <td class="px-6 py-4 font-medium whitespace-nowrap">1</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">Cell</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">Cell</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">Cell</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">Cell</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">Cell</td>
-                                      
-                                      </tr>
-                                      <tr class="border-b dark:border-neutral-500">
-                                        <td class="px-6 py-4 font-medium whitespace-nowrap ">2</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">Cell</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">Cell</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">Cell</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">Cell</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">Cell</td>
-
-                                      </tr>
-                                      <tr class="border-b ">
-                                        <td class="px-6 py-4 font-medium whitespace-nowrap ">3</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">Cell</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">Cell</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">Cell</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">Cell</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">Cell</td>
-                                     
-                                      </tr>
-                                    </tbody>
-                                  </table>
-                                </div>
-                              </div>
-                            </div>
-                          </div>-->
+                   
                     </div>
                 </div>
             </div>
  
 
             <!-- Row #4 -->
-<!--            <div class="col-md-4" >-->
-<!--                <div class="block block-rounded block-transparent bg-primary">-->
-<!--                <div class="block-content block-content-full">-->
-<!--                    <div class="py-3 text-center">-->
-<!--                    <div class="mb-3">-->
-<!--                        <i class="fa fa-users fa-4x text-primary-lighter"></i>-->
-<!--                    </div>-->
-<!--                    <div class="text-white fs-4 fw-semibold">Total User</div>-->
-<!--                    <div class="text-white-75">All registered user</div>-->
-<!--                    <div class="pt-3">-->
-<!--                        <a class="btn btn-alt-primary" href="javascript:void(0)">-->
-<!--                        <i class="opacity-50 fa fa-users me-1"></i> View Users-->
-<!--                        </a>-->
-<!--                    </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="col-md-4">-->
-<!--                <div class="block block-rounded block-transparent bg-info">-->
-<!--                <div class="block-content block-content-full">-->
-<!--                    <div class="py-3 text-center">-->
-<!--                    <div class="mb-3">-->
-<!--                        <i class="fa fa-envelope-open fa-4x text-info-light"></i>-->
-<!--                    </div>-->
-<!--                    <div class="text-white fs-4 fw-semibold">New Domain</div>-->
-<!--                    <div class="text-white-75">Total domain From last Search</div>-->
-<!--                    <div class="pt-3">-->
-<!--                        <a class="btn btn-alt-info" href="javascript:void(0)">-->
-<!--                        <i class="opacity-50 fa fa-envelope-open me-1"></i> View Domain-->
-<!--                        </a>-->
-<!--                    </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="col-md-4">-->
-<!--                <div class="block block-rounded block-transparent bg-success">-->
-<!--                <div class="block-content block-content-full">-->
-<!--                    <div class="py-3 text-center">-->
-<!--                    <div class="mb-3">-->
-<!--                        <i class="fa fa-check fa-4x text-success-light"></i>-->
-<!--                    </div>-->
-<!--                    <div class="text-white fs-4 fw-semibold">Total Domain</div>-->
-<!--                    <div class=" text-white-75">All Domain</div>-->
-<!--                    <div class="pt-3">-->
-<!--                        <a class="btn btn-alt-success" href="javascript:void(0)">-->
-<!--                        <i class="opacity-50 fa fa-arrow-up me-1"></i> List Domain-->
-<!--                        </a>-->
-<!--                    </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                </div>-->
-<!--            </div>-->
+
             <!-- END Row #4 -->
 
 

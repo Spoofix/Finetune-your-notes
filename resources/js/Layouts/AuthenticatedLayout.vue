@@ -13,6 +13,23 @@ defineComponent({
     Link
   },
 });
+const props = defineProps( {
+    data() {
+      return {
+        isSidebarOpen: false,
+      };
+    },
+    methods: {
+      toggleSidebar() {
+        this.isSidebarOpen = !this.isSidebarOpen;
+      },
+    },
+    // watch: {
+    //   isSidebarOpen() {
+    //     document.body.classList.toggle('sidebar-open', this.isSidebarOpen);
+    //   },
+    // },
+  });
 const showingNavigationDropdown = ref(false);
 </script>
 
@@ -20,22 +37,29 @@ const showingNavigationDropdown = ref(false);
     <div>
         <div id="page-container" class="sidebar-o sidebar-dark enable-page-overlay side-scroll page-header-fixed main-content-narrow">
 
-          <nav id="sidebar">
+         <!-- sidebar was here -->
+         <div class="relative">
+          <nav class="absolute top-0 bottom-0 left-0 flex w-64 px-2 py-2 transition-all duration-300 ease-in-out transform -translate-x-full shadow-xl bg-blue flex-nowrap md:z-10 z-9999 md:translate-x-0" id="sidebar">
+            
             <!-- Sidebar Content -->
             <div class="sidebar-content">
               <!-- Side Header -->
-              <div class="content-header justify-content-lg-center">
+              <div class="content-header justify-content-lg-between">
                 <!-- Logo -->
                 <div>
                   <span class="tracking-wide smini-visible fw-bold fs-lg">
                     ye<span class="text-primary">s</span>
                   </span>
-                  <Link class="mx-auto tracking-wide link-fx fw-bold" :href="route('dashboard')">
+                  <div class="justify-between w-full d-flex">
+                  <Link class="px-1 tracking-wide fw-bold " :href="route('dashboard')">
                     <span class="smini-hidden">
                       <span class="fs-4 text-dual">ye</span><span class="fs-4 text-primary">spoff</span>
                     </span>
                   </Link>
+                  
                 </div>
+              </div>
+              <div> <i class="pl-10 text-2xl font-extrabold fa fa-bars fa-bounce :hover" @click="toggleSidebar"></i></div>
                 <!-- END Logo -->
 
                 <!-- Options -->
@@ -61,6 +85,12 @@ const showingNavigationDropdown = ref(false);
                         <span class="nav-main-link-name">Dashboard</span>
                       </Link>
                     </li>
+                    <li class="nav-main-item">
+                      <Link class="nav-main-link" :href="route('dashboard')">
+                        <i class="nav-main-link-icon fa fa-server"></i>
+                        <span class="nav-main-link-name">Domains</span>
+                      </Link>
+                    </li>
                     <li class="nav-main-item" v-if="$page.props.auth.user.role_id == 1">
                       <Link class="nav-main-link" :href="route('users.list')">
                         <i class="nav-main-link-icon fa fa-grip-vertical"></i>
@@ -80,7 +110,8 @@ const showingNavigationDropdown = ref(false);
               <!-- END Sidebar Scrolling -->
             </div>
             <!-- Sidebar Content -->
-          </nav>
+         </nav>
+         </div>
           <!-- END Sidebar -->
 
           <!-- Header -->
@@ -88,7 +119,7 @@ const showingNavigationDropdown = ref(false);
             
             <!-- Header Content -->
             <div class="content-header">
-              <div> <i class="px-5 text-2xl font-extrabold fa fa-bars fa-bounce :hover"></i></div>
+              <div> <i class="px-5 text-2xl font-extrabold fa fa-bars fa-bounce :hover d-lg-none "></i></div>
               <!-- Left Section -->
               <div class="space-x-1">
                 <!-- Toggle Sidebar -->
@@ -109,15 +140,20 @@ const showingNavigationDropdown = ref(false);
                
                 <!-- User Dropdown -->
                 <div class="dropdown d-inline-block">
-                  <button type="button" class="btn btn-sm btn-alt-secondary" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <button type="button" class="btn btn-sm btn-alt-secondary d-flex hover:text-gray-500 fa-bounce" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-user d-sm-none"></i>
-                    <span class="d-none d-sm-inline-block fw-semibold">{{ $page.props.auth.user.name }}</span>
-                    <i class="opacity-50 fa fa-angle-down ms-1"></i>
+                    <img
+                    class="h-8 w-8 rounded-full object-cover d-lg=none mx-3"
+                    src="https://randomuser.me/api/portraits/men/30.jpg"
+                    alt=""
+                  />
+                    <span class="my-auto d-none d-sm-inline-block fw-semibold">{{ $page.props.auth.user.name }}</span>
+                    <i class="my-auto opacity-50 fa fa-angle-down ms-1"></i>
                   </button>
                   <div class="p-0 dropdown-menu dropdown-menu-md dropdown-menu-end" aria-labelledby="page-header-user-dropdown">
                     <div class="px-2 py-3 bg-body-light rounded-top">
                       <h5 class="mb-0 text-center h6">
-                        {{ $page.props.auth.user.name }}
+                        Welcome {{ $page.props.auth.user.name }}
                       </h5>
                     </div>
                     <div class="p-2">
@@ -126,10 +162,10 @@ const showingNavigationDropdown = ref(false);
                         <i class="opacity-25 fa fa-fw fa-user"></i>
                       </Link>
 
-                      <Link class="space-x-1 dropdown-item d-flex align-items-center justify-content-between" :href="route('organization')" data-toggle="layout" data-action="side_overlay_toggle" >
+                      <!-- <Link class="space-x-1 dropdown-item d-flex align-items-center justify-content-between" :href="route('organization')" data-toggle="layout" data-action="side_overlay_toggle" >
                         <span>Organization</span>
                         <i class="opacity-25 fa fa-fw fa-wrench"></i>
-                      </Link>
+                      </Link> -->
 
                       <div class="dropdown-divider"></div>
                       <Link class="space-x-1 dropdown-item d-flex align-items-center justify-content-between" :href="route('logout')" method="post" >
@@ -318,3 +354,9 @@ const showingNavigationDropdown = ref(false);
         </div>
     </div>
 </template>
+<!-- /* Sidebar styles */ -->
+<style>
+
+
+
+</style>

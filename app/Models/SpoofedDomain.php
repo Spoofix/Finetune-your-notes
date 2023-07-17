@@ -12,6 +12,6 @@ class SpoofedDomain extends Model
     protected $table="spoofed_domains";
 
     protected $fillable = [
-        'domain_id', 'spoofed_domain', 'last_batch'
+        'domain_id', 'spoofed_domain', 'rating' ,'last_batch', 'registrar', 'screenshot', 'country', 'registrationDate'
     ];
 }

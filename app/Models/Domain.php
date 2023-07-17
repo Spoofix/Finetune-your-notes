@@ -14,4 +14,11 @@ class Domain extends Model
     protected $fillable = [
         'user_id', 'domain_name', 'status'
     ];
+
+   protected $appends =['formated_updated_at'];
+
+   public function getFormatedUpdatedAtAttribute($key)
+   {
+      return $this->created_at->format("Y-m-d H:i");
+   }
 }

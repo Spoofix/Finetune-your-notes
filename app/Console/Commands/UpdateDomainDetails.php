@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\OrgDomain;
-use App\Services\PulseDive;
+// use App\Services\;
 use Illuminate\Console\Command;
 
 class UpdateDomainDetails extends Command
@@ -31,8 +31,7 @@ class UpdateDomainDetails extends Command
 
         foreach ($domains as $domain) {
 
-            PulseDive::search($domain->name, $domain->id);
-
+            // PulseDrive::search($domain->name, $domain->id);
         }
 
         dd($domains);

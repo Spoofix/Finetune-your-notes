@@ -26,6 +26,12 @@ const props = defineProps({
     organization: {
         type: Object,
     },
+    spoofList: {
+        type: Object,
+    },
+    domainList: {
+        type:Object,
+    }
 });
 
 const form = useForm({
@@ -176,109 +182,65 @@ function activate(id) {
   <div class="relative flex flex-col w-full min-w-0 mb-6 break-words bg-white rounded shadow-lg ">
     <div class="px-4 py-3 mb-0 border-0 rounded-t">
       <div class="flex flex-wrap items-center">
-        <div class="relative flex-1 flex-grow w-full max-w-full px-4">
-          <h3 class="text-base font-semibold text-blueGray-700">similer to{{ Domain-selected }}</h3>
+        <div class="relative flex-1 flex-grow w-full max-w-full px-4" v-for="(domain, index) in domainList" :key="index" >
+            <div v-for="(spoof, index) in spoofList" :key="index">
+            <div  v-if="domain.id == spoof.domain_id && index === 0">
+                <h3 class="ml-2 text-3xl font-semibold text-blueGray-700">{{ domain.domain_name}}</h3>
+            
+            </div>
+           
+        </div>
+
         </div>
         <div class="relative flex-1 flex-grow w-full max-w-full px-4 text-right">
-          <button class="px-3 py-1 mb-1 mr-1 text-xs font-bold text-white uppercase transition-all duration-150 ease-linear bg-indigo-500 rounded outline-none active:bg-indigo-600 focus:outline-none" type="button">See all</button>
+          <Link class="px-3 py-1 mb-1 mr-1 text-xs font-bold text-white uppercase transition-all duration-150 ease-linear bg-indigo-500 rounded outline-none active:bg-indigo-600 focus:outline-none" type="button" :href="'/dashboard'"><i class="fa fa-arrow-left"></i> Back</Link>
         </div>
       </div>
     </div>
 
     <div class="block w-full overflow-x-auto">
-      <table class="items-center w-full bg-transparent border-collapse ">
+      <table class="items-center w-full bg-transparent border-collapse">
         <thead>
           <tr>
             <th class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid bg-blueGray-50 text-blueGray-500 border-blueGray-100 whitespace-nowrap">
                           Domain
                         </th>
-          <th class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid bg-blueGray-50 text-blueGray-500 border-blueGray-100 whitespace-nowrap">
-                          <i class="fa fa-thumbtack"></i> Pin
-                        </th>
+                <th class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid bg-blueGray-50 text-blueGray-500 border-blueGray-100 whitespace-nowrap">
+                    Rating
+                    </th>
+        
            <th class="px-6 py-3 text-xs font-semibold text-left text-red-500 uppercase align-middle border border-l-0 border-r-0 border-solid bg-blueGray-50 border-blueGray-100 whitespace-nowrap">
                           Report
                         </th>
-          <th class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid bg-blueGray-50 text-blueGray-500 border-blueGray-100 whitespace-nowrap">
-                       Rating
-                        </th>
+          
           </tr>
         </thead>
 
         <tbody>
-          <tr>
+          <tr v-for="(spoof, index) in spoofList" :key="index"  :style="{ background: index % 2 !== 0 ? 'white' : 'rgba(245, 245, 241)'}" class="transition-colors duration-300 hover:!bg-gray-300" >
             <th class="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap text-blueGray-700 ">
-              google.com
+              {{ spoof.spoofed_domain }}
             </th>
-            <td class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap ">
-                <i class="fa fa-thumbtack"></i> 
+            <td class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap" :style="{
+                color: spoof.rating == 'high' ? 'red' :
+                       spoof.rating == 'critical' ? 'orange' :
+                       spoof.rating == 'medium' ? '#8B8000' :
+                       spoof.rating == 'none' ? 'blue' :
+                       spoof.rating == 'low' ? 'green' :
+                       'gray'
+              }"
+              >
+              <!-- <i class="mr-4 fas fa-arrow-up text-emerald-500"></i> -->
+              {{ spoof.rating }}
             </td>
-            <td class="p-4 px-6 text-xs border-t-0 border-l-0 border-r-0 align-center whitespace-nowrap">
-              Report
+            
+            <td class="p-4 px-6 text-xs border-t-0 border-l-0 border-r-0 align-between whitespace-nowrap">
+              <span class="px-1 py-1 mb-1 mr-1 text-xs font-bold text-white uppercase transition-all duration-150 ease-linear bg-red-400 rounded outline-none active:bg-red-700 hover:bg-red-700 hover:text-black focus:outline-none" type="button">Report</span>
+              <Link  :href="'/spoof/view/'+spoof.id" class="px-1 py-1 mb-1 mr-1 text-xs font-bold text-white uppercase transition-all duration-150 ease-linear bg-blue-400 rounded outline-none visited:bg-green-500 active:bg-blue-700 hover:bg-blue-700 hover:text-black focus:outline-none">
+                    <span class=""  type="button"><i class="fa fa-eye"></i> View</span>
+            </Link>
             </td>
-            <td class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-              <i class="mr-4 fas fa-arrow-up text-emerald-500"></i>
-              46,53%
-            </td>
-          </tr>
-          <tr>
-            <th class="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap text-blueGray-700">
-              /argon/index.html
-            </th>
-            <td class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-              3,985
-            </td>
-            <td class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-              319
-            </td>
-            <td class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-              <i class="mr-4 text-orange-500 fas fa-arrow-down"></i>
-              46,53%
-            </td>
-          </tr>
-          <tr>
-            <th class="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap text-blueGray-700">
-              /argon/charts.html
-            </th>
-            <td class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-              3,513
-            </td>
-            <td class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-              294
-            </td>
-            <td class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-              <i class="mr-4 text-orange-500 fas fa-arrow-down"></i>
-              36,49%
-            </td>
-          </tr>
-          <tr>
-            <th class="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap text-blueGray-700">
-              /argon/tables.html
-            </th>
-            <td class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-              2,050
-            </td>
-            <td class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-              147
-            </td>
-            <td class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-              <i class="mr-4 fas fa-arrow-up text-emerald-500"></i>
-              50,87%
-            </td>
-          </tr>
-          <tr>
-            <th class="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap text-blueGray-700">
-              /argon/profile.html
-            </th>
-            <td class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-              1,795
-            </td>
-            <td class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-              190
-            </td>
-            <td class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-              <i class="mr-4 text-red-500 fas fa-arrow-down"></i>
-              46,53%
-            </td>
+          
           </tr>
         </tbody>
 
@@ -291,7 +253,7 @@ function activate(id) {
     <div class="flex flex-wrap items-center justify-center md:justify-between">
       <div class="w-full px-4 mx-auto text-center md:w-6/12">
         <div class="py-1 text-sm font-semibold text-blueGray-500">
-          Made with <a href="https://www.creative-tim.com/product/notus-js" class="text-blueGray-500 hover:text-gray-800" target="_blank">Notus JS</a> by <a href="https://www.creative-tim.com" class="text-blueGray-500 hover:text-blueGray-800" target="_blank"> Creative Tim</a>.
+          <!-- Made with <a href="https://www.creative-tim.com/product/notus-js" class="text-blueGray-500 hover:text-gray-800" target="_blank">Notus JS</a> by <a href="https://www.creative-tim.com" class="text-blueGray-500 hover:text-blueGray-800" target="_blank"> Creative Tim</a>. -->
         </div>
       </div>
     </div>

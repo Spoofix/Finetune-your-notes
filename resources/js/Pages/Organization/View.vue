@@ -57,7 +57,8 @@ function search() {
     <Head title="Organization" />
 
     <AuthenticatedLayout>
-        <div class="col-md-12">
+        
+        <!-- <div class="col-md-12">
             <div class="block block-rounded">
                 <div class="block-header px-5">
                     <Link class="btn btn-info mr-3 text-capitalize" :href="route('organization')">Back</Link>
@@ -116,6 +117,6 @@ function search() {
                     </nav>
                 </div>
             </div>
-        </div>
-    </AuthenticatedLayout>
+        </div>-->
+    </AuthenticatedLayout> 
 </template>

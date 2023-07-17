@@ -2,28 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DomainDetail;
-use App\Models\Organization;
+use Inertia\Inertia;
+use Inertia\Controller;
 use App\Models\OrgDomain;
 use App\Services\PulseDive;
-use Illuminate\Support\Facades\Request;
-use Inertia\Inertia;
+use App\Models\DomainDetail;
+use App\Models\Organization;
+use Illuminate\Http\Request;
 
 class DomainController extends Controller
 {
     public function index(Request $request)
     {
+        // $data = DomainDetail::where('domain_id', request('domain_id'))->first();
+                
         return Inertia::render('Domain/View', [
-            'organization' => Organization::where('id', request('org_id'))->first(),
-            'domain' => OrgDomain::where('id', request('id'))->first(),
-            'details' => DomainDetail::where('domain_id', request('id'))->first(),
-        ]);
+            // 'organization' => Organization::where('id', request('org_id'))->first(),
+            // 'domain' => OrgDomain::where('id', request('id'))->first(),
+            // 'details' => DomainDetail::where('domain_id', request('id'))->first(),
+            //   'domain' =>   pulseDive::search('wegoogle.com', 1),   
+            ]);
     }
-
+     
     public function detail(Request $request)
     {
-        $data = DomainDetail::where('domain_id', request('domain_id'))->first();
-
+         $data = DomainDetail::where('domain_id', request('domain_id'))->first();
+        // dd($data);
+        // exit();
         if (!$data) {
             $response = PulseDive::search(request('domain'), request('domain_id'));
 
@@ -54,11 +59,11 @@ class DomainController extends Controller
                     'links' => json_encode($data['links']),
                 ]);
 
-                // return response()->json(['data' => $details]);
+                return response()->json(['data' => $data]);//details
             }
         }
 
-        // return response()->json(['data' => $data]);
+        return response()->json(['data' => $data]);
 
     }
 }

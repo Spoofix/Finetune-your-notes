@@ -1,17 +1,21 @@
 <?php
 
-use App\Http\Controllers\DomainController;
-use App\Http\Controllers\OrganizationController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ReportController;
-use App\Http\Controllers\SearchController;
-use App\Http\Controllers\UsersController;
-use App\Models\Domain;
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Models\Domain;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\SpoofController;
+use App\Http\Controllers\UsersController;
+use App\Http\Controllers\DomainController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\RescanController;
+use App\Http\Controllers\SearchController;
+use App\Http\Controllers\ProfileController;
 use App\Console\Commands\ScanSpoofingDomains;
+use App\Http\Controllers\SpoofViewController;
+use App\Http\Controllers\OrganizationController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,7 +33,7 @@ Route::get('/', function () {
 //        'domain_name'=>'google.com',
 //    ]);
 //    Artisan::call(ScanSpoofingDomains::class, ['--user_id' => 2]);
-    exit();
+//     exit();
     return Inertia::render('Search', [ //fix the Welcome : Search
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
@@ -39,7 +43,9 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    return Inertia::render('Dashboard', [
+        'domainList' => Domain::where('user_id',auth()->id())->get()
+    ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/search-domain', [SearchController::class, 'index'])->name('search.domain');
@@ -48,7 +54,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/domain-search', [DomainController::class, 'index'])->name('domain.list');
-
+ Route::get('/rescan-domain/{domainId}', [RescanController::class, 'rescan'])->name('rescan.domain');
+ Route::get('/spoof/{domainId}', [SpoofController::class, 'spoof'])->name('spoof.domain');
+ Route::get('/spoof/view/{spoofId}', [SpoofViewController::class, 'spoofView'])->name('spoof.view');
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::get('/profile-update', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/profile-update', [ProfileController::class, 'update'])->name('profile.update');
@@ -64,7 +72,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/organization-search', [OrganizationController::class, 'search'])->name('organization.search');
 
     Route::get('/domain/{org_id}/{id}/{domain}', [DomainController::class, 'index'])->name('domain');
-    Route::post('/domain', [DomainController::class, 'detail'])->name('domain.detail');
+    Route::get('/domain', [DomainController::class, 'detail'])->name('domain.detail');
 
     Route::get('/report/{domain}/{id}', [ReportController::class, 'index'])->name('report');
 
