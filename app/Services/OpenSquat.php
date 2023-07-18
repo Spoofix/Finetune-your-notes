@@ -84,56 +84,12 @@ class OpenSquat
         $current .= $name;
         file_put_contents($main_file, $current);
 
-        //delete everything in the results.txt
-        // $file2 = 'results.txt';
-        // File::put($file2, '');
-        //moving to the opensquat directory
-
-       
-        
-
-        // ...
-        
-        // function executeCommandAndWait()
-        // {
-        //     $command = shell_exec("cat keywords.txt");
-        //     getcwd(); // Get the current working directory
-        
-        //     $fullCommand =  $command; // Append the command to the current directory
-        //     // $pythonExecutable = 'C:\Program Files\Python311\python.exe';
-        //     // c:\Program Files\Python311
-
-        //     $process = Process::fromShellCommandline($fullCommand);
-        //     $process->setTimeout(null); // Remove timeout limit
-        //     // set_time_limit(0); // Set maximum execution time limit to 0
-        //     $process->run();
-        //     if (!$process->isSuccessful()) {
-        //         // throw new \RuntimeException('Command failed: ' . $process->getErrorOutput());
-        //         return shell_exec("cat keywords.txt");
-        //     }
-        
-        //     // Command executed successfully, and you can access the output using $process->getOutput()
-        
-        //     return 'hello there';
-        // }
-        
-        //  return  executeCommandAndWait();
+      
        $command = 'python3 opensquat.py';
 
 
 
-       //.base_path('opensquat\opensquat.py');
-    // Log::alert( base_path('opensquat') );
-    //    Log::alert($command);
-    //    exec($command, $output, $return);
-    //    return  $return = shell_exec("cat keywords.txt");
-    //  shell_exec("python opensquat.py");
-
-    // if($return){
-    //     return $return = shell_exec("cat keywords.txt");
-    // }
-
-    // return  $return = shell_exec("python opensquat.py");
+   
         shell_exec($command);
         chdir($originalDir);
 

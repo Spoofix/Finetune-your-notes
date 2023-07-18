@@ -105,7 +105,8 @@ const props = defineProps({
       </div>
 
       <div class="w-full px-4 xl:w-8/12">    
-          <img class="w-full" :src="spoofData.screenshot" alt="...">     
+          <!-- <img class="w-full" :src="spoofData.screenshot" alt="...">     -->
+          <img class="w-full" src="../../../../public/assets/screenshots/yieldexchange.ca/1689684766/cc29f0a5_yieldexchange.ca.png" alt="..." >
      </div>
 
     </AuthenticatedLayout>
