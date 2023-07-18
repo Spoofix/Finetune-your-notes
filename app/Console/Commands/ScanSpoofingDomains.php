@@ -5,8 +5,6 @@ namespace App\Console\Commands;
 
 use App\Models\Domain;
 use App\Services\DnsTwist;
-use App\Services\OpenSquat;
-use App\Services\PulseDive;
 use App\Models\SpoofedDomain;
 
 use Illuminate\Console\Command;
@@ -86,7 +84,7 @@ class ScanSpoofingDomains extends Command
             //             ]
             //         );
             //     }
-            
+
             //     SpoofedDomain::insert($fields_array);
             // }
             // dd($domain_);
@@ -122,9 +120,10 @@ class ScanSpoofingDomains extends Command
                 }
 
                 if(count($fields_array) > 0){
+                    info(json_encode($fields_array));
                     SpoofedDomain::insert($fields_array);
                 }
-            // } 
+            // }
             $domain->status = "SCANNED";
             $domain->save();
         }

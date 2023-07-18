@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Console\Commands\ScanSpoofingDomains;
 use App\Http\Controllers\Controller;
+use App\Jobs\ScanDomains;
 use App\Models\Domain;
 use App\Models\User;
 use App\Notifications\WelcomeNotification;
@@ -66,7 +67,9 @@ class RegisteredUserController extends Controller
             ]);
         }
 
-        Artisan::call(ScanSpoofingDomains::class,['--user_id'=>$user->id]);
+        ScanDomains::dispatch([
+            'user_id'=>$user->id
+        ]);
 
 
         event(new Registered($user));

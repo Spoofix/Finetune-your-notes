@@ -12,8 +12,13 @@ class DnsTwist
  
 // Define the directory to save the screenshots
 
-$dir="assets/screenshots/".$domain;
+$dir="assets/screenshots";
 try{
+
+    if(!is_dir($dir)){
+        mkdir($dir);
+    }
+    $dir.="/".$domain;
     if(!is_dir($dir)){
         mkdir($dir);
     }
@@ -43,9 +48,6 @@ foreach ($result as $entry) {
     if(!isset($entry['phash'])){
       continue;
     }
-
-
-    $entry=$entry;
     
     //  dd(self::screenshot($dir, $entry));
     Log::error(self::screenshot($dir, $entry));
