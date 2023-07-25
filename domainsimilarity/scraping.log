@@ -1,0 +1,1261 @@
+2023-07-25 11:17:38 - ERROR - Error fetching content from https://googleapiaag.com: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x557fe88784e3 <unknown>
+#1 0x557fe85a7c76 <unknown>
+#2 0x557fe859fc7f <unknown>
+#3 0x557fe8591ca2 <unknown>
+#4 0x557fe8593412 <unknown>
+#5 0x557fe85920ca <unknown>
+#6 0x557fe8591168 <unknown>
+#7 0x557fe8590fa0 <unknown>
+#8 0x557fe858f9bf <unknown>
+#9 0x557fe858ffed <unknown>
+#10 0x557fe85a9b06 <unknown>
+#11 0x557fe861b9e5 <unknown>
+#12 0x557fe8603012 <unknown>
+#13 0x557fe861b30e <unknown>
+#14 0x557fe8602de3 <unknown>
+#15 0x557fe85d82dd <unknown>
+#16 0x557fe85d934e <unknown>
+#17 0x557fe88383e4 <unknown>
+#18 0x557fe883c3d7 <unknown>
+#19 0x557fe8846b20 <unknown>
+#20 0x557fe883d023 <unknown>
+#21 0x557fe880b1aa <unknown>
+#22 0x557fe88616b8 <unknown>
+#23 0x557fe8861847 <unknown>
+#24 0x557fe8871243 <unknown>
+#25 0x7f5edde94b43 <unknown>
+
+2023-07-25 13:12:47 - ERROR - Error fetching content from https://earningmoneyfacebook.com: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x56530c5904e3 <unknown>
+#1 0x56530c2bfc76 <unknown>
+#2 0x56530c2b7c7f <unknown>
+#3 0x56530c2a9ca2 <unknown>
+#4 0x56530c2ab412 <unknown>
+#5 0x56530c2aa0ca <unknown>
+#6 0x56530c2a9168 <unknown>
+#7 0x56530c2a8fa0 <unknown>
+#8 0x56530c2a79bf <unknown>
+#9 0x56530c2a7fed <unknown>
+#10 0x56530c2c1b06 <unknown>
+#11 0x56530c3339e5 <unknown>
+#12 0x56530c31b012 <unknown>
+#13 0x56530c33330e <unknown>
+#14 0x56530c31ade3 <unknown>
+#15 0x56530c2f02dd <unknown>
+#16 0x56530c2f134e <unknown>
+#17 0x56530c5503e4 <unknown>
+#18 0x56530c5543d7 <unknown>
+#19 0x56530c55eb20 <unknown>
+#20 0x56530c555023 <unknown>
+#21 0x56530c5231aa <unknown>
+#22 0x56530c5796b8 <unknown>
+#23 0x56530c579847 <unknown>
+#24 0x56530c589243 <unknown>
+#25 0x7fde50694b43 <unknown>
+
+2023-07-25 13:13:14 - ERROR - Error fetching content from https://earningmsoneyfacebook.com: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x55ceee6ec4e3 <unknown>
+#1 0x55ceee41bc76 <unknown>
+#2 0x55ceee413c7f <unknown>
+#3 0x55ceee405ca2 <unknown>
+#4 0x55ceee407412 <unknown>
+#5 0x55ceee4060ca <unknown>
+#6 0x55ceee405168 <unknown>
+#7 0x55ceee404fa0 <unknown>
+#8 0x55ceee4039bf <unknown>
+#9 0x55ceee403fed <unknown>
+#10 0x55ceee41db06 <unknown>
+#11 0x55ceee48f9e5 <unknown>
+#12 0x55ceee477012 <unknown>
+#13 0x55ceee48f30e <unknown>
+#14 0x55ceee476de3 <unknown>
+#15 0x55ceee44c2dd <unknown>
+#16 0x55ceee44d34e <unknown>
+#17 0x55ceee6ac3e4 <unknown>
+#18 0x55ceee6b03d7 <unknown>
+#19 0x55ceee6bab20 <unknown>
+#20 0x55ceee6b1023 <unknown>
+#21 0x55ceee67f1aa <unknown>
+#22 0x55ceee6d56b8 <unknown>
+#23 0x55ceee6d5847 <unknown>
+#24 0x55ceee6e5243 <unknown>
+#25 0x7f7e17694b43 <unknown>
+
+2023-07-25 13:13:48 - ERROR - Error fetching content from https://facebook11.com: Message: unknown error: net::ERR_SSL_PROTOCOL_ERROR
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x55c9cda4d4e3 <unknown>
+#1 0x55c9cd77cc76 <unknown>
+#2 0x55c9cd774c7f <unknown>
+#3 0x55c9cd766ca2 <unknown>
+#4 0x55c9cd768412 <unknown>
+#5 0x55c9cd7670ca <unknown>
+#6 0x55c9cd766168 <unknown>
+#7 0x55c9cd765fa0 <unknown>
+#8 0x55c9cd7649bf <unknown>
+#9 0x55c9cd764fed <unknown>
+#10 0x55c9cd77eb06 <unknown>
+#11 0x55c9cd7f09e5 <unknown>
+#12 0x55c9cd7d8012 <unknown>
+#13 0x55c9cd7f030e <unknown>
+#14 0x55c9cd7d7de3 <unknown>
+#15 0x55c9cd7ad2dd <unknown>
+#16 0x55c9cd7ae34e <unknown>
+#17 0x55c9cda0d3e4 <unknown>
+#18 0x55c9cda113d7 <unknown>
+#19 0x55c9cda1bb20 <unknown>
+#20 0x55c9cda12023 <unknown>
+#21 0x55c9cd9e01aa <unknown>
+#22 0x55c9cda366b8 <unknown>
+#23 0x55c9cda36847 <unknown>
+#24 0x55c9cda46243 <unknown>
+#25 0x7fac56694b43 <unknown>
+
+2023-07-25 13:14:28 - ERROR - Error fetching content from https://facebooksecuritys.com: Message: unknown error: net::ERR_CONNECTION_CLOSED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x5631a25d54e3 <unknown>
+#1 0x5631a2304c76 <unknown>
+#2 0x5631a22fcc7f <unknown>
+#3 0x5631a22eeca2 <unknown>
+#4 0x5631a22f0412 <unknown>
+#5 0x5631a22ef0ca <unknown>
+#6 0x5631a22ee168 <unknown>
+#7 0x5631a22edfa0 <unknown>
+#8 0x5631a22ec9bf <unknown>
+#9 0x5631a22ecfed <unknown>
+#10 0x5631a2306b06 <unknown>
+#11 0x5631a23789e5 <unknown>
+#12 0x5631a2360012 <unknown>
+#13 0x5631a237830e <unknown>
+#14 0x5631a235fde3 <unknown>
+#15 0x5631a23352dd <unknown>
+#16 0x5631a233634e <unknown>
+#17 0x5631a25953e4 <unknown>
+#18 0x5631a25993d7 <unknown>
+#19 0x5631a25a3b20 <unknown>
+#20 0x5631a259a023 <unknown>
+#21 0x5631a25681aa <unknown>
+#22 0x5631a25be6b8 <unknown>
+#23 0x5631a25be847 <unknown>
+#24 0x5631a25ce243 <unknown>
+#25 0x7f55bdc94b43 <unknown>
+
+2023-07-25 13:15:25 - ERROR - Error fetching content from https://recovermyfacebook.com: Message: unknown error: net::ERR_CONNECTION_CLOSED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x55d9e25224e3 <unknown>
+#1 0x55d9e2251c76 <unknown>
+#2 0x55d9e2249c7f <unknown>
+#3 0x55d9e223bca2 <unknown>
+#4 0x55d9e223d412 <unknown>
+#5 0x55d9e223c0ca <unknown>
+#6 0x55d9e223b168 <unknown>
+#7 0x55d9e223afa0 <unknown>
+#8 0x55d9e22399bf <unknown>
+#9 0x55d9e2239fed <unknown>
+#10 0x55d9e2253b06 <unknown>
+#11 0x55d9e22c59e5 <unknown>
+#12 0x55d9e22ad012 <unknown>
+#13 0x55d9e22c530e <unknown>
+#14 0x55d9e22acde3 <unknown>
+#15 0x55d9e22822dd <unknown>
+#16 0x55d9e228334e <unknown>
+#17 0x55d9e24e23e4 <unknown>
+#18 0x55d9e24e63d7 <unknown>
+#19 0x55d9e24f0b20 <unknown>
+#20 0x55d9e24e7023 <unknown>
+#21 0x55d9e24b51aa <unknown>
+#22 0x55d9e250b6b8 <unknown>
+#23 0x55d9e250b847 <unknown>
+#24 0x55d9e251b243 <unknown>
+#25 0x7f0d67c94b43 <unknown>
+
+2023-07-25 13:31:43 - ERROR - Error fetching content from https://earningmoneyfacebook.com: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x555e86ae54e3 <unknown>
+#1 0x555e86814c76 <unknown>
+#2 0x555e8680cc7f <unknown>
+#3 0x555e867feca2 <unknown>
+#4 0x555e86800412 <unknown>
+#5 0x555e867ff0ca <unknown>
+#6 0x555e867fe168 <unknown>
+#7 0x555e867fdfa0 <unknown>
+#8 0x555e867fc9bf <unknown>
+#9 0x555e867fcfed <unknown>
+#10 0x555e86816b06 <unknown>
+#11 0x555e868889e5 <unknown>
+#12 0x555e86870012 <unknown>
+#13 0x555e8688830e <unknown>
+#14 0x555e8686fde3 <unknown>
+#15 0x555e868452dd <unknown>
+#16 0x555e8684634e <unknown>
+#17 0x555e86aa53e4 <unknown>
+#18 0x555e86aa93d7 <unknown>
+#19 0x555e86ab3b20 <unknown>
+#20 0x555e86aaa023 <unknown>
+#21 0x555e86a781aa <unknown>
+#22 0x555e86ace6b8 <unknown>
+#23 0x555e86ace847 <unknown>
+#24 0x555e86ade243 <unknown>
+#25 0x7fd1a8694b43 <unknown>
+
+2023-07-25 13:32:05 - ERROR - Error fetching content from https://earningmsoneyfacebook.com: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x55cc6c50a4e3 <unknown>
+#1 0x55cc6c239c76 <unknown>
+#2 0x55cc6c231c7f <unknown>
+#3 0x55cc6c223ca2 <unknown>
+#4 0x55cc6c225412 <unknown>
+#5 0x55cc6c2240ca <unknown>
+#6 0x55cc6c223168 <unknown>
+#7 0x55cc6c222fa0 <unknown>
+#8 0x55cc6c2219bf <unknown>
+#9 0x55cc6c221fed <unknown>
+#10 0x55cc6c23bb06 <unknown>
+#11 0x55cc6c2ad9e5 <unknown>
+#12 0x55cc6c295012 <unknown>
+#13 0x55cc6c2ad30e <unknown>
+#14 0x55cc6c294de3 <unknown>
+#15 0x55cc6c26a2dd <unknown>
+#16 0x55cc6c26b34e <unknown>
+#17 0x55cc6c4ca3e4 <unknown>
+#18 0x55cc6c4ce3d7 <unknown>
+#19 0x55cc6c4d8b20 <unknown>
+#20 0x55cc6c4cf023 <unknown>
+#21 0x55cc6c49d1aa <unknown>
+#22 0x55cc6c4f36b8 <unknown>
+#23 0x55cc6c4f3847 <unknown>
+#24 0x55cc6c503243 <unknown>
+#25 0x7f5d4d294b43 <unknown>
+
+2023-07-25 13:32:47 - ERROR - Error fetching content from https://facebook11.com: Message: unknown error: net::ERR_SSL_PROTOCOL_ERROR
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x55f34b4644e3 <unknown>
+#1 0x55f34b193c76 <unknown>
+#2 0x55f34b18bc7f <unknown>
+#3 0x55f34b17dca2 <unknown>
+#4 0x55f34b17f412 <unknown>
+#5 0x55f34b17e0ca <unknown>
+#6 0x55f34b17d168 <unknown>
+#7 0x55f34b17cfa0 <unknown>
+#8 0x55f34b17b9bf <unknown>
+#9 0x55f34b17bfed <unknown>
+#10 0x55f34b195b06 <unknown>
+#11 0x55f34b2079e5 <unknown>
+#12 0x55f34b1ef012 <unknown>
+#13 0x55f34b20730e <unknown>
+#14 0x55f34b1eede3 <unknown>
+#15 0x55f34b1c42dd <unknown>
+#16 0x55f34b1c534e <unknown>
+#17 0x55f34b4243e4 <unknown>
+#18 0x55f34b4283d7 <unknown>
+#19 0x55f34b432b20 <unknown>
+#20 0x55f34b429023 <unknown>
+#21 0x55f34b3f71aa <unknown>
+#22 0x55f34b44d6b8 <unknown>
+#23 0x55f34b44d847 <unknown>
+#24 0x55f34b45d243 <unknown>
+#25 0x7fcf5d894b43 <unknown>
+
+2023-07-25 13:33:21 - ERROR - Error fetching content from https://facebooksecuritys.com: Message: unknown error: net::ERR_CONNECTION_CLOSED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x55a700ba24e3 <unknown>
+#1 0x55a7008d1c76 <unknown>
+#2 0x55a7008c9c7f <unknown>
+#3 0x55a7008bbca2 <unknown>
+#4 0x55a7008bd412 <unknown>
+#5 0x55a7008bc0ca <unknown>
+#6 0x55a7008bb168 <unknown>
+#7 0x55a7008bafa0 <unknown>
+#8 0x55a7008b99bf <unknown>
+#9 0x55a7008b9fed <unknown>
+#10 0x55a7008d3b06 <unknown>
+#11 0x55a7009459e5 <unknown>
+#12 0x55a70092d012 <unknown>
+#13 0x55a70094530e <unknown>
+#14 0x55a70092cde3 <unknown>
+#15 0x55a7009022dd <unknown>
+#16 0x55a70090334e <unknown>
+#17 0x55a700b623e4 <unknown>
+#18 0x55a700b663d7 <unknown>
+#19 0x55a700b70b20 <unknown>
+#20 0x55a700b67023 <unknown>
+#21 0x55a700b351aa <unknown>
+#22 0x55a700b8b6b8 <unknown>
+#23 0x55a700b8b847 <unknown>
+#24 0x55a700b9b243 <unknown>
+#25 0x7fe099694b43 <unknown>
+
+2023-07-25 13:35:12 - ERROR - Error fetching content from https://recovermyfacebook.com: Message: unknown error: net::ERR_CONNECTION_CLOSED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x55cc8cc124e3 <unknown>
+#1 0x55cc8c941c76 <unknown>
+#2 0x55cc8c939c7f <unknown>
+#3 0x55cc8c92bca2 <unknown>
+#4 0x55cc8c92d412 <unknown>
+#5 0x55cc8c92c0ca <unknown>
+#6 0x55cc8c92b168 <unknown>
+#7 0x55cc8c92afa0 <unknown>
+#8 0x55cc8c9299bf <unknown>
+#9 0x55cc8c929fed <unknown>
+#10 0x55cc8c943b06 <unknown>
+#11 0x55cc8c9b59e5 <unknown>
+#12 0x55cc8c99d012 <unknown>
+#13 0x55cc8c9b530e <unknown>
+#14 0x55cc8c99cde3 <unknown>
+#15 0x55cc8c9722dd <unknown>
+#16 0x55cc8c97334e <unknown>
+#17 0x55cc8cbd23e4 <unknown>
+#18 0x55cc8cbd63d7 <unknown>
+#19 0x55cc8cbe0b20 <unknown>
+#20 0x55cc8cbd7023 <unknown>
+#21 0x55cc8cba51aa <unknown>
+#22 0x55cc8cbfb6b8 <unknown>
+#23 0x55cc8cbfb847 <unknown>
+#24 0x55cc8cc0b243 <unknown>
+#25 0x7f94f9894b43 <unknown>
+
+2023-07-25 14:19:44 - ERROR - Error fetching content from https://lojadsamsung.com: Message: unknown error: net::ERR_SSL_PROTOCOL_ERROR
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x5586eccfa4e3 <unknown>
+#1 0x5586eca29c76 <unknown>
+#2 0x5586eca21c7f <unknown>
+#3 0x5586eca13ca2 <unknown>
+#4 0x5586eca15412 <unknown>
+#5 0x5586eca140ca <unknown>
+#6 0x5586eca13168 <unknown>
+#7 0x5586eca12fa0 <unknown>
+#8 0x5586eca119bf <unknown>
+#9 0x5586eca11fed <unknown>
+#10 0x5586eca2bb06 <unknown>
+#11 0x5586eca9d9e5 <unknown>
+#12 0x5586eca85012 <unknown>
+#13 0x5586eca9d30e <unknown>
+#14 0x5586eca84de3 <unknown>
+#15 0x5586eca5a2dd <unknown>
+#16 0x5586eca5b34e <unknown>
+#17 0x5586eccba3e4 <unknown>
+#18 0x5586eccbe3d7 <unknown>
+#19 0x5586eccc8b20 <unknown>
+#20 0x5586eccbf023 <unknown>
+#21 0x5586ecc8d1aa <unknown>
+#22 0x5586ecce36b8 <unknown>
+#23 0x5586ecce3847 <unknown>
+#24 0x5586eccf3243 <unknown>
+#25 0x7f316ac94b43 <unknown>
+
+2023-07-25 14:21:51 - ERROR - Error fetching content from https://samsung-servicios-tecnico.com: Message: unknown error: net::ERR_SSL_PROTOCOL_ERROR
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x5613958074e3 <unknown>
+#1 0x561395536c76 <unknown>
+#2 0x56139552ec7f <unknown>
+#3 0x561395520ca2 <unknown>
+#4 0x561395522412 <unknown>
+#5 0x5613955210ca <unknown>
+#6 0x561395520168 <unknown>
+#7 0x56139551ffa0 <unknown>
+#8 0x56139551e9bf <unknown>
+#9 0x56139551efed <unknown>
+#10 0x561395538b06 <unknown>
+#11 0x5613955aa9e5 <unknown>
+#12 0x561395592012 <unknown>
+#13 0x5613955aa30e <unknown>
+#14 0x561395591de3 <unknown>
+#15 0x5613955672dd <unknown>
+#16 0x56139556834e <unknown>
+#17 0x5613957c73e4 <unknown>
+#18 0x5613957cb3d7 <unknown>
+#19 0x5613957d5b20 <unknown>
+#20 0x5613957cc023 <unknown>
+#21 0x56139579a1aa <unknown>
+#22 0x5613957f06b8 <unknown>
+#23 0x5613957f0847 <unknown>
+#24 0x561395800243 <unknown>
+#25 0x7f671d094b43 <unknown>
+
+2023-07-25 14:38:29 - ERROR - Error fetching content from https://activeapplearena.com: Message: unknown error: net::ERR_SSL_PROTOCOL_ERROR
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x55a6a4b274e3 <unknown>
+#1 0x55a6a4856c76 <unknown>
+#2 0x55a6a484ec7f <unknown>
+#3 0x55a6a4840ca2 <unknown>
+#4 0x55a6a4842412 <unknown>
+#5 0x55a6a48410ca <unknown>
+#6 0x55a6a4840168 <unknown>
+#7 0x55a6a483ffa0 <unknown>
+#8 0x55a6a483e9bf <unknown>
+#9 0x55a6a483efed <unknown>
+#10 0x55a6a4858b06 <unknown>
+#11 0x55a6a48ca9e5 <unknown>
+#12 0x55a6a48b2012 <unknown>
+#13 0x55a6a48ca30e <unknown>
+#14 0x55a6a48b1de3 <unknown>
+#15 0x55a6a48872dd <unknown>
+#16 0x55a6a488834e <unknown>
+#17 0x55a6a4ae73e4 <unknown>
+#18 0x55a6a4aeb3d7 <unknown>
+#19 0x55a6a4af5b20 <unknown>
+#20 0x55a6a4aec023 <unknown>
+#21 0x55a6a4aba1aa <unknown>
+#22 0x55a6a4b106b8 <unknown>
+#23 0x55a6a4b10847 <unknown>
+#24 0x55a6a4b20243 <unknown>
+#25 0x7ff034294b43 <unknown>
+
+2023-07-25 14:39:20 - ERROR - Error fetching content from https://activeappleattic.com: Message: unknown error: net::ERR_SSL_PROTOCOL_ERROR
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x5627ebe844e3 <unknown>
+#1 0x5627ebbb3c76 <unknown>
+#2 0x5627ebbabc7f <unknown>
+#3 0x5627ebb9dca2 <unknown>
+#4 0x5627ebb9f412 <unknown>
+#5 0x5627ebb9e0ca <unknown>
+#6 0x5627ebb9d168 <unknown>
+#7 0x5627ebb9cfa0 <unknown>
+#8 0x5627ebb9b9bf <unknown>
+#9 0x5627ebb9bfed <unknown>
+#10 0x5627ebbb5b06 <unknown>
+#11 0x5627ebc279e5 <unknown>
+#12 0x5627ebc0f012 <unknown>
+#13 0x5627ebc2730e <unknown>
+#14 0x5627ebc0ede3 <unknown>
+#15 0x5627ebbe42dd <unknown>
+#16 0x5627ebbe534e <unknown>
+#17 0x5627ebe443e4 <unknown>
+#18 0x5627ebe483d7 <unknown>
+#19 0x5627ebe52b20 <unknown>
+#20 0x5627ebe49023 <unknown>
+#21 0x5627ebe171aa <unknown>
+#22 0x5627ebe6d6b8 <unknown>
+#23 0x5627ebe6d847 <unknown>
+#24 0x5627ebe7d243 <unknown>
+#25 0x7f7b01094b43 <unknown>
+
+2023-07-25 14:40:01 - ERROR - Error fetching content from https://app1e.one: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x558c285bb4e3 <unknown>
+#1 0x558c282eac76 <unknown>
+#2 0x558c282e2c7f <unknown>
+#3 0x558c282d4ca2 <unknown>
+#4 0x558c282d6412 <unknown>
+#5 0x558c282d50ca <unknown>
+#6 0x558c282d4168 <unknown>
+#7 0x558c282d3fa0 <unknown>
+#8 0x558c282d29bf <unknown>
+#9 0x558c282d2fed <unknown>
+#10 0x558c282ecb06 <unknown>
+#11 0x558c2835e9e5 <unknown>
+#12 0x558c28346012 <unknown>
+#13 0x558c2835e30e <unknown>
+#14 0x558c28345de3 <unknown>
+#15 0x558c2831b2dd <unknown>
+#16 0x558c2831c34e <unknown>
+#17 0x558c2857b3e4 <unknown>
+#18 0x558c2857f3d7 <unknown>
+#19 0x558c28589b20 <unknown>
+#20 0x558c28580023 <unknown>
+#21 0x558c2854e1aa <unknown>
+#22 0x558c285a46b8 <unknown>
+#23 0x558c285a4847 <unknown>
+#24 0x558c285b4243 <unknown>
+#25 0x7fc010694b43 <unknown>
+
+2023-07-25 14:40:48 - ERROR - Error fetching content from https://apple-128.com: Message: unknown error: net::ERR_CONNECTION_REFUSED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x55d5707874e3 <unknown>
+#1 0x55d5704b6c76 <unknown>
+#2 0x55d5704aec7f <unknown>
+#3 0x55d5704a0ca2 <unknown>
+#4 0x55d5704a2412 <unknown>
+#5 0x55d5704a10ca <unknown>
+#6 0x55d5704a0168 <unknown>
+#7 0x55d57049ffa0 <unknown>
+#8 0x55d57049e9bf <unknown>
+#9 0x55d57049efed <unknown>
+#10 0x55d5704b8b06 <unknown>
+#11 0x55d57052a9e5 <unknown>
+#12 0x55d570512012 <unknown>
+#13 0x55d57052a30e <unknown>
+#14 0x55d570511de3 <unknown>
+#15 0x55d5704e72dd <unknown>
+#16 0x55d5704e834e <unknown>
+#17 0x55d5707473e4 <unknown>
+#18 0x55d57074b3d7 <unknown>
+#19 0x55d570755b20 <unknown>
+#20 0x55d57074c023 <unknown>
+#21 0x55d57071a1aa <unknown>
+#22 0x55d5707706b8 <unknown>
+#23 0x55d570770847 <unknown>
+#24 0x55d570780243 <unknown>
+#25 0x7fe662094b43 <unknown>
+
+2023-07-25 14:41:37 - ERROR - Error fetching content from https://apple360.top: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x56415488f4e3 <unknown>
+#1 0x5641545bec76 <unknown>
+#2 0x5641545b6c7f <unknown>
+#3 0x5641545a8ca2 <unknown>
+#4 0x5641545aa412 <unknown>
+#5 0x5641545a90ca <unknown>
+#6 0x5641545a8168 <unknown>
+#7 0x5641545a7fa0 <unknown>
+#8 0x5641545a69bf <unknown>
+#9 0x5641545a6fed <unknown>
+#10 0x5641545c0b06 <unknown>
+#11 0x5641546329e5 <unknown>
+#12 0x56415461a012 <unknown>
+#13 0x56415463230e <unknown>
+#14 0x564154619de3 <unknown>
+#15 0x5641545ef2dd <unknown>
+#16 0x5641545f034e <unknown>
+#17 0x56415484f3e4 <unknown>
+#18 0x5641548533d7 <unknown>
+#19 0x56415485db20 <unknown>
+#20 0x564154854023 <unknown>
+#21 0x5641548221aa <unknown>
+#22 0x5641548786b8 <unknown>
+#23 0x564154878847 <unknown>
+#24 0x564154888243 <unknown>
+#25 0x7f5a97c94b43 <unknown>
+
+2023-07-25 14:42:33 - ERROR - Error fetching content from https://appleblossomrock.com: Message: unknown error: net::ERR_CONNECTION_CLOSED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x561eb555d4e3 <unknown>
+#1 0x561eb528cc76 <unknown>
+#2 0x561eb5284c7f <unknown>
+#3 0x561eb5276ca2 <unknown>
+#4 0x561eb5278412 <unknown>
+#5 0x561eb52770ca <unknown>
+#6 0x561eb5276168 <unknown>
+#7 0x561eb5275fa0 <unknown>
+#8 0x561eb52749bf <unknown>
+#9 0x561eb5274fed <unknown>
+#10 0x561eb528eb06 <unknown>
+#11 0x561eb53009e5 <unknown>
+#12 0x561eb52e8012 <unknown>
+#13 0x561eb530030e <unknown>
+#14 0x561eb52e7de3 <unknown>
+#15 0x561eb52bd2dd <unknown>
+#16 0x561eb52be34e <unknown>
+#17 0x561eb551d3e4 <unknown>
+#18 0x561eb55213d7 <unknown>
+#19 0x561eb552bb20 <unknown>
+#20 0x561eb5522023 <unknown>
+#21 0x561eb54f01aa <unknown>
+#22 0x561eb55466b8 <unknown>
+#23 0x561eb5546847 <unknown>
+#24 0x561eb5556243 <unknown>
+#25 0x7f468bc94b43 <unknown>
+
+2023-07-25 14:43:30 - ERROR - Error fetching content from https://applecustomskins.com: Message: unknown error: net::ERR_SSL_PROTOCOL_ERROR
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x5561cff024e3 <unknown>
+#1 0x5561cfc31c76 <unknown>
+#2 0x5561cfc29c7f <unknown>
+#3 0x5561cfc1bca2 <unknown>
+#4 0x5561cfc1d412 <unknown>
+#5 0x5561cfc1c0ca <unknown>
+#6 0x5561cfc1b168 <unknown>
+#7 0x5561cfc1afa0 <unknown>
+#8 0x5561cfc199bf <unknown>
+#9 0x5561cfc19fed <unknown>
+#10 0x5561cfc33b06 <unknown>
+#11 0x5561cfca59e5 <unknown>
+#12 0x5561cfc8d012 <unknown>
+#13 0x5561cfca530e <unknown>
+#14 0x5561cfc8cde3 <unknown>
+#15 0x5561cfc622dd <unknown>
+#16 0x5561cfc6334e <unknown>
+#17 0x5561cfec23e4 <unknown>
+#18 0x5561cfec63d7 <unknown>
+#19 0x5561cfed0b20 <unknown>
+#20 0x5561cfec7023 <unknown>
+#21 0x5561cfe951aa <unknown>
+#22 0x5561cfeeb6b8 <unknown>
+#23 0x5561cfeeb847 <unknown>
+#24 0x5561cfefb243 <unknown>
+#25 0x7f3c5d694b43 <unknown>
+
+2023-07-25 15:47:31 - ERROR - Error fetching content from https://earningmoneyfacebook.com: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x5627eaa6a4e3 <unknown>
+#1 0x5627ea799c76 <unknown>
+#2 0x5627ea791c7f <unknown>
+#3 0x5627ea783ca2 <unknown>
+#4 0x5627ea785412 <unknown>
+#5 0x5627ea7840ca <unknown>
+#6 0x5627ea783168 <unknown>
+#7 0x5627ea782fa0 <unknown>
+#8 0x5627ea7819bf <unknown>
+#9 0x5627ea781fed <unknown>
+#10 0x5627ea79bb06 <unknown>
+#11 0x5627ea80d9e5 <unknown>
+#12 0x5627ea7f5012 <unknown>
+#13 0x5627ea80d30e <unknown>
+#14 0x5627ea7f4de3 <unknown>
+#15 0x5627ea7ca2dd <unknown>
+#16 0x5627ea7cb34e <unknown>
+#17 0x5627eaa2a3e4 <unknown>
+#18 0x5627eaa2e3d7 <unknown>
+#19 0x5627eaa38b20 <unknown>
+#20 0x5627eaa2f023 <unknown>
+#21 0x5627ea9fd1aa <unknown>
+#22 0x5627eaa536b8 <unknown>
+#23 0x5627eaa53847 <unknown>
+#24 0x5627eaa63243 <unknown>
+#25 0x7f2543a94b43 <unknown>
+
+2023-07-25 15:48:04 - ERROR - Error fetching content from https://earningmsoneyfacebook.com: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x563bd7a564e3 <unknown>
+#1 0x563bd7785c76 <unknown>
+#2 0x563bd777dc7f <unknown>
+#3 0x563bd776fca2 <unknown>
+#4 0x563bd7771412 <unknown>
+#5 0x563bd77700ca <unknown>
+#6 0x563bd776f168 <unknown>
+#7 0x563bd776efa0 <unknown>
+#8 0x563bd776d9bf <unknown>
+#9 0x563bd776dfed <unknown>
+#10 0x563bd7787b06 <unknown>
+#11 0x563bd77f99e5 <unknown>
+#12 0x563bd77e1012 <unknown>
+#13 0x563bd77f930e <unknown>
+#14 0x563bd77e0de3 <unknown>
+#15 0x563bd77b62dd <unknown>
+#16 0x563bd77b734e <unknown>
+#17 0x563bd7a163e4 <unknown>
+#18 0x563bd7a1a3d7 <unknown>
+#19 0x563bd7a24b20 <unknown>
+#20 0x563bd7a1b023 <unknown>
+#21 0x563bd79e91aa <unknown>
+#22 0x563bd7a3f6b8 <unknown>
+#23 0x563bd7a3f847 <unknown>
+#24 0x563bd7a4f243 <unknown>
+#25 0x7f4248094b43 <unknown>
+
+2023-07-25 15:49:15 - ERROR - Error fetching content from https://earningmoneyfacebook.com: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x557818ace4e3 <unknown>
+#1 0x5578187fdc76 <unknown>
+#2 0x5578187f5c7f <unknown>
+#3 0x5578187e7ca2 <unknown>
+#4 0x5578187e9412 <unknown>
+#5 0x5578187e80ca <unknown>
+#6 0x5578187e7168 <unknown>
+#7 0x5578187e6fa0 <unknown>
+#8 0x5578187e59bf <unknown>
+#9 0x5578187e5fed <unknown>
+#10 0x5578187ffb06 <unknown>
+#11 0x5578188719e5 <unknown>
+#12 0x557818859012 <unknown>
+#13 0x55781887130e <unknown>
+#14 0x557818858de3 <unknown>
+#15 0x55781882e2dd <unknown>
+#16 0x55781882f34e <unknown>
+#17 0x557818a8e3e4 <unknown>
+#18 0x557818a923d7 <unknown>
+#19 0x557818a9cb20 <unknown>
+#20 0x557818a93023 <unknown>
+#21 0x557818a611aa <unknown>
+#22 0x557818ab76b8 <unknown>
+#23 0x557818ab7847 <unknown>
+#24 0x557818ac7243 <unknown>
+#25 0x7f98e7c94b43 <unknown>
+
+2023-07-25 15:49:39 - ERROR - Error fetching content from https://earningmsoneyfacebook.com: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x5653b03884e3 <unknown>
+#1 0x5653b00b7c76 <unknown>
+#2 0x5653b00afc7f <unknown>
+#3 0x5653b00a1ca2 <unknown>
+#4 0x5653b00a3412 <unknown>
+#5 0x5653b00a20ca <unknown>
+#6 0x5653b00a1168 <unknown>
+#7 0x5653b00a0fa0 <unknown>
+#8 0x5653b009f9bf <unknown>
+#9 0x5653b009ffed <unknown>
+#10 0x5653b00b9b06 <unknown>
+#11 0x5653b012b9e5 <unknown>
+#12 0x5653b0113012 <unknown>
+#13 0x5653b012b30e <unknown>
+#14 0x5653b0112de3 <unknown>
+#15 0x5653b00e82dd <unknown>
+#16 0x5653b00e934e <unknown>
+#17 0x5653b03483e4 <unknown>
+#18 0x5653b034c3d7 <unknown>
+#19 0x5653b0356b20 <unknown>
+#20 0x5653b034d023 <unknown>
+#21 0x5653b031b1aa <unknown>
+#22 0x5653b03716b8 <unknown>
+#23 0x5653b0371847 <unknown>
+#24 0x5653b0381243 <unknown>
+#25 0x7f7917e94b43 <unknown>
+
+2023-07-25 15:50:06 - ERROR - Error fetching content from https://facebook11.com: Message: unknown error: net::ERR_SSL_PROTOCOL_ERROR
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x5579c93b34e3 <unknown>
+#1 0x5579c90e2c76 <unknown>
+#2 0x5579c90dac7f <unknown>
+#3 0x5579c90ccca2 <unknown>
+#4 0x5579c90ce412 <unknown>
+#5 0x5579c90cd0ca <unknown>
+#6 0x5579c90cc168 <unknown>
+#7 0x5579c90cbfa0 <unknown>
+#8 0x5579c90ca9bf <unknown>
+#9 0x5579c90cafed <unknown>
+#10 0x5579c90e4b06 <unknown>
+#11 0x5579c91569e5 <unknown>
+#12 0x5579c913e012 <unknown>
+#13 0x5579c915630e <unknown>
+#14 0x5579c913dde3 <unknown>
+#15 0x5579c91132dd <unknown>
+#16 0x5579c911434e <unknown>
+#17 0x5579c93733e4 <unknown>
+#18 0x5579c93773d7 <unknown>
+#19 0x5579c9381b20 <unknown>
+#20 0x5579c9378023 <unknown>
+#21 0x5579c93461aa <unknown>
+#22 0x5579c939c6b8 <unknown>
+#23 0x5579c939c847 <unknown>
+#24 0x5579c93ac243 <unknown>
+#25 0x7fccb1494b43 <unknown>
+
+2023-07-25 15:50:33 - ERROR - Error fetching content from https://facebooksecuritys.com: Message: unknown error: net::ERR_CONNECTION_CLOSED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x5605a518a4e3 <unknown>
+#1 0x5605a4eb9c76 <unknown>
+#2 0x5605a4eb1c7f <unknown>
+#3 0x5605a4ea3ca2 <unknown>
+#4 0x5605a4ea5412 <unknown>
+#5 0x5605a4ea40ca <unknown>
+#6 0x5605a4ea3168 <unknown>
+#7 0x5605a4ea2fa0 <unknown>
+#8 0x5605a4ea19bf <unknown>
+#9 0x5605a4ea1fed <unknown>
+#10 0x5605a4ebbb06 <unknown>
+#11 0x5605a4f2d9e5 <unknown>
+#12 0x5605a4f15012 <unknown>
+#13 0x5605a4f2d30e <unknown>
+#14 0x5605a4f14de3 <unknown>
+#15 0x5605a4eea2dd <unknown>
+#16 0x5605a4eeb34e <unknown>
+#17 0x5605a514a3e4 <unknown>
+#18 0x5605a514e3d7 <unknown>
+#19 0x5605a5158b20 <unknown>
+#20 0x5605a514f023 <unknown>
+#21 0x5605a511d1aa <unknown>
+#22 0x5605a51736b8 <unknown>
+#23 0x5605a5173847 <unknown>
+#24 0x5605a5183243 <unknown>
+#25 0x7eff5a894b43 <unknown>
+
+2023-07-25 15:51:20 - ERROR - Error fetching content from https://recovermyfacebook.com: Message: unknown error: net::ERR_CONNECTION_CLOSED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x559597f0d4e3 <unknown>
+#1 0x559597c3cc76 <unknown>
+#2 0x559597c34c7f <unknown>
+#3 0x559597c26ca2 <unknown>
+#4 0x559597c28412 <unknown>
+#5 0x559597c270ca <unknown>
+#6 0x559597c26168 <unknown>
+#7 0x559597c25fa0 <unknown>
+#8 0x559597c249bf <unknown>
+#9 0x559597c24fed <unknown>
+#10 0x559597c3eb06 <unknown>
+#11 0x559597cb09e5 <unknown>
+#12 0x559597c98012 <unknown>
+#13 0x559597cb030e <unknown>
+#14 0x559597c97de3 <unknown>
+#15 0x559597c6d2dd <unknown>
+#16 0x559597c6e34e <unknown>
+#17 0x559597ecd3e4 <unknown>
+#18 0x559597ed13d7 <unknown>
+#19 0x559597edbb20 <unknown>
+#20 0x559597ed2023 <unknown>
+#21 0x559597ea01aa <unknown>
+#22 0x559597ef66b8 <unknown>
+#23 0x559597ef6847 <unknown>
+#24 0x559597f06243 <unknown>
+#25 0x7fd2ad094b43 <unknown>
+
+2023-07-25 15:56:35 - ERROR - Error fetching content from https://earningmoneyfacebook.com: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x55a8d14914e3 <unknown>
+#1 0x55a8d11c0c76 <unknown>
+#2 0x55a8d11b8c7f <unknown>
+#3 0x55a8d11aaca2 <unknown>
+#4 0x55a8d11ac412 <unknown>
+#5 0x55a8d11ab0ca <unknown>
+#6 0x55a8d11aa168 <unknown>
+#7 0x55a8d11a9fa0 <unknown>
+#8 0x55a8d11a89bf <unknown>
+#9 0x55a8d11a8fed <unknown>
+#10 0x55a8d11c2b06 <unknown>
+#11 0x55a8d12349e5 <unknown>
+#12 0x55a8d121c012 <unknown>
+#13 0x55a8d123430e <unknown>
+#14 0x55a8d121bde3 <unknown>
+#15 0x55a8d11f12dd <unknown>
+#16 0x55a8d11f234e <unknown>
+#17 0x55a8d14513e4 <unknown>
+#18 0x55a8d14553d7 <unknown>
+#19 0x55a8d145fb20 <unknown>
+#20 0x55a8d1456023 <unknown>
+#21 0x55a8d14241aa <unknown>
+#22 0x55a8d147a6b8 <unknown>
+#23 0x55a8d147a847 <unknown>
+#24 0x55a8d148a243 <unknown>
+#25 0x7f53d2494b43 <unknown>
+
+2023-07-25 15:57:03 - ERROR - Error fetching content from https://earningmsoneyfacebook.com: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x55daa12bd4e3 <unknown>
+#1 0x55daa0fecc76 <unknown>
+#2 0x55daa0fe4c7f <unknown>
+#3 0x55daa0fd6ca2 <unknown>
+#4 0x55daa0fd8412 <unknown>
+#5 0x55daa0fd70ca <unknown>
+#6 0x55daa0fd6168 <unknown>
+#7 0x55daa0fd5fa0 <unknown>
+#8 0x55daa0fd49bf <unknown>
+#9 0x55daa0fd4fed <unknown>
+#10 0x55daa0feeb06 <unknown>
+#11 0x55daa10609e5 <unknown>
+#12 0x55daa1048012 <unknown>
+#13 0x55daa106030e <unknown>
+#14 0x55daa1047de3 <unknown>
+#15 0x55daa101d2dd <unknown>
+#16 0x55daa101e34e <unknown>
+#17 0x55daa127d3e4 <unknown>
+#18 0x55daa12813d7 <unknown>
+#19 0x55daa128bb20 <unknown>
+#20 0x55daa1282023 <unknown>
+#21 0x55daa12501aa <unknown>
+#22 0x55daa12a66b8 <unknown>
+#23 0x55daa12a6847 <unknown>
+#24 0x55daa12b6243 <unknown>
+#25 0x7fe01a294b43 <unknown>
+
+2023-07-25 15:57:26 - ERROR - Error fetching content from https://facebook11.com: Message: unknown error: net::ERR_SSL_PROTOCOL_ERROR
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x55883fade4e3 <unknown>
+#1 0x55883f80dc76 <unknown>
+#2 0x55883f805c7f <unknown>
+#3 0x55883f7f7ca2 <unknown>
+#4 0x55883f7f9412 <unknown>
+#5 0x55883f7f80ca <unknown>
+#6 0x55883f7f7168 <unknown>
+#7 0x55883f7f6fa0 <unknown>
+#8 0x55883f7f59bf <unknown>
+#9 0x55883f7f5fed <unknown>
+#10 0x55883f80fb06 <unknown>
+#11 0x55883f8819e5 <unknown>
+#12 0x55883f869012 <unknown>
+#13 0x55883f88130e <unknown>
+#14 0x55883f868de3 <unknown>
+#15 0x55883f83e2dd <unknown>
+#16 0x55883f83f34e <unknown>
+#17 0x55883fa9e3e4 <unknown>
+#18 0x55883faa23d7 <unknown>
+#19 0x55883faacb20 <unknown>
+#20 0x55883faa3023 <unknown>
+#21 0x55883fa711aa <unknown>
+#22 0x55883fac76b8 <unknown>
+#23 0x55883fac7847 <unknown>
+#24 0x55883fad7243 <unknown>
+#25 0x7f0f47e94b43 <unknown>
+
+2023-07-25 15:58:07 - ERROR - Error fetching content from https://facebooksecuritys.com: Message: unknown error: net::ERR_CONNECTION_CLOSED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x55e4accba4e3 <unknown>
+#1 0x55e4ac9e9c76 <unknown>
+#2 0x55e4ac9e1c7f <unknown>
+#3 0x55e4ac9d3ca2 <unknown>
+#4 0x55e4ac9d5412 <unknown>
+#5 0x55e4ac9d40ca <unknown>
+#6 0x55e4ac9d3168 <unknown>
+#7 0x55e4ac9d2fa0 <unknown>
+#8 0x55e4ac9d19bf <unknown>
+#9 0x55e4ac9d1fed <unknown>
+#10 0x55e4ac9ebb06 <unknown>
+#11 0x55e4aca5d9e5 <unknown>
+#12 0x55e4aca45012 <unknown>
+#13 0x55e4aca5d30e <unknown>
+#14 0x55e4aca44de3 <unknown>
+#15 0x55e4aca1a2dd <unknown>
+#16 0x55e4aca1b34e <unknown>
+#17 0x55e4acc7a3e4 <unknown>
+#18 0x55e4acc7e3d7 <unknown>
+#19 0x55e4acc88b20 <unknown>
+#20 0x55e4acc7f023 <unknown>
+#21 0x55e4acc4d1aa <unknown>
+#22 0x55e4acca36b8 <unknown>
+#23 0x55e4acca3847 <unknown>
+#24 0x55e4accb3243 <unknown>
+#25 0x7efd49a94b43 <unknown>
+
+2023-07-25 15:59:25 - ERROR - Error fetching content from https://recovermyfacebook.com: Message: unknown error: net::ERR_CONNECTION_CLOSED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x55b9ce9104e3 <unknown>
+#1 0x55b9ce63fc76 <unknown>
+#2 0x55b9ce637c7f <unknown>
+#3 0x55b9ce629ca2 <unknown>
+#4 0x55b9ce62b412 <unknown>
+#5 0x55b9ce62a0ca <unknown>
+#6 0x55b9ce629168 <unknown>
+#7 0x55b9ce628fa0 <unknown>
+#8 0x55b9ce6279bf <unknown>
+#9 0x55b9ce627fed <unknown>
+#10 0x55b9ce641b06 <unknown>
+#11 0x55b9ce6b39e5 <unknown>
+#12 0x55b9ce69b012 <unknown>
+#13 0x55b9ce6b330e <unknown>
+#14 0x55b9ce69ade3 <unknown>
+#15 0x55b9ce6702dd <unknown>
+#16 0x55b9ce67134e <unknown>
+#17 0x55b9ce8d03e4 <unknown>
+#18 0x55b9ce8d43d7 <unknown>
+#19 0x55b9ce8deb20 <unknown>
+#20 0x55b9ce8d5023 <unknown>
+#21 0x55b9ce8a31aa <unknown>
+#22 0x55b9ce8f96b8 <unknown>
+#23 0x55b9ce8f9847 <unknown>
+#24 0x55b9ce909243 <unknown>
+#25 0x7f1436a94b43 <unknown>
+
+2023-07-25 16:48:12 - ERROR - Error fetching content from https://earningmoneyfacebook.com: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x55cdecf214e3 <unknown>
+#1 0x55cdecc50c76 <unknown>
+#2 0x55cdecc48c7f <unknown>
+#3 0x55cdecc3aca2 <unknown>
+#4 0x55cdecc3c412 <unknown>
+#5 0x55cdecc3b0ca <unknown>
+#6 0x55cdecc3a168 <unknown>
+#7 0x55cdecc39fa0 <unknown>
+#8 0x55cdecc389bf <unknown>
+#9 0x55cdecc38fed <unknown>
+#10 0x55cdecc52b06 <unknown>
+#11 0x55cdeccc49e5 <unknown>
+#12 0x55cdeccac012 <unknown>
+#13 0x55cdeccc430e <unknown>
+#14 0x55cdeccabde3 <unknown>
+#15 0x55cdecc812dd <unknown>
+#16 0x55cdecc8234e <unknown>
+#17 0x55cdecee13e4 <unknown>
+#18 0x55cdecee53d7 <unknown>
+#19 0x55cdeceefb20 <unknown>
+#20 0x55cdecee6023 <unknown>
+#21 0x55cdeceb41aa <unknown>
+#22 0x55cdecf0a6b8 <unknown>
+#23 0x55cdecf0a847 <unknown>
+#24 0x55cdecf1a243 <unknown>
+#25 0x7fa885094b43 <unknown>
+
+2023-07-25 16:48:32 - ERROR - Error fetching content from https://earningmsoneyfacebook.com: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x5568251214e3 <unknown>
+#1 0x556824e50c76 <unknown>
+#2 0x556824e48c7f <unknown>
+#3 0x556824e3aca2 <unknown>
+#4 0x556824e3c412 <unknown>
+#5 0x556824e3b0ca <unknown>
+#6 0x556824e3a168 <unknown>
+#7 0x556824e39fa0 <unknown>
+#8 0x556824e389bf <unknown>
+#9 0x556824e38fed <unknown>
+#10 0x556824e52b06 <unknown>
+#11 0x556824ec49e5 <unknown>
+#12 0x556824eac012 <unknown>
+#13 0x556824ec430e <unknown>
+#14 0x556824eabde3 <unknown>
+#15 0x556824e812dd <unknown>
+#16 0x556824e8234e <unknown>
+#17 0x5568250e13e4 <unknown>
+#18 0x5568250e53d7 <unknown>
+#19 0x5568250efb20 <unknown>
+#20 0x5568250e6023 <unknown>
+#21 0x5568250b41aa <unknown>
+#22 0x55682510a6b8 <unknown>
+#23 0x55682510a847 <unknown>
+#24 0x55682511a243 <unknown>
+#25 0x7f7452694b43 <unknown>
+
+2023-07-25 16:48:56 - ERROR - Error fetching content from https://facebook11.com: Message: unknown error: net::ERR_SSL_PROTOCOL_ERROR
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x555951bb24e3 <unknown>
+#1 0x5559518e1c76 <unknown>
+#2 0x5559518d9c7f <unknown>
+#3 0x5559518cbca2 <unknown>
+#4 0x5559518cd412 <unknown>
+#5 0x5559518cc0ca <unknown>
+#6 0x5559518cb168 <unknown>
+#7 0x5559518cafa0 <unknown>
+#8 0x5559518c99bf <unknown>
+#9 0x5559518c9fed <unknown>
+#10 0x5559518e3b06 <unknown>
+#11 0x5559519559e5 <unknown>
+#12 0x55595193d012 <unknown>
+#13 0x55595195530e <unknown>
+#14 0x55595193cde3 <unknown>
+#15 0x5559519122dd <unknown>
+#16 0x55595191334e <unknown>
+#17 0x555951b723e4 <unknown>
+#18 0x555951b763d7 <unknown>
+#19 0x555951b80b20 <unknown>
+#20 0x555951b77023 <unknown>
+#21 0x555951b451aa <unknown>
+#22 0x555951b9b6b8 <unknown>
+#23 0x555951b9b847 <unknown>
+#24 0x555951bab243 <unknown>
+#25 0x7f6878894b43 <unknown>
+
+2023-07-25 16:49:21 - ERROR - Error fetching content from https://facebooksecuritys.com: Message: unknown error: net::ERR_CONNECTION_CLOSED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x55c3305da4e3 <unknown>
+#1 0x55c330309c76 <unknown>
+#2 0x55c330301c7f <unknown>
+#3 0x55c3302f3ca2 <unknown>
+#4 0x55c3302f5412 <unknown>
+#5 0x55c3302f40ca <unknown>
+#6 0x55c3302f3168 <unknown>
+#7 0x55c3302f2fa0 <unknown>
+#8 0x55c3302f19bf <unknown>
+#9 0x55c3302f1fed <unknown>
+#10 0x55c33030bb06 <unknown>
+#11 0x55c33037d9e5 <unknown>
+#12 0x55c330365012 <unknown>
+#13 0x55c33037d30e <unknown>
+#14 0x55c330364de3 <unknown>
+#15 0x55c33033a2dd <unknown>
+#16 0x55c33033b34e <unknown>
+#17 0x55c33059a3e4 <unknown>
+#18 0x55c33059e3d7 <unknown>
+#19 0x55c3305a8b20 <unknown>
+#20 0x55c33059f023 <unknown>
+#21 0x55c33056d1aa <unknown>
+#22 0x55c3305c36b8 <unknown>
+#23 0x55c3305c3847 <unknown>
+#24 0x55c3305d3243 <unknown>
+#25 0x7f3fcb694b43 <unknown>
+
+2023-07-25 16:50:04 - ERROR - Error fetching content from https://recovermyfacebook.com: Message: unknown error: net::ERR_CONNECTION_CLOSED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x564c7225f4e3 <unknown>
+#1 0x564c71f8ec76 <unknown>
+#2 0x564c71f86c7f <unknown>
+#3 0x564c71f78ca2 <unknown>
+#4 0x564c71f7a412 <unknown>
+#5 0x564c71f790ca <unknown>
+#6 0x564c71f78168 <unknown>
+#7 0x564c71f77fa0 <unknown>
+#8 0x564c71f769bf <unknown>
+#9 0x564c71f76fed <unknown>
+#10 0x564c71f90b06 <unknown>
+#11 0x564c720029e5 <unknown>
+#12 0x564c71fea012 <unknown>
+#13 0x564c7200230e <unknown>
+#14 0x564c71fe9de3 <unknown>
+#15 0x564c71fbf2dd <unknown>
+#16 0x564c71fc034e <unknown>
+#17 0x564c7221f3e4 <unknown>
+#18 0x564c722233d7 <unknown>
+#19 0x564c7222db20 <unknown>
+#20 0x564c72224023 <unknown>
+#21 0x564c721f21aa <unknown>
+#22 0x564c722486b8 <unknown>
+#23 0x564c72248847 <unknown>
+#24 0x564c72258243 <unknown>
+#25 0x7f77da294b43 <unknown>
+
+2023-07-25 16:51:10 - ERROR - Error fetching content from https://earningmoneyfacebook.com: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x559e6e9934e3 <unknown>
+#1 0x559e6e6c2c76 <unknown>
+#2 0x559e6e6bac7f <unknown>
+#3 0x559e6e6acca2 <unknown>
+#4 0x559e6e6ae412 <unknown>
+#5 0x559e6e6ad0ca <unknown>
+#6 0x559e6e6ac168 <unknown>
+#7 0x559e6e6abfa0 <unknown>
+#8 0x559e6e6aa9bf <unknown>
+#9 0x559e6e6aafed <unknown>
+#10 0x559e6e6c4b06 <unknown>
+#11 0x559e6e7369e5 <unknown>
+#12 0x559e6e71e012 <unknown>
+#13 0x559e6e73630e <unknown>
+#14 0x559e6e71dde3 <unknown>
+#15 0x559e6e6f32dd <unknown>
+#16 0x559e6e6f434e <unknown>
+#17 0x559e6e9533e4 <unknown>
+#18 0x559e6e9573d7 <unknown>
+#19 0x559e6e961b20 <unknown>
+#20 0x559e6e958023 <unknown>
+#21 0x559e6e9261aa <unknown>
+#22 0x559e6e97c6b8 <unknown>
+#23 0x559e6e97c847 <unknown>
+#24 0x559e6e98c243 <unknown>
+#25 0x7f9e07694b43 <unknown>
+
+2023-07-25 16:51:39 - ERROR - Error fetching content from https://earningmsoneyfacebook.com: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x55ce3473d4e3 <unknown>
+#1 0x55ce3446cc76 <unknown>
+#2 0x55ce34464c7f <unknown>
+#3 0x55ce34456ca2 <unknown>
+#4 0x55ce34458412 <unknown>
+#5 0x55ce344570ca <unknown>
+#6 0x55ce34456168 <unknown>
+#7 0x55ce34455fa0 <unknown>
+#8 0x55ce344549bf <unknown>
+#9 0x55ce34454fed <unknown>
+#10 0x55ce3446eb06 <unknown>
+#11 0x55ce344e09e5 <unknown>
+#12 0x55ce344c8012 <unknown>
+#13 0x55ce344e030e <unknown>
+#14 0x55ce344c7de3 <unknown>
+#15 0x55ce3449d2dd <unknown>
+#16 0x55ce3449e34e <unknown>
+#17 0x55ce346fd3e4 <unknown>
+#18 0x55ce347013d7 <unknown>
+#19 0x55ce3470bb20 <unknown>
+#20 0x55ce34702023 <unknown>
+#21 0x55ce346d01aa <unknown>
+#22 0x55ce347266b8 <unknown>
+#23 0x55ce34726847 <unknown>
+#24 0x55ce34736243 <unknown>
+#25 0x7faff4094b43 <unknown>
+
+2023-07-25 16:52:02 - ERROR - Error fetching content from https://facebook11.com: Message: unknown error: net::ERR_SSL_PROTOCOL_ERROR
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x559fc7c5c4e3 <unknown>
+#1 0x559fc798bc76 <unknown>
+#2 0x559fc7983c7f <unknown>
+#3 0x559fc7975ca2 <unknown>
+#4 0x559fc7977412 <unknown>
+#5 0x559fc79760ca <unknown>
+#6 0x559fc7975168 <unknown>
+#7 0x559fc7974fa0 <unknown>
+#8 0x559fc79739bf <unknown>
+#9 0x559fc7973fed <unknown>
+#10 0x559fc798db06 <unknown>
+#11 0x559fc79ff9e5 <unknown>
+#12 0x559fc79e7012 <unknown>
+#13 0x559fc79ff30e <unknown>
+#14 0x559fc79e6de3 <unknown>
+#15 0x559fc79bc2dd <unknown>
+#16 0x559fc79bd34e <unknown>
+#17 0x559fc7c1c3e4 <unknown>
+#18 0x559fc7c203d7 <unknown>
+#19 0x559fc7c2ab20 <unknown>
+#20 0x559fc7c21023 <unknown>
+#21 0x559fc7bef1aa <unknown>
+#22 0x559fc7c456b8 <unknown>
+#23 0x559fc7c45847 <unknown>
+#24 0x559fc7c55243 <unknown>
+#25 0x7f5101294b43 <unknown>
+
+2023-07-25 16:53:23 - ERROR - Timeout occurred while fetching content from https://facebook.com
+2023-07-25 16:53:26 - ERROR - Error fetching content from https://facebooksecuritys.com: Message: unknown error: net::ERR_CONNECTION_CLOSED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x55a0f73954e3 <unknown>
+#1 0x55a0f70c4c76 <unknown>
+#2 0x55a0f70bcc7f <unknown>
+#3 0x55a0f70aeca2 <unknown>
+#4 0x55a0f70b0412 <unknown>
+#5 0x55a0f70af0ca <unknown>
+#6 0x55a0f70ae168 <unknown>
+#7 0x55a0f70adfa0 <unknown>
+#8 0x55a0f70ac9bf <unknown>
+#9 0x55a0f70acfed <unknown>
+#10 0x55a0f70c6b06 <unknown>
+#11 0x55a0f71389e5 <unknown>
+#12 0x55a0f7120012 <unknown>
+#13 0x55a0f713830e <unknown>
+#14 0x55a0f711fde3 <unknown>
+#15 0x55a0f70f52dd <unknown>
+#16 0x55a0f70f634e <unknown>
+#17 0x55a0f73553e4 <unknown>
+#18 0x55a0f73593d7 <unknown>
+#19 0x55a0f7363b20 <unknown>
+#20 0x55a0f735a023 <unknown>
+#21 0x55a0f73281aa <unknown>
+#22 0x55a0f737e6b8 <unknown>
+#23 0x55a0f737e847 <unknown>
+#24 0x55a0f738e243 <unknown>
+#25 0x7fda63a94b43 <unknown>
+
+2023-07-25 16:54:35 - ERROR - Error fetching content from https://recovermyfacebook.com: Message: unknown error: net::ERR_CONNECTION_RESET
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x55da0cf694e3 <unknown>
+#1 0x55da0cc98c76 <unknown>
+#2 0x55da0cc90c7f <unknown>
+#3 0x55da0cc82ca2 <unknown>
+#4 0x55da0cc84412 <unknown>
+#5 0x55da0cc830ca <unknown>
+#6 0x55da0cc82168 <unknown>
+#7 0x55da0cc81fa0 <unknown>
+#8 0x55da0cc809bf <unknown>
+#9 0x55da0cc80fed <unknown>
+#10 0x55da0cc9ab06 <unknown>
+#11 0x55da0cd0c9e5 <unknown>
+#12 0x55da0ccf4012 <unknown>
+#13 0x55da0cd0c30e <unknown>
+#14 0x55da0ccf3de3 <unknown>
+#15 0x55da0ccc92dd <unknown>
+#16 0x55da0ccca34e <unknown>
+#17 0x55da0cf293e4 <unknown>
+#18 0x55da0cf2d3d7 <unknown>
+#19 0x55da0cf37b20 <unknown>
+#20 0x55da0cf2e023 <unknown>
+#21 0x55da0cefc1aa <unknown>
+#22 0x55da0cf526b8 <unknown>
+#23 0x55da0cf52847 <unknown>
+#24 0x55da0cf62243 <unknown>
+#25 0x7f8873294b43 <unknown>
+

@@ -70,9 +70,10 @@ class ScanSpoofingDomains extends Command
                     try{
                     $output = pulseDive::search($spoofed_domain, 1) ;
                     $domainsimilarity = DomainSimilarity::rate($todomainsimilarity, 1) ;
+                    $imagerating = imagerating::rate($todomainsimilarity, 1) ;
                     $contentrating = contentrating::rate($todomainsimilarity, 1) ;
                     $csscolor = csscolor::rate($todomainsimilarity, 1) ;
-                    // $imagerating = imagerating::rate($domainsimilarity, 1) ;
+                  
                     }catch(\Exception $e)
                     {
                         info($e->getMessage());
@@ -115,7 +116,7 @@ class ScanSpoofingDomains extends Command
                             'registrar' => $registrar,
                             'screenshot' => $screenshot,
                             'country' => $country,
-                            'phashes' => 'none', //'imagerating' => $imagerating
+                            'phashes' => $imagerating, //'imagerating' => $imagerating
                             'htmls' => $contentrating,  //'contentrating' => $contentrating,
                             'dir' => 'none',
                             'registrationDate' => $creation_date,
@@ -136,7 +137,7 @@ class ScanSpoofingDomains extends Command
                             'city' => $city,
                             'state' => $state,
                             'registrant_postal_code' => $registrant_postal_code,
-                            'domainsimilarityrate' => $domainsimilarity,
+                            'domainsimilarityrate' => $domainsimilarity ?? 'none',
                             'csscolor' => $csscolor
                            
                         ]
@@ -145,8 +146,16 @@ class ScanSpoofingDomains extends Command
                     info(json_encode($fields_array));
                 }
             }
+
                 $outputs= DnsTwist::dnstwist($domain_, $last_batch);
+              
                 foreach ($outputs as $output) {
+                    $todomainsimilarity = $domain_ . ", " . $outputs;   
+
+                    $domainsimilarity = DomainSimilarity::rate($todomainsimilarity, 1) ;
+                    // $imagerating = imagerating::rate($todomainsimilarity, 1) ;
+                    // $contentrating = contentrating::rate($todomainsimilarity, 1) ;
+                    $csscolor = csscolor::rate($todomainsimilarity, 1) ;
                     if($output[4] == 'none'){
                         continue;
                     }
@@ -222,13 +231,15 @@ class ScanSpoofingDomains extends Command
                         'city' => $city,
                         'state' => $state,
                         'registrant_postal_code' => $registrant_postal_code,
+                        'domainsimilarityrate' => $domainsimilarity ?? 'none',
+                        'csscolor' => $csscolor
                     ]
                 );
-                    log('hello');
+                    // log('hello');
                 //   if(count($fields_array) > 0){
                     info(json_encode($fields_array));
                     SpoofedDomain::insert($fields_array);
-                    log('hello');
+                    // log('hello');
                 // }
                 }
 

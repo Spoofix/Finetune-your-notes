@@ -13,8 +13,6 @@ domain_list = domain_string.split(',')
 domainOne = domain_list[0].strip()  # Use strip() to remove any leading or trailing whitespaces
 domainTwo = domain_list[1].strip()
 
-
-
 import cv2
 from PIL import Image
 from skimage.metrics import structural_similarity as ssim
@@ -39,10 +37,10 @@ def image_similarity(image_path1, image_path2):
     return similarity_rating
 
 # Example usage
-image1_path = f"./screenshots/{domainOne}.png" # Replace with the actual path of the first image
-image2_path = f"./screenshots/{domainTwo}.png" # Replace with the actual path of the second image
+image1_path = f"./screenshots/{domainOne}.png" # first image
+image2_path = f"./screenshots/{domainTwo}.png" # second image
 
 average_rating = image_similarity(image1_path, image2_path)
-# print(f"{average_rating:.2f} / 10")
-print("pending / 10")
+print(f"{average_rating:.2f} / 10")
+
 

@@ -34,6 +34,60 @@ const props = defineProps({
     }
 });
 
+const calculateTimeDifference = (dateString) => {
+  if (typeof dateString === "string") {
+    const firstDate = new Date(dateString);
+    const currentDate = new Date();
+
+    // Calculate the time difference in milliseconds
+    const diffInMilliseconds = currentDate - firstDate;
+
+    // Calculate the time difference in years, months, days, and hours
+    const diffInYears = Math.round(diffInMilliseconds / (365 * 24 * 60 * 60 * 1000));
+    const diffInMonths = Math.round(diffInMilliseconds / (30 * 24 * 60 * 60 * 1000));
+    const diffInDays = Math.round(diffInMilliseconds / (24 * 60 * 60 * 1000));
+    const diffInHours = Math.round(diffInMilliseconds / (60 * 60 * 1000));
+
+    // Determine the appropriate unit based on the rounded time difference
+    let unit, timeDiff;
+    if (diffInYears > 0) {
+      unit = "year";
+      timeDiff = diffInYears;
+    } else if (diffInMonths > 0) {
+      unit = "month";
+      timeDiff = diffInMonths;
+    } else if (diffInDays > 0) {
+      unit = "day";
+      timeDiff = diffInDays;
+    } else if (diffInHours) {
+      unit = "hour";
+      timeDiff = diffInHours;
+    }else {
+      unit = "hour";
+      timeDiff = 'past';
+    }
+
+    // Handle plural form if time difference is not 1
+    if (timeDiff !== 1) {
+      unit += "s";
+    }
+
+    return ` ${timeDiff} ${unit}`;
+  } else if (Array.isArray(dateString)) {
+    // If the dateString is an array, get the first date from the array
+    const firstDateString = dateString[0];
+    if (typeof firstDateString === "string") {
+      // Calculate the time difference for the first date in the array
+      return calculateTimeDifference(firstDateString);
+    }
+  }
+
+  return 'none';
+};
+
+
+
+
 const form = useForm({
     name: null,
 });
@@ -217,6 +271,9 @@ function activate(id) {
                         <th class="px-2 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid bg-blueGray-50 text-blueGray-500 border-blueGray-100 whitespace-nowrap">
                             colorscheme rating
                             </th>
+                            <th class="px-2 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid bg-blueGray-50 text-blueGray-500 border-blueGray-100 whitespace-nowrap">
+                                age
+                            </th>
                 <th class="px-2 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid bg-blueGray-50 text-blueGray-500 border-blueGray-100 whitespace-nowrap">
                     Rating
                     </th>
@@ -230,10 +287,10 @@ function activate(id) {
 
         <tbody>
           <tr v-for="(spoof, index) in spoofList" :key="index"  :style="{ background: index % 2 !== 0 ? 'white' : 'rgba(245, 245, 241)'}" class="transition-colors duration-300 hover:!bg-gray-300" >
-            <th class="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap text-blueGray-700 ">
+            <th class="p-4 px-2 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap text-blueGray-700 ">
               {{ spoof.spoofed_domain }}
             </th>
-            <td class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap" 
+            <td class="p-4 px-2 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap" 
             :style="{
                color: spoof.phashes == 100 || spoof.phashes > 90 ? 'red' :
                spoof.phashes == 90 || spoof.phashes > 0 ?  'orange' :
@@ -246,16 +303,24 @@ function activate(id) {
               <!-- <i class="mr-4 fas fa-arrow-up text-emerald-500"></i> -->
               {{ spoof.phashes }}
             </td>
-            <td class="p-4 px-6 text-xs border-t-0 border-l-0 border-r-0 align-between whitespace-nowrap">
-              {{ spoof.htmls }}
-            </td>
-            <td class="p-4 px-6 text-xs border-t-0 border-l-0 border-r-0 align-between whitespace-nowrap">
+            <td class="p-4 px-2 text-xs border-t-0 border-l-0 border-r-0 align-between whitespace-nowrap" v-if="spoof.htmls !== ''">
+                {{ spoof.htmls }}
+              </td>
+              <td class="p-4 px-2 text-xs border-t-0 border-l-0 border-r-0 align-between whitespace-nowrap" v-else>
+                none
+              </td>
+              
+            <td class="p-4 px-2 text-xs border-t-0 border-l-0 border-r-0 align-between whitespace-nowrap">
                 {{ spoof.domainsimilarityrate }}
               </td>
-              <td class="p-4 px-6 text-xs border-t-0 border-l-0 border-r-0 align-between whitespace-nowrap">
+              <td class="p-4 px-2 text-xs border-t-0 border-l-0 border-r-0 align-between whitespace-nowrap">
                 {{ spoof.csscolor }}
               </td>
-            <td class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap" :style="{
+              <td class="p-4 px-2 text-xs border-t-0 border-l-0 border-r-0 align-between whitespace-nowrap">
+                {{ calculateTimeDifference(spoof.registrationDate) }} 
+                <!-- {{ spoof.registrationDate }} -->
+              </td>
+            <td class="p-4 px-2 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap" :style="{
                 color: spoof.rating == 'high' ? 'red' :
                        spoof.rating == 'critical' ? 'orange' :
                        spoof.rating == 'medium' ? '#8B8000' :
@@ -268,7 +333,7 @@ function activate(id) {
               {{ spoof.rating }}
             </td>
             
-            <td class="p-4 px-6 text-xs border-t-0 border-l-0 border-r-0 align-between whitespace-nowrap">
+            <td class="p-4 px-2 text-xs border-t-0 border-l-0 border-r-0 align-between whitespace-nowrap">
               <span class="px-1 py-1 mb-1 mr-1 text-xs font-bold text-white uppercase transition-all duration-150 ease-linear bg-red-400 rounded outline-none active:bg-red-700 hover:bg-red-700 hover:text-black focus:outline-none" type="button">Report</span>
               <Link  :href="'/spoof/view/'+spoof.id" class="px-1 py-1 mb-1 mr-1 text-xs font-bold text-white uppercase transition-all duration-150 ease-linear bg-blue-400 rounded outline-none visited:bg-green-500 active:bg-blue-700 hover:bg-blue-700 hover:text-black focus:outline-none">
                     <span class=""  type="button"><i class="fa fa-eye"></i> View</span>

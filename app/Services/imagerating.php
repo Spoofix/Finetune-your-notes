@@ -25,7 +25,9 @@ class imagerating
             file_put_contents($main_file, $current);
 
             $command = 'python3 screenshots.py';
-          $command = 'python3 image.py';
+            $output = shell_exec($command);
+
+            $command = 'python3 image.py';
     
           $output = shell_exec($command);
             chdir($originalDir);

@@ -15,7 +15,7 @@ class ScanDomains implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     private $data;
-
+    public $tries = 5;
     /**
      * Create a new job instance.
      * @param $dt

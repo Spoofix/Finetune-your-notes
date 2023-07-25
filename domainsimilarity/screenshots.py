@@ -51,8 +51,9 @@ def take_screenshot(url):
 
 if __name__ == "__main__":
     web_page_url1 =  f'https://{domainOne}' # Replace with the URL of the first web page
-    web_page_url2 =  f'https://{domainOne}'    # Replace with the URL of the second web page
-
+    web_page_url2 =  f'https://{domainTwo}'    # Replace with the URL of the second web page
+try:
     take_screenshot(web_page_url1)
     take_screenshot(web_page_url2)
-
+except:
+    1+1
