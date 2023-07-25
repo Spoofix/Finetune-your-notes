@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-class DomainSimilarity implements RatingInterface
+class ImageRating implements RatingInterface
 {
     public static function rate($name): string
     {
@@ -20,9 +20,12 @@ class DomainSimilarity implements RatingInterface
         $current .= $name;
         file_put_contents($main_file, $current);
 
-       $command = 'python3 domainsimilarityrate.py';
+        $command = 'python3 screenshots.py';
+        $output = shell_exec($command);
 
-       $output = shell_exec($command);
+        $command = 'python3 image.py';
+
+        $output = shell_exec($command);
         chdir($originalDir);
 
           // Decode the JSON output
@@ -30,15 +33,16 @@ class DomainSimilarity implements RatingInterface
         
          // Check if the JSON decoding was successful
          if ($data === null) {
-            throw new \Exception("Error finding similarity");
+            throw new \Exception("Error finding Image similarity");
         }
        // Assign each value to a variable
-   
+
         return  $data;
+      
     }
 
     public static function dbColumnName(): string
     {
-        return "domainsimilarityrate";
+        return "phashes";
     }
 }

@@ -2,21 +2,17 @@
 
 namespace App\Services;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Log;
 
-class DnsTwist
+class DnsTwist implements ScanInterface
 {
-    public static function dnstwist($domain, $scan_id)
+    public static function search($domain, $scan_id=null): array
     {
-
         // Define the directory to save the screenshots
-
-        ini_set("max_execution_time", 600);
+//        ini_set("max_execution_time", 600);
         // $domainW = explode('.', $domain)[0];
         $dir = public_path("assets/screenshots/" . $domain);
-        info($dir);
+//        info($dir);
         try {
             if (!is_dir($dir)) {
                 mkdir($dir);
@@ -24,7 +20,7 @@ class DnsTwist
             $dir .= '/' . $scan_id;
             mkdir($dir);
         } catch (\Exception $ex) {
-            info($ex->getMessage());
+//            info($ex->getMessage());
         }
 
         // Run dnstwist command and capture output
@@ -36,8 +32,7 @@ class DnsTwist
 
         // Check if the JSON decoding was successful
         if ($result === null) {
-            echo "Error decoding JSON data\n";
-            exit;
+            throw new \Exception("Error decoding JSON data");
         }
 
         $spoofs = [];
@@ -49,14 +44,13 @@ class DnsTwist
             }
 
             //  dd(self::screenshot($dir, $entry));
-            Log::error(self::screenshot($dir, $entry));
+//            Log::error(self::screenshot($dir, $entry));
             // Extract and store the relevant data for each entry
             $screenshot = self::screenshot($dir, $entry);
             $phashes = $entry['phash'] ?? 'none';
             $geoips = $entry['geoip'] ?? 'none';
             $htmls = $entry['ssdeep'] ?? 'none';
             $domainsFound = $entry['fuzzer'] === 'subdomain' ? $entry['domain'] : 'none';
-
 
             $resultArray = [
                 $screenshot,
@@ -74,11 +68,8 @@ class DnsTwist
         // Now you have arrays containing the extracted data, and you can use them as needed.
         // Or you can loop through all the domains and their respective data:
 
-
-
         return $spoofs;
     }
-
 
     public static function screenshot($dir, $entry)
     {
@@ -104,4 +95,5 @@ class DnsTwist
         // dd($dir . DIRECTORY_SEPARATOR . $screenshot);
         return $dir . DIRECTORY_SEPARATOR . $screenshot;
     }
+
 }
