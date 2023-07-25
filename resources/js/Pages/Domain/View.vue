@@ -70,7 +70,50 @@ const props = defineProps({
                     <th scope="col" class="px-6 py-4 text-sm font-medium text-left text-gray-900">
                       country
                     </th>
+                    <!-- <th scope="col" class="px-6 py-4 text-sm font-medium text-left text-gray-900">
+                      screenshot rating
+                    </th>
+                    <th scope="col" class="px-6 py-4 text-sm font-medium text-left text-gray-900">
+                      contenthtml rating
+                    </th>
+                    
+                    <th scope="col" class="px-6 py-4 text-sm font-medium text-left text-gray-900">
+                      whois server
+                    </th>
+                    <th scope="col" class="px-6 py-4 text-sm font-medium text-left text-gray-900">
+                      update_date
+                    </th>
+                    <th scope="col" class="px-6 py-4 text-sm font-medium text-left text-gray-900">
+                      expiration_date
+                    </th>
+                    <th scope="col" class="px-6 py-4 text-sm font-medium text-left text-gray-900">
+                      name servers
+                    </th>
+                    <th scope="col" class="px-6 py-4 text-sm font-medium text-left text-gray-900">
+                      abuse email' (s)
+                    </th>
+                    <th scope="col" class="px-6 py-4 text-sm font-medium text-left text-gray-900">
+                      name
+                    </th>
+                    org
                   </tr>
+                  <th scope="col" class="px-6 py-4 text-sm font-medium text-left text-gray-900">
+                   address
+                  </th><th scope="col" class="px-6 py-4 text-sm font-medium text-left text-gray-900">
+                    city
+                  </th><th scope="col" class="px-6 py-4 text-sm font-medium text-left text-gray-900">
+                    state
+                  </th>
+                  <th scope="col" class="px-6 py-4 text-sm font-medium text-left text-gray-900">
+                    registrant_postal_code
+                  </th>
+                  <th scope="col" class="px-6 py-4 text-sm font-medium text-left text-gray-900">
+                      domainsimilarityrate
+                    </th>
+                    <th scope="col" class="px-6 py-4 text-sm font-medium text-left text-gray-900">
+                      csscolor
+                    </th> -->
+                    </tr>
                 </thead>
                 <tbody>
                   <tr class="transition duration-300 ease-in-out bg-white border-b hover:bg-gray-100" >
@@ -95,6 +138,33 @@ const props = defineProps({
                     <td class="px-6 py-4 text-sm font-light text-gray-900 whitespace-nowrap">
                       {{ spoofData.country }}
                     </td>
+                    <!-- <td class="px-6 py-4 text-sm font-light text-gray-900 whitespace-nowrap">
+                      {{ spoofData.phashes }}
+                    </td>  <td class="px-6 py-4 text-sm font-light text-gray-900 whitespace-nowrap">
+                      {{ spoofData.htmls }}
+                    </td>  <td class="px-6 py-4 text-sm font-light text-gray-900 whitespace-nowrap">
+                      {{ spoofData.whois_server }}
+                    </td>  <td class="px-6 py-4 text-sm font-light text-gray-900 whitespace-nowrap">
+                      {{ spoofData.name_servers }}
+                    </td>  <td class="px-6 py-4 text-sm font-light text-gray-900 whitespace-nowrap">
+                      {{ spoofData.emails}}
+                    </td>  <td class="px-6 py-4 text-sm font-light text-gray-900 whitespace-nowrap">
+                      {{ spoofData.name }}
+                    </td>  <td class="px-6 py-4 text-sm font-light text-gray-900 whitespace-nowrap">
+                      {{ spoofData.org}}
+                    </td>  <td class="px-6 py-4 text-sm font-light text-gray-900 whitespace-nowrap">
+                      {{ spoofData.address }}
+                    </td>  <td class="px-6 py-4 text-sm font-light text-gray-900 whitespace-nowrap">
+                      {{ spoofData.city }}
+                    </td>  <td class="px-6 py-4 text-sm font-light text-gray-900 whitespace-nowrap">
+                      {{ spoofData.state}}
+                    </td>  <td class="px-6 py-4 text-sm font-light text-gray-900 whitespace-nowrap">
+                      {{ spoofData.registrant_postal_code }}
+                    </td>  <td class="px-6 py-4 text-sm font-light text-gray-900 whitespace-nowrap">
+                      {{ spoofData.domainsimilarityrate }}
+                    </td>  <td class="px-6 py-4 text-sm font-light text-gray-900 whitespace-nowrap">
+                      {{ spoofData.csscolor}}
+                    </td>  -->
                   </tr>
                 
                 </tbody>
@@ -105,9 +175,10 @@ const props = defineProps({
       </div>
 
       <div class="w-full px-4 xl:w-8/12">    
-          <!-- <img class="w-full" :src="spoofData.screenshot" alt="...">     -->
-          <img class="w-full" src="../../../../public/assets/screenshots/yieldexchange.ca/1689684766/cc29f0a5_yieldexchange.ca.png" alt="..." >
+          <img class="w-full" :src="spoofData.screenshot" alt="...">    
+          <!-- <img class="w-full" src="../../../../screenshots/yieldexchange/1689759800/d0e16b1c_yieldexch.ange.ca.png" alt="..." > -->
+          <!-- <img class="w-full" src="../../../../../../../../home/kiromo/Desktop/Domain/public/assets/screenshots/yieldexchange.ca/1689763307/ee73106b_yielde.xchange.ca.png" alt="..."> -->
      </div>
-
+   
     </AuthenticatedLayout>
 </template>

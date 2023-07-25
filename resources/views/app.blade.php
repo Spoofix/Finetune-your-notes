@@ -19,5 +19,7 @@
     @inertia
     <script src="{{ asset('./assets/js/pages/be_pages_dashboard.min.js') }}"></script>
     <script src="{{ asset('./assets/js/codebase.app.min.js') }}"></script>
+    {{-- @include('sweetalert::alert') --}}
+
 </body>
 </html>

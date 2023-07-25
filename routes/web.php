@@ -72,7 +72,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/organization-search', [OrganizationController::class, 'search'])->name('organization.search');
 
     Route::get('/domain/{org_id}/{id}/{domain}', [DomainController::class, 'index'])->name('domain');
-    Route::get('/domain', [DomainController::class, 'detail'])->name('domain.detail');
+    Route::get('/domain', [DomainController::class, 'index'])->name('domain.detail');//details
 
     Route::get('/report/{domain}/{id}', [ReportController::class, 'index'])->name('report');
 

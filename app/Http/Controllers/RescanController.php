@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Console\Commands\ScanSpoofingDomains;
-use App\Http\Controllers\Controller;
+// use alert;
 use App\Jobs\ScanDomains;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+// use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Redirect;
+// use App\Console\Commands\ScanSpoofingDomains;
+use RealRashid\SweetAlert\Facades\Alert;
+
+
 
 class RescanController extends Controller
 {
@@ -16,6 +20,8 @@ class RescanController extends Controller
         ScanDomains::dispatch([
             'domain_id'=>$domainId
         ]);
+
+        Alert::success('Registration succesful', ' we are scanning the domains that you provided to identify possible spoof domains');
 
         // Additional logic if needed
         // Redirect('/');

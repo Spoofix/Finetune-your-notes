@@ -2,22 +2,26 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Console\Commands\ScanSpoofingDomains;
-use App\Http\Controllers\Controller;
-use App\Jobs\ScanDomains;
-use App\Models\Domain;
+use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\User;
-use App\Notifications\WelcomeNotification;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules\Password;
 use Inertia\Inertia;
 use Inertia\Response;
+use App\Models\Domain;
+use App\Jobs\ScanDomains;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Auth\Events\Registered;
+use App\Providers\RouteServiceProvider;
+// use Illuminate\Support\Facades\Artisan;
+use Illuminate\Validation\Rules\Password;
+use App\Notifications\WelcomeNotification;
+// use App\Console\Commands\ScanSpoofingDomains;
+
+
+
 
 class RegisteredUserController extends Controller
 {
@@ -75,6 +79,9 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
         Auth::login($user);
         $user->notify(new WelcomeNotification());
+
+        Alert::success('SuccessAlert','Registration succesful, we are scanning the domains that you provided to identify possible spoof domains');
+    
 
         return redirect(RouteServiceProvider::HOME);
     }

@@ -202,14 +202,26 @@ function activate(id) {
       <table class="items-center w-full bg-transparent border-collapse">
         <thead>
           <tr >
-            <th class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid bg-blueGray-50 text-blueGray-500 border-blueGray-100 whitespace-nowrap">
+            <th class="px-2 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid bg-blueGray-50 text-blueGray-500 border-blueGray-100 whitespace-nowrap">
                           Domain
                         </th>
-                <th class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid bg-blueGray-50 text-blueGray-500 border-blueGray-100 whitespace-nowrap">
+                                          <th class="px-2 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid bg-blueGray-50 text-blueGray-500 border-blueGray-100 whitespace-nowrap">
+                          screenshot rating
+                          </th>
+                          <th class="px-2 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid bg-blueGray-50 text-blueGray-500 border-blueGray-100 whitespace-nowrap">
+                            html rating
+                            </th>
+                        <th class="px-2 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid bg-blueGray-50 text-blueGray-500 border-blueGray-100 whitespace-nowrap">
+                            domain rating
+                            </th>
+                        <th class="px-2 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid bg-blueGray-50 text-blueGray-500 border-blueGray-100 whitespace-nowrap">
+                            colorscheme rating
+                            </th>
+                <th class="px-2 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid bg-blueGray-50 text-blueGray-500 border-blueGray-100 whitespace-nowrap">
                     Rating
                     </th>
         
-           <th class="px-6 py-3 text-xs font-semibold text-left text-red-500 uppercase align-middle border border-l-0 border-r-0 border-solid bg-blueGray-50 border-blueGray-100 whitespace-nowrap">
+           <th class="px-2 py-3 text-xs font-semibold text-left text-red-500 uppercase align-middle border border-l-0 border-r-0 border-solid bg-blueGray-50 border-blueGray-100 whitespace-nowrap">
                           Report
                         </th>
           
@@ -221,6 +233,28 @@ function activate(id) {
             <th class="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap text-blueGray-700 ">
               {{ spoof.spoofed_domain }}
             </th>
+            <td class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap" 
+            :style="{
+               color: spoof.phashes == 100 || spoof.phashes > 90 ? 'red' :
+               spoof.phashes == 90 || spoof.phashes > 0 ?  'orange' :
+                       spoof.phashes == 0 ? '#8B8000' :
+                       spoof.phashes == 'none' ? 'blue' :
+                       spoof.phashes == 'low' ? 'green' :
+                       'gray'
+              }"
+              >
+              <!-- <i class="mr-4 fas fa-arrow-up text-emerald-500"></i> -->
+              {{ spoof.phashes }}
+            </td>
+            <td class="p-4 px-6 text-xs border-t-0 border-l-0 border-r-0 align-between whitespace-nowrap">
+              {{ spoof.htmls }}
+            </td>
+            <td class="p-4 px-6 text-xs border-t-0 border-l-0 border-r-0 align-between whitespace-nowrap">
+                {{ spoof.domainsimilarityrate }}
+              </td>
+              <td class="p-4 px-6 text-xs border-t-0 border-l-0 border-r-0 align-between whitespace-nowrap">
+                {{ spoof.csscolor }}
+              </td>
             <td class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap" :style="{
                 color: spoof.rating == 'high' ? 'red' :
                        spoof.rating == 'critical' ? 'orange' :
@@ -246,59 +280,6 @@ function activate(id) {
 
       </table>
     </div>
-    <div class="block w-full overflow-x-auto">
-        <table class="items-center w-full bg-transparent border-collapse">
-          <thead>
-            <tr >
-              <th class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid bg-blueGray-50 text-blueGray-500 border-blueGray-100 whitespace-nowrap">
-                            Domain
-                          </th>
-                  <th class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid bg-blueGray-50 text-blueGray-500 border-blueGray-100 whitespace-nowrap">
-                      screenshot similarity rating
-                      </th>
-                      <th class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid bg-blueGray-50 text-blueGray-500 border-blueGray-100 whitespace-nowrap">
-                        html similarity rating
-                        </th>
-             <th class="px-6 py-3 text-xs font-semibold text-left text-red-500 uppercase align-middle border border-l-0 border-r-0 border-solid bg-blueGray-50 border-blueGray-100 whitespace-nowrap">
-                            Report
-                          </th>
-            
-            </tr>
-          </thead>
-  
-          <tbody>
-            <tr v-for="(spoof, index) in spoofList" :key="index"  :style="{ background: index % 2 !== 0 ? 'white' : 'rgba(245, 245, 241)'}" class="transition-colors duration-300 hover:!bg-gray-300" >
-              <th class="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap text-blueGray-700 ">
-                {{ spoof.spoofed_domain }}
-              </th>
-              <td class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap" 
-              :style="{
-                 // color: spoof.rating == 'high' ? 'red' :
-                        // spoof.rating == 'critical' ? 'orange' :
-                        // spoof.rating == 'medium' ? '#8B8000' :
-                        // spoof.rating == 'none' ? 'blue' :
-                        // spoof.rating == 'low' ? 'green' :
-                         //'gray'
-                }"
-                >
-                <!-- <i class="mr-4 fas fa-arrow-up text-emerald-500"></i> -->
-                {{ spoof.phashes }}
-              </td>
-              <td class="p-4 px-6 text-xs border-t-0 border-l-0 border-r-0 align-between whitespace-nowrap">
-                {{ spoof.htmls }}
-              </td>
-              <td class="p-4 px-6 text-xs border-t-0 border-l-0 border-r-0 align-between whitespace-nowrap">
-                <span class="px-1 py-1 mb-1 mr-1 text-xs font-bold text-white uppercase transition-all duration-150 ease-linear bg-red-400 rounded outline-none active:bg-red-700 hover:bg-red-700 hover:text-black focus:outline-none" type="button">Report</span>
-                <Link  :href="'/spoof/view/'+spoof.id" class="px-1 py-1 mb-1 mr-1 text-xs font-bold text-white uppercase transition-all duration-150 ease-linear bg-blue-400 rounded outline-none visited:bg-green-500 active:bg-blue-700 hover:bg-blue-700 hover:text-black focus:outline-none">
-                      <span class=""  type="button"><i class="fa fa-eye"></i> View</span>
-              </Link>
-              </td>
-            
-            </tr>
-          </tbody>
-  
-        </table>
-      </div>
   </div>
 </div>
 <footer class="relative pt-8 pb-6 mt-16">

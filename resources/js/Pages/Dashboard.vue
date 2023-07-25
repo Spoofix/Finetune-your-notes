@@ -587,6 +587,6 @@ function activate(id) {
             <!-- END Row #4 -->
 
 
-
+          
     </AuthenticatedLayout>
 </template>

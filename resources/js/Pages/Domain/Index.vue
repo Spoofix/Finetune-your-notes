@@ -58,13 +58,13 @@ function submit() {
     <AuthenticatedLayout>
         <div class="col-md-12">
             <div class="block block-rounded">
-                <div class="block-header px-5">
+                <div class="px-5 block-header">
                     <h2 class="block-title">Organization</h2>
-                    <a  class="btn btn-info mr-3 text-capitalize"   data-bs-toggle="modal" data-bs-target="#modal-normal">Add Organization</a>
+                    <a  class="mr-3 btn btn-info text-capitalize"   data-bs-toggle="modal" data-bs-target="#modal-normal">Add Organization</a>
                     <div class="modal" id="modal-normal" tabindex="-1" role="dialog" aria-labelledby="modal-normal" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
-                                <div class="block block-rounded shadow-none mb-0">
+                                <div class="block mb-0 shadow-none block-rounded">
                                     <div class="block-header block-header-default">
                                         <h3 class="block-title">Add Organization</h3>
                                         <div class="block-options">
@@ -77,7 +77,7 @@ function submit() {
                                         <form  @submit.prevent="submit">
 
                                             <div class="col-md-12">
-                                                <div class="row mb-4">
+                                                <div class="mb-4 row">
                                                     <div class="col-12">
                                                         <label class="form-label">Organization</label>
                                                         <input type="text" class="form-control form-control-lg"  v-model="form.name" placeholder="Enter your organization name..">
@@ -87,7 +87,7 @@ function submit() {
 
                                             <div class="mb-4">
                                                 <button class="btn btn-primary btn-primary-custom" type="submit" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                                                    <i class="fa fa-check opacity-50 me-1"></i>Create Organization
+                                                    <i class="opacity-50 fa fa-check me-1"></i>Create Organization
                                                 </button>
                                             </div>
 
@@ -98,7 +98,7 @@ function submit() {
                         </div>
                     </div>
                 </div>
-                <div class="block-content pb-5 px-5">
+                <div class="px-5 pb-5 block-content">
 
                     <table class="table table-borderless table-striped">
                         <thead>

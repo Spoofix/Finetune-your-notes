@@ -8,6 +8,7 @@ import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import { Link } from '@inertiajs/vue3';
 import { defineComponent } from 'vue';
 
+
 defineComponent({
   components: {
     Link
@@ -119,7 +120,7 @@ const showingNavigationDropdown = ref(false);
             
             <!-- Header Content -->
             <div class="content-header">
-              <div> <i class="px-5 text-2xl font-extrabold fa fa-bars fa-bounce :hover d-lg-none "></i></div>
+              <div> <i class="px-5 text-2xl font-extrabold fa fa-bars :hover d-lg-none "></i></div>
               <!-- Left Section -->
               <div class="space-x-1">
                 <!-- Toggle Sidebar -->
@@ -140,7 +141,7 @@ const showingNavigationDropdown = ref(false);
                
                 <!-- User Dropdown -->
                 <div class="dropdown d-inline-block">
-                  <button type="button" class="btn btn-sm btn-alt-secondary d-flex hover:text-gray-500 fa-bounce" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <button type="button" class="btn btn-sm btn-alt-secondary d-flex hover:text-gray-500 " id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-user d-sm-none"></i>
                     <img
                     class="h-8 w-8 rounded-full object-cover d-lg=none mx-3"
