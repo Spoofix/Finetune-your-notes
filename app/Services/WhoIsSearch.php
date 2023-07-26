@@ -2,11 +2,9 @@
 
 namespace App\Services;
 
-use Illuminate\Support\Facades\Http;
-
-class PulseDive
+class WhoIsSearch
 {
-    public static function search($name, $id) //$id
+    public static function search($name) //$id
     {
     //     $domain = $name;
     //     $response = Http::withHeaders([

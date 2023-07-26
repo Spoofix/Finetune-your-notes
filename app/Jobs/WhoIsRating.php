@@ -2,23 +2,18 @@
 
 namespace App\Jobs;
 
-use App\Models\Domain;
 use App\Models\SpoofedDomain;
-use App\Services\ContentRating;
-use App\Services\CssColor;
-use App\Services\DomainSimilarity;
-use App\Services\ImageRating;
-use App\Services\PulseDive;
+use App\Services\WhoIsSearch;
+use App\Traits\RatingAlreadyScanned;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Log;
 
 class WhoIsRating implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, RatingAlreadyScanned;
 
     private $spoofed_domain;
     public $tries = 5;
@@ -36,8 +31,12 @@ class WhoIsRating implements ShouldQueue
      */
     public function handle(): void
     {
-        $screenshot = 'http://127.0.0.1:5173/public/assets/screenshots/' . $this->spoofed_domain->spoofed_domain . '.png';
-        $output = PulseDive::search($this->spoofed_domain->spoofed_domain,1);
+        if( $this->copyRating($this->spoofed_domain,"WHOIS") ){
+            return;
+        }
+
+        $screenshot = ('/assets/screenshots/' . $this->spoofed_domain->spoofed_domain . '.png');
+        $output = WhoIsSearch::search($this->spoofed_domain->spoofed_domain);
         
         $this->spoofed_domain->registrar  = $output[1] ?? '';
         // $this->spoofed_domain-> 'domain_id' => $domain->id,
@@ -70,7 +69,7 @@ class WhoIsRating implements ShouldQueue
         // $this->spoofed_domain-> domainsimilarityrate => $domainsimilarity ?? 'none',
         // $this->spoofed_domain->csscolor => $csscolor
 
-        Log::alert(json_encode($this->spoofed_domain));
+//        Log::alert(json_encode($this->spoofed_domain));
 
         $this->spoofed_domain->save();
     }

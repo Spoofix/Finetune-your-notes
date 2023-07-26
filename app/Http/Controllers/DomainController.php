@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Inertia\Inertia;
 use Inertia\Controller;
 use App\Models\OrgDomain;
-use App\Services\PulseDive;
+use App\Services\WhoIsSearch;
 use App\Models\DomainDetail;
 use App\Models\Organization;
 use Illuminate\Http\Request;

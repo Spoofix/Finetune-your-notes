@@ -10,7 +10,7 @@ use App\Services\contentrating;
 use App\Services\csscolor;
 use App\Services\DomainSimilarity;
 use App\Services\imagerating;
-use App\Services\PulseDive;
+use App\Services\WhoIsSearch;
 use App\Services\OpenSquat;
 use App\Services\WhoIs;
 use Illuminate\Console\Command;
@@ -68,7 +68,7 @@ class ScanSpoofingDomainsBackup extends Command
                 foreach ($spoofed_domains as $spoofed_domain) {
                     $todomainsimilarity = $domain_ . ", " . $spoofed_domain;
                     try{
-                    $output = pulseDive::search($spoofed_domain, 1) ;
+                    $output = WhoIsSearch::search($spoofed_domain, 1) ;
                     $domainsimilarity = DomainSimilarity::rate($todomainsimilarity, 1) ;
                     $imagerating = imagerating::rate($todomainsimilarity, 1) ;
                     $contentrating = contentrating::rate($todomainsimilarity, 1) ;
@@ -167,7 +167,7 @@ class ScanSpoofingDomainsBackup extends Command
                     }
                     try{
                         // $Data = WhoIs::search( $output[4], 1);
-                        $Data = pulseDive::search( $output[4], 1);
+                        $Data = WhoIsSearch::search( $output[4], 1);
                         }catch(\Exception $e)
                         {
                             info($e->getMessage());
