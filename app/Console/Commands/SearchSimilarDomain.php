@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Jobs\ScanDomainRatings;
+use App\Jobs\WhoIsRating;
 use App\Models\Domain;
 use App\Models\SpoofedDomain;
 use App\Services\DnsTwist;
@@ -64,9 +65,11 @@ class SearchSimilarDomain extends Command
 
         foreach ($this->domains_searchers as $domains_searcher){
             try {
-                array_merge($domains,$domains_searcher::search($domain_));
+                $returned_domains = $domains_searcher::search($domain_,$last_batch);
+                Log::info(json_encode($returned_domains ));
+                $domains = array_merge($domains,$returned_domains);
             }catch (\Exception $exception){
-                Log::error("searching domain: ".$domain_.", failed => ".$exception->getMessage());
+                Log::error("searching domain: ".$domain_.", failedi => ".$exception->getTraceAsString());
             }
         }
 
@@ -82,6 +85,7 @@ class SearchSimilarDomain extends Command
                 'last_batch' => $last_batch,
             ]);
 
+            WhoIsRating::dispatch($created);
             ScanDomainRatings::dispatch($created);
         }
     }

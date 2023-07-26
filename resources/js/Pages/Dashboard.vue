@@ -190,14 +190,6 @@ function activate(id) {
 
     <AuthenticatedLayout>
 
-        <!-- <div class="block rounded bg-gd-dusk">
-        <div class="block-content bg-white-5">
-            <div class="text-center">
-            <h1 class="text-white h2 fw-bold ">{{ ($page.props.auth.user.role_id == 1) ? "Admin Dashboard" : "User Dashboard" }}</h1>
-            </div>
-        </div>
-        </div> -->
-
         <div class="row" v-if="$page.props.auth.user.role_id == 1">
 <!--            admin content-->
 <table class="block min-w-full border-collapse md:table">
@@ -258,51 +250,6 @@ function activate(id) {
     </tbody>
 </table>
 
-
-            <!-- <div>
-                <div class="block block-rounded">
-                    <div class="block-header block-header-default">
-                        <h3 class="block-title">Users List</h3>
-                        <div class="block-options">
-                        </div>
-                    </div>
-                    <div class="block-content">
-                        <table class="table table-center">
-                            <thead>
-                            <tr>
-                                <th class="text-center" style="width: 50px;"></th>
-                                <th>User</th>
-                                <th>Organization</th>
-                                <th>Last seen</th>
-                                <th>Status</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr v-for="(item, index) in domain" :key="index" :style="{ background: index % 2 === 0 ? 'white' : 'rgba(25, 0, 0, 0.1)'}">
-                                <th class="text-center" scope="row">{{ ++index }}</th>
-                                <td>{{ item }}" hello"</td>
-                                <td>{{ item }}</td>
-                                <td>{{ item }}</td>
-                                <td><div class="relative inline-block">
-                                    <select class="block w-full px-4 py-2 pr-8 leading-tight bg-white border border-gray-300 rounded shadow appearance-none hover:border-gray-400 focus:outline-none focus:border-blue-500 focus:shadow-outline">
-                                        <option>view profile</option>
-                                        <option>view domains</option>
-                                        <option>view user</option>
-
-                                    </select>
-                                    <div class="absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 pointer-events-none">
-                                        <svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                            <path d="M10 12l-6-6-1.414 1.414L10 14.828l7.414-7.414L16 6z"/>
-                                        </svg>
-                                    </div>
-                                </div>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>-->
         </div> 
 
 <!--            user-->
@@ -356,7 +303,7 @@ function activate(id) {
                   <div class="w-full px-4 mx-auto md:px-6">
                      <div>
                         <div class="flex flex-wrap">
-                           <div class="w-full px-4 lg:w-6/12 xl:w-3/12">
+                           <div class="w-full px-4 lg:w-6/12 xl:w-4/12">
                               <div class="relative flex flex-col min-w-0 mb-3 break-words bg-white rounded-lg shadow-lg xl:mb-0">
                                  <div class="flex-auto p-4">
                                     <div class="flex flex-wrap">
@@ -372,7 +319,7 @@ function activate(id) {
                                  </div>
                               </div>
                            </div>
-                           <div class="w-full px-4 lg:w-6/12 xl:w-3/12">
+                           <div class="w-full px-4 lg:w-6/12 xl:w-4/12">
                               <div class="relative flex flex-col min-w-0 mb-3 break-words bg-white rounded-lg shadow-lg xl:mb-0">
                                  <div class="flex-auto p-4">
                                     <div class="flex flex-wrap">
@@ -388,7 +335,7 @@ function activate(id) {
                                  </div>
                               </div>
                            </div>
-                           <div class="w-full px-4 lg:w-6/12 xl:w-3/12">
+                           <div class="w-full px-4 lg:w-6/12 xl:w-4/12">
                               <div class="relative flex flex-col min-w-0 mb-3 break-words bg-white rounded-lg shadow-lg xl:mb-0">
                                  <div class="flex-auto p-4">
                                     <div class="flex flex-wrap">
@@ -404,22 +351,7 @@ function activate(id) {
                                  </div>
                               </div>
                            </div>
-                           <div class="w-full px-4 lg:w-6/12 xl:w-3/12">
-                              <div class="relative flex flex-col min-w-0 mb-3 break-words bg-white rounded-lg shadow-lg xl:mb-0">
-                                 <div class="flex-auto p-4">
-                                    <div class="flex flex-wrap">
-                                       <div class="relative flex-1 flex-grow w-full max-w-full pr-4">
-                                          <h5 class="text-xs font-bold uppercase text-blueGray-400">Trend</h5>
-                                          <span class="text-xl font-bold">10</span>
-                                       </div>
-                                       <div class="relative flex-initial w-auto pl-4">
-                                          <div class="inline-flex items-center justify-center w-12 h-12 p-3 text-center text-white rounded-full shadow-lg bg-lightBlue-500"><i class="fas fa-percent"></i></div>
-                                       </div>
-                                    </div>
-                                    <p class="mt-4 text-sm text-blueGray-500"><span class="mr-2 text-red-500"><i class="fas fa-arrow-up"></i> 12%</span><span class="whitespace-nowrap">Since last 24hrs</span></p>
-                                 </div>
-                              </div>
-                           </div>
+                          
                         </div>
                      </div>
                   </div>

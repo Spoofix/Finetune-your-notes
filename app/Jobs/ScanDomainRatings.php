@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Models\Domain;
 use App\Models\SpoofedDomain;
 use App\Services\ContentRating;
 use App\Services\CssColor;
@@ -19,10 +20,10 @@ class ScanDomainRatings implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     private $ratings = [
-        CssColor::class,
+        DomainSimilarity::class,
         ContentRating::class,
         ImageRating::class,
-        DomainSimilarity::class
+        CssColor::class
     ];
 
     private $spoofed_domain;
@@ -43,9 +44,11 @@ class ScanDomainRatings implements ShouldQueue
     {
         foreach ($this->ratings as $rating){
             try {
-                $this->spoofed_domain->{$rating::dbColumnName()} = $rating->rate($this->spoofed_domain);
+                $domain = Domain::find($this->spoofed_domain->domain_id);
+                $todomainsimilarity = $domain->domain_name . ", " . $this->spoofed_domain->spoofed_domain;
+                $this->spoofed_domain->{$rating::dbColumnName()} = $rating::rate($todomainsimilarity);
             }catch (\Exception $exception){
-                Log::error("Obtaining css ratings for ".$this->spoofed_domain->spoofed_domain." failed: ".$exception->getMessage());
+                Log::error("Obtaining ".$rating::dbColumnName()." ratings for ".$this->spoofed_domain->spoofed_domain." failed: ".$exception->getMessage());
                 $this->spoofed_domain->{$rating::dbColumnName()} = "failed";
             }
 

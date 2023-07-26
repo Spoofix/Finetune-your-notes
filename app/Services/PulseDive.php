@@ -8,24 +8,24 @@ class PulseDive
 {
     public static function search($name, $id) //$id
     {
-        $domain = $name;
-        $response = Http::withHeaders([
-            "Content-Type" => "application/x-www-form-urlencoded; charset=UTF-8",
-        ])->withOptions(['verify' => false])->get("https://pulsedive.com/api/analyze.php?value=$domain&probe=1&pretty=1&key=67dc312c2a8e663a959d915e308e6a1d0863749e327cb415f875dd8a1f3d490a");
+    //     $domain = $name;
+    //     $response = Http::withHeaders([
+    //         "Content-Type" => "application/x-www-form-urlencoded; charset=UTF-8",
+    //     ])->withOptions(['verify' => false])->get("https://pulsedive.com/api/analyze.php?value=$domain&probe=1&pretty=1&key=67dc312c2a8e663a959d915e308e6a1d0863749e327cb415f875dd8a1f3d490a");
        
 
-        $response2 = Http::withOptions(['verify' => false])->get("https://pulsedive.com/api/analyze.php?qid=" . $response->json()['qid'] . "&pretty=1&key=67dc312c2a8e663a959d915e308e6a1d0863749e327cb415f875dd8a1f3d490a");
-       info($response2->json()['status']);
-        while (($response2->json()['status'] == "processing")) {
-            $response2 = Http::withOptions(['verify' => false])->get("https://pulsedive.com/api/analyze.php?qid=" . $response->json()['qid'] . "&pretty=1&key=67dc312c2a8e663a959d915e308e6a1d0863749e327cb415f875dd8a1f3d490a");
-            sleep(1);
+    //     $response2 = Http::withOptions(['verify' => false])->get("https://pulsedive.com/api/analyze.php?qid=" . $response->json()['qid'] . "&pretty=1&key=67dc312c2a8e663a959d915e308e6a1d0863749e327cb415f875dd8a1f3d490a");
+    //    info($response2->json()['status']);
+    //     while (($response2->json()['status'] == "processing")) {
+    //         $response2 = Http::withOptions(['verify' => false])->get("https://pulsedive.com/api/analyze.php?qid=" . $response->json()['qid'] . "&pretty=1&key=67dc312c2a8e663a959d915e308e6a1d0863749e327cb415f875dd8a1f3d490a");
+    //         sleep(1);
            
-        }
-        $return = $response2->json();
+    //     }
+    //     $return = $response2->json();
       
-        $riskRating = $return['data']['risk'] ?? 'None';
-        $screenshot = $return["data"]["properties"]["dom"]["screenshot"] ?? 'None';
-        //$rname = $return["data"]["properties"]["dns"]["rname"] ?? 'None';
+    //     $riskRating = $return['data']['risk'] ?? 'None';
+    //     $screenshot = $return["data"]["properties"]["dom"]["screenshot"] ?? 'None';
+    //     //$rname = $return["data"]["properties"]["dns"]["rname"] ?? 'None';
         //$geoCountry = $return["data"]["properties"]["geo"]["country"] ?? 'None';
         // $registrationDate = $return["data"]["stamp_seen"] ?? "None";
 
@@ -68,6 +68,7 @@ class PulseDive
          // Check if the JSON decoding was successful
          if ($data === null) {
             throw new \Exception("Error decoding JSON data");
+            
         }
        // Assign each value to a variable
        
@@ -110,8 +111,8 @@ class PulseDive
             $state,
             $registrant_postal_code,
             $country,
-            $screenshot,
-            $riskRating 
+            // $screenshot,
+            // $riskRating 
          );
      
         return $result;

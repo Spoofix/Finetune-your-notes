@@ -36,11 +36,11 @@ def take_screenshot(url):
         # Rest of your code for interacting with the web page, if needed.
 
         # Create the 'screenshots' subdirectory if it doesn't exist
-        if not os.path.exists("screenshots"):
-            os.makedirs("screenshots")
+        if not os.path.exists("../public/assets/screenshots"):
+            os.makedirs("../public/assets/screenshots")
 
         domain_name = urlparse(url).netloc
-        screenshot_file = os.path.join("screenshots", f"{domain_name}.png")
+        screenshot_file = os.path.join("../public/assets/screenshots", f"{domain_name}.png")
         driver.save_screenshot(screenshot_file)
         print(f"Screenshot saved as: {screenshot_file}")
 
