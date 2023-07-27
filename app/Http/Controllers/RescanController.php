@@ -19,7 +19,7 @@ class RescanController extends Controller
     {
         ScanDomains::dispatch([
             'domain_id'=>$domainId
-        ]);
+        ])->onQueue('ScanDomains'.$domainId);
 
         Alert::success('Registration succesful', ' we are scanning the domains that you provided to identify possible spoof domains');
 

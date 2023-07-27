@@ -73,7 +73,7 @@ class RegisteredUserController extends Controller
 
         ScanDomains::dispatch([
             'user_id'=>$user->id
-        ]);
+        ])->onQueue('ScanDomains');
 
 
         event(new Registered($user));
