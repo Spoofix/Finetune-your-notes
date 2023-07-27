@@ -89,8 +89,8 @@ class SearchSimilarDomain extends Command
                 'last_batch' => $last_batch,
             ]);
 
-            WhoIsRating::dispatch($created);
-            ScanDomainRatings::dispatch($created);
+            WhoIsRating::dispatch($created)->onQueue("WhoIsRating");
+            ScanDomainRatings::dispatch($created)->onQueue("ScanDomainRatings");
         }
 
     }
