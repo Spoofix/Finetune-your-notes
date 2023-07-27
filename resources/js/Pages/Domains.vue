@@ -6,10 +6,6 @@ import { Head, router, useForm } from '@inertiajs/vue3';
 import Swal from 'sweetalert2'
 import {Link} from "@inertiajs/vue3"
 import { defineComponent, onMounted } from 'vue';
-import Chart from 'chart.js/auto';
-
-
-
 
 
 defineComponent({
@@ -19,8 +15,6 @@ defineComponent({
   },
   
 });
-
-
 
 const Toast = Swal.mixin({
     toast: true,
@@ -35,9 +29,6 @@ const Toast = Swal.mixin({
 })
 
 const props = defineProps({
-    organization: {
-        type: Object,
-    },
     domainList: {
         type:Object,
     }
@@ -45,23 +36,23 @@ const props = defineProps({
 });
 
 const form = useForm({
-    name: null,
+    domain: null,
 });
 
 function submit() {
-    if (form.name == null) {
+    if (form.domain == null) {
         Toast.fire({
             icon: 'error',
-            title: 'All fields are required'
+            title: 'Domain Is Required'
         })
         return;
     }
 
-    form.post(route('organization'), {
+    form.post(route('add_domain'), {
         onFinish: (response) => {
             Toast.fire({
                 icon: 'success',
-                title: 'Organization Created Successfully'
+                title: 'Domain Added Successfully'
             })
 
             console.log(response);
@@ -73,61 +64,61 @@ function submit() {
 
 }
 
-function cancel(id) {
-    Swal.fire({
-        title: 'Do you want to disable this organization?',
-        showDenyButton: true,
-        confirmButtonText: 'Yes',
-        denyButtonText: "No"
-    }).then((result) => {
-        /* Read more about isConfirmed, isDenied below */
-        if (result.isConfirmed) {
-            const cancel_form = useForm({
-                org_id: id,
-            });
-            cancel_form.post(route('organization.cancel'), {
-                onFinish: (response) => {
-                    Toast.fire({
-                        icon: 'success',
-                        title: 'Domain Updated Successfully'
-                    })
-                },
-                onSuccess: () => { },
-            });
-        } else if (result.isDenied) {
-            // Swal.fire('Changes are not saved', '', 'info')
-        }
-    })
-}
+// function cancel(id) {
+//     Swal.fire({
+//         title: 'Do you want to disable this organization?',
+//         showDenyButton: true,
+//         confirmButtonText: 'Yes',
+//         denyButtonText: "No"
+//     }).then((result) => {
+//         /* Read more about isConfirmed, isDenied below */
+//         if (result.isConfirmed) {
+//             const cancel_form = useForm({
+//                 org_id: id,
+//             });
+//             cancel_form.post(route('organization.cancel'), {
+//                 onFinish: (response) => {
+//                     Toast.fire({
+//                         icon: 'success',
+//                         title: 'Domain Updated Successfully'
+//                     })
+//                 },
+//                 onSuccess: () => { },
+//             });
+//         } else if (result.isDenied) {
+//             // Swal.fire('Changes are not saved', '', 'info')
+//         }
+//     })
+// }
 
-function activate(id) {
+// function activate(id) {
 
-    Swal.fire({
-        title: 'Do you want to disable this organization?',
-        showDenyButton: true,
-        confirmButtonText: 'Yes',
-        denyButtonText: "No"
-    }).then((result) => {
-        /* Read more about isConfirmed, isDenied below */
-        if (result.isConfirmed) {
-            const activate_form = useForm({
-                org_id: id,
-            });
-            activate_form.post(route('organization.activate'), {
-                onFinish: (response) => {
-                    Toast.fire({
-                        icon: 'success',
-                        title: 'Organization Updated Successfully'
-                    })
-                },
-                onSuccess: () => { },
-            });
-        } else if (result.isDenied) {
-            // Swal.fire('Changes are not saved', '', 'info')
-        }
-    })
+//     Swal.fire({
+//         title: 'Do you want to disable this organization?',
+//         showDenyButton: true,
+//         confirmButtonText: 'Yes',
+//         denyButtonText: "No"
+//     }).then((result) => {
+//         /* Read more about isConfirmed, isDenied below */
+//         if (result.isConfirmed) {
+//             const activate_form = useForm({
+//                 org_id: id,
+//             });
+//             activate_form.post(route('organization.activate'), {
+//                 onFinish: (response) => {
+//                     Toast.fire({
+//                         icon: 'success',
+//                         title: 'Organization Updated Successfully'
+//                     })
+//                 },
+//                 onSuccess: () => { },
+//             });
+//         } else if (result.isDenied) {
+//             // Swal.fire('Changes are not saved', '', 'info')
+//         }
+//     })
 
-} 
+// } 
 </script>
 
 <template>
@@ -156,7 +147,7 @@ function activate(id) {
                                     <div class="mb-4 row">
                                         <div class="col-12">
                                             <label class="form-label">Domain</label>
-                                            <input type="text" class="form-control form-control-lg"  v-model="form.name" placeholder="Enter domain to add..">
+                                            <input type="text" class="form-control form-control-lg"  v-model="form.domains" placeholder="Enter domain to add..">
                                         </div>
                                         
                                     </div>
