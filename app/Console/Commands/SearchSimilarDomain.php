@@ -8,6 +8,7 @@ use App\Models\Domain;
 use App\Models\SpoofedDomain;
 use App\Services\DnsTwist;
 use App\Services\OpenSquat;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 
@@ -16,7 +17,7 @@ class SearchSimilarDomain extends Command
 
     private $domains_searchers = [
         OpenSquat::class,
-        DnsTwist::class
+        // DnsTwist::class
     ];
 
     /**
@@ -58,18 +59,20 @@ class SearchSimilarDomain extends Command
         }
 
         $domain_ = trim($domain->domain_name);
-        $domain__ = explode(".",$domain_);
-        if( !empty($domain__[0]) ) {
-            $domain_ = trim($domain__[0]);
+
+        if($this->triggerIfScannedToday($domain)){
+            Log::alert("Hpa");
+            return;
         }
 
         foreach ($this->domains_searchers as $domains_searcher){
+
             try {
                 $returned_domains = $domains_searcher::search($domain_,$last_batch);
                 Log::info(json_encode($returned_domains ));
                 $domains = array_merge($domains,$returned_domains);
             }catch (\Exception $exception){
-                Log::error("searching domain: ".$domain_.", failedi => ".$exception->getTraceAsString());
+                Log::error($domains_searcher." >> searching domain: ".$domain_.", failedi => ".$exception->getMessage().' <> '.$exception->getTraceAsString());
             }
         }
 
@@ -79,6 +82,7 @@ class SearchSimilarDomain extends Command
                 'domain_id'=>$domain->id,
                 'spoofed_domain'=>$unique_domain,
                 'csscolor'=>'processing',
+                'domain_rating'=>'processing',
                 'domainsimilarityrate'=>'processing',
                 'htmls'=>'processing',
                 'phashes'=>'processing',
@@ -88,5 +92,26 @@ class SearchSimilarDomain extends Command
             WhoIsRating::dispatch($created);
             ScanDomainRatings::dispatch($created);
         }
+
+    }
+
+    private function triggerIfScannedToday($domain){
+        $returns = SpoofedDomain::where('domain_id',$domain->id)
+            ->whereDate('created_at', Carbon::today()->toDateString())
+             ->get();
+
+             if(count($returns) == 0){
+                Log::alert("This here");
+                return false;
+             }
+
+            foreach($returns as $return){
+                WhoIsRating::dispatch($return);
+                ScanDomainRatings::dispatch($return);
+            }
+
+            Log::alert("This huku: ".json_encode($returns));
+
+            return true;
     }
 }

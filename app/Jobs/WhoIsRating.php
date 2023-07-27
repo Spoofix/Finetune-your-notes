@@ -39,17 +39,10 @@ class WhoIsRating implements ShouldQueue
         $output = WhoIsSearch::search($this->spoofed_domain->spoofed_domain);
         
         $this->spoofed_domain->registrar  = $output[1] ?? '';
-        // $this->spoofed_domain-> 'domain_id' => $domain->id,
-        // $this->spoofed_domain-> spoofed_domain => $spoofed_domain,
         $this->spoofed_domain-> rating = $output[19] ?? '';
-        // 'registrar' => $registrar,
         $this->spoofed_domain-> screenshot= $screenshot ?? '';
         $this->spoofed_domain->country = $output[17] ?? '';
-        // $this->spoofed_domain->phashes => $imagerating, //'imagerating' => $imagerating
-        // $this->spoofed_domain->htmls => $contentrating,  //'contentrating' => $contentrating,
-        // $this->spoofed_domain->dir => 'none',
         $this->spoofed_domain->registrationDate = $output[5] ?? '';
-        // $this->spoofed_domain->last_batch => $last_batch,
         //new
         $this->spoofed_domain->domain  = $output[0] ?? '';
         $this->spoofed_domain->whois_server = $output[2] ?? '';
@@ -66,11 +59,7 @@ class WhoIsRating implements ShouldQueue
         $this->spoofed_domain->city  = $output[14] ?? '';
         $this->spoofed_domain->state  = $output[15] ?? '';
         $this->spoofed_domain->registrant_postal_code = $output[16] ?? '';
-        // $this->spoofed_domain-> domainsimilarityrate => $domainsimilarity ?? 'none',
-        // $this->spoofed_domain->csscolor => $csscolor
-
 //        Log::alert(json_encode($this->spoofed_domain));
-
         $this->spoofed_domain->save();
     }
 }

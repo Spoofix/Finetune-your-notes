@@ -174,12 +174,13 @@ const props = defineProps({
         </div>
       </div>
 
-      <div class="w-full px-4 xl:w-8/12">    
+      <div class="w-full px-4 xl:w-8/12" v-if="spoofData.screenshot">    
           <img class="w-full" :src="spoofData.screenshot" alt="...">   
-          <!-- <img class="w-full" src="../../../../public/assets/screenshots/googlec.org.png" alt="..."> -->
-          <!-- <img class="w-full" src="../../../../screenshots/yieldexchange/1689759800/d0e16b1c_yieldexch.ange.ca.png" alt="..." > -->
-          <!-- <img class="w-full" src="../../../../../../../../home/kiromo/Desktop/Domain/public/assets/screenshots/yieldexchange.ca/1689763307/ee73106b_yielde.xchange.ca.png" alt="..."> -->
      </div>
+
+     <div class="w-full px-4 xl:w-8/12" v-if="!spoofData.screenshot">    
+      <img class="w-full" :src="'/assets/screenshots/'+spoofData.spoofed_domain+'.png'" alt="...">
+ </div>
    
     </AuthenticatedLayout>
 </template>

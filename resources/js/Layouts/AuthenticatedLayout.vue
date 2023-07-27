@@ -87,7 +87,7 @@ const showingNavigationDropdown = ref(false);
                       </Link>
                     </li>
                     <li class="nav-main-item">
-                      <Link class="nav-main-link" :href="route('dashboard')">
+                      <Link class="nav-main-link" :href="route('domains')">
                         <i class="nav-main-link-icon fa fa-server"></i>
                         <span class="nav-main-link-name">Domains</span>
                       </Link>

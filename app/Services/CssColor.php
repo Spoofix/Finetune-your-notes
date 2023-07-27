@@ -4,9 +4,8 @@ namespace App\Services;
 
 class CssColor implements RatingInterface
 {
-    public static function rate($spoof_domain) : string
+    public static function rate($name) : string
     {
-       $name = $spoof_domain->spoofed_domain;
        $originalDir = getcwd();
 
        // Command

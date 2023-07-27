@@ -247,7 +247,7 @@ function activate(id) {
 
         </div>
         <div class="relative flex-1 flex-grow w-full max-w-full px-4 text-right">
-          <Link class="px-3 py-1 mb-1 mr-1 text-xs font-bold text-white uppercase transition-all duration-150 ease-linear bg-indigo-500 rounded outline-none active:bg-indigo-600 focus:outline-none" type="button" :href="'/dashboard'"><i class="fa fa-arrow-left"></i> Back</Link>
+          <Link class="px-3 py-1 mb-1 mr-1 text-xs font-bold text-white uppercase transition-all duration-150 ease-linear bg-indigo-500 rounded outline-none active:bg-indigo-600 focus:outline-none" type="button" :href="'/domains'"><i class="fa fa-arrow-left"></i> Back</Link>
         </div>
       </div>
     </div>
@@ -266,11 +266,14 @@ function activate(id) {
                             html rating
                             </th>
                         <th class="px-2 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid bg-blueGray-50 text-blueGray-500 border-blueGray-100 whitespace-nowrap">
-                            domain rating
+                            content rating
                             </th>
                         <th class="px-2 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid bg-blueGray-50 text-blueGray-500 border-blueGray-100 whitespace-nowrap">
                             colorscheme rating
                             </th>
+                            <th class="px-2 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid bg-blueGray-50 text-blueGray-500 border-blueGray-100 whitespace-nowrap">
+                              Domain rating
+                              </th>
                             <th class="px-2 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid bg-blueGray-50 text-blueGray-500 border-blueGray-100 whitespace-nowrap">
                                 age
                             </th>
@@ -290,33 +293,84 @@ function activate(id) {
             <th class="p-4 px-2 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap text-blueGray-700 ">
               {{ spoof.spoofed_domain }}
             </th>
-            <td class="p-4 px-2 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap" 
-            :style="{
-               color: spoof.phashes == 100 || spoof.phashes > 90 ? 'red' :
-               spoof.phashes == 90 || spoof.phashes > 0 ?  'orange' :
-                       spoof.phashes == 0 ? '#8B8000' :
-                       spoof.phashes == 'none' ? 'blue' :
-                       spoof.phashes == 'low' ? 'green' :
-                       'gray'
-              }"
-              >
+            <td class="p-4 px-2 text-xs border-t-0 border-l-0 border-r-0 align-between whitespace-nowrap" v-if="spoof.phashes == 'processing'">
+              <div role="status">
+                <svg aria-hidden="true" class="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-400" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                    <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                </svg>
+                <span class="sr-only">Loading...</span>
+              </div>
+      </td>
+      <td class="p-4 px-2 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap" v-else-if="spoof.phashes == 'failed'">
+        <!-- <i class="mr-4 fas fa-arrow-up text-emerald-500"></i> -->
+        none
+      </td>
+            <td class="p-4 px-2 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap" v-else>
               <!-- <i class="mr-4 fas fa-arrow-up text-emerald-500"></i> -->
               {{ spoof.phashes }}
             </td>
-            <td class="p-4 px-2 text-xs border-t-0 border-l-0 border-r-0 align-between whitespace-nowrap" v-if="spoof.htmls !== ''">
+            <td class="p-4 px-2 text-xs border-t-0 border-l-0 border-r-0 align-between whitespace-nowrap" v-if="spoof.htmls == 'processing'">
+                    <div role="status">
+                      <svg aria-hidden="true" class="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                          <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                      </svg>
+                      <span class="sr-only">Loading...</span>
+                    </div>
+            </td>
+            <td class="p-4 px-2 text-xs border-t-0 border-l-0 border-r-0 align-between whitespace-nowrap" v-else-if="spoof.htmls !== '' ">
                 {{ spoof.htmls }}
               </td>
               <td class="p-4 px-2 text-xs border-t-0 border-l-0 border-r-0 align-between whitespace-nowrap" v-else>
                 none
               </td>
-              
-            <td class="p-4 px-2 text-xs border-t-0 border-l-0 border-r-0 align-between whitespace-nowrap">
+              <td class="p-4 px-2 text-xs border-t-0 border-l-0 border-r-0 align-between whitespace-nowrap" v-if="spoof.domainsimilarityrate == 'processing'">
+                <div role="status">
+                  <svg aria-hidden="true" class="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                      <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                  </svg>
+                  <span class="sr-only">Loading...</span>
+                </div>
+            </td>
+            <td class="p-4 px-2 text-xs border-t-0 border-l-0 border-r-0 align-between whitespace-nowrap" v-else>
                 {{ spoof.domainsimilarityrate }}
               </td>
-              <td class="p-4 px-2 text-xs border-t-0 border-l-0 border-r-0 align-between whitespace-nowrap">
+              <td class="p-4 px-2 text-xs border-t-0 border-l-0 border-r-0 align-between whitespace-nowrap" v-if="spoof.csscolor== 'processing'">
+                <div role="status">
+                  <svg aria-hidden="true" class="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                      <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                  </svg>
+                  <span class="sr-only">Loading...</span>
+                </div>
+        </td>
+              <td class="p-4 px-2 text-xs border-t-0 border-l-0 border-r-0 align-between whitespace-nowrap" v-else>
                 {{ spoof.csscolor }}
               </td>
-              <td class="p-4 px-2 text-xs border-t-0 border-l-0 border-r-0 align-between whitespace-nowrap">
+              <td class="p-4 px-2 text-xs border-t-0 border-l-0 border-r-0 align-between whitespace-nowrap" v-if="spoof.domain_rating == 'processing'">
+                <div role="status">
+                  <svg aria-hidden="true" class="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                      <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                  </svg>
+                  <span class="sr-only">Loading...</span>
+                </div>
+        </td>
+              <td class="p-4 px-2 text-xs border-t-0 border-l-0 border-r-0 align-between whitespace-nowrap" v-else>
+                {{ spoof.domain_rating }}
+              </td>
+              <td class="p-4 px-2 text-xs border-t-0 border-l-0 border-r-0 align-between whitespace-nowrap" v-if="spoof.registrationDate == 'processing'">
+                <div role="status">
+                  <svg aria-hidden="true" class="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                      <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                  </svg>
+                  <span class="sr-only">Loading...</span>
+                </div>
+        </td>
+              <td class="p-4 px-2 text-xs border-t-0 border-l-0 border-r-0 align-between whitespace-nowrap" v-else>
                 {{ calculateTimeDifference(spoof.registrationDate) }} 
                 <!-- {{ spoof.registrationDate }} -->
               </td>
@@ -332,7 +386,6 @@ function activate(id) {
               <!-- <i class="mr-4 fas fa-arrow-up text-emerald-500"></i> -->
               {{ spoof.rating }}
             </td>
-            
             <td class="p-4 px-2 text-xs border-t-0 border-l-0 border-r-0 align-between whitespace-nowrap">
               <span class="px-1 py-1 mb-1 mr-1 text-xs font-bold text-white uppercase transition-all duration-150 ease-linear bg-red-400 rounded outline-none active:bg-red-700 hover:bg-red-700 hover:text-black focus:outline-none" type="button">Report</span>
               <Link  :href="'/spoof/view/'+spoof.id" class="px-1 py-1 mb-1 mr-1 text-xs font-bold text-white uppercase transition-all duration-150 ease-linear bg-blue-400 rounded outline-none visited:bg-green-500 active:bg-blue-700 hover:bg-blue-700 hover:text-black focus:outline-none">
@@ -360,65 +413,7 @@ function activate(id) {
 </footer>
 </section>
                 
-                <!-- <div class="px-5 pb-5 block-content">
-
-                     <table class="table table-borderless table-striped">
-                        <thead>
-                            <tr>
-                                <th>NO</th>
-                                <th>SIMILAR DOMAINS </th>
-                                <th>Rating</th>
-                                <th style="width: 200px;">Report all</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="(item, index) in $page.props.organizations.data" v-bind:key="item">
-                                <td><a class="fw-semibold">{{ ++index }}</a></td>
-                                <td><a class="fw-semibold">{{ item  }}</a></td>
-                                <td><a class="fw-semibold">{{ rating }}</a></td>
-                                <td><a class="fw-semibold"> </a> {{ report }} </td>
-                                <td>
-                                    <a class="btn btn-sm btn-secondary" data-bs-toggle="tooltip" title="View Organization" :href="route('organization.view', [organization.name, organization.id] )">
-                                      <i class="fa fa-pencil-alt"></i>
-                                    </a>
-
-                                    <a class="m-2 btn btn-sm btn-danger" data-bs-toggle="tooltip" title="Cancel Organization" @click="cancel(organization.id)" v-if="organization.status == 'ACTIVE'">
-                                        <i class="fa fa-times"></i>
-                                    </a>
-                                    <a class="m-2 btn btn-sm btn-success" data-bs-toggle="tooltip" title="Activate Organization" @click="activate(organization.id)" v-else>
-                                        <i class="fa fa-check"></i>
-                                    </a>
-                                </td> 
-                            </tr>
-
-                        </tbody>
-
-                    </table> -->
-
-                                <!-- <nav aria-label="Page navigation pull-right" v-if="$page.props.organizations.links.length > 3">
-                                    <ul class="pagination pagination-sm">
-                                        <template v-for="(link, p) in $page.props.organizations.links" :key="p">
-                                            <li class="page-item" v-if="link.label.includes('Previous')">
-                                                <Link class="page-link" :href="link.url" tabindex="-1" aria-label="Previous">
-                                                    <span aria-hidden="true" class="">
-                                                        <i class="mr-2 fa fa-angle-double-left"></i> Previous
-                                                    </span>
-                                                </Link>
-                                            </li>
-                                            <li class="page-item" v-else-if="link.label.includes('Next')">
-                                                <Link class="page-link" :href="link.url" aria-label="Next">
-                                                    <span aria-hidden="true" class="">
-                                                        Next<i class="ml-2 fa fa-angle-double-right"></i>
-                                                    </span>
-                                                </Link>
-                                            </li>
-                                            <li class="page-item" :class="{ active: link.active }" v-else>
-                                                <Link class="page-link" :href="link.url">{{ link.label }}</Link>
-                                            </li>
-                                        </template>
-                                     </ul>
-                                </nav> 
-                </div> -->
+            
             </div>
         </div>
     </AuthenticatedLayout>

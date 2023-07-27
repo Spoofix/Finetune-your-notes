@@ -15,35 +15,19 @@ domainOne = domain_list[0].strip()  # Use strip() to remove any leading or trail
 domainTwo = domain_list[1].strip()
 
 import requests
+import re
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.common.by import By
 
-try:
-    import cssutils
-except ImportError:
-    print("Error: cssutils library not found. Please install it using 'pip install cssutils'")
-    exit(1)
 
-def fetch_image_urls(url):
-    response = requests.get(url)
-    if response.status_code == 200:
-        soup = BeautifulSoup(response.content, 'html.parser')
-        image_urls = [img['src'] for img in soup.find_all('img', src=True)]
-        return image_urls
-    else:
-        print(f"Error fetching content from {url}")
-        return []
+# ... (Previous imports and code)
 
-def fetch_web_page_content(url):
-    response = requests.get(url)
-    if response.status_code == 200:
-        return response.text
-    else:
-        print(f"Error fetching content from {url}")
-        return ""
+def extract_css_colors(css_content):
+    color_regex = r'#(?:[0-9a-fA-F]{3}){1,2}|(?:rgb|hsl)a?\([^)]*\)'
+    return re.findall(color_regex, css_content)
 
 def fetch_css_colors(url):
     chrome_service = ChromeService(executable_path='path_to_chromedriver')  # Replace with the path to chromedriver
@@ -58,17 +42,10 @@ def fetch_css_colors(url):
         for style in style_elements:
             css_content += style.get_attribute('innerText')
         
-        css_parser = cssutils.CSSParser()
-        style_sheet = css_parser.parseString(css_content)
-        color_set = set()
-        for rule in style_sheet:
-            if rule.type == rule.STYLE_RULE:
-                for prop in rule.style:
-                    if prop.name.endswith("color"):
-                        color_set.add(prop.value)
-        return list(color_set)
+        css_colors = extract_css_colors(css_content)
+        return css_colors
     except Exception as e:
-        print(f"Error fetching CSS colors: {e}")
+        # print(f"Error fetching CSS colors: {e}")
         return []
     finally:
         chrome_driver.quit()
@@ -77,27 +54,36 @@ def calculate_css_color_similarity(css_colors1, css_colors2):
     if not css_colors1 or not css_colors2:
         return 0.0
 
-    css_color_similarity = len(set(css_colors1) & set(css_colors2)) / max(len(css_colors1), len(css_colors2))
+    css_colors1_set = set(css_colors1)
+    css_colors2_set = set(css_colors2)
+
+    # Find the common colors in both sets
+    common_colors = css_colors1_set.intersection(css_colors2_set)
+
+    css_color_similarity = len(common_colors) / max(len(css_colors1_set), len(css_colors2_set))
     return css_color_similarity
 
 def main():
     web_page_url1 = f"https://{domainOne}"  # Replace with the URL of the first web page
     web_page_url2 = f"https://{domainTwo}"  # Replace with the URL of the second web page
+    # web_page_url1 = "https://google.com"  
+    # web_page_url2 = "https://youtube.com" 
 
-    # Fetch CSS colors from the web pages
     try:
+        # Fetch CSS colors from the web pages
         css_colors1 = fetch_css_colors(web_page_url1)
         css_colors2 = fetch_css_colors(web_page_url2)
-    except Exception as e:
-        1+1
-    try:
+
         # Perform CSS color similarity comparison
         css_color_similarity = calculate_css_color_similarity(css_colors1, css_colors2)
-        print(f"crating_{css_color_similarity:.2f}")
+        if {css_color_similarity}:
+            print(f"{css_color_similarity:.2f}")
+        else:
+            print("none")
     except Exception as e:
-    #    error =f"Error: {e}"
-       print('none')
+        # Log the error message for debugging purposes
+        # print(f"Error: {e}")
+        print('none')
 
 if __name__ == "__main__":
     main()
-

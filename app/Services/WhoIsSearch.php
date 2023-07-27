@@ -67,6 +67,7 @@ class WhoIsSearch
          if ($data === null) {
             throw new \Exception("Error decoding JSON data");
             
+            
         }
        // Assign each value to a variable
        

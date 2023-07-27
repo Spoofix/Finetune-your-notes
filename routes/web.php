@@ -75,7 +75,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/domain', [DomainController::class, 'index'])->name('domain.detail');//details
 
     Route::get('/report/{domain}/{id}', [ReportController::class, 'index'])->name('report');
-
+    Route::get('/domains', function () {
+        return Inertia::render('Domains', [
+            'domainList' => Domain::where('user_id',auth()->id())->get()
+        ]);
+    })->middleware(['auth', 'verified'])->name('domains');
     Route::middleware('is_admin')->group(function () {
         Route::get('/users', [UsersController::class, 'index'])->name('users.list');
         Route::get('/user/{user_id}', [UsersController::class, 'view'])->name('user.view');

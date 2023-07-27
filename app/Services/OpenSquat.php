@@ -6,6 +6,11 @@ class OpenSquat implements ScanInterface
 {
     public static function search($name, $ref_id=null) : array
     {
+        $domain__ = explode(".",$name);
+        if( !empty($domain__[0]) ) {
+            $name = trim($domain__[0]);
+        }
+
         // chdir($basePath);
         $originalDir = getcwd();
 
