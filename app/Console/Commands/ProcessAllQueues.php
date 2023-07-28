@@ -37,6 +37,10 @@ class ProcessAllQueues extends Command
                 continue;
             }
             $process = new Process(["php","artisan","queue:work","--queue=".$auto_generated_queue,"--timeout=3000"]);
+            if ($process->isRunning()){
+                Log::error("The process is running, leave is alone!");
+                continue;
+            }
             $process->start();
             Log::info("Processing Job: ".$auto_generated_queue);
         }
