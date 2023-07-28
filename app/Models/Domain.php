@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Queue;
 
@@ -28,7 +29,7 @@ class Domain extends Model
     {
         try {
             $queueName = "ScanDomains" . $this->id;
-            return Queue::size($queueName) > 0;
+            return DB::table("jobs")->where('tags',$queueName)->exists();
         }catch (\Exception $exception){
             Log::error("Error > ".$exception->getMessage().' <> '.$exception->getTraceAsString());
         }
