@@ -16,7 +16,7 @@ class ScanDomains implements ShouldQueue
 
     private $data;
     public $tries = 5;
-    public $tag;
+    public $tag = NULL;
     /**
      * Create a new job instance.
      * @param $dt
@@ -47,5 +47,13 @@ class ScanDomains implements ShouldQueue
         info("-- CALL STARTED --");
         Artisan::call(ScanSpoofingDomains::class,$actions);
         info("-- CALL ENDED --");
+    }
+
+    public function toArray()
+    {
+        return [
+            'tag' => $this->tag,
+            // Add other properties here if needed
+        ];
     }
 }
