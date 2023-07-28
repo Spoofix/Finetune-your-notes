@@ -18,14 +18,29 @@ class SpoofedDomain extends Model
         'domain_rating','spoof_status'
     ];
 
-    public static function validDomains(){
-        $columns = ['phashes'];
-        
-        $this_=self::whereRaw("1=1");
-        // foreach($columns as $column){
-        //  $this_=self::whereNotIn($column,['none',NULL]);
-        // }
+    public static function processingDomains(){
+        $columns = self::columnsToCheck();
+
+        $this_=null;
+        foreach($columns as $column){
+            $this_=self::whereRaw($column." = 'processing'");
+        }
 
         return $this_;
+    }
+
+    public static function validDomains(){
+        $columns = self::columnsToCheck();
+
+        $this_=null;
+         foreach($columns as $column){
+          $this_=self::whereRaw($column." != 'none'")->whereRaw($column." IS NOT NULL");
+         }
+
+        return $this_;
+    }
+
+    private static function columnsToCheck(){
+        return ['phashes'];
     }
 }

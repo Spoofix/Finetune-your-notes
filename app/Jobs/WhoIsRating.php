@@ -63,7 +63,6 @@ class WhoIsRating implements ShouldQueue
         $this->spoofed_domain->city  = $output[14] ?? '';
         $this->spoofed_domain->state  = $output[15] ?? '';
         $this->spoofed_domain->registrant_postal_code = $output[16] ?? '';
-//        Log::alert(json_encode($this->spoofed_domain));
         $this->spoofed_domain->save();
     }
 }
