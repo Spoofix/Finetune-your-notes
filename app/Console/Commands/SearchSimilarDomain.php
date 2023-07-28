@@ -89,8 +89,8 @@ class SearchSimilarDomain extends Command
                 'last_batch' => $last_batch,
             ]);
 
-            WhoIsRating::dispatch($created)->onQueue("ScanDomains".$domain->id);
-            ScanDomainRatings::dispatch($created)->onQueue("ScanDomains".$domain->id);
+            WhoIsRating::dispatch($created);
+            ScanDomainRatings::dispatch($created);
         }
 
     }
@@ -108,8 +108,8 @@ class SearchSimilarDomain extends Command
             foreach($returns as $return){
                 // WhoIsRating::dispatch($return);
                 // ScanDomainRatings::dispatch($return);
-                WhoIsRating::dispatch($return)->onQueue("ScanDomains".$domain->id);
-                ScanDomainRatings::dispatch($return)->onQueue("ScanDomains".$domain->id);
+                WhoIsRating::dispatch($return);
+                ScanDomainRatings::dispatch($return);
             }
 
             Log::alert("This huku: ".count($returns));
