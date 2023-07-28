@@ -8865,3 +8865,1247 @@ Stacktrace:
 #24 0x560713742243 <unknown>
 #25 0x7fb280894b43 <unknown>
 
+2023-07-27 15:09:05 - ERROR - Error fetching content from https://applestarry.com: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x55fa8b8874e3 <unknown>
+#1 0x55fa8b5b6c76 <unknown>
+#2 0x55fa8b5aec7f <unknown>
+#3 0x55fa8b5a0ca2 <unknown>
+#4 0x55fa8b5a2412 <unknown>
+#5 0x55fa8b5a10ca <unknown>
+#6 0x55fa8b5a0168 <unknown>
+#7 0x55fa8b59ffa0 <unknown>
+#8 0x55fa8b59e9bf <unknown>
+#9 0x55fa8b59efed <unknown>
+#10 0x55fa8b5b8b06 <unknown>
+#11 0x55fa8b62a9e5 <unknown>
+#12 0x55fa8b612012 <unknown>
+#13 0x55fa8b62a30e <unknown>
+#14 0x55fa8b611de3 <unknown>
+#15 0x55fa8b5e72dd <unknown>
+#16 0x55fa8b5e834e <unknown>
+#17 0x55fa8b8473e4 <unknown>
+#18 0x55fa8b84b3d7 <unknown>
+#19 0x55fa8b855b20 <unknown>
+#20 0x55fa8b84c023 <unknown>
+#21 0x55fa8b81a1aa <unknown>
+#22 0x55fa8b8706b8 <unknown>
+#23 0x55fa8b870847 <unknown>
+#24 0x55fa8b880243 <unknown>
+#25 0x7fbc8c094b43 <unknown>
+
+2023-07-27 15:13:00 - ERROR - Error fetching content from https://appletestd.xyz: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x559187bf94e3 <unknown>
+#1 0x559187928c76 <unknown>
+#2 0x559187920c7f <unknown>
+#3 0x559187912ca2 <unknown>
+#4 0x559187914412 <unknown>
+#5 0x5591879130ca <unknown>
+#6 0x559187912168 <unknown>
+#7 0x559187911fa0 <unknown>
+#8 0x5591879109bf <unknown>
+#9 0x559187910fed <unknown>
+#10 0x55918792ab06 <unknown>
+#11 0x55918799c9e5 <unknown>
+#12 0x559187984012 <unknown>
+#13 0x55918799c30e <unknown>
+#14 0x559187983de3 <unknown>
+#15 0x5591879592dd <unknown>
+#16 0x55918795a34e <unknown>
+#17 0x559187bb93e4 <unknown>
+#18 0x559187bbd3d7 <unknown>
+#19 0x559187bc7b20 <unknown>
+#20 0x559187bbe023 <unknown>
+#21 0x559187b8c1aa <unknown>
+#22 0x559187be26b8 <unknown>
+#23 0x559187be2847 <unknown>
+#24 0x559187bf2243 <unknown>
+#25 0x7fa517494b43 <unknown>
+
+2023-07-27 15:14:42 - ERROR - Error fetching content from https://appleupdate.space: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x5619247d04e3 <unknown>
+#1 0x5619244ffc76 <unknown>
+#2 0x5619244f7c7f <unknown>
+#3 0x5619244e9ca2 <unknown>
+#4 0x5619244eb412 <unknown>
+#5 0x5619244ea0ca <unknown>
+#6 0x5619244e9168 <unknown>
+#7 0x5619244e8fa0 <unknown>
+#8 0x5619244e79bf <unknown>
+#9 0x5619244e7fed <unknown>
+#10 0x561924501b06 <unknown>
+#11 0x5619245739e5 <unknown>
+#12 0x56192455b012 <unknown>
+#13 0x56192457330e <unknown>
+#14 0x56192455ade3 <unknown>
+#15 0x5619245302dd <unknown>
+#16 0x56192453134e <unknown>
+#17 0x5619247903e4 <unknown>
+#18 0x5619247943d7 <unknown>
+#19 0x56192479eb20 <unknown>
+#20 0x561924795023 <unknown>
+#21 0x5619247631aa <unknown>
+#22 0x5619247b96b8 <unknown>
+#23 0x5619247b9847 <unknown>
+#24 0x5619247c9243 <unknown>
+#25 0x7fbb73694b43 <unknown>
+
+2023-07-27 15:15:42 - ERROR - Error fetching content from https://appleurhome.com: Message: unknown error: net::ERR_SSL_PROTOCOL_ERROR
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x55689bf0d4e3 <unknown>
+#1 0x55689bc3cc76 <unknown>
+#2 0x55689bc34c7f <unknown>
+#3 0x55689bc26ca2 <unknown>
+#4 0x55689bc28412 <unknown>
+#5 0x55689bc270ca <unknown>
+#6 0x55689bc26168 <unknown>
+#7 0x55689bc25fa0 <unknown>
+#8 0x55689bc249bf <unknown>
+#9 0x55689bc24fed <unknown>
+#10 0x55689bc3eb06 <unknown>
+#11 0x55689bcb09e5 <unknown>
+#12 0x55689bc98012 <unknown>
+#13 0x55689bcb030e <unknown>
+#14 0x55689bc97de3 <unknown>
+#15 0x55689bc6d2dd <unknown>
+#16 0x55689bc6e34e <unknown>
+#17 0x55689becd3e4 <unknown>
+#18 0x55689bed13d7 <unknown>
+#19 0x55689bedbb20 <unknown>
+#20 0x55689bed2023 <unknown>
+#21 0x55689bea01aa <unknown>
+#22 0x55689bef66b8 <unknown>
+#23 0x55689bef6847 <unknown>
+#24 0x55689bf06243 <unknown>
+#25 0x7f64bb094b43 <unknown>
+
+2023-07-27 15:16:38 - ERROR - Error fetching content from https://applevin.com: Message: unknown error: net::ERR_SSL_PROTOCOL_ERROR
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x557e099d44e3 <unknown>
+#1 0x557e09703c76 <unknown>
+#2 0x557e096fbc7f <unknown>
+#3 0x557e096edca2 <unknown>
+#4 0x557e096ef412 <unknown>
+#5 0x557e096ee0ca <unknown>
+#6 0x557e096ed168 <unknown>
+#7 0x557e096ecfa0 <unknown>
+#8 0x557e096eb9bf <unknown>
+#9 0x557e096ebfed <unknown>
+#10 0x557e09705b06 <unknown>
+#11 0x557e097779e5 <unknown>
+#12 0x557e0975f012 <unknown>
+#13 0x557e0977730e <unknown>
+#14 0x557e0975ede3 <unknown>
+#15 0x557e097342dd <unknown>
+#16 0x557e0973534e <unknown>
+#17 0x557e099943e4 <unknown>
+#18 0x557e099983d7 <unknown>
+#19 0x557e099a2b20 <unknown>
+#20 0x557e09999023 <unknown>
+#21 0x557e099671aa <unknown>
+#22 0x557e099bd6b8 <unknown>
+#23 0x557e099bd847 <unknown>
+#24 0x557e099cd243 <unknown>
+#25 0x7f2115094b43 <unknown>
+
+2023-07-27 15:18:41 - ERROR - Error fetching content from https://appli.education: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x556c14b1a4e3 <unknown>
+#1 0x556c14849c76 <unknown>
+#2 0x556c14841c7f <unknown>
+#3 0x556c14833ca2 <unknown>
+#4 0x556c14835412 <unknown>
+#5 0x556c148340ca <unknown>
+#6 0x556c14833168 <unknown>
+#7 0x556c14832fa0 <unknown>
+#8 0x556c148319bf <unknown>
+#9 0x556c14831fed <unknown>
+#10 0x556c1484bb06 <unknown>
+#11 0x556c148bd9e5 <unknown>
+#12 0x556c148a5012 <unknown>
+#13 0x556c148bd30e <unknown>
+#14 0x556c148a4de3 <unknown>
+#15 0x556c1487a2dd <unknown>
+#16 0x556c1487b34e <unknown>
+#17 0x556c14ada3e4 <unknown>
+#18 0x556c14ade3d7 <unknown>
+#19 0x556c14ae8b20 <unknown>
+#20 0x556c14adf023 <unknown>
+#21 0x556c14aad1aa <unknown>
+#22 0x556c14b036b8 <unknown>
+#23 0x556c14b03847 <unknown>
+#24 0x556c14b13243 <unknown>
+#25 0x7f75b8294b43 <unknown>
+
+2023-07-27 15:21:10 - ERROR - Error fetching content from https://bluepineappleapp.com: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x558c58f654e3 <unknown>
+#1 0x558c58c94c76 <unknown>
+#2 0x558c58c8cc7f <unknown>
+#3 0x558c58c7eca2 <unknown>
+#4 0x558c58c80412 <unknown>
+#5 0x558c58c7f0ca <unknown>
+#6 0x558c58c7e168 <unknown>
+#7 0x558c58c7dfa0 <unknown>
+#8 0x558c58c7c9bf <unknown>
+#9 0x558c58c7cfed <unknown>
+#10 0x558c58c96b06 <unknown>
+#11 0x558c58d089e5 <unknown>
+#12 0x558c58cf0012 <unknown>
+#13 0x558c58d0830e <unknown>
+#14 0x558c58cefde3 <unknown>
+#15 0x558c58cc52dd <unknown>
+#16 0x558c58cc634e <unknown>
+#17 0x558c58f253e4 <unknown>
+#18 0x558c58f293d7 <unknown>
+#19 0x558c58f33b20 <unknown>
+#20 0x558c58f2a023 <unknown>
+#21 0x558c58ef81aa <unknown>
+#22 0x558c58f4e6b8 <unknown>
+#23 0x558c58f4e847 <unknown>
+#24 0x558c58f5e243 <unknown>
+#25 0x7f5a9dc94b43 <unknown>
+
+2023-07-27 15:21:58 - ERROR - Error fetching content from https://bowapplecapitalfl.com: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x5583805594e3 <unknown>
+#1 0x558380288c76 <unknown>
+#2 0x558380280c7f <unknown>
+#3 0x558380272ca2 <unknown>
+#4 0x558380274412 <unknown>
+#5 0x5583802730ca <unknown>
+#6 0x558380272168 <unknown>
+#7 0x558380271fa0 <unknown>
+#8 0x5583802709bf <unknown>
+#9 0x558380270fed <unknown>
+#10 0x55838028ab06 <unknown>
+#11 0x5583802fc9e5 <unknown>
+#12 0x5583802e4012 <unknown>
+#13 0x5583802fc30e <unknown>
+#14 0x5583802e3de3 <unknown>
+#15 0x5583802b92dd <unknown>
+#16 0x5583802ba34e <unknown>
+#17 0x5583805193e4 <unknown>
+#18 0x55838051d3d7 <unknown>
+#19 0x558380527b20 <unknown>
+#20 0x55838051e023 <unknown>
+#21 0x5583804ec1aa <unknown>
+#22 0x5583805426b8 <unknown>
+#23 0x558380542847 <unknown>
+#24 0x558380552243 <unknown>
+#25 0x7f3b15494b43 <unknown>
+
+2023-07-27 15:24:05 - ERROR - Error fetching content from https://exploringthebigapple.com: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x56454d5b44e3 <unknown>
+#1 0x56454d2e3c76 <unknown>
+#2 0x56454d2dbc7f <unknown>
+#3 0x56454d2cdca2 <unknown>
+#4 0x56454d2cf412 <unknown>
+#5 0x56454d2ce0ca <unknown>
+#6 0x56454d2cd168 <unknown>
+#7 0x56454d2ccfa0 <unknown>
+#8 0x56454d2cb9bf <unknown>
+#9 0x56454d2cbfed <unknown>
+#10 0x56454d2e5b06 <unknown>
+#11 0x56454d3579e5 <unknown>
+#12 0x56454d33f012 <unknown>
+#13 0x56454d35730e <unknown>
+#14 0x56454d33ede3 <unknown>
+#15 0x56454d3142dd <unknown>
+#16 0x56454d31534e <unknown>
+#17 0x56454d5743e4 <unknown>
+#18 0x56454d5783d7 <unknown>
+#19 0x56454d582b20 <unknown>
+#20 0x56454d579023 <unknown>
+#21 0x56454d5471aa <unknown>
+#22 0x56454d59d6b8 <unknown>
+#23 0x56454d59d847 <unknown>
+#24 0x56454d5ad243 <unknown>
+#25 0x7f13a4c94b43 <unknown>
+
+2023-07-27 15:24:58 - ERROR - Error fetching content from https://flndidevices-apple.com: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x55c3020a94e3 <unknown>
+#1 0x55c301dd8c76 <unknown>
+#2 0x55c301dd0c7f <unknown>
+#3 0x55c301dc2ca2 <unknown>
+#4 0x55c301dc4412 <unknown>
+#5 0x55c301dc30ca <unknown>
+#6 0x55c301dc2168 <unknown>
+#7 0x55c301dc1fa0 <unknown>
+#8 0x55c301dc09bf <unknown>
+#9 0x55c301dc0fed <unknown>
+#10 0x55c301ddab06 <unknown>
+#11 0x55c301e4c9e5 <unknown>
+#12 0x55c301e34012 <unknown>
+#13 0x55c301e4c30e <unknown>
+#14 0x55c301e33de3 <unknown>
+#15 0x55c301e092dd <unknown>
+#16 0x55c301e0a34e <unknown>
+#17 0x55c3020693e4 <unknown>
+#18 0x55c30206d3d7 <unknown>
+#19 0x55c302077b20 <unknown>
+#20 0x55c30206e023 <unknown>
+#21 0x55c30203c1aa <unknown>
+#22 0x55c3020926b8 <unknown>
+#23 0x55c302092847 <unknown>
+#24 0x55c3020a2243 <unknown>
+#25 0x7fced9294b43 <unknown>
+
+2023-07-27 15:27:40 - ERROR - Error fetching content from https://genuineappleaccessories.com: Message: unknown error: net::ERR_SSL_PROTOCOL_ERROR
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x55f7a587a4e3 <unknown>
+#1 0x55f7a55a9c76 <unknown>
+#2 0x55f7a55a1c7f <unknown>
+#3 0x55f7a5593ca2 <unknown>
+#4 0x55f7a5595412 <unknown>
+#5 0x55f7a55940ca <unknown>
+#6 0x55f7a5593168 <unknown>
+#7 0x55f7a5592fa0 <unknown>
+#8 0x55f7a55919bf <unknown>
+#9 0x55f7a5591fed <unknown>
+#10 0x55f7a55abb06 <unknown>
+#11 0x55f7a561d9e5 <unknown>
+#12 0x55f7a5605012 <unknown>
+#13 0x55f7a561d30e <unknown>
+#14 0x55f7a5604de3 <unknown>
+#15 0x55f7a55da2dd <unknown>
+#16 0x55f7a55db34e <unknown>
+#17 0x55f7a583a3e4 <unknown>
+#18 0x55f7a583e3d7 <unknown>
+#19 0x55f7a5848b20 <unknown>
+#20 0x55f7a583f023 <unknown>
+#21 0x55f7a580d1aa <unknown>
+#22 0x55f7a58636b8 <unknown>
+#23 0x55f7a5863847 <unknown>
+#24 0x55f7a5873243 <unknown>
+#25 0x7fb294894b43 <unknown>
+
+2023-07-27 15:29:05 - ERROR - Timeout occurred while fetching content from https://goldenpineappledetailing.com
+2023-07-27 15:30:18 - ERROR - Error fetching content from https://greenappletack.com: Message: unknown error: net::ERR_CONNECTION_CLOSED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x55d9fa6cd4e3 <unknown>
+#1 0x55d9fa3fcc76 <unknown>
+#2 0x55d9fa3f4c7f <unknown>
+#3 0x55d9fa3e6ca2 <unknown>
+#4 0x55d9fa3e8412 <unknown>
+#5 0x55d9fa3e70ca <unknown>
+#6 0x55d9fa3e6168 <unknown>
+#7 0x55d9fa3e5fa0 <unknown>
+#8 0x55d9fa3e49bf <unknown>
+#9 0x55d9fa3e4fed <unknown>
+#10 0x55d9fa3feb06 <unknown>
+#11 0x55d9fa4709e5 <unknown>
+#12 0x55d9fa458012 <unknown>
+#13 0x55d9fa47030e <unknown>
+#14 0x55d9fa457de3 <unknown>
+#15 0x55d9fa42d2dd <unknown>
+#16 0x55d9fa42e34e <unknown>
+#17 0x55d9fa68d3e4 <unknown>
+#18 0x55d9fa6913d7 <unknown>
+#19 0x55d9fa69bb20 <unknown>
+#20 0x55d9fa692023 <unknown>
+#21 0x55d9fa6601aa <unknown>
+#22 0x55d9fa6b66b8 <unknown>
+#23 0x55d9fa6b6847 <unknown>
+#24 0x55d9fa6c6243 <unknown>
+#25 0x7f692b094b43 <unknown>
+
+2023-07-27 15:31:39 - ERROR - Timeout occurred while fetching content from https://guy-sky-apple17.xyz
+2023-07-27 15:38:22 - ERROR - Error fetching content from https://hello-apple.com: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x55db65fef4e3 <unknown>
+#1 0x55db65d1ec76 <unknown>
+#2 0x55db65d16c7f <unknown>
+#3 0x55db65d08ca2 <unknown>
+#4 0x55db65d0a412 <unknown>
+#5 0x55db65d090ca <unknown>
+#6 0x55db65d08168 <unknown>
+#7 0x55db65d07fa0 <unknown>
+#8 0x55db65d069bf <unknown>
+#9 0x55db65d06fed <unknown>
+#10 0x55db65d20b06 <unknown>
+#11 0x55db65d929e5 <unknown>
+#12 0x55db65d7a012 <unknown>
+#13 0x55db65d9230e <unknown>
+#14 0x55db65d79de3 <unknown>
+#15 0x55db65d4f2dd <unknown>
+#16 0x55db65d5034e <unknown>
+#17 0x55db65faf3e4 <unknown>
+#18 0x55db65fb33d7 <unknown>
+#19 0x55db65fbdb20 <unknown>
+#20 0x55db65fb4023 <unknown>
+#21 0x55db65f821aa <unknown>
+#22 0x55db65fd86b8 <unknown>
+#23 0x55db65fd8847 <unknown>
+#24 0x55db65fe8243 <unknown>
+#25 0x7fa325294b43 <unknown>
+
+2023-07-27 15:40:41 - ERROR - Error fetching content from https://iceapple.org: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x5563f3b7d4e3 <unknown>
+#1 0x5563f38acc76 <unknown>
+#2 0x5563f38a4c7f <unknown>
+#3 0x5563f3896ca2 <unknown>
+#4 0x5563f3898412 <unknown>
+#5 0x5563f38970ca <unknown>
+#6 0x5563f3896168 <unknown>
+#7 0x5563f3895fa0 <unknown>
+#8 0x5563f38949bf <unknown>
+#9 0x5563f3894fed <unknown>
+#10 0x5563f38aeb06 <unknown>
+#11 0x5563f39209e5 <unknown>
+#12 0x5563f3908012 <unknown>
+#13 0x5563f392030e <unknown>
+#14 0x5563f3907de3 <unknown>
+#15 0x5563f38dd2dd <unknown>
+#16 0x5563f38de34e <unknown>
+#17 0x5563f3b3d3e4 <unknown>
+#18 0x5563f3b413d7 <unknown>
+#19 0x5563f3b4bb20 <unknown>
+#20 0x5563f3b42023 <unknown>
+#21 0x5563f3b101aa <unknown>
+#22 0x5563f3b666b8 <unknown>
+#23 0x5563f3b66847 <unknown>
+#24 0x5563f3b76243 <unknown>
+#25 0x7ff67a694b43 <unknown>
+
+2023-07-27 15:41:30 - ERROR - Error fetching content from https://iceboxapple.site: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x5606151604e3 <unknown>
+#1 0x560614e8fc76 <unknown>
+#2 0x560614e87c7f <unknown>
+#3 0x560614e79ca2 <unknown>
+#4 0x560614e7b412 <unknown>
+#5 0x560614e7a0ca <unknown>
+#6 0x560614e79168 <unknown>
+#7 0x560614e78fa0 <unknown>
+#8 0x560614e779bf <unknown>
+#9 0x560614e77fed <unknown>
+#10 0x560614e91b06 <unknown>
+#11 0x560614f039e5 <unknown>
+#12 0x560614eeb012 <unknown>
+#13 0x560614f0330e <unknown>
+#14 0x560614eeade3 <unknown>
+#15 0x560614ec02dd <unknown>
+#16 0x560614ec134e <unknown>
+#17 0x5606151203e4 <unknown>
+#18 0x5606151243d7 <unknown>
+#19 0x56061512eb20 <unknown>
+#20 0x560615125023 <unknown>
+#21 0x5606150f31aa <unknown>
+#22 0x5606151496b8 <unknown>
+#23 0x560615149847 <unknown>
+#24 0x560615159243 <unknown>
+#25 0x7f1a12e94b43 <unknown>
+
+2023-07-27 15:44:22 - ERROR - Error fetching content from https://idapplestore.shop: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x555c82cf24e3 <unknown>
+#1 0x555c82a21c76 <unknown>
+#2 0x555c82a19c7f <unknown>
+#3 0x555c82a0bca2 <unknown>
+#4 0x555c82a0d412 <unknown>
+#5 0x555c82a0c0ca <unknown>
+#6 0x555c82a0b168 <unknown>
+#7 0x555c82a0afa0 <unknown>
+#8 0x555c82a099bf <unknown>
+#9 0x555c82a09fed <unknown>
+#10 0x555c82a23b06 <unknown>
+#11 0x555c82a959e5 <unknown>
+#12 0x555c82a7d012 <unknown>
+#13 0x555c82a9530e <unknown>
+#14 0x555c82a7cde3 <unknown>
+#15 0x555c82a522dd <unknown>
+#16 0x555c82a5334e <unknown>
+#17 0x555c82cb23e4 <unknown>
+#18 0x555c82cb63d7 <unknown>
+#19 0x555c82cc0b20 <unknown>
+#20 0x555c82cb7023 <unknown>
+#21 0x555c82c851aa <unknown>
+#22 0x555c82cdb6b8 <unknown>
+#23 0x555c82cdb847 <unknown>
+#24 0x555c82ceb243 <unknown>
+#25 0x7f1b85a94b43 <unknown>
+
+2023-07-27 15:45:09 - ERROR - Error fetching content from https://laurenappleby.com: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x561099c3d4e3 <unknown>
+#1 0x56109996cc76 <unknown>
+#2 0x561099964c7f <unknown>
+#3 0x561099956ca2 <unknown>
+#4 0x561099958412 <unknown>
+#5 0x5610999570ca <unknown>
+#6 0x561099956168 <unknown>
+#7 0x561099955fa0 <unknown>
+#8 0x5610999549bf <unknown>
+#9 0x561099954fed <unknown>
+#10 0x56109996eb06 <unknown>
+#11 0x5610999e09e5 <unknown>
+#12 0x5610999c8012 <unknown>
+#13 0x5610999e030e <unknown>
+#14 0x5610999c7de3 <unknown>
+#15 0x56109999d2dd <unknown>
+#16 0x56109999e34e <unknown>
+#17 0x561099bfd3e4 <unknown>
+#18 0x561099c013d7 <unknown>
+#19 0x561099c0bb20 <unknown>
+#20 0x561099c02023 <unknown>
+#21 0x561099bd01aa <unknown>
+#22 0x561099c266b8 <unknown>
+#23 0x561099c26847 <unknown>
+#24 0x561099c36243 <unknown>
+#25 0x7f8bca094b43 <unknown>
+
+2023-07-27 15:48:23 - ERROR - Error fetching content from https://matchapple.site: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x5610edb1a4e3 <unknown>
+#1 0x5610ed849c76 <unknown>
+#2 0x5610ed841c7f <unknown>
+#3 0x5610ed833ca2 <unknown>
+#4 0x5610ed835412 <unknown>
+#5 0x5610ed8340ca <unknown>
+#6 0x5610ed833168 <unknown>
+#7 0x5610ed832fa0 <unknown>
+#8 0x5610ed8319bf <unknown>
+#9 0x5610ed831fed <unknown>
+#10 0x5610ed84bb06 <unknown>
+#11 0x5610ed8bd9e5 <unknown>
+#12 0x5610ed8a5012 <unknown>
+#13 0x5610ed8bd30e <unknown>
+#14 0x5610ed8a4de3 <unknown>
+#15 0x5610ed87a2dd <unknown>
+#16 0x5610ed87b34e <unknown>
+#17 0x5610edada3e4 <unknown>
+#18 0x5610edade3d7 <unknown>
+#19 0x5610edae8b20 <unknown>
+#20 0x5610edadf023 <unknown>
+#21 0x5610edaad1aa <unknown>
+#22 0x5610edb036b8 <unknown>
+#23 0x5610edb03847 <unknown>
+#24 0x5610edb13243 <unknown>
+#25 0x7efeb3894b43 <unknown>
+
+2023-07-27 15:49:42 - ERROR - Error fetching content from https://minhhienapple.com: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x55b0b32df4e3 <unknown>
+#1 0x55b0b300ec76 <unknown>
+#2 0x55b0b3006c7f <unknown>
+#3 0x55b0b2ff8ca2 <unknown>
+#4 0x55b0b2ffa412 <unknown>
+#5 0x55b0b2ff90ca <unknown>
+#6 0x55b0b2ff8168 <unknown>
+#7 0x55b0b2ff7fa0 <unknown>
+#8 0x55b0b2ff69bf <unknown>
+#9 0x55b0b2ff6fed <unknown>
+#10 0x55b0b3010b06 <unknown>
+#11 0x55b0b30829e5 <unknown>
+#12 0x55b0b306a012 <unknown>
+#13 0x55b0b308230e <unknown>
+#14 0x55b0b3069de3 <unknown>
+#15 0x55b0b303f2dd <unknown>
+#16 0x55b0b304034e <unknown>
+#17 0x55b0b329f3e4 <unknown>
+#18 0x55b0b32a33d7 <unknown>
+#19 0x55b0b32adb20 <unknown>
+#20 0x55b0b32a4023 <unknown>
+#21 0x55b0b32721aa <unknown>
+#22 0x55b0b32c86b8 <unknown>
+#23 0x55b0b32c8847 <unknown>
+#24 0x55b0b32d8243 <unknown>
+#25 0x7fe2ae094b43 <unknown>
+
+2023-07-27 15:51:18 - ERROR - Error fetching content from https://mrapple.website: Message: unknown error: net::ERR_SSL_PROTOCOL_ERROR
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x55961201c4e3 <unknown>
+#1 0x559611d4bc76 <unknown>
+#2 0x559611d43c7f <unknown>
+#3 0x559611d35ca2 <unknown>
+#4 0x559611d37412 <unknown>
+#5 0x559611d360ca <unknown>
+#6 0x559611d35168 <unknown>
+#7 0x559611d34fa0 <unknown>
+#8 0x559611d339bf <unknown>
+#9 0x559611d33fed <unknown>
+#10 0x559611d4db06 <unknown>
+#11 0x559611dbf9e5 <unknown>
+#12 0x559611da7012 <unknown>
+#13 0x559611dbf30e <unknown>
+#14 0x559611da6de3 <unknown>
+#15 0x559611d7c2dd <unknown>
+#16 0x559611d7d34e <unknown>
+#17 0x559611fdc3e4 <unknown>
+#18 0x559611fe03d7 <unknown>
+#19 0x559611feab20 <unknown>
+#20 0x559611fe1023 <unknown>
+#21 0x559611faf1aa <unknown>
+#22 0x5596120056b8 <unknown>
+#23 0x559612005847 <unknown>
+#24 0x559612015243 <unknown>
+#25 0x7f095b494b43 <unknown>
+
+2023-07-27 15:53:36 - ERROR - Error fetching content from https://opineapple.site: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x564d0a8e74e3 <unknown>
+#1 0x564d0a616c76 <unknown>
+#2 0x564d0a60ec7f <unknown>
+#3 0x564d0a600ca2 <unknown>
+#4 0x564d0a602412 <unknown>
+#5 0x564d0a6010ca <unknown>
+#6 0x564d0a600168 <unknown>
+#7 0x564d0a5fffa0 <unknown>
+#8 0x564d0a5fe9bf <unknown>
+#9 0x564d0a5fefed <unknown>
+#10 0x564d0a618b06 <unknown>
+#11 0x564d0a68a9e5 <unknown>
+#12 0x564d0a672012 <unknown>
+#13 0x564d0a68a30e <unknown>
+#14 0x564d0a671de3 <unknown>
+#15 0x564d0a6472dd <unknown>
+#16 0x564d0a64834e <unknown>
+#17 0x564d0a8a73e4 <unknown>
+#18 0x564d0a8ab3d7 <unknown>
+#19 0x564d0a8b5b20 <unknown>
+#20 0x564d0a8ac023 <unknown>
+#21 0x564d0a87a1aa <unknown>
+#22 0x564d0a8d06b8 <unknown>
+#23 0x564d0a8d0847 <unknown>
+#24 0x564d0a8e0243 <unknown>
+#25 0x7f0243894b43 <unknown>
+
+2023-07-27 15:54:30 - ERROR - Error fetching content from https://phukienapple.site: Message: unknown error: net::ERR_CONNECTION_REFUSED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x563e5f8014e3 <unknown>
+#1 0x563e5f530c76 <unknown>
+#2 0x563e5f528c7f <unknown>
+#3 0x563e5f51aca2 <unknown>
+#4 0x563e5f51c412 <unknown>
+#5 0x563e5f51b0ca <unknown>
+#6 0x563e5f51a168 <unknown>
+#7 0x563e5f519fa0 <unknown>
+#8 0x563e5f5189bf <unknown>
+#9 0x563e5f518fed <unknown>
+#10 0x563e5f532b06 <unknown>
+#11 0x563e5f5a49e5 <unknown>
+#12 0x563e5f58c012 <unknown>
+#13 0x563e5f5a430e <unknown>
+#14 0x563e5f58bde3 <unknown>
+#15 0x563e5f5612dd <unknown>
+#16 0x563e5f56234e <unknown>
+#17 0x563e5f7c13e4 <unknown>
+#18 0x563e5f7c53d7 <unknown>
+#19 0x563e5f7cfb20 <unknown>
+#20 0x563e5f7c6023 <unknown>
+#21 0x563e5f7941aa <unknown>
+#22 0x563e5f7ea6b8 <unknown>
+#23 0x563e5f7ea847 <unknown>
+#24 0x563e5f7fa243 <unknown>
+#25 0x7f4181094b43 <unknown>
+
+2023-07-27 15:56:02 - ERROR - Timeout occurred while fetching content from https://pineappledolewhip.com
+2023-07-27 16:01:25 - ERROR - Error fetching content from https://pineappleparadiseawaits.com: Message: unknown error: net::ERR_CONNECTION_RESET
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x562d4645e4e3 <unknown>
+#1 0x562d4618dc76 <unknown>
+#2 0x562d46185c7f <unknown>
+#3 0x562d46177ca2 <unknown>
+#4 0x562d46179412 <unknown>
+#5 0x562d461780ca <unknown>
+#6 0x562d46177168 <unknown>
+#7 0x562d46176fa0 <unknown>
+#8 0x562d461759bf <unknown>
+#9 0x562d46175fed <unknown>
+#10 0x562d4618fb06 <unknown>
+#11 0x562d462019e5 <unknown>
+#12 0x562d461e9012 <unknown>
+#13 0x562d4620130e <unknown>
+#14 0x562d461e8de3 <unknown>
+#15 0x562d461be2dd <unknown>
+#16 0x562d461bf34e <unknown>
+#17 0x562d4641e3e4 <unknown>
+#18 0x562d464223d7 <unknown>
+#19 0x562d4642cb20 <unknown>
+#20 0x562d46423023 <unknown>
+#21 0x562d463f11aa <unknown>
+#22 0x562d464476b8 <unknown>
+#23 0x562d46447847 <unknown>
+#24 0x562d46457243 <unknown>
+#25 0x7f00f1894b43 <unknown>
+
+2023-07-27 16:02:47 - ERROR - Timeout occurred while fetching content from https://pineapplescreen.news
+2023-07-27 16:08:45 - ERROR - Timeout occurred while fetching content from https://pinnacleapplefarms.com
+2023-07-27 16:22:31 - ERROR - Timeout occurred while fetching content from https://rqnapple.top
+2023-07-27 16:24:36 - ERROR - Timeout occurred while fetching content from https://sdapple.com
+2023-07-27 16:31:34 - ERROR - Timeout occurred while fetching content from https://supportedeapple.store
+2023-07-27 16:36:57 - ERROR - Error fetching content from https://theapplestock.com: Message: unknown error: net::ERR_CONNECTION_CLOSED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x5607632634e3 <unknown>
+#1 0x560762f92c76 <unknown>
+#2 0x560762f8ac7f <unknown>
+#3 0x560762f7cca2 <unknown>
+#4 0x560762f7e412 <unknown>
+#5 0x560762f7d0ca <unknown>
+#6 0x560762f7c168 <unknown>
+#7 0x560762f7bfa0 <unknown>
+#8 0x560762f7a9bf <unknown>
+#9 0x560762f7afed <unknown>
+#10 0x560762f94b06 <unknown>
+#11 0x5607630069e5 <unknown>
+#12 0x560762fee012 <unknown>
+#13 0x56076300630e <unknown>
+#14 0x560762fedde3 <unknown>
+#15 0x560762fc32dd <unknown>
+#16 0x560762fc434e <unknown>
+#17 0x5607632233e4 <unknown>
+#18 0x5607632273d7 <unknown>
+#19 0x560763231b20 <unknown>
+#20 0x560763228023 <unknown>
+#21 0x5607631f61aa <unknown>
+#22 0x56076324c6b8 <unknown>
+#23 0x56076324c847 <unknown>
+#24 0x56076325c243 <unknown>
+#25 0x7f71c3894b43 <unknown>
+
+2023-07-27 16:39:19 - ERROR - Error fetching content from https://whatthepineapple.com: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x5563618494e3 <unknown>
+#1 0x556361578c76 <unknown>
+#2 0x556361570c7f <unknown>
+#3 0x556361562ca2 <unknown>
+#4 0x556361564412 <unknown>
+#5 0x5563615630ca <unknown>
+#6 0x556361562168 <unknown>
+#7 0x556361561fa0 <unknown>
+#8 0x5563615609bf <unknown>
+#9 0x556361560fed <unknown>
+#10 0x55636157ab06 <unknown>
+#11 0x5563615ec9e5 <unknown>
+#12 0x5563615d4012 <unknown>
+#13 0x5563615ec30e <unknown>
+#14 0x5563615d3de3 <unknown>
+#15 0x5563615a92dd <unknown>
+#16 0x5563615aa34e <unknown>
+#17 0x5563618093e4 <unknown>
+#18 0x55636180d3d7 <unknown>
+#19 0x556361817b20 <unknown>
+#20 0x55636180e023 <unknown>
+#21 0x5563617dc1aa <unknown>
+#22 0x5563618326b8 <unknown>
+#23 0x556361832847 <unknown>
+#24 0x556361842243 <unknown>
+#25 0x7f2e30294b43 <unknown>
+
+2023-07-27 16:41:11 - ERROR - Timeout occurred while fetching content from https://apple.com
+2023-07-27 16:44:12 - ERROR - Error fetching content from https://galp-microsoftonline.com: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x55618f9814e3 <unknown>
+#1 0x55618f6b0c76 <unknown>
+#2 0x55618f6a8c7f <unknown>
+#3 0x55618f69aca2 <unknown>
+#4 0x55618f69c412 <unknown>
+#5 0x55618f69b0ca <unknown>
+#6 0x55618f69a168 <unknown>
+#7 0x55618f699fa0 <unknown>
+#8 0x55618f6989bf <unknown>
+#9 0x55618f698fed <unknown>
+#10 0x55618f6b2b06 <unknown>
+#11 0x55618f7249e5 <unknown>
+#12 0x55618f70c012 <unknown>
+#13 0x55618f72430e <unknown>
+#14 0x55618f70bde3 <unknown>
+#15 0x55618f6e12dd <unknown>
+#16 0x55618f6e234e <unknown>
+#17 0x55618f9413e4 <unknown>
+#18 0x55618f9453d7 <unknown>
+#19 0x55618f94fb20 <unknown>
+#20 0x55618f946023 <unknown>
+#21 0x55618f9141aa <unknown>
+#22 0x55618f96a6b8 <unknown>
+#23 0x55618f96a847 <unknown>
+#24 0x55618f97a243 <unknown>
+#25 0x7f0968094b43 <unknown>
+
+2023-07-27 16:45:55 - ERROR - Timeout occurred while fetching content from https://logonmicrosoft.online
+2023-07-27 16:52:23 - ERROR - Timeout occurred while fetching content from https://micrnosoft.com
+2023-07-27 16:58:48 - ERROR - Timeout occurred while fetching content from https://microscft.com
+2023-07-27 17:04:54 - ERROR - Timeout occurred while fetching content from https://microsoft.com
+2023-07-27 17:04:59 - ERROR - Error fetching content from https://microsof.click: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x55c86c0c74e3 <unknown>
+#1 0x55c86bdf6c76 <unknown>
+#2 0x55c86bdeec7f <unknown>
+#3 0x55c86bde0ca2 <unknown>
+#4 0x55c86bde2412 <unknown>
+#5 0x55c86bde10ca <unknown>
+#6 0x55c86bde0168 <unknown>
+#7 0x55c86bddffa0 <unknown>
+#8 0x55c86bdde9bf <unknown>
+#9 0x55c86bddefed <unknown>
+#10 0x55c86bdf8b06 <unknown>
+#11 0x55c86be6a9e5 <unknown>
+#12 0x55c86be52012 <unknown>
+#13 0x55c86be6a30e <unknown>
+#14 0x55c86be51de3 <unknown>
+#15 0x55c86be272dd <unknown>
+#16 0x55c86be2834e <unknown>
+#17 0x55c86c0873e4 <unknown>
+#18 0x55c86c08b3d7 <unknown>
+#19 0x55c86c095b20 <unknown>
+#20 0x55c86c08c023 <unknown>
+#21 0x55c86c05a1aa <unknown>
+#22 0x55c86c0b06b8 <unknown>
+#23 0x55c86c0b0847 <unknown>
+#24 0x55c86c0c0243 <unknown>
+#25 0x7fe196294b43 <unknown>
+
+2023-07-27 17:07:45 - ERROR - Error fetching content from https://microsoft-document.com: Message: unknown error: net::ERR_SSL_VERSION_OR_CIPHER_MISMATCH
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x5649827144e3 <unknown>
+#1 0x564982443c76 <unknown>
+#2 0x56498243bc7f <unknown>
+#3 0x56498242dca2 <unknown>
+#4 0x56498242f412 <unknown>
+#5 0x56498242e0ca <unknown>
+#6 0x56498242d168 <unknown>
+#7 0x56498242cfa0 <unknown>
+#8 0x56498242b9bf <unknown>
+#9 0x56498242bfed <unknown>
+#10 0x564982445b06 <unknown>
+#11 0x5649824b79e5 <unknown>
+#12 0x56498249f012 <unknown>
+#13 0x5649824b730e <unknown>
+#14 0x56498249ede3 <unknown>
+#15 0x5649824742dd <unknown>
+#16 0x56498247534e <unknown>
+#17 0x5649826d43e4 <unknown>
+#18 0x5649826d83d7 <unknown>
+#19 0x5649826e2b20 <unknown>
+#20 0x5649826d9023 <unknown>
+#21 0x5649826a71aa <unknown>
+#22 0x5649826fd6b8 <unknown>
+#23 0x5649826fd847 <unknown>
+#24 0x56498270d243 <unknown>
+#25 0x7f5759894b43 <unknown>
+
+2023-07-27 17:10:31 - ERROR - Error fetching content from https://microsoftsaas.com: Message: unknown error: net::ERR_CONNECTION_CLOSED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x55a83ba864e3 <unknown>
+#1 0x55a83b7b5c76 <unknown>
+#2 0x55a83b7adc7f <unknown>
+#3 0x55a83b79fca2 <unknown>
+#4 0x55a83b7a1412 <unknown>
+#5 0x55a83b7a00ca <unknown>
+#6 0x55a83b79f168 <unknown>
+#7 0x55a83b79efa0 <unknown>
+#8 0x55a83b79d9bf <unknown>
+#9 0x55a83b79dfed <unknown>
+#10 0x55a83b7b7b06 <unknown>
+#11 0x55a83b8299e5 <unknown>
+#12 0x55a83b811012 <unknown>
+#13 0x55a83b82930e <unknown>
+#14 0x55a83b810de3 <unknown>
+#15 0x55a83b7e62dd <unknown>
+#16 0x55a83b7e734e <unknown>
+#17 0x55a83ba463e4 <unknown>
+#18 0x55a83ba4a3d7 <unknown>
+#19 0x55a83ba54b20 <unknown>
+#20 0x55a83ba4b023 <unknown>
+#21 0x55a83ba191aa <unknown>
+#22 0x55a83ba6f6b8 <unknown>
+#23 0x55a83ba6f847 <unknown>
+#24 0x55a83ba7f243 <unknown>
+#25 0x7f17c7894b43 <unknown>
+
+2023-07-27 17:11:52 - ERROR - Error fetching content from https://microsoft-server.com: Message: unknown error: net::ERR_SSL_VERSION_OR_CIPHER_MISMATCH
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x55f7c380b4e3 <unknown>
+#1 0x55f7c353ac76 <unknown>
+#2 0x55f7c3532c7f <unknown>
+#3 0x55f7c3524ca2 <unknown>
+#4 0x55f7c3526412 <unknown>
+#5 0x55f7c35250ca <unknown>
+#6 0x55f7c3524168 <unknown>
+#7 0x55f7c3523fa0 <unknown>
+#8 0x55f7c35229bf <unknown>
+#9 0x55f7c3522fed <unknown>
+#10 0x55f7c353cb06 <unknown>
+#11 0x55f7c35ae9e5 <unknown>
+#12 0x55f7c3596012 <unknown>
+#13 0x55f7c35ae30e <unknown>
+#14 0x55f7c3595de3 <unknown>
+#15 0x55f7c356b2dd <unknown>
+#16 0x55f7c356c34e <unknown>
+#17 0x55f7c37cb3e4 <unknown>
+#18 0x55f7c37cf3d7 <unknown>
+#19 0x55f7c37d9b20 <unknown>
+#20 0x55f7c37d0023 <unknown>
+#21 0x55f7c379e1aa <unknown>
+#22 0x55f7c37f46b8 <unknown>
+#23 0x55f7c37f4847 <unknown>
+#24 0x55f7c3804243 <unknown>
+#25 0x7f57bb094b43 <unknown>
+
+2023-07-27 17:13:07 - ERROR - Error fetching content from https://microsoftservice.store: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x5603a223f4e3 <unknown>
+#1 0x5603a1f6ec76 <unknown>
+#2 0x5603a1f66c7f <unknown>
+#3 0x5603a1f58ca2 <unknown>
+#4 0x5603a1f5a412 <unknown>
+#5 0x5603a1f590ca <unknown>
+#6 0x5603a1f58168 <unknown>
+#7 0x5603a1f57fa0 <unknown>
+#8 0x5603a1f569bf <unknown>
+#9 0x5603a1f56fed <unknown>
+#10 0x5603a1f70b06 <unknown>
+#11 0x5603a1fe29e5 <unknown>
+#12 0x5603a1fca012 <unknown>
+#13 0x5603a1fe230e <unknown>
+#14 0x5603a1fc9de3 <unknown>
+#15 0x5603a1f9f2dd <unknown>
+#16 0x5603a1fa034e <unknown>
+#17 0x5603a21ff3e4 <unknown>
+#18 0x5603a22033d7 <unknown>
+#19 0x5603a220db20 <unknown>
+#20 0x5603a2204023 <unknown>
+#21 0x5603a21d21aa <unknown>
+#22 0x5603a22286b8 <unknown>
+#23 0x5603a2228847 <unknown>
+#24 0x5603a2238243 <unknown>
+#25 0x7f02f4a94b43 <unknown>
+
+2023-07-27 17:14:52 - ERROR - Error fetching content from https://microsofttech.support: Message: unknown error: net::ERR_CONNECTION_CLOSED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x55f8584b44e3 <unknown>
+#1 0x55f8581e3c76 <unknown>
+#2 0x55f8581dbc7f <unknown>
+#3 0x55f8581cdca2 <unknown>
+#4 0x55f8581cf412 <unknown>
+#5 0x55f8581ce0ca <unknown>
+#6 0x55f8581cd168 <unknown>
+#7 0x55f8581ccfa0 <unknown>
+#8 0x55f8581cb9bf <unknown>
+#9 0x55f8581cbfed <unknown>
+#10 0x55f8581e5b06 <unknown>
+#11 0x55f8582579e5 <unknown>
+#12 0x55f85823f012 <unknown>
+#13 0x55f85825730e <unknown>
+#14 0x55f85823ede3 <unknown>
+#15 0x55f8582142dd <unknown>
+#16 0x55f85821534e <unknown>
+#17 0x55f8584743e4 <unknown>
+#18 0x55f8584783d7 <unknown>
+#19 0x55f858482b20 <unknown>
+#20 0x55f858479023 <unknown>
+#21 0x55f8584471aa <unknown>
+#22 0x55f85849d6b8 <unknown>
+#23 0x55f85849d847 <unknown>
+#24 0x55f8584ad243 <unknown>
+#25 0x7f61eec94b43 <unknown>
+
+2023-07-27 17:17:38 - ERROR - Error fetching content from https://onmicrosoft1.org: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x5612a35854e3 <unknown>
+#1 0x5612a32b4c76 <unknown>
+#2 0x5612a32acc7f <unknown>
+#3 0x5612a329eca2 <unknown>
+#4 0x5612a32a0412 <unknown>
+#5 0x5612a329f0ca <unknown>
+#6 0x5612a329e168 <unknown>
+#7 0x5612a329dfa0 <unknown>
+#8 0x5612a329c9bf <unknown>
+#9 0x5612a329cfed <unknown>
+#10 0x5612a32b6b06 <unknown>
+#11 0x5612a33289e5 <unknown>
+#12 0x5612a3310012 <unknown>
+#13 0x5612a332830e <unknown>
+#14 0x5612a330fde3 <unknown>
+#15 0x5612a32e52dd <unknown>
+#16 0x5612a32e634e <unknown>
+#17 0x5612a35453e4 <unknown>
+#18 0x5612a35493d7 <unknown>
+#19 0x5612a3553b20 <unknown>
+#20 0x5612a354a023 <unknown>
+#21 0x5612a35181aa <unknown>
+#22 0x5612a356e6b8 <unknown>
+#23 0x5612a356e847 <unknown>
+#24 0x5612a357e243 <unknown>
+#25 0x7fb408e94b43 <unknown>
+
+2023-07-27 17:18:55 - ERROR - Error fetching content from https://wicrosoft.org: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x55645623f4e3 <unknown>
+#1 0x556455f6ec76 <unknown>
+#2 0x556455f66c7f <unknown>
+#3 0x556455f58ca2 <unknown>
+#4 0x556455f5a412 <unknown>
+#5 0x556455f590ca <unknown>
+#6 0x556455f58168 <unknown>
+#7 0x556455f57fa0 <unknown>
+#8 0x556455f569bf <unknown>
+#9 0x556455f56fed <unknown>
+#10 0x556455f70b06 <unknown>
+#11 0x556455fe29e5 <unknown>
+#12 0x556455fca012 <unknown>
+#13 0x556455fe230e <unknown>
+#14 0x556455fc9de3 <unknown>
+#15 0x556455f9f2dd <unknown>
+#16 0x556455fa034e <unknown>
+#17 0x5564561ff3e4 <unknown>
+#18 0x5564562033d7 <unknown>
+#19 0x55645620db20 <unknown>
+#20 0x556456204023 <unknown>
+#21 0x5564561d21aa <unknown>
+#22 0x5564562286b8 <unknown>
+#23 0x556456228847 <unknown>
+#24 0x556456238243 <unknown>
+#25 0x7fbf86c94b43 <unknown>
+
+2023-07-27 17:20:04 - ERROR - Error fetching content from https://xs2microsoft.com: Message: unknown error: net::ERR_CONNECTION_REFUSED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x55d8ead664e3 <unknown>
+#1 0x55d8eaa95c76 <unknown>
+#2 0x55d8eaa8dc7f <unknown>
+#3 0x55d8eaa7fca2 <unknown>
+#4 0x55d8eaa81412 <unknown>
+#5 0x55d8eaa800ca <unknown>
+#6 0x55d8eaa7f168 <unknown>
+#7 0x55d8eaa7efa0 <unknown>
+#8 0x55d8eaa7d9bf <unknown>
+#9 0x55d8eaa7dfed <unknown>
+#10 0x55d8eaa97b06 <unknown>
+#11 0x55d8eab099e5 <unknown>
+#12 0x55d8eaaf1012 <unknown>
+#13 0x55d8eab0930e <unknown>
+#14 0x55d8eaaf0de3 <unknown>
+#15 0x55d8eaac62dd <unknown>
+#16 0x55d8eaac734e <unknown>
+#17 0x55d8ead263e4 <unknown>
+#18 0x55d8ead2a3d7 <unknown>
+#19 0x55d8ead34b20 <unknown>
+#20 0x55d8ead2b023 <unknown>
+#21 0x55d8eacf91aa <unknown>
+#22 0x55d8ead4f6b8 <unknown>
+#23 0x55d8ead4f847 <unknown>
+#24 0x55d8ead5f243 <unknown>
+#25 0x7f9b73e94b43 <unknown>
+
+2023-07-28 11:39:54 - ERROR - Error fetching content from https://facebookmetasecurity.com: Message: unknown error: net::ERR_CONNECTION_CLOSED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x5631c61c64e3 <unknown>
+#1 0x5631c5ef5c76 <unknown>
+#2 0x5631c5eedc7f <unknown>
+#3 0x5631c5edfca2 <unknown>
+#4 0x5631c5ee1412 <unknown>
+#5 0x5631c5ee00ca <unknown>
+#6 0x5631c5edf168 <unknown>
+#7 0x5631c5edefa0 <unknown>
+#8 0x5631c5edd9bf <unknown>
+#9 0x5631c5eddfed <unknown>
+#10 0x5631c5ef7b06 <unknown>
+#11 0x5631c5f699e5 <unknown>
+#12 0x5631c5f51012 <unknown>
+#13 0x5631c5f6930e <unknown>
+#14 0x5631c5f50de3 <unknown>
+#15 0x5631c5f262dd <unknown>
+#16 0x5631c5f2734e <unknown>
+#17 0x5631c61863e4 <unknown>
+#18 0x5631c618a3d7 <unknown>
+#19 0x5631c6194b20 <unknown>
+#20 0x5631c618b023 <unknown>
+#21 0x5631c61591aa <unknown>
+#22 0x5631c61af6b8 <unknown>
+#23 0x5631c61af847 <unknown>
+#24 0x5631c61bf243 <unknown>
+#25 0x7f6260094b43 <unknown>
+
+2023-07-28 11:40:21 - ERROR - Error fetching content from https://facebookscriptz.com: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x55bd30b954e3 <unknown>
+#1 0x55bd308c4c76 <unknown>
+#2 0x55bd308bcc7f <unknown>
+#3 0x55bd308aeca2 <unknown>
+#4 0x55bd308b0412 <unknown>
+#5 0x55bd308af0ca <unknown>
+#6 0x55bd308ae168 <unknown>
+#7 0x55bd308adfa0 <unknown>
+#8 0x55bd308ac9bf <unknown>
+#9 0x55bd308acfed <unknown>
+#10 0x55bd308c6b06 <unknown>
+#11 0x55bd309389e5 <unknown>
+#12 0x55bd30920012 <unknown>
+#13 0x55bd3093830e <unknown>
+#14 0x55bd3091fde3 <unknown>
+#15 0x55bd308f52dd <unknown>
+#16 0x55bd308f634e <unknown>
+#17 0x55bd30b553e4 <unknown>
+#18 0x55bd30b593d7 <unknown>
+#19 0x55bd30b63b20 <unknown>
+#20 0x55bd30b5a023 <unknown>
+#21 0x55bd30b281aa <unknown>
+#22 0x55bd30b7e6b8 <unknown>
+#23 0x55bd30b7e847 <unknown>
+#24 0x55bd30b8e243 <unknown>
+#25 0x7f21c8494b43 <unknown>
+
+2023-07-28 11:41:13 - ERROR - Timeout occurred while fetching content from https://facebookstatus.com
+2023-07-28 12:03:36 - ERROR - Error fetching content from https://nubianfacebook.com: Message: unknown error: net::ERR_CONNECTION_RESET
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x55f90891c4e3 <unknown>
+#1 0x55f90864bc76 <unknown>
+#2 0x55f908643c7f <unknown>
+#3 0x55f908635ca2 <unknown>
+#4 0x55f908637412 <unknown>
+#5 0x55f9086360ca <unknown>
+#6 0x55f908635168 <unknown>
+#7 0x55f908634fa0 <unknown>
+#8 0x55f9086339bf <unknown>
+#9 0x55f908633fed <unknown>
+#10 0x55f90864db06 <unknown>
+#11 0x55f9086bf9e5 <unknown>
+#12 0x55f9086a7012 <unknown>
+#13 0x55f9086bf30e <unknown>
+#14 0x55f9086a6de3 <unknown>
+#15 0x55f90867c2dd <unknown>
+#16 0x55f90867d34e <unknown>
+#17 0x55f9088dc3e4 <unknown>
+#18 0x55f9088e03d7 <unknown>
+#19 0x55f9088eab20 <unknown>
+#20 0x55f9088e1023 <unknown>
+#21 0x55f9088af1aa <unknown>
+#22 0x55f9089056b8 <unknown>
+#23 0x55f908905847 <unknown>
+#24 0x55f908915243 <unknown>
+#25 0x7fa64f894b43 <unknown>
+
+2023-07-28 12:04:36 - ERROR - Error fetching content from https://thefacebookmba.com: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x5638cde4e4e3 <unknown>
+#1 0x5638cdb7dc76 <unknown>
+#2 0x5638cdb75c7f <unknown>
+#3 0x5638cdb67ca2 <unknown>
+#4 0x5638cdb69412 <unknown>
+#5 0x5638cdb680ca <unknown>
+#6 0x5638cdb67168 <unknown>
+#7 0x5638cdb66fa0 <unknown>
+#8 0x5638cdb659bf <unknown>
+#9 0x5638cdb65fed <unknown>
+#10 0x5638cdb7fb06 <unknown>
+#11 0x5638cdbf19e5 <unknown>
+#12 0x5638cdbd9012 <unknown>
+#13 0x5638cdbf130e <unknown>
+#14 0x5638cdbd8de3 <unknown>
+#15 0x5638cdbae2dd <unknown>
+#16 0x5638cdbaf34e <unknown>
+#17 0x5638cde0e3e4 <unknown>
+#18 0x5638cde123d7 <unknown>
+#19 0x5638cde1cb20 <unknown>
+#20 0x5638cde13023 <unknown>
+#21 0x5638cdde11aa <unknown>
+#22 0x5638cde376b8 <unknown>
+#23 0x5638cde37847 <unknown>
+#24 0x5638cde47243 <unknown>
+#25 0x7f1420a94b43 <unknown>
+
+2023-07-28 12:48:12 - ERROR - Error fetching content from https://buscarcongoogle.com: Message: unknown error: net::ERR_CONNECTION_CLOSED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x55a05e3644e3 <unknown>
+#1 0x55a05e093c76 <unknown>
+#2 0x55a05e08bc7f <unknown>
+#3 0x55a05e07dca2 <unknown>
+#4 0x55a05e07f412 <unknown>
+#5 0x55a05e07e0ca <unknown>
+#6 0x55a05e07d168 <unknown>
+#7 0x55a05e07cfa0 <unknown>
+#8 0x55a05e07b9bf <unknown>
+#9 0x55a05e07bfed <unknown>
+#10 0x55a05e095b06 <unknown>
+#11 0x55a05e1079e5 <unknown>
+#12 0x55a05e0ef012 <unknown>
+#13 0x55a05e10730e <unknown>
+#14 0x55a05e0eede3 <unknown>
+#15 0x55a05e0c42dd <unknown>
+#16 0x55a05e0c534e <unknown>
+#17 0x55a05e3243e4 <unknown>
+#18 0x55a05e3283d7 <unknown>
+#19 0x55a05e332b20 <unknown>
+#20 0x55a05e329023 <unknown>
+#21 0x55a05e2f71aa <unknown>
+#22 0x55a05e34d6b8 <unknown>
+#23 0x55a05e34d847 <unknown>
+#24 0x55a05e35d243 <unknown>
+#25 0x7f00cd294b43 <unknown>
+
+2023-07-28 12:49:10 - ERROR - Error fetching content from https://dzgoogle.com: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: headless chrome=114.0.5735.198)
+Stacktrace:
+#0 0x55cc35f4e4e3 <unknown>
+#1 0x55cc35c7dc76 <unknown>
+#2 0x55cc35c75c7f <unknown>
+#3 0x55cc35c67ca2 <unknown>
+#4 0x55cc35c69412 <unknown>
+#5 0x55cc35c680ca <unknown>
+#6 0x55cc35c67168 <unknown>
+#7 0x55cc35c66fa0 <unknown>
+#8 0x55cc35c659bf <unknown>
+#9 0x55cc35c65fed <unknown>
+#10 0x55cc35c7fb06 <unknown>
+#11 0x55cc35cf19e5 <unknown>
+#12 0x55cc35cd9012 <unknown>
+#13 0x55cc35cf130e <unknown>
+#14 0x55cc35cd8de3 <unknown>
+#15 0x55cc35cae2dd <unknown>
+#16 0x55cc35caf34e <unknown>
+#17 0x55cc35f0e3e4 <unknown>
+#18 0x55cc35f123d7 <unknown>
+#19 0x55cc35f1cb20 <unknown>
+#20 0x55cc35f13023 <unknown>
+#21 0x55cc35ee11aa <unknown>
+#22 0x55cc35f376b8 <unknown>
+#23 0x55cc35f37847 <unknown>
+#24 0x55cc35f47243 <unknown>
+#25 0x7fc105c94b43 <unknown>
+

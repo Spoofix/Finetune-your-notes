@@ -13,7 +13,7 @@ class SearchController extends Controller
         $request->validate([
             'domain' => 'required',
         ]);
-        $domain = OpenSquat::find($request->domain);
+        $domain = OpenSquat::search($request->domain);
 
         // dd($domain);
 

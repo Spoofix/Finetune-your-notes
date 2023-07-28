@@ -24,7 +24,7 @@ class Domain extends Model
       return $this->created_at->format("Y-m-d H:i");
    }
 
-    public function geIsQueuedAtAttribute()
+    public function getIsQueuedAttribute()
     {
         try {
             $queueName = "ScanDomains" . $this->id;
@@ -35,4 +35,5 @@ class Domain extends Model
 
         return false;
     }
+
 }

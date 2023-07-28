@@ -31,14 +31,16 @@ class DomainController extends Controller
         
         $domains = explode(",",$request->domains);
         foreach ($domains as $domain){
-            Domain::create([
+           $created =  Domain::create([
                 'domain_name'=>trim($domain),
-                'user_id'=>$user_id,
+                'user_id'=>auth()->id(),
             ]);
+
+            ScanDomains::dispatch([
+            'domain_id'=> $created->id
+        ]);
         }
 
-        ScanDomains::dispatch([
-            'domain_id'=> $domains->id
-        ]);
+        
     }
     }

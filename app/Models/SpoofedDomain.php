@@ -17,4 +17,15 @@ class SpoofedDomain extends Model
         'csscolor', 'domainsimilarityrate', //new
         'domain_rating','spoof_status'
     ];
+
+    public static function validDomains(){
+        $columns = ['phashes'];
+        
+        $this_=self::whereRaw("1=1");
+        // foreach($columns as $column){
+        //  $this_=self::whereNotIn($column,['none',NULL]);
+        // }
+
+        return $this_;
+    }
 }

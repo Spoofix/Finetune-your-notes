@@ -35,6 +35,9 @@ const props = defineProps({
 });
 
 const calculateTimeDifference = (dateString) => {
+  try{
+      dateString = JSON.parse(dateString);
+  }catch(e){}
   if (typeof dateString === "string") {
     const firstDate = new Date(dateString);
     const currentDate = new Date();
@@ -76,6 +79,7 @@ const calculateTimeDifference = (dateString) => {
   } else if (Array.isArray(dateString)) {
     // If the dateString is an array, get the first date from the array
     const firstDateString = dateString[0];
+    // console.log(firstDateString);
     if (typeof firstDateString === "string") {
       // Calculate the time difference for the first date in the array
       return calculateTimeDifference(firstDateString);

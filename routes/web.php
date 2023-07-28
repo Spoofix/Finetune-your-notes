@@ -73,7 +73,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/domain/{org_id}/{id}/{domain}', [DomainController::class, 'index'])->name('domain');
     Route::get('/domain', [DomainController::class, 'index'])->name('domain.detail');//details
-    Route::get('/add_domain/{user_id}', [DomainController::class, 'store'])->name('add_domain');
+    Route::post('/add_domain', [DomainController::class, 'store'])->name('add_domain');
 
     Route::get('/report/{domain}/{id}', [ReportController::class, 'index'])->name('report');
     Route::get('/domains', function () {

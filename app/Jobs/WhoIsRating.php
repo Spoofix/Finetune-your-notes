@@ -10,6 +10,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
 class WhoIsRating implements ShouldQueue
 {
@@ -32,6 +33,7 @@ class WhoIsRating implements ShouldQueue
     public function handle(): void
     {
         if( $this->copyRating($this->spoofed_domain,"WHOIS") ){
+            Log::alert('hello');
             return;
         }
 

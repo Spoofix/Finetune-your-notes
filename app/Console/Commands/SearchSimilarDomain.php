@@ -106,11 +106,13 @@ class SearchSimilarDomain extends Command
              }
 
             foreach($returns as $return){
-                WhoIsRating::dispatch($return);
-                ScanDomainRatings::dispatch($return);
+                // WhoIsRating::dispatch($return);
+                // ScanDomainRatings::dispatch($return);
+                WhoIsRating::dispatch($return)->onQueue("ScanDomains".$domain->id);
+                ScanDomainRatings::dispatch($return)->onQueue("ScanDomains".$domain->id);
             }
 
-            Log::alert("This huku: ".json_encode($returns));
+            Log::alert("This huku: ".count($returns));
 
             return true;
     }
