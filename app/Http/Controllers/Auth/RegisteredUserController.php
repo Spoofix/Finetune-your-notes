@@ -73,14 +73,14 @@ class RegisteredUserController extends Controller
 
         ScanDomains::dispatch([
             'user_id'=>$user->id
-        ])->onQueue('ScanDomains');
+        ]);
 
 
         event(new Registered($user));
         Auth::login($user);
         $user->notify(new WelcomeNotification());
 
-        Alert::success('SuccessAlert','Registration succesful, we are scanning the domains that you provided to identify possible spoof domains');
+//        Alert::success('SuccessAlert','Registration succesful, we are scanning the domains that you provided to identify possible spoof domains');
     
 
         return redirect(RouteServiceProvider::HOME);

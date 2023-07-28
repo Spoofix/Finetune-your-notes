@@ -18,6 +18,7 @@ class WhoIsRating implements ShouldQueue
 
     private $spoofed_domain;
     public $tries = 5;
+    public $tag;
     /**
      * Create a new job instance.
      * @param $dt
@@ -25,6 +26,7 @@ class WhoIsRating implements ShouldQueue
     public function __construct(SpoofedDomain $dt)
     {
         $this->spoofed_domain = $dt;
+        $this->tag = "ScanDomains".$dt->domain_id;
     }
 
     /**

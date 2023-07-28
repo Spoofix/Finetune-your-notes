@@ -27,8 +27,7 @@ class RunJobs extends Command
     public function handle()
     {
         Artisan::call("queue:restart");
-//        $output = Artisan::call("queue:work",['--timeout'=>3000, '--queue'=>'*']);
-        $output = Artisan::call("app:process-all-queues");
+        $output = Artisan::call("queue:work",['--timeout'=>3000]);
         $this->alert($output);
     }
 }

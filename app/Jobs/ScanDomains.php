@@ -16,6 +16,7 @@ class ScanDomains implements ShouldQueue
 
     private $data;
     public $tries = 5;
+    public $tag;
     /**
      * Create a new job instance.
      * @param $dt
@@ -23,6 +24,9 @@ class ScanDomains implements ShouldQueue
     public function __construct(array $dt)
     {
         $this->data = $dt;
+        if(isset($this->data['domain_id'])) {
+            $this->tag = "ScanDomains" . $this->data['domain_id'];
+        }
     }
 
     /**
