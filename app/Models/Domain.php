@@ -29,7 +29,7 @@ class Domain extends Model
     {
         try {
             $queueName = "ScanDomains" . $this->id;
-            return DB::table("jobs")->where('tags',$queueName)->exists();
+            return DB::table("jobs")->where('tag',$queueName)->exists();
         }catch (\Exception $exception){
             Log::error("Error > ".$exception->getMessage().' <> '.$exception->getTraceAsString());
         }
