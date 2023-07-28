@@ -66,4 +66,12 @@ class WhoIsRating implements ShouldQueue
 //        Log::alert(json_encode($this->spoofed_domain));
         $this->spoofed_domain->save();
     }
+
+    public function toArray()
+    {
+        return [
+            'tag' => $this->tag,
+            // Add other properties here if needed
+        ];
+    }
 }

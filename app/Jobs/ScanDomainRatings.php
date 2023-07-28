@@ -69,4 +69,12 @@ class ScanDomainRatings implements ShouldQueue
             $this->spoofed_domain->save();
         }
     }
+
+    public function toArray()
+    {
+        return [
+            'tag' => $this->tag,
+            // Add other properties here if needed
+        ];
+    }
 }
