@@ -29,8 +29,13 @@ class ProcessAllQueues extends Command
     public function handle()
     {
         Log::info("Started Jobs");
-        $auto_generated_queues = DB::table("jobs")/*(->where("queue","!=","default")*/->pluck("queue")->toArray();
+        $auto_generated_queues = DB::table("jobs")/*(->where("queue","!=","default")*/->where('attempts',0)->pluck("queue")->toArray();
+        $auto_generated_queues = array_unique(array_unique($auto_generated_queues));
         foreach ($auto_generated_queues as $auto_generated_queue){
+            if(DB::table("jobs")->where('queue',$auto_generated_queue)->where('attempts',1)->exists()){
+                Log::error("Job already running, skip");
+                continue;
+            }
             $process = new Process(["php","artisan","queue:work","--queue=".$auto_generated_queue,"--timeout=3000"]);
             $process->start();
             Log::info("Processing Job: ".$auto_generated_queue);
