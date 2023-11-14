@@ -34,7 +34,7 @@ class WelcomeNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->line('Welcome to YeSpoff.')
+            ->line('Welcome to Spoofix.')
             ->action('Notification Action', url('/'))
             ->line('Thank you for using our application!');
     }

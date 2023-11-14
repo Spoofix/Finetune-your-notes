@@ -6,7 +6,8 @@ import { Head, router, useForm } from '@inertiajs/vue3';
 import Swal from 'sweetalert2'
 import {Link} from "@inertiajs/vue3"
 import { defineComponent, onMounted } from 'vue';
-import Chart from 'chart.js/auto';
+import Dropdown from '@/Components/Dropdown.vue';
+import DropdownLink from '@/Components/DropdownLink.vue';
 
 
 
@@ -129,57 +130,6 @@ function activate(id) {
 
 } 
 
-// const ctx = document.getElementById('myChart');
-
-// onMounted(() => {
-// new Chart(ctx, {
-//   type: 'bar',
-//   data: {
-//     labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-//     datasets: [{
-//       label: '# of Votes',
-//       data: [12, 19, 3, 5, 2, 3],
-//       borderWidth: 1
-//     }]
-//   },
-//   options: {
-//     scales: {
-//       y: {
-//         beginAtZero: true
-//       }
-//     }
-//   }
-// });
-   
-// })
-
-
-
-
-// window.onload = function () {
-
-// //Better to construct options first and then pass it as a parameter
-// var options = {
-// 	title: {
-// 		text: "Column Chart in jQuery CanvasJS"              
-// 	},
-// 	data: [              
-// 	{
-// 		// Change type to "doughnut", "line", "splineArea", etc.
-// 		type: "column",
-// 		dataPoints: [
-// 			{ label: "apple",  y: 10  },
-// 			{ label: "orange", y: 15  },
-// 			{ label: "banana", y: 25  },
-// 			{ label: "mango",  y: 30  },
-// 			{ label: "grape",  y: 28  }
-// 		]
-// 	}
-// 	]
-// };
-
-// $("#chartContainer").CanvasJSChart(options);
-// }
 
 
 </script>
@@ -190,65 +140,505 @@ function activate(id) {
 
     <AuthenticatedLayout>
 
-        <div class="row" v-if="$page.props.auth.user.role_id == 1">
+        <div class="mt-6 ml-4 row" v-if="$page.props.auth.user.role_id == 1">
 <!--            admin content-->
-<table class="block min-w-full border-collapse md:table">
-    <thead class="block md:table-header-group">
-        <tr class="absolute block border border-grey-500 md:border-none md:table-row -top-full md:top-auto -left-full md:left-auto md:relative ">
-            <th class="block p-2 font-bold text-left text-white bg-gray-600 md:border md:border-grey-500 md:table-cell">Name</th>
-            <th class="block p-2 font-bold text-left text-white bg-gray-600 md:border md:border-grey-500 md:table-cell">User Name</th>
-            <th class="block p-2 font-bold text-left text-white bg-gray-600 md:border md:border-grey-500 md:table-cell">Email Address</th>
-            <th class="block p-2 font-bold text-left text-white bg-gray-600 md:border md:border-grey-500 md:table-cell">Mobile</th>
-            <th class="block p-2 font-bold text-left text-white bg-gray-600 md:border md:border-grey-500 md:table-cell">Actions</th>
-        </tr>
-    </thead>
-    <tbody class="block md:table-row-group">
-        <tr class="block bg-gray-300 border border-grey-500 md:border-none md:table-row">
-            <td class="block p-2 text-left md:border md:border-grey-500 md:table-cell"><span class="inline-block w-1/3 font-bold md:hidden">Name</span>Jamal Rios</td>
-            <td class="block p-2 text-left md:border md:border-grey-500 md:table-cell"><span class="inline-block w-1/3 font-bold md:hidden">User Name</span>jrios1</td>
-            <td class="block p-2 text-left md:border md:border-grey-500 md:table-cell"><span class="inline-block w-1/3 font-bold md:hidden">Email Address</span>jrios@icloud.com</td>
-            <td class="block p-2 text-left md:border md:border-grey-500 md:table-cell"><span class="inline-block w-1/3 font-bold md:hidden">Mobile</span>582-3X2-6233</td>
-            <td class="block p-2 text-left md:border md:border-grey-500 md:table-cell">
-                <span class="inline-block w-1/3 font-bold md:hidden">Actions</span>
-                <button class="px-2 py-1 font-bold text-white bg-blue-500 border border-blue-500 rounded hover:bg-blue-700">Edit</button>
-                <button class="px-2 py-1 font-bold text-white bg-red-500 border border-red-500 rounded hover:bg-red-700">Delete</button>
-            </td>
-        </tr>
-        <tr class="block bg-white border border-grey-500 md:border-none md:table-row">
-            <td class="block p-2 text-left md:border md:border-grey-500 md:table-cell"><span class="inline-block w-1/3 font-bold md:hidden">Name</span>Erwin Campbell</td>
-            <td class="block p-2 text-left md:border md:border-grey-500 md:table-cell"><span class="inline-block w-1/3 font-bold md:hidden">User Name</span>ecampbell088</td>
-            <td class="block p-2 text-left md:border md:border-grey-500 md:table-cell"><span class="inline-block w-1/3 font-bold md:hidden">Email Address</span>ecampbell088@hotmail.com</td>
-            <td class="block p-2 text-left md:border md:border-grey-500 md:table-cell"><span class="inline-block w-1/3 font-bold md:hidden">Mobile</span>318-685-X414</td>
-            <td class="block p-2 text-left md:border md:border-grey-500 md:table-cell">
-                <span class="inline-block w-1/3 font-bold md:hidden">Actions</span>
-                <button class="px-2 py-1 font-bold text-white bg-blue-500 border border-blue-500 rounded hover:bg-blue-700">Edit</button>
-                <button class="px-2 py-1 font-bold text-white bg-red-500 border border-red-500 rounded hover:bg-red-700">Delete</button>
-            </td>
-        </tr>
-        <tr class="block bg-gray-300 border border-grey-500 md:border-none md:table-row">
-            <td class="block p-2 text-left md:border md:border-grey-500 md:table-cell"><span class="inline-block w-1/3 font-bold md:hidden">Name</span>Lillie Clark</td>
-            <td class="block p-2 text-left md:border md:border-grey-500 md:table-cell"><span class="inline-block w-1/3 font-bold md:hidden">User Name</span>lillie</td>
-            <td class="block p-2 text-left md:border md:border-grey-500 md:table-cell"><span class="inline-block w-1/3 font-bold md:hidden">Email Address</span>lillie.clark@gmail.com</td>
-            <td class="block p-2 text-left md:border md:border-grey-500 md:table-cell"><span class="inline-block w-1/3 font-bold md:hidden">Mobile</span>505-644-84X4</td>
-            <td class="block p-2 text-left md:border md:border-grey-500 md:table-cell">
-                <span class="inline-block w-1/3 font-bold md:hidden">Actions</span>
-                <button class="px-2 py-1 font-bold text-white bg-blue-500 border border-blue-500 rounded hover:bg-blue-700">Edit</button>
-                <button class="px-2 py-1 font-bold text-white bg-red-500 border border-red-500 rounded hover:bg-red-700">Delete</button>
-            </td>
-        </tr>
-        <tr class="block bg-white border border-grey-500 md:border-none md:table-row">
-            <td class="block p-2 text-left md:border md:border-grey-500 md:table-cell"><span class="inline-block w-1/3 font-bold md:hidden">Name</span>Maribel Koch</td>
-            <td class="block p-2 text-left md:border md:border-grey-500 md:table-cell"><span class="inline-block w-1/3 font-bold md:hidden">User Name</span>maribelkoch</td>
-            <td class="block p-2 text-left md:border md:border-grey-500 md:table-cell"><span class="inline-block w-1/3 font-bold md:hidden">Email Address</span>mkoch@yahoo.com</td>
-            <td class="block p-2 text-left md:border md:border-grey-500 md:table-cell"><span class="inline-block w-1/3 font-bold md:hidden">Mobile</span>582-400-3X36</td>
-            <td class="block p-2 text-left md:border md:border-grey-500 md:table-cell">
-                <span class="inline-block w-1/3 font-bold md:hidden">Actions</span>
-                <button class="px-2 py-1 font-bold text-white bg-blue-500 border border-blue-500 rounded hover:bg-blue-700">Edit</button>
-                <button class="px-2 py-1 font-bold text-white bg-red-500 border border-red-500 rounded hover:bg-red-700">Delete</button>
-            </td>
-        </tr>			
-    </tbody>
-</table>
+<div class="flex sm:flex-col lg:flex-row ">
+    <div class="overflow-x-auto lg:w-1/2 sm:-mx-3 lg:-mx-4">
+      <div class="inline-block min-w-full py-2 sm:px-3 lg:px-4">
+        <div class="overflow-hidden">
+          <table class="min-w-full text-sm font-light text-left">
+            <thead class="font-medium border-b dark:border-neutral-500">
+              <tr>
+                <th scope="col" class="px-3 py-4">Spoofix Rating Model</th>
+                <th scope="col" class="px-3 py-4">From</th>
+                <th scope="col" class="px-3 py-4">To</th>
+               
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b dark:border-neutral-500">
+                <td class="px-3 py-2 font-medium whitespace-nowrap">
+                    <div class="relative ml-3">
+                        <Dropdown align="right" width="48">
+                            <template #trigger>
+                                <span class="inline-flex rounded-md">
+                                    <button
+                                        type="button"
+                                        class="flex items-center whitespace-nowrap rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] motion-reduce:transition-none dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] justify-items-between"
+                                    >
+                                       <small>change category</small>  
+                                       <i class="fa fa-angle-down"></i>
+                                    </button>
+                                </span>
+                            </template>
+
+                            <template #content>
+                                <DropdownLink class="bg-red-400"> Very High Risk</DropdownLink>
+                                <DropdownLink class="-mt-6 bg-pink-300"> High Risk</DropdownLink>
+                                <DropdownLink class="-mt-6 bg-red-200"> Medium Risk</DropdownLink>
+                                <DropdownLink class="-mt-6 bg-red-100"> Low Risk</DropdownLink>
+                                <DropdownLink class="-mt-6 -mb-6 bg-pink-100"> Very Low Risk</DropdownLink> 
+                                <!-- :href="route('...')" -->
+
+                            </template>
+                        </Dropdown>
+                    </div>
+                </td>
+                <td class="px-3 py-2 whitespace-nowrap">100%</td>
+                <td class="px-3 py-2 whitespace-nowrap">90%</td>
+              
+              </tr>
+              <tr class="border-b dark:border-neutral-500">
+                <td class="px-3 py-2 font-medium whitespace-nowrap">
+                    <div class="relative ml-3">
+                        <Dropdown align="right" width="48">
+                            <template #trigger>
+                                <span class="inline-flex rounded-md">
+                                    <button
+                                        type="button"
+                                        class="flex items-center whitespace-nowrap rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] motion-reduce:transition-none dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] justify-items-between"
+                                    >
+                                       <small>change category</small>  
+                                       <i class="fa fa-angle-down"></i>
+                                    </button>
+                                </span>
+                            </template>
+
+                            <template #content>
+                                <DropdownLink class="bg-red-400"> Very High Risk</DropdownLink>
+                                <DropdownLink class="-mt-6 bg-pink-300"> High Risk</DropdownLink>
+                                <DropdownLink class="-mt-6 bg-red-200"> Medium Risk</DropdownLink>
+                                <DropdownLink class="-mt-6 bg-red-100"> Low Risk</DropdownLink>
+                                <DropdownLink class="-mt-6 -mb-6 bg-pink-100"> Very Low Risk</DropdownLink> 
+                                <!-- :href="route('...')" -->
+
+                            </template>
+                        </Dropdown>
+                    </div>
+                </td>
+                <td class="px-3 py-2 whitespace-nowrap">90%</td>
+                <td class="px-3 py-2 whitespace-nowrap">80%</td>
+         
+              </tr>
+              <tr class="border-b dark:border-neutral-500">
+                <td class="px-3 py-2 font-medium whitespace-nowrap">
+                    <div class="relative ml-3">
+                        <Dropdown align="right" width="48">
+                            <template #trigger>
+                                <span class="inline-flex rounded-md">
+                                    <button
+                                        type="button"
+                                        class="flex items-center whitespace-nowrap rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] motion-reduce:transition-none dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] justify-items-between"
+                                    >
+                                       <small>change category</small>  
+                                       <i class="fa fa-angle-down"></i>
+                                    </button>
+                                </span>
+                            </template>
+
+                            <template #content>
+                                <DropdownLink class="bg-red-400"> Very High Risk</DropdownLink>
+                                <DropdownLink class="-mt-6 bg-pink-300"> High Risk</DropdownLink>
+                                <DropdownLink class="-mt-6 bg-red-200"> Medium Risk</DropdownLink>
+                                <DropdownLink class="-mt-6 bg-red-100"> Low Risk</DropdownLink>
+                                <DropdownLink class="-mt-6 -mb-6 bg-pink-100"> Very Low Risk</DropdownLink> 
+                                <!-- :href="route('...')" -->
+
+                            </template>
+                        </Dropdown>
+                    </div>
+                </td>
+                <td class="px-3 py-2 whitespace-nowrap">80%</td>
+                <td class="px-3 py-2 whitespace-nowrap">70%</td>
+          
+              </tr>
+              <tr class="border-b dark:border-neutral-500">
+                <td class="px-3 py-2 font-medium whitespace-nowrap">
+                    <div class="relative ml-3">
+                        <Dropdown align="right" width="48">
+                            <template #trigger>
+                                <span class="inline-flex rounded-md">
+                                    <button
+                                        type="button"
+                                        class="flex items-center whitespace-nowrap rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] motion-reduce:transition-none dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] justify-items-between"
+                                    >
+                                       <small>change category</small>  
+                                       <i class="fa fa-angle-down"></i>
+                                    </button>
+                                </span>
+                            </template>
+
+                            <template #content>
+                                <DropdownLink class="bg-red-400"> Very High Risk</DropdownLink>
+                                <DropdownLink class="-mt-6 bg-pink-300"> High Risk</DropdownLink>
+                                <DropdownLink class="-mt-6 bg-red-200"> Medium Risk</DropdownLink>
+                                <DropdownLink class="-mt-6 bg-red-100"> Low Risk</DropdownLink>
+                                <DropdownLink class="-mt-6 -mb-6 bg-pink-100"> Very Low Risk</DropdownLink> 
+                                <!-- :href="route('...')" -->
+
+                            </template>
+                        </Dropdown>
+                    </div>
+                </td>
+                <td class="px-3 py-2 whitespace-nowrap">70%</td>
+                <td class="px-3 py-2 whitespace-nowrap">60%</td>
+          
+              </tr>
+              <tr class="border-b dark:border-neutral-500">
+                <td class="px-3 py-2 font-medium whitespace-nowrap">
+                    <div class="relative ml-3">
+                        <Dropdown align="right" width="48">
+                            <template #trigger>
+                                <span class="inline-flex rounded-md">
+                                    <button
+                                        type="button"
+                                        class="flex items-center whitespace-nowrap rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] motion-reduce:transition-none dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] justify-items-between"
+                                    >
+                                       <small>change category</small>  
+                                       <i class="fa fa-angle-down"></i>
+                                    </button>
+                                </span>
+                            </template>
+
+                            <template #content>
+                                <DropdownLink class="bg-red-400"> Very High Risk</DropdownLink>
+                                <DropdownLink class="-mt-6 bg-pink-300"> High Risk</DropdownLink>
+                                <DropdownLink class="-mt-6 bg-red-200"> Medium Risk</DropdownLink>
+                                <DropdownLink class="-mt-6 bg-red-100"> Low Risk</DropdownLink>
+                                <DropdownLink class="-mt-6 -mb-6 bg-pink-100"> Very Low Risk</DropdownLink> 
+                                <!-- :href="route('...')" -->
+
+                            </template>
+                        </Dropdown>
+                    </div>
+                </td>
+                <td class="px-3 py-2 whitespace-nowrap">60%</td>
+                <td class="px-3 py-2 whitespace-nowrap">50%</td>
+          
+              </tr>
+              <tr class="border-b dark:border-neutral-500">
+                <td class="px-3 py-2 font-medium whitespace-nowrap">
+                    <div class="relative ml-3">
+                        <Dropdown align="right" width="48">
+                            <template #trigger>
+                                <span class="inline-flex rounded-md">
+                                    <button
+                                        type="button"
+                                        class="flex items-center whitespace-nowrap rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] motion-reduce:transition-none dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] justify-items-between"
+                                    >
+                                       <small>change category</small>  
+                                       <i class="fa fa-angle-down"></i>
+                                    </button>
+                                </span>
+                            </template>
+
+                            <template #content>
+                                <DropdownLink class="bg-red-400"> Very High Risk</DropdownLink>
+                                <DropdownLink class="-mt-6 bg-pink-300"> High Risk</DropdownLink>
+                                <DropdownLink class="-mt-6 bg-red-200"> Medium Risk</DropdownLink>
+                                <DropdownLink class="-mt-6 bg-red-100"> Low Risk</DropdownLink>
+                                <DropdownLink class="-mt-6 -mb-6 bg-pink-100"> Very Low Risk</DropdownLink> 
+                                <!-- :href="route('...')" -->
+
+                            </template>
+                        </Dropdown>
+                    </div>
+                </td>
+                <td class="px-3 py-2 whitespace-nowrap">50%</td>
+                <td class="px-3 py-2 whitespace-nowrap">40%</td>
+          
+              </tr>
+              <tr class="border-b dark:border-neutral-500">
+                <td class="px-3 py-2 font-medium whitespace-nowrap">
+                    <div class="relative ml-3">
+                        <Dropdown align="right" width="48">
+                            <template #trigger>
+                                <span class="inline-flex rounded-md">
+                                    <button
+                                        type="button"
+                                        class="flex items-center whitespace-nowrap rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] motion-reduce:transition-none dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] justify-items-between"
+                                    >
+                                       <small>change category</small>  
+                                       <i class="fa fa-angle-down"></i>
+                                    </button>
+                                </span>
+                            </template>
+
+                            <template #content>
+                                <DropdownLink class="bg-red-400"> Very High Risk</DropdownLink>
+                                <DropdownLink class="-mt-6 bg-pink-300"> High Risk</DropdownLink>
+                                <DropdownLink class="-mt-6 bg-red-200"> Medium Risk</DropdownLink>
+                                <DropdownLink class="-mt-6 bg-red-100"> Low Risk</DropdownLink>
+                                <DropdownLink class="-mt-6 -mb-6 bg-pink-100"> Very Low Risk</DropdownLink> 
+                                <!-- :href="route('...')" -->
+
+                            </template>
+                        </Dropdown>
+                    </div>
+                </td>
+                <td class="px-3 py-2 whitespace-nowrap">40%</td>
+                <td class="px-3 py-2 whitespace-nowrap">30</td>
+          
+              </tr>
+              <tr class="border-b dark:border-neutral-500">
+                <td class="px-3 py-2 font-medium whitespace-nowrap">
+                    <div class="relative ml-3">
+                        <Dropdown align="right" width="48">
+                            <template #trigger>
+                                <span class="inline-flex rounded-md">
+                                    <button
+                                        type="button"
+                                        class="flex items-center whitespace-nowrap rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] motion-reduce:transition-none dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] justify-items-between"
+                                    >
+                                       <small>change category</small>  
+                                       <i class="fa fa-angle-down"></i>
+                                    </button>
+                                </span>
+                            </template>
+
+                            <template #content>
+                                <DropdownLink class="bg-red-400"> Very High Risk</DropdownLink>
+                                <DropdownLink class="-mt-6 bg-pink-300"> High Risk</DropdownLink>
+                                <DropdownLink class="-mt-6 bg-red-200"> Medium Risk</DropdownLink>
+                                <DropdownLink class="-mt-6 bg-red-100"> Low Risk</DropdownLink>
+                                <DropdownLink class="-mt-6 -mb-6 bg-pink-100"> Very Low Risk</DropdownLink> 
+                                <!-- :href="route('...')" -->
+
+                            </template>
+                        </Dropdown>
+                    </div>
+                </td>
+                <td class="px-3 py-2 whitespace-nowrap">30%</td>
+                <td class="px-3 py-2 whitespace-nowrap">20%</td>
+          
+              </tr>
+              <tr class="border-b dark:border-neutral-500">
+                <td class="px-3 py-2 font-medium whitespace-nowrap">
+                    <div class="relative ml-3">
+                        <Dropdown align="right" width="48">
+                            <template #trigger>
+                                <span class="inline-flex rounded-md">
+                                    <button
+                                        type="button"
+                                        class="flex items-center whitespace-nowrap rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] motion-reduce:transition-none dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] justify-items-between"
+                                    >
+                                       <small>change category</small>  
+                                       <i class="fa fa-angle-down"></i>
+                                    </button>
+                                </span>
+                            </template>
+
+                            <template #content>
+                                <DropdownLink class="bg-red-400"> Very High Risk</DropdownLink>
+                                <DropdownLink class="-mt-6 bg-pink-300"> High Risk</DropdownLink>
+                                <DropdownLink class="-mt-6 bg-red-200"> Medium Risk</DropdownLink>
+                                <DropdownLink class="-mt-6 bg-red-100"> Low Risk</DropdownLink>
+                                <DropdownLink class="-mt-6 -mb-6 bg-pink-100"> Very Low Risk</DropdownLink> 
+                                <!-- :href="route('...')" -->
+
+                            </template>
+                        </Dropdown>
+                    </div>
+                </td>
+                <td class="px-3 py-2 whitespace-nowrap">20%</td>
+                <td class="px-3 py-2 whitespace-nowrap">10%</td>
+          
+              </tr>
+              <tr class="border-b dark:border-neutral-500">
+                <td class="px-3 py-2 font-medium whitespace-nowrap">
+                    <div class="relative ml-3">
+                        <Dropdown align="right" width="48">
+                            <template #trigger>
+                                <span class="inline-flex rounded-md">
+                                    <button
+                                        type="button"
+                                        class="flex items-center whitespace-nowrap rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] motion-reduce:transition-none dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] justify-items-between"
+                                    >
+                                       <small>change category</small>  
+                                       <i class="fa fa-angle-down"></i>
+                                    </button>
+                                </span>
+                            </template>
+
+                            <template #content>
+                                <DropdownLink class="bg-red-400"> Very High Risk</DropdownLink>
+                                <DropdownLink class="-mt-6 bg-pink-300"> High Risk</DropdownLink>
+                                <DropdownLink class="-mt-6 bg-red-200"> Medium Risk</DropdownLink>
+                                <DropdownLink class="-mt-6 bg-red-100"> Low Risk</DropdownLink>
+                                <DropdownLink class="-mt-6 -mb-6 bg-pink-100"> Very Low Risk</DropdownLink> 
+                                <!-- :href="route('...')" -->
+
+                            </template>
+                        </Dropdown>
+                    </div>
+                </td>
+                <td class="px-3 py-2 whitespace-nowrap">10%</td>
+                <td class="px-3 py-2 whitespace-nowrap">0%</td>
+          
+              </tr>
+            </tbody>
+            
+          </table>
+          <div class="mx-auto w-max">
+            <button
+                type="button"
+                class="mx-4 inline-block rounded bg-primary px-2 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
+                cancel
+                <i class="fa fa-cancel"></i>
+            </button>
+            <button
+                type="button"
+                class="mx-5 inline-block rounded bg-primary px-2 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
+                Edit
+                <i class="fa fa-pencil"></i>
+            </button>
+            <button
+                type="button"
+                class="mx-4 inline-block rounded bg-primary px-2 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
+                Save
+                <i class="fa fa-save"></i>
+             </button>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-4 lg:w-1/2">
+        <h4 class="ml-6 font-bold text-black">Factors vs Weights</h4>
+        <div class="flex flex-col">
+            <div class="overflow-x-auto sm:-mx-3 lg:-mx-4">
+              <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+                <div class="overflow-hidden">
+                  <table
+                    class="min-w-full text-sm font-light text-center border dark:border-neutral-500">
+                    <thead class="font-medium border-b dark:border-neutral-500">
+                      <tr>
+                        <th
+                          scope="col"
+                          class="px-3 py-3 border-r dark:border-neutral-500">
+                          Factors
+                        </th>
+                        <th
+                          scope="col"
+                          class="px-3 py-3 border-r dark:border-neutral-500">
+                          Weight
+                        </th>
+                       
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="border-b dark:border-neutral-500">
+                        <td
+                          class="px-3 py-3 font-medium border-r whitespace-nowrap dark:border-neutral-500">
+                          UI Rating
+                        </td>
+                        <td
+                          class="px-3 py-3 border-r whitespace-nowrap dark:border-neutral-500">
+                          10.0%
+                        </td>
+                      </tr>
+                      
+                    </tbody>
+                  </table>
+                  <div class="mx-auto w-max">
+                    <button
+                        type="button"
+                        class="mx-4 inline-block rounded bg-primary px-2 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
+                        Add New
+                        <i class="fa fa-add"></i>
+                    </button>
+                    <button
+                        type="button"
+                        class="mx-5 inline-block rounded bg-primary px-2 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
+                        Cancel
+                        <i class="fa fa-cancel"></i>
+                    </button>
+                    <button
+                        type="button"
+                        class="mx-4 inline-block rounded bg-primary px-2 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
+                        Edit
+                        <i class="fa fa-pencil"></i>
+                     </button>
+                     <button
+                        type="button"
+                        class="mx-4 inline-block rounded bg-primary px-2 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
+                        Save
+                        <i class="fa fa-save"></i>
+                  </button>
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+  </div>
+  <div class="mt-4 lg:w-1/2">
+    <h4 class="ml-6 font-bold text-black">Rating Scale</h4>
+    <div class="flex flex-col">
+        <div class="overflow-x-auto sm:-mx-3 lg:-mx-4">
+          <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+            <div class="overflow-hidden">
+              <table
+                class="min-w-full text-sm font-light text-center border dark:border-neutral-500">
+                <thead class="font-medium border-b dark:border-neutral-500">
+                  <tr>
+                    <th
+                      scope="col"
+                      class="px-3 py-3 border-r dark:border-neutral-500">
+                      Factors
+                    </th>
+                    <th
+                      scope="col"
+                      class="px-3 py-3 border-r dark:border-neutral-500">
+                      Rating
+                    </th>
+                   
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="border-b dark:border-neutral-500">
+                    <td
+                      class="px-3 py-3 font-medium border-r whitespace-nowrap dark:border-neutral-500">
+                      75% to 100%
+                    </td>
+                    <td
+                      class="px-3 py-3 border-r whitespace-nowrap dark:border-neutral-500">
+                      High Risk
+                    </td>
+                  </tr>
+                  
+                </tbody>
+              </table>
+              <div class="mx-auto w-max">
+                <button
+                    type="button"
+                    class="mx-4 inline-block rounded bg-primary px-2 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
+                    Add New
+                    <i class="fa fa-add"></i>
+                </button>
+                <button
+                    type="button"
+                    class="mx-5 inline-block rounded bg-primary px-2 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
+                    Cancel
+                    <i class="fa fa-cancel"></i>
+                </button>
+                <button
+                    type="button"
+                    class="mx-4 inline-block rounded bg-primary px-2 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
+                    Edit
+                    <i class="fa fa-pencil"></i>
+                 </button>
+                 <button
+                    type="button"
+                    class="mx-4 inline-block rounded bg-primary px-2 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
+                    Save
+                    <i class="fa fa-save"></i>
+              </button>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
 
         </div> 
 
@@ -364,13 +754,5 @@ function activate(id) {
                     </div>
                 </div>
             </div>
- 
-
-            <!-- Row #4 -->
-
-            <!-- END Row #4 -->
-
-
-          
     </AuthenticatedLayout>
 </template>

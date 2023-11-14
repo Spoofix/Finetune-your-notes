@@ -30,7 +30,7 @@ def extract_css_colors(css_content):
     return re.findall(color_regex, css_content)
 
 def fetch_css_colors(url):
-    chrome_service = ChromeService(executable_path='path_to_chromedriver')  # Replace with the path to chromedriver
+    chrome_service = ChromeService(executable_path='/usr/bin/chromedriver')  # Replace with the path to chromedriver
     chrome_options = ChromeOptions()
     chrome_options.add_argument('--headless')
     chrome_driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
@@ -76,8 +76,11 @@ def main():
 
         # Perform CSS color similarity comparison
         css_color_similarity = calculate_css_color_similarity(css_colors1, css_colors2)
+
         if {css_color_similarity}:
-            print(f"{css_color_similarity:.2f}")
+            # print(f"{css_color_similarity:.2f}")
+            rating = css_color_similarity / 1 * 100
+            print(f"{rating:.2f}")
         else:
             print("none")
     except Exception as e:

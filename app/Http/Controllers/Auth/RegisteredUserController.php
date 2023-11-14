@@ -15,10 +15,10 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Auth\Events\Registered;
 use App\Providers\RouteServiceProvider;
-// use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Validation\Rules\Password;
 use App\Notifications\WelcomeNotification;
-// use App\Console\Commands\ScanSpoofingDomains;
+use App\Console\Commands\ScanSpoofingDomains;
 
 
 
@@ -61,18 +61,18 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        
 
-        $domains = explode(",",$request->domains);
-        foreach ($domains as $domain){
+
+        $domains = explode(",", $request->domains);
+        foreach ($domains as $domain) {
             Domain::create([
-                'domain_name'=>trim($domain),
-                'user_id'=>$user->id
+                'domain_name' => trim($domain),
+                'user_id' => $user->id
             ]);
         }
 
         ScanDomains::dispatch([
-            'user_id'=>$user->id
+            'user_id' => $user->id
         ]);
 
 
@@ -80,8 +80,8 @@ class RegisteredUserController extends Controller
         Auth::login($user);
         $user->notify(new WelcomeNotification());
 
-//        Alert::success('SuccessAlert','Registration succesful, we are scanning the domains that you provided to identify possible spoof domains');
-    
+        //        Alert::success('SuccessAlert','Registration succesful, we are scanning the domains that you provided to identify possible spoof domains');
+
 
         return redirect(RouteServiceProvider::HOME);
     }

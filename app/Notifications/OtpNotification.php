@@ -38,7 +38,7 @@ class OtpNotification extends Notification
         return (new MailMessage)
             ->line('Your Login Otp is ' . $this->otp)
             ->line('It expires in fifteen minutes')
-            ->action('Notification Action', url('/'))
+            ->action('Notification Action', url('/dashboard'))
             ->line('Thank you for using our application!');
     }
 

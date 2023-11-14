@@ -40,7 +40,9 @@ def image_similarity(image_path1, image_path2):
 image1_path = f"../public/assets/screenshots/{domainOne}.png" # first image
 image2_path = f"../public/assets/screenshots/{domainTwo}.png" # second image
 
-average_rating = image_similarity(image1_path, image2_path)
-print(f"{average_rating:.2f} / 10")
+average_rating  = image_similarity(image1_path, image2_path)
+# print(f"{average_rating:.2f}")
+rating = (average_rating / 10) * 100
+print(f"{rating:.2f}")
 
 

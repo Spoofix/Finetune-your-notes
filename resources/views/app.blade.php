@@ -1,14 +1,16 @@
 <!DOCTYPE html>
+
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title inertia>{{ config('app.name', 'Laravel') }}</title>
+    <title inertia>{{ config('app.name', 'Spoofix') }}</title>
 
     <!-- Fonts -->
     <link rel="stylesheet" href="{{ asset('./assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('./assets/css/codebase.min.css') }}">
+    <link rel="icon" href="{{ asset('./assets/systemImages/favicon_io/favicon-32x32.png') }}" type="image/x-icon" />
 
     <!-- Scripts -->
     @routes
@@ -19,7 +21,7 @@
     @inertia
     <script src="{{ asset('./assets/js/pages/be_pages_dashboard.min.js') }}"></script>
     <script src="{{ asset('./assets/js/codebase.app.min.js') }}"></script>
-    {{-- @include('sweetalert::alert') --}}
+    @include('sweetalert::alert')
 
 </body>
 </html>

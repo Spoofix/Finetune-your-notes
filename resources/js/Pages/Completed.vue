@@ -1,0 +1,389 @@
+<script setup>
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import {Link} from "@inertiajs/vue3"
+// import { defineComponent, onMounted } from 'vue';
+import { Head, router, useForm } from '@inertiajs/vue3';
+import { defineComponent } from 'vue';
+import { ref, computed } from 'vue';
+import Dropdown from '@/Components/Dropdown.vue';
+import DropdownLink from '@/Components/DropdownLink.vue';
+import NavLink from '@/Components/NavLink.vue';
+import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
+
+defineComponent({
+   name: 'App',
+  components: {
+    Link
+  },
+  
+});
+
+const props = defineProps({
+     testList: {
+        type: Object,
+    },
+    domainList: {
+        type:Object,
+    },
+      spoofList: {
+        type: Object,
+    }
+});
+
+const calculateTimeDifference = (dateString) => {
+  try{
+      dateString = JSON.parse(dateString);
+  }catch(e){}
+  if (typeof dateString === "string") {
+    const firstDate = new Date(dateString);
+    const currentDate = new Date();
+
+    // Calculate the time difference in milliseconds
+    const diffInMilliseconds = currentDate - firstDate;
+
+    // Calculate the time difference in years, months, days, and hours
+    const diffInYears = Math.round(diffInMilliseconds / (365 * 24 * 60 * 60 * 1000));
+    const diffInMonths = Math.round(diffInMilliseconds / (30 * 24 * 60 * 60 * 1000));
+    const diffInDays = Math.round(diffInMilliseconds / (24 * 60 * 60 * 1000));
+    const diffInHours = Math.round(diffInMilliseconds / (60 * 60 * 1000));
+
+    // Determine the appropriate unit based on the rounded time difference
+    let unit, timeDiff;
+    if (diffInYears > 0) {
+      unit = "year";
+      timeDiff = diffInYears;
+    } else if (diffInMonths > 0) {
+      unit = "month";
+      timeDiff = diffInMonths;
+    } else if (diffInDays > 0) {
+      unit = "day";
+      timeDiff = diffInDays;
+    } else if (diffInHours) {
+      unit = "hour";
+      timeDiff = diffInHours;
+    }else {
+      unit = "hour";
+      timeDiff = 'past';
+    }
+
+    // Handle plural form if time difference is not 1
+    if (timeDiff !== 1) {
+      unit += "s";
+    }
+
+    return ` ${timeDiff} ${unit}`;
+  } else if (Array.isArray(dateString)) {
+    // If the dateString is an array, get the first date from the array
+    const firstDateString = dateString[0];
+    // console.log(firstDateString);
+    if (typeof firstDateString === "string") {
+      // Calculate the time difference for the first date in the array
+      return calculateTimeDifference(firstDateString);
+    }
+  }
+  return 'none';
+};
+
+const filteredSpoofListCurrentValue = ref([]); 
+
+
+function filteredSpoofList(domainid) {
+  const spoofList = props.spoofList;
+  const filteredSpoofListValue = [];
+  for (const spoof of spoofList) {
+    if (spoof.domain_id === domainid) {
+      filteredSpoofListValue.push(spoof);
+    }
+  }
+  filteredSpoofListCurrentValue.value = filteredSpoofListValue;
+  return filteredSpoofListValue;
+}
+
+
+const showTable = ref(true);
+const indexStore = ref(null);
+
+function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+// const element = document.getElementById("smoothDropDown");
+
+// const toggleTable = async (index, domainid) => {
+//   element.style.marginTop = -100 + '%'; 
+//   if (index === indexStore.value) {
+//     showTable.value = !showTable.value;
+//     if (element) {
+//       element.classList.add('.smoothDropDown');
+//       element.style.marginTop = -100 + '%'; 
+//       while (width < 0) {
+//             await delay(1000); 
+//             width += 10;
+//             element.style.marginTop = width + '%'; 
+//         }
+//       // await delay(1000);
+//   };
+//   } else {
+//     showTable.value = true;
+//     console.log("here");
+//   }
+//   indexStore.value = index;
+//   filteredSpoofList(domainid);
+// };
+
+const toggleTable = async (index, domainid) => {
+  changePage(1); 
+    if (index === indexStore.value) { 
+      showTable.value = !showTable.value;
+    } else {
+      showTable.value = true;
+      console.log("here");
+    }
+    indexStore.value = index;
+    filteredSpoofList(domainid);
+};
+
+indexStore.value = null; 
+const currentPage = ref(1);
+const itemsPerPage = 7;
+
+
+
+// const spooflist = filteredSpoofListCurrentValue.value;
+const paginatedSpoofList = computed(() => {
+  // console.log(filteredSpoofListCurrentValue.value);
+  const start = (currentPage.value - 1) * itemsPerPage;
+  const end = start + itemsPerPage;
+  return filteredSpoofListCurrentValue.value.slice(start, end);
+});
+
+const totalPages = computed(() => Math.ceil(filteredSpoofListCurrentValue.value.length / itemsPerPage));
+
+const changePage = (page) => {
+  currentPage.value = page;
+};
+const active = toggleTable(0 , props.domainList[0].id);
+
+ function scrollToElement(index) {
+    const element = document.getElementById('myDiv');
+    const margin = getComputedStyle(element).marginTop;
+
+    // Calculate the desired scroll position
+    const scrollPosition = element.offsetTop - parseInt(margin);
+
+    // Scroll to the element
+    window.scrollTo({
+        top: scrollPosition,
+        // behavior: 'smooth'
+    });
+}
+</script>
+
+<template>
+    <Head title="Completed" />
+
+    <AuthenticatedLayout class="overflow-scroll " style="height: 100vh;">
+        <section class="py-1 pt-6 bg-blueGray-50">
+          
+        <!-- testing place -->
+          <div class="mr-12" v-for="(domain, index) in domainList" :key="index">
+            <div
+              class="flex items-center justify-between w-full mx-4 my-2 cursor-pointer h-14"
+                style="border-radius: 6px; "
+                id="myDiv"
+                :class="showTable && index == indexStore ? 'bigDropdownBgActive' : 'bigDropdownBg'"     
+              @click="toggleTable(index, domain.id), scrollToElement(index)"
+            >
+              <div class="ml-5 text-2xl font-semibold text-blueGray-700">
+                  <h3 class="orgDomain text-capitalize ">{{ domain.domain_name }}</h3>
+              </div>
+              <div class="mr-5 botton ">
+                <i
+                  class="fa"
+                  :class="showTable && index == indexStore ? 'fa-chevron-down' : 'fa-chevron-left'"
+                  aria-hidden="true"
+                ></i>
+                  <div>
+                  Spoofing sites 
+                </div>
+              </div>
+            </div>
+             <div
+                v-if="showTable && index === indexStore"
+                class="items-center ml-6 overflow-auto bg-transparent border-collapse smooth"
+                :class="{ 'smoothDropDown': showTable }"
+                id="smoothDropDown"
+                  > 
+              <div class="overflow-x-auto ">
+                <table class="w-full text-sm ">
+                  <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                      <tr class="container justify-evenly">
+                          <th  class="py-3 pl-2" >
+                              Domain
+                          </th>
+                          <th  class="py-3 text-center">
+                              Source
+                          </th>
+                          <th  class="py-3 text-center">
+                               User
+                          </th>
+                          <th  class="py-3 text-center">
+                               Start Date
+                          </th>
+                          <th  class="py-3 text-center">
+                                End Date
+                          </th>
+                          <th  class="py-3 text-center">
+                              Status
+                          </th>
+                          <th  class="py-3 text-center">
+                              Total Time
+                          </th>
+                          <th  class="py-3 text-center">
+                              Action
+                          </th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr class=" tableRow
+                      transition-colors duration-300 hover:!bg-yellow-50"
+                      v-for="(spoof, index) in paginatedSpoofList" :key="index"
+                          :style="{ background: index % 2 !== 1 ? '#FDE6E6' : '#F7E6E4' }"
+                          >
+                          <td class="pl-3 overflow-auto py-auto" style="max-width: 90px;">
+                              {{ spoof.spoofed_domain }}
+                          </td>
+                          <td class="text-center py-auto">
+                              Self Reported
+                          </td>
+                          <td class="text-center py-auto">
+                              Phil
+                          </td>
+                          <td class="text-center py-auto">
+                              Oct 12, 23
+                          </td>
+                          <td class="text-center py-auto">
+                              Oct 13, 23
+                          </td>
+                          <td class="text-center py-auto">
+                              Completed 
+                          </td>
+                          <td class="text-center py-auto">
+                              01D:21H
+                          </td>
+                          <td class="py-1 ">
+                            <Link :href="'/spoof/view/' + spoof.id" class="w-16 py-1 mx-auto transition-all duration-150 ease-linear tableButton visited:bg-pink-300 active:bg-yellow-200 hover:bg-yellow-200 focus:outline-none" preserve-scroll>
+                               <div class="px-4 my-auto">View</div> 
+                            </Link>
+                          </td>
+                      </tr>
+                  </tbody>
+              </table>
+
+              </div>
+
+               <div class="flex justify-center mt-4" style="">
+                  <button class="px-3 py-2 mr-2 cursor-pointer round gray"  @click="changePage(--page)">
+                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                  </button>
+                  <button
+                    v-for="page in totalPages"
+                    :key="page"
+                    @click="changePage(page)"
+                    :class="{ 'primaryColor paginationButtons': page === currentPage, 'gray text-gray-700': page !== currentPage }"
+                    class="px-3 py-2 mr-2 rounded cursor-pointer"
+                  >
+                    {{ page }}
+                  </button >
+                  
+                  <button class="px-3 py-2 mr-2 cursor-pointer round gray"  @click="changePage(++page)">
+                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                  </button>
+                </div>
+            </div>
+                       
+          </div>
+        </section>
+    </AuthenticatedLayout>
+</template>
+<style>
+.height{
+  margin-top: -100%;
+}
+.height2{
+  margin-top: 0%;
+}
+.smoothDropDown{
+  transition-duration: 1s;
+  transition-delay: 20ms;
+}
+.bigDropdownBgActive{
+  background: var(--dark-neutral-dark-neutral-5, #D9D9D9);
+}
+.bigDropdownBg{
+  background: #FFEFB0;
+}
+.tableRow{
+  height: 45px;
+  flex-shrink: 0;
+  border: 1px solid var(--dark-neutral-dark-neutral-4, #F0F0F0);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.10) inset;
+  background: #dc8f8f;
+}
+.tableButton{
+display: flex;
+height: 39px;
+justify-content: center;
+align-items: center;
+border-radius: 30px;
+background: var(--error-e-75, #F89999);
+}
+.smooth{
+   transition-duration: 1s;
+ transition-delay: 20ms;
+}
+.gray{
+  background-color: #BFBFBF;
+}
+.round{
+  border-radius:24px ;
+  
+}
+.paginationButtons{
+  color: var(--dark-neutral-dark-neutral-9, #454545);
+font-family: Poppins;
+font-size: 12px;
+font-style: normal;
+font-weight: 600;
+line-height: 120%; /* 14.4px */
+}
+.primaryColor{
+  background-color: #FFE88A;
+}
+.botton{
+  display: flex;
+width: 159px;
+height: 34px;
+justify-content: center;
+align-items: center;
+gap: 16px;
+flex-shrink: 0;
+border-radius: 30px;
+background: var(--yellow-yellow-400, #FFD633);
+}
+.orgDomain{
+  color: var(--dark-neutral-dark-neutral-8, #595959);
+
+/* Semibold/Heading 5/Semibold */
+font-family: Poppins;
+font-size: 20px;
+font-style: normal;
+font-weight: 600;
+line-height: 120%; /* 24px */
+}
+  .bigDropdown{
+  height: 68px;
+  border-radius: 6px;
+background: var(--yellow-yellow-50, #FFFAE6);
+}
+</style>

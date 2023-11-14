@@ -27,9 +27,11 @@ from urllib.parse import urlparse
 
 def take_screenshot(url):
     try:
-        chrome_service = ChromeService(executable_path='path_to_chromedriver')  # Replace with the path to chromedriver
+        chrome_service = ChromeService(executable_path='/usr/bin/chromedriver')  # Replace with the path to chromedriver
         chrome_options = ChromeOptions()
         chrome_options.add_argument('--headless')
+        # Set window size to match your laptop screen resolution
+        chrome_options.add_argument('--window-size=1366,768')
         driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
 
         driver.get(url)

@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\weight;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -20,6 +22,11 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call(RolesSeeder::class);
         $this->call(UserSeeder::class);
+        $this->call(AgeSeeder::class);
+        $this->call(RatingSeeder::class);
+        $this->call(ReportingSeeder::class);
+        $this->call(WeightSeeder::class);
+
 
     }
 }

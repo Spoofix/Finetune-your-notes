@@ -78,7 +78,10 @@ domain2 = f'https://{domainTwo}'
 
 similarity_score = compare_domains(domain1, domain2)
 
+
 if similarity_score is not None:
-    print(f"{similarity_score:.2f}")
+    # print(f"{similarity_score:.2f}")
+    rating = similarity_score / 1 * 100
+    print(f"{rating:.2f}")
 else:
     print("none")

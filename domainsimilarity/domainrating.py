@@ -95,7 +95,9 @@ text1 = f"https://{domainOne}"
 text2 = f"https://{domainTwo}"
 
 similarity_score = calculate_text_similarity(text1, text2)
-print(f"{similarity_score:.2f}")
+# print(f"{similarity_score:.2f}")
+rating = (similarity_score / 1 ) * 100
+print(f"{rating:.2f}")
 
 
 

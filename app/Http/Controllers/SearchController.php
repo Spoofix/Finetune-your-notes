@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\DnsTwist;
 use App\Services\OpenSquat;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -13,7 +14,8 @@ class SearchController extends Controller
         $request->validate([
             'domain' => 'required',
         ]);
-        $domain = OpenSquat::search($request->domain);
+        $domain = OpenSquat::search($request->domain) ;//&& DnsTwist::search($request->domain)
+
 
         // dd($domain);
 

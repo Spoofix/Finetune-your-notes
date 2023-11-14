@@ -57,11 +57,11 @@ const sites = [
     <AuthenticatedLayout>
         <div class="col-md-12">
             <div class="block block-rounded">
-                <div class="block-header px-5">
-                    <Link class="btn btn-info mr-3 text-capitalize" :href="route('organization')">Back</Link>
+                <div class="px-5 block-header">
+                    <Link class="mr-3 btn btn-info text-capitalize" :href="route('organization')">Back</Link>
                     <h2 class="block-title">Report</h2>
                 </div>
-                <div class="block-content pb-5 px-5">
+                <div class="px-5 pb-5 block-content">
                     <table class="table table-borderless table-striped">
                         <thead>
                             <tr>

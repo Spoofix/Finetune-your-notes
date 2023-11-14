@@ -41,6 +41,6 @@ class SpoofedDomain extends Model
     }
 
     private static function columnsToCheck(){
-        return ['phashes'];
+        return ['phashes', 'htmls', 'domain_rating', 'csscolor', 'domainsimilarityrate'];
     }
 }

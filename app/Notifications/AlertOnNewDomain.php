@@ -38,6 +38,7 @@ class AlertOnNewDomain extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
+
         return (new MailMessage)
             ->line('Hello')
             ->line('You have a new domain similar to one of your' . $this->domain)

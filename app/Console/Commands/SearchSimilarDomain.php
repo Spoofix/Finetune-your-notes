@@ -17,7 +17,7 @@ class SearchSimilarDomain extends Command
 
     private $domains_searchers = [
         OpenSquat::class,
-        // DnsTwist::class
+        DnsTwist::class
     ];
 
     /**
@@ -61,7 +61,7 @@ class SearchSimilarDomain extends Command
         $domain_ = trim($domain->domain_name);
 
         if($this->triggerIfScannedToday($domain)){
-            Log::alert("Hpa");
+            Log::alert("Hpa {$domain_}");
             return;
         }
 

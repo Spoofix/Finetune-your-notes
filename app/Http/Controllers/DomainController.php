@@ -17,30 +17,38 @@ class DomainController extends Controller
     public function index(Request $request)
     {
         // $data = DomainDetail::where('domain_id', request('domain_id'))->first();
-                
-        return Inertia::render('Domain/View', [
-           
-            ]);
+
+        // return Inertia::render('Domain/View', [
+
+        //     ]);ReportForm 
     }
-     
+    // ReportForm
+    public function ReportForm(Request $request)
+    {
+        return Inertia::render('ReportForm', []);
+    }
+    // Messages
+    public function Messages(Request $request)
+    {
+        return Inertia::render('Messages', []);
+    }
+
     public function store(Request $request)
     {
         $request->validate([
             'domains' => 'required|string'
         ]);
-        
-        $domains = explode(",",$request->domains);
-        foreach ($domains as $domain){
-           $created =  Domain::create([
-                'domain_name'=>trim($domain),
-                'user_id'=>auth()->id(),
+
+        $domains = explode(",", $request->domains);
+        foreach ($domains as $domain) {
+            $created =  Domain::create([
+                'domain_name' => trim($domain),
+                'user_id' => auth()->id(),
             ]);
 
             ScanDomains::dispatch([
-            'domain_id'=> $created->id
-        ]);
+                'domain_id' => $created->id
+            ]);
         }
-
-        
     }
-    }
+}
