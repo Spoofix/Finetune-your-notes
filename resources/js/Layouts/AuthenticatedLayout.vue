@@ -7,6 +7,16 @@ import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import { Link } from '@inertiajs/vue3';
 
+// const currentPage = ref('');
+
+// onBeforeMount(() => {
+//   currentPage.value = $route.name;
+// });
+
+// watch('$route.name', (newRoute) => {
+//   currentPage.value = newRoute;
+// });
+
 const isSidebarOpen = ref(true);
 
 if (window.innerWidth < 1200) {
@@ -61,6 +71,23 @@ const active = (idNo, idNo2) => {
   }
 };
 
+
+//active
+let pageTitle = ref();
+// var pageTitle = document.title;
+function updatePageTitle() {
+  pageTitle.value = document.title;
+  // Do something with the pageTitle if needed
+  // console.log(document);
+}
+
+// // Run the function every second (1000 milliseconds)
+var intervalId = setInterval(updatePageTitle, 10);
+
+setTimeout(function() {
+  clearInterval(intervalId);
+}, 200); 
+
 </script>
 
 
@@ -69,7 +96,7 @@ const active = (idNo, idNo2) => {
         <div class="relative flex flex-row" id="page-container">   <!-- id="page-container class="sidebar-o"" -->
          <!-- sidebar hear-->
         <div class="hidden1" >
-          <nav class="absolute top-0 bottom-0 left-0 flex py-2 transition-all duration-300 ease-in-out transform -translate-x-full shadow-xl smooth bg-blue flex-nowrap md:z-10 z-9999 md:translate-x-0"  style="background: var(--dark-neutral-dark-neutral-10, #262626); top-0; min-height: 100vh; position: fixed;" :class="{'navWidth px-2': isSidebarOpen, 'navWidthColups w-24 -mx-3': !isSidebarOpen }" >
+          <nav class="absolute top-0 bottom-0 left-0 flex py-2 transition-all duration-300 ease-in-out transform shadow-xl smooth bg-blue flex-nowrap md:z-10 z-9999 md:translate-x-0"  style="z-index: 3; background: var(--dark-neutral-dark-neutral-10, #262626); top-0; min-height: 100vh; position: fixed;" :class="{'navWidth px-2 ': isSidebarOpen, 'navWidthColups w-24 -mx-3 -translate-x-full ': !isSidebarOpen }" >
             <!-- id="sidebar" -->
 
             <!-- Sidebar Content -->
@@ -79,13 +106,13 @@ const active = (idNo, idNo2) => {
                 <div>
                    <div class="justify-between w-full d-flex"  v-if="isSidebarOpen" >
                     <!-- Logo -->
-                    <Link class="pl-9 logo-div" :href="route('dashboard')">
+                    <Link class="pl-9 logo-div" >
                       <span class="logo">Spoo</span>
                       <span class="logo-fix">fix</span>
                     </Link>
                   </div>
                     <div class="justify-between d-flex" v-else>
-                     <Link class="-mt-5 pl-7"  :href="route('dashboard')" >
+                     <Link class="-mt-5 pl-7"  >
                       <span class="logo">S</span>
                       <span class="logo-fix">f</span>
                     </Link>
@@ -103,38 +130,38 @@ const active = (idNo, idNo2) => {
                   <ul class="nav-main">
                     <li class="nav-main-items"  :class="{'pl-4': isSidebarOpen, 'pl-3 w-6': !isSidebarOpen }">
                       <Link class="nav-main-link" :href="route('dashboard')" @click="active('Scanned')">
-                          <i class="justify-center pt-1 my-2 text-xl text-black rounded nav-icons-background h-9 align-center w-9 nav-main-link-icon fa fa-house-user"></i>
-                        <span class="nav-main-link-name sidenav_text" v-if="isSidebarOpen">Dashboard</span>
+                          <i class="justify-center pt-1 my-2 text-xl text-black rounded nav-icons-background h-9 align-center w-9 nav-main-link-icon fa fa-house-user hover:active-bg" :class="pageTitle === 'Dashboard - Spoofix' ? 'active-bg' : 'nav-icons-background'"></i>
+                        <span class="nav-main-link-name sidenav_text hover:!active-text" v-if="isSidebarOpen" :class="pageTitle === 'Dashboard - Spoofix' ? 'active-text sidenav_text' : 'sidenav_text'">Dashboard</span>
                       </Link>
                     </li>
                     <li class="nav-main-item" :class="{'pl-4': isSidebarOpen, 'pl-3 w-6': !isSidebarOpen }">
                         <Link class="nav-main-link" :href="route('domains')" @click="active('Active', 'Active2')">
-                        <i class="justify-center pt-1 my-2 text-xl text-black rounded h-9 align-center w-9 nav-main-link-icon fa fa-server nav-icons-background" id="Active2"></i>
-                        <span class="nav-main-link-name sidenav_text" :class="{'active-text': isActive, 'inactive-text': !isActive}" id="Active">Scanned</span>
+                        <i class="justify-center pt-1 my-2 text-xl text-black rounded h-9 align-center w-9 nav-main-link-icon fa fa-server nav-icons-background" :class="pageTitle === 'Scanned - Spoofix' ? 'active-bg' : 'nav-icons-background'"></i>
+                        <span class="nav-main-link-name sidenav_text hover:active-text" :class="pageTitle === 'Scanned - Spoofix' ? 'active-text sidenav_text' : 'sidenav_text'">Scanned</span>
                       </Link>
                     </li>
                     <li class="nav-main-item"  :class="{'pl-4': isSidebarOpen, 'pl-3 w-6': !isSidebarOpen }">
                       <Link class="nav-main-link" :href="route('ReportForm')" @click="active('Scanned')">
-                        <i class="justify-center pt-1 my-2 text-xl text-black rounded nav-icons-background h-9 align-center w-9 nav-main-link-icon fa-regular fa-pen-to-square"></i>
-                        <span class="nav-main-link-name sidenav_text" v-if="isSidebarOpen">Report Form</span>
+                        <i class="justify-center pt-1 my-2 text-xl text-black rounded nav-icons-background h-9 align-center w-9 nav-main-link-icon fa-regular fa-pen-to-square" :class="pageTitle === 'ReportForm - Spoofix' ? 'active-bg' : 'nav-icons-background'"></i>
+                        <span class="nav-main-link-name sidenav_text hover:active-text min-w-max" v-if="isSidebarOpen" :class="pageTitle === 'ReportForm - Spoofix' ? 'active-text sidenav_text' : 'sidenav_text'">Report Form</span>
                       </Link>
                     </li>
                        <li class="nav-main-item"  :class="{'pl-4': isSidebarOpen, 'pl-3 w-6': !isSidebarOpen }">
                       <Link class="nav-main-link" :href="route('InProgress')" @click="active('Scanned')">
-                        <i class="justify-center pt-1 my-2 text-xl text-black rounded nav-icons-background h-9 align-center w-9 nav-main-link-icon fa-solid fa-square-poll-vertical"></i>
-                        <span class="nav-main-link-name sidenav_text" v-if="isSidebarOpen">In Progress</span>
+                        <i class="justify-center pt-1 my-2 text-xl text-black rounded nav-icons-background h-9 align-center w-9 nav-main-link-icon fa-solid fa-square-poll-vertical" :class="pageTitle === 'InProgress - Spoofix' ? 'active-bg' : 'nav-icons-background'"></i>
+                        <span class="nav-main-link-name sidenav_text hover:active-text min-w-max" v-if="isSidebarOpen" :class="pageTitle === 'InProgress - Spoofix' ? 'active-text sidenav_text' : 'sidenav_text'">In Progress</span>
                       </Link>
                     </li>
                        <li class="nav-main-item"  :class="{'pl-4': isSidebarOpen, 'pl-3 w-6': !isSidebarOpen }">
                       <Link class="nav-main-link" :href="route('Completed')">
-                        <i class="justify-center pt-1 my-2 text-xl text-black rounded nav-icons-background h-9 align-center w-9 nav-main-link-icon fa fa-check"></i>
-                        <span class="nav-main-link-name sidenav_text" v-if="isSidebarOpen">Completed</span>
+                        <i class="justify-center pt-1 my-2 text-xl text-black rounded nav-icons-background h-9 align-center w-9 nav-main-link-icon fa fa-check" :class="pageTitle === 'Completed - Spoofix' ? 'active-bg' : 'nav-icons-background'"></i>
+                        <span class="nav-main-link-name sidenav_text hover:active-text" v-if="isSidebarOpen" :class="pageTitle === 'Completed - Spoofix' ? 'active-text sidenav_text' : 'sidenav_text'">Completed</span>
                       </Link>
                     </li>
                        <li class="nav-main-item "  :class="{'pl-4': isSidebarOpen, 'pl-3 w-6': !isSidebarOpen }">
                       <Link class="nav-main-link" :href="route('Messages')">
-                        <i class="justify-center pt-1 my-2 text-xl text-black rounded nav-icons-background h-9 align-center w-9 nav-main-link-icon fa fa-message"></i>
-                        <span class="nav-main-link-name sidenav_text" v-if="isSidebarOpen">Messages</span>
+                        <i class="justify-center pt-1 my-2 text-xl text-black rounded nav-icons-background h-9 align-center w-9 nav-main-link-icon fa fa-message" :class="pageTitle === 'Messages - Spoofix' ? 'active-bg' : 'nav-icons-background'"></i>
+                        <span class="nav-main-link-name sidenav_text hover:active-text" v-if="isSidebarOpen" :class="pageTitle === 'Messages - Spoofix' ? 'active-text sidenav_text' : 'sidenav_text'">Messages</span>
                       </Link>
                     </li>
                     <li class="nav-main-item" v-if="$page.props.auth.user.role_id == 1">
@@ -153,7 +180,7 @@ const active = (idNo, idNo2) => {
                   <li class="nav-main-item"  :class="{'pl-4': isSidebarOpen, 'pl-3 w-6': !isSidebarOpen }">
                       <Link class="nav-main-link" :href="route('domains')">
                         <i class="justify-center pt-1 my-2 text-xl text-black bg-white rounded h-9 align-center w-9 nav-main-link-icon fa-solid fa-circle-question"></i>
-                        <span class="nav-main-link-name sidenav_text" v-if="isSidebarOpen">Help Center</span>
+                        <span class="nav-main-link-name sidenav_text min-w-max" v-if="isSidebarOpen">Help Center</span>
                       </Link>
                     </li>
                      <li class="nav-main-item"  :class="{'pl-4': isSidebarOpen, 'pl-3 w-6': !isSidebarOpen }">
@@ -179,19 +206,19 @@ const active = (idNo, idNo2) => {
 
           
         <!-- div 2 -->
-          <div class="bg-white small w-100 " :class="{'div2Opened': isSidebarOpen, 'div2Closed': !isSidebarOpen }" >
+          <div class="bg-white small w-100 " :class="{'div2Opened smallScreen ': isSidebarOpen, 'div2Closed': !isSidebarOpen }" >
             <!-- style="padding-left:296px;" -->
             <!-- Header -->
-          <header class="sticky top-0 flex justify-between container-fluid headerr WidthOnSmall" > 
+          <header class="flex justify-between positioning container-fluid headerr WidthOnSmall "  style="z-index: 2;"> 
             <!-- style="padding-left:296px;" -->
             <!-- dropdown -->
               <div class="flex pl-3 my-auto" >
-                <div class="mt-2 text-xl font-bold">
-                  <i class="fa fa-bars bars" aria-hidden="true"></i>
+                <div class="mt-2 text-2xl font-bold" @click="toggleSidebar">
+                  <i class="fa fa-bars bars hover:bounce"  aria-hidden="true"></i>
                 </div>
-                <!-- User Dropdown -->
+                 <!-- User Dropdown -->
                 <div class="dropdown d-inline-block">
-                  <button type="button" class="border-none btn btn-sm btn-alt-secondary d-flex" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <button type="button" class="w-40 border-none md:w-52 btn btn-sm hover:bg-yellow-300 active:bg-yellow-300 d-flex" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     
                     <img
                     class="h-9 w-9 rounded-full object-cover d-lg=none mx-3"
@@ -203,21 +230,21 @@ const active = (idNo, idNo2) => {
                     
                   </div>
                   </button>
-                  <div class="p-0 ml-7 dropdown-menu dropdown-menu-md dropdown-menu-end" aria-labelledby="page-header-user-dropdown">
-                    <div class="px-2 py-3 bg-body-light rounded-top">
-                      <h5 class="mb-0 text-center h6">
-                        Welcome {{ $page.props.auth.user.name }}
+                  <div class="p-0 ml-10 dropdown-menu dropdown-menu-md dropdown-menu-end" aria-labelledby="page-header-user-dropdown">
+                    <div class="px-2 py-3 bg-yellow-100 rounded-top">
+                      <h5 class="mb-0 text-center h6 text-capitalize">
+                        welcome {{ $page.props.auth.user.name }}
                       </h5>
                     </div>
-                    <div class="p-2">
-                      <Link class="space-x-1 dropdown-item d-flex align-items-center justify-content-between" :href="route('profile')">
+                    <div class="p-2 ">
+                      <Link class="space-x-1 font-black dropdown-item d-flex align-items-center justify-content-between hover:bg-yellow-100" :href="route('profile')">
                         <span>Profile</span>
-                        <i class="opacity-25 fa fa-fw fa-user"></i>
+                        <i class="opacity-50 hover:opacity-25 fa fa-fw fa-user"></i>
                       </Link>
                       <div class="dropdown-divider"></div>
-                      <Link class="space-x-1 dropdown-item d-flex align-items-center justify-content-between" :href="route('logout')" method="post" >
+                      <Link class="space-x-1 font-black dropdown-item d-flex align-items-center justify-content-between hover:bg-yellow-100" :href="route('logout')" method="post" >
                         <span>Log Out</span>
-                        <i class="opacity-25 fa fa-fw fa-sign-out-alt"></i>
+                        <i class="opacity-50 hover:opacity-25 fa fa-fw fa-sign-out-alt"></i>
                       </Link>
                     </div>
                   </div>
@@ -261,6 +288,10 @@ const active = (idNo, idNo2) => {
 </template>
 <!-- /* Sidebar styles */ -->
 <style>
+.positioning{
+  position: sticky;
+  top: 0%;
+}
 .hiddenClass {
   display: none;
   opacity: 0;
@@ -375,6 +406,7 @@ line-height: 120%;
   .bars{
       display: none;
     }
+
 @media (max-width: 767px) {
    .hidden1{
      width: 0%; 
@@ -388,6 +420,21 @@ line-height: 120%;
     }
     .bars{
       display: contents;
+    }
+    .smallScreen{
+      margin-left: -225px;
+    }
+    .smallScreenNav{
+      position: absolute;
+    }
+  /**  .positioning{
+      
+    } **/
+    .no_position{
+      padding: 0%;
+    }
+    .sm_display_none{
+      display: none;
     }
 }
 </style>

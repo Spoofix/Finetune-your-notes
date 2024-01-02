@@ -18,14 +18,13 @@ class RescanController extends Controller
     public function rescan(Request $request, $domainId)
     {
         ScanDomains::dispatch([
-            'domain_id'=>$domainId
+            'domain_id' => $domainId
         ]);
 
-//        Alert::success('Registration succesful', ' we are scanning the domains that you provided to identify possible spoof domains');
+        //    Alert::success('Registration succesful', ' we are scanning the domains that you provided to identify possible spoof domains');
 
         // Additional logic if needed
         // Redirect('/');
         return redirect()->back();
     }
 }
-

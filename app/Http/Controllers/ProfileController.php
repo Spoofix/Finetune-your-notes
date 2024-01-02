@@ -44,10 +44,12 @@ class ProfileController extends Controller
             $request->user()->email_verified_at = null;
         }
 
-        $request->user()->name = $request->user()->first_name . " " . $request->user()->last_name;
+        $request->user()->name = $request->name;
+        $request->user()->second_name = $request->second_name;
+        $request->user()->email = $request->email;
         $request->user()->save();
 
-        return Redirect::route('profile');
+        return Redirect::route('settings.account'); //profile
     }
 
     /**

@@ -9,10 +9,14 @@
 
     <!-- Fonts -->
     <link rel="stylesheet" href="{{ asset('./assets/css/style.css') }}">
+    {{-- <link rel="stylesheet" href="{{ mix('assets/css/styles.css') }}"> --}}
     <link rel="stylesheet" href="{{ asset('./assets/css/codebase.min.css') }}">
     <link rel="icon" href="{{ asset('./assets/systemImages/favicon_io/favicon-32x32.png') }}" type="image/x-icon" />
 
     <!-- Scripts -->
+    <link rel="stylesheet" href="{{ mix('css/assets/codebase.css') }}">
+    <link rel="stylesheet" href="{{ mix('assets/css/styles.css') }}">
+    
     @routes
     @vite(['resources/js/app.js', "resources/js/Pages/{$page['component']}.vue"])
     @inertiaHead

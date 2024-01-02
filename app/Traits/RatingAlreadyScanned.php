@@ -6,53 +6,64 @@ use App\Models\SpoofedDomain;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 
-trait RatingAlreadyScanned{
-    private function spoofExists($spoofed_domain,$select_values_to_update){
-        $return = SpoofedDomain::where('spoofed_domain',$spoofed_domain->spoofed_domain)
+trait RatingAlreadyScanned
+{
+    private function spoofExists($spoofed_domain, $select_values_to_update)
+    {
+        $return = SpoofedDomain::where('spoofed_domain', $spoofed_domain->spoofed_domain)
             // ->where('id','!=',$spoofed_domain->id)
-            ->whereDate('created_at','>=', Carbon::yesterday()->toDateString());
-            
-            if($select_values_to_update){
-                if(count($select_values_to_update) == 1){
-                    $return = $return->where($select_values_to_update[0],'!=', 'processing')->where($select_values_to_update[0],'!=', 'failed');
-                }else{
-                    $return = $return->whereNotNull($select_values_to_update[0]);
-                }
+            ->whereDate('created_at', '>=', Carbon::yesterday()->toDateString());
+
+        if ($select_values_to_update) {
+            if (count($select_values_to_update) == 1) {
+                $return = $return->where($select_values_to_update[0], '!=', 'processing')->where($select_values_to_update[0], '!=', 'failed');
+            } else {
+                $return = $return->whereNotNull($select_values_to_update[0]);
             }
-            
-           return $return->select($select_values_to_update)
+        }
+
+        return $return->select($select_values_to_update)
             ->first();
     }
 
-    public function copyRating($spoofed_domain,$rating){
-        switch ($rating){
+    public function copyRating($spoofed_domain, $rating)
+    {
+        switch ($rating) {
             case 'WHOIS':
-                $select_values_to_update=['domain','registrar','rating','screenshot','country',
-                    'registrationDate','whois_server','referral_url','update_date','expiration_date',
-                    'name_servers','status','emails','dnssec','name','org','address','city','state','registrant_postal_code'];
+                $select_values_to_update = [
+                    'domain', 'registrar', 'rating', 'screenshot', 'country',
+                    'registrationDate', 'whois_server', 'referral_url', 'update_date', 'expiration_date',
+                    'name_servers', 'status', 'emails', 'dnssec', 'name', 'org', 'address', 'city', 'state', 'registrant_postal_code'
+                ];
+                break;
+            case 'locationSslAndRedirects':
+                $select_values_to_update = [
+                    'ip_address', 'server_city', 'region', 'server_country', 'latitude', 'longitude', 'organization', 'isp',
+                    'server_os', 'ssl_certificate_details', 'redirect_urls', 'http_status_code', 'cookies', 'console_messages', 'security_headers',
+                    'spoof_status'
+                ];
                 break;
             case 'DomainSimilarity':
-                $select_values_to_update=["domainsimilarityrate"];
+                $select_values_to_update = ["domainsimilarityrate"];
                 break;
             case 'ContentRating':
-                $select_values_to_update=["htmls"];
+                $select_values_to_update = ["htmls"];
                 break;
             case 'ImageRating':
-                $select_values_to_update=["phashes"];
+                $select_values_to_update = ["phashes"];
                 break;
             case 'CssColor':
-                $select_values_to_update=["csscolor"];
+                $select_values_to_update = ["csscolor"];
                 break;
-
         }
 
-        if(!isset($select_values_to_update)){
-            Log::error("copyRating function call failed as the rating <".$rating."> is not found");
+        if (!isset($select_values_to_update)) {
+            Log::error("copyRating function call failed as the rating <" . $rating . "> is not found");
             return false;
         }
 
         $duplicate_spoof = $this->spoofExists($spoofed_domain, $select_values_to_update);
-        if(!$duplicate_spoof){
+        if (!$duplicate_spoof) {
             return false;
         }
 

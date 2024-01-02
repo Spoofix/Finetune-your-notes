@@ -10,6 +10,99 @@ import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 
+
+function calculateWeightedSum(ratings, weights) {
+  // Initialize sum to 0
+  let sum = 0;
+
+  // Iterate over each criterion in ratings
+  for (let criterion in ratings) {
+    if (ratings.hasOwnProperty(criterion)) {
+      // Get the rating for the current criterion
+      const rating = ratings[criterion];
+      // console.log(rating)
+
+      // Normalize the rating (assuming a maximum rating of 5)
+      const normalizedRating = rating / 5;
+      // console.log(normalizedRating)
+
+      // Get the weight for the current criterion
+      const weight = weights[criterion];
+      // console.log(normalizedRating)
+
+      // Calculate the weighted value for the current criterion
+      
+      const weightedValue = normalizedRating * weight;
+      // console.log(weightedValue)
+
+      // Add the weighted value to the sum
+      if(!isNaN(weightedValue)){
+        sum += weightedValue;
+      }
+    }
+  }
+
+  // Return the final sum
+  return sum;
+}
+
+function ratingsValues(cssRating, screenshotSimilarityRating, htmlRating, domainNameSimilarityRating, age, sslValidity, domainrating) {
+    const ratings = {
+        cssRating,
+        screenshotSimilarityRating,
+        htmlRating,
+        domainNameSimilarityRating,
+        age,
+        sslValidity,
+        domainrating
+    };
+
+    const weights = {
+      webflow: {
+        cssRating: 0.2,
+        screenshotSimilarityRating: 0.4,
+        htmlRating: 0.4,
+      },
+      domain: {
+        domainNameSimilarityRating: 0.1,
+        age: 0.05,
+        sslValidity: 0.05,
+        domainrating: 0.8
+      },
+      interface: {
+        cssRating: 0.3,
+        screenshotSimilarityRating: 0.7,
+      },
+    };
+
+    const webflowRating = calculateWeightedSum(ratings, weights.webflow);
+    const domainRating = calculateWeightedSum(ratings, weights.domain);
+    const interfaceRating = calculateWeightedSum(ratings, weights.interface);
+
+    const overallRating = (webflowRating + domainRating + interfaceRating) / 3;
+
+    return [webflowRating, domainRating, interfaceRating, overallRating]
+}
+// let me = props.spoofList[299];
+// const [webflowRating, domainRating, interfaceRating, overallRating] = ratingsValues(me.csscolor, me.phashes, me.htmls, me.domainsimilarityrate, 2, true, me.domain_rating);
+// const [webflowRating, domainRating, interfaceRating, overallRating] = ratingsValues(100, 100, 100, 100, 100, 100, 90,80);
+// console.log(webflowRating, domainRating, interfaceRating, overallRating);
+
+// console.log(me.csscolor, me.phashes, me.htmls,me.domain_rating, me.ssl_certificate_details+ "n",me.registrationDate ,me.domainsimilarityrate)
+// const ha = calculateTimeDifference(me.registrationDate);
+// console.log('its :')
+// console.log(ha)
+
+// Calculate overall rating
+// const overallRating = (webflowRating + domainRating + interfaceRating) / 3;
+
+// console.log('Webflow Rating:', webflowRating);
+// console.log('Domain Rating:', domainRating);
+// console.log('Interface Rating:', interfaceRating);
+// console.log('Overall Rating:', overallRating);
+
+
+
 defineComponent({
    name: 'App',
   components: {
@@ -30,6 +123,45 @@ const props = defineProps({
     }
 });
 
+const methods = {
+    spoofStatus(spoof) {
+      //
+      return 'New';
+    },
+    webflowRating(spoof) {
+    const [webflowRating, domainRating, interfaceRating, overallRating]  = ratingsValues(spoof.csscolor, spoof.phashes, spoof.htmls, spoof.domainsimilarityrate, 2, true, spoof.domain_rating);
+    return webflowRating; 
+    },
+
+    domainRating(spoof) {
+    const [webflowRating, domainRating, interfaceRating, overallRating]  = ratingsValues(spoof.csscolor, spoof.phashes, spoof.htmls, spoof.domainsimilarityrate, 2, true, spoof.domain_rating);
+
+      return domainRating; 
+    },
+    interfaceRating(spoof) {
+      // Calculate interface rating for the spoof
+    const [webflowRating, domainRating, interfaceRating, overallRating]  = ratingsValues(spoof.csscolor, spoof.phashes, spoof.htmls, spoof.domainsimilarityrate, 2, true, spoof.domain_rating);
+
+      return interfaceRating; 
+    },
+    overallRating(spoof) {
+    const [webflowRating, domainRating, interfaceRating, overallRating]  = ratingsValues(spoof.csscolor, spoof.phashes, spoof.htmls, spoof.domainsimilarityrate, 2, true, spoof.domain_rating);
+      return overallRating; 
+    },
+    webflowRatingLabel(rating) {
+      return rating > 5 ? 'High' : rating > 4 ? 'medium' : 'low';
+    },
+    domainRatingLabel(rating) {
+      return rating > 5 ? 'High' : rating > 4 ? 'medium' : 'low';
+    },
+    interfaceRatingLabel(rating) {
+      return rating > 5 ? 'High' : rating > 4 ? 'medium' : 'low';
+    },
+    overallRatingLabel(rating) {
+      return rating > 4 ? 'High' : rating > 3 ? 'medium' : 'Low';
+    },
+  };
+
 const calculateTimeDifference = (dateString) => {
   try{
       dateString = JSON.parse(dateString);
@@ -43,35 +175,34 @@ const calculateTimeDifference = (dateString) => {
 
     // Calculate the time difference in years, months, days, and hours
     const diffInYears = Math.round(diffInMilliseconds / (365 * 24 * 60 * 60 * 1000));
-    const diffInMonths = Math.round(diffInMilliseconds / (30 * 24 * 60 * 60 * 1000));
-    const diffInDays = Math.round(diffInMilliseconds / (24 * 60 * 60 * 1000));
-    const diffInHours = Math.round(diffInMilliseconds / (60 * 60 * 1000));
+    // const diffInMonths = Math.round(diffInMilliseconds / (30 * 24 * 60 * 60 * 1000));
+    // const diffInDays = Math.round(diffInMilliseconds / (24 * 60 * 60 * 1000));
+    // const diffInHours = Math.round(diffInMilliseconds / (60 * 60 * 1000));
 
     // Determine the appropriate unit based on the rounded time difference
-    let unit, timeDiff;
-    if (diffInYears > 0) {
-      unit = "year";
+    // let unit, timeDiff;
+    // if (diffInYears > 0) {
+      // unit = "year";
       timeDiff = diffInYears;
-    } else if (diffInMonths > 0) {
-      unit = "month";
-      timeDiff = diffInMonths;
-    } else if (diffInDays > 0) {
-      unit = "day";
-      timeDiff = diffInDays;
-    } else if (diffInHours) {
-      unit = "hour";
-      timeDiff = diffInHours;
-    }else {
-      unit = "hour";
-      timeDiff = 'past';
-    }
+    // } else if (diffInMonths > 0) {
+    //   unit = "month";
+    //   timeDiff = diffInMonths;
+    // } else if (diffInDays > 0) {
+    //   unit = "day";
+    //   timeDiff = diffInDays;
+    // } else if (diffInHours) {
+    //   unit = "hour";
+    //   timeDiff = diffInHours;
+    // }else {
+    //   unit = "hour";
+    //   timeDiff = 'past';
+    // }
+    //
+    // if (timeDiff !== 1) {
+    //   unit += "s";
+    // }
 
-    // Handle plural form if time difference is not 1
-    if (timeDiff !== 1) {
-      unit += "s";
-    }
-
-    return ` ${timeDiff} ${unit}`;
+    return ` ${timeDiff} `; //${unit}
   } else if (Array.isArray(dateString)) {
     // If the dateString is an array, get the first date from the array
     const firstDateString = dateString[0];
@@ -131,13 +262,43 @@ function delay(ms) {
 //   filteredSpoofList(domainid);
 // };
 
+// function delay(ms) {
+//     return new Promise(resolve => setTimeout(resolve, ms));
+// }
+
+// const toggleTable = async (index, domainid) => {
+//     // location.reload();
+//     // await delay(3000);
+//     isSidebarOpen.value = !isSidebarOpen.value;
+//     let width = 0;
+//     const element = document.getElementById('smoothTextId');
+//     if (element) {
+//         if (isSidebarOpen.value) {
+//             element.classList.add('hiddenClass');
+//             await delay(360);
+//             element.classList.remove('hiddenClass');
+//             element.classList.add('smoothText');
+//             while (width < 250) {
+//                 await delay(0); // Await the promise to introduce the delay
+//                 width += 70;
+//                 element.style.maxWidth = width + 'px'; // Update the max-width property
+//             }
+//         } else if(!isSidebarOpen.value) {
+//             element.classList.remove('smoothText');
+//         } else {
+//             element.classList.remove('smoothText');
+//         }
+//     }
+// };
+
 const toggleTable = async (index, domainid) => {
   changePage(1); 
+  // console.log(Object.keys(totalPages).length );
     if (index === indexStore.value) { 
       showTable.value = !showTable.value;
     } else {
       showTable.value = true;
-      console.log("here");
+      // console.log("here");
     }
     indexStore.value = index;
     filteredSpoofList(domainid);
@@ -160,8 +321,15 @@ const paginatedSpoofList = computed(() => {
 const totalPages = computed(() => Math.ceil(filteredSpoofListCurrentValue.value.length / itemsPerPage));
 
 const changePage = (page) => {
-  currentPage.value = page;
+  if(page === 0 || page < 0) {
+    console.log(page);
+    return;
+  }else{
+    currentPage.value = page;
+   console.log(page);
+  }
 };
+// console.log(Object.keys(totalPages).length - 1);
 const active = toggleTable(0 , props.domainList[0].id);
 
  function scrollToElement(index) {
@@ -177,6 +345,7 @@ const active = toggleTable(0 , props.domainList[0].id);
         // behavior: 'smooth'
     });
 }
+
 </script>
 
 <template>
@@ -186,16 +355,18 @@ const active = toggleTable(0 , props.domainList[0].id);
         <section class="py-1 pt-6 bg-blueGray-50">
           
         <!-- testing place -->
-          <div class="mr-12" v-for="(domain, index) in domainList" :key="index">
+          <div class="mr-4 lg:mr-7" v-for="(domain, index) in domainList" :key="index">
             <div
-              class="flex items-center justify-between w-full mx-4 my-2 cursor-pointer h-14"
-                style="border-radius: 6px; "
+              class="flex items-center justify-between w-full my-2 cursor-pointer md:mx-3 lg:mx-4 h-14 hover:bg-gray-300"
+                style="border-radius: 6px; box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);"
                 id="myDiv"
                 :class="showTable && index == indexStore ? 'bigDropdownBgActive' : 'bigDropdownBg'"     
               @click="toggleTable(index, domain.id), scrollToElement(index)"
             >
               <div class="ml-5 text-2xl font-semibold text-blueGray-700">
-                  <h3 class="orgDomain text-capitalize ">{{ domain.domain_name }}</h3>
+                  <h3 class="orgDomain">
+                   <Link :href="'rescan-domain/' + domain.id">{{ domain.domain_name }}</Link> 
+                  </h3>
               </div>
               <div class="mr-5 botton ">
                 <i
@@ -210,15 +381,16 @@ const active = toggleTable(0 , props.domainList[0].id);
             </div>
              <div
                 v-if="showTable && index === indexStore"
-                class="items-center ml-6 overflow-auto bg-transparent border-collapse smooth"
+                class="items-center overflow-auto bg-transparent border-collapse lg:ml-6 md:ml-4 md:-mr-3 smooth "
                 :class="{ 'smoothDropDown': showTable }"
                 id="smoothDropDown"
                   > 
-              <div class="overflow-x-auto ">
-                <table class="w-full text-sm ">
+              <div :class="{ 'table-container.open': showTable, 'table-container' : !showTable}">
+                <!-- <div> -->
+                <table class="w-full text-sm " style="min-width: 600px;">
                   <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                       <tr class="container justify-evenly">
-                          <th  class="py-3 pl-2" >
+                          <th  class="py-3 pl-2 min-w-max" >
                               Domain
                           </th>
                           <th  class="py-3 text-center">
@@ -233,64 +405,84 @@ const active = toggleTable(0 , props.domainList[0].id);
                           <th  class="py-3 text-center">
                               Interface Rating
                           </th>
-                          <th  class="py-3 text-center">
+                            <th class="py-3 text-center" @click="sortByOverall">
                               Overall
-                          </th>
+                              <i class="ml-1 fa fa-sort-up"></i> <!-- v-if="sortOrder === 'asc'"-->
+                              <i class="ml-1 fa fa-sort-down"></i> <!--v-if="sortOrder === 'desc'" -->
+                            </th>
+                          <!-- <th  class="py-3 text-center">
+                              Overall
+                          </th> -->
                           <th  class="py-3 text-center">
                               Action
                           </th>
                       </tr>
                   </thead>
                   <tbody>
-                      <tr class=" tableRow
-                      transition-colors duration-300 hover:!bg-yellow-50"
+                      <!-- <tr class=" tableRow
+                      transition-colors duration-300 hover:!bg-blue-50 border-solid border-white "
                       v-for="(spoof, index) in paginatedSpoofList" :key="index"
                           :style="{ background: index % 2 !== 1 ? '#FDE6E6' : '#F7E6E4' }"
-                          >
-                          <td class="pl-3 overflow-auto py-auto" style="max-width: 90px;">
-                              {{ spoof.spoofed_domain }}
-                          </td>
-                          <td class="text-center py-auto">
-                              New
-                          </td>
-                          <td class="text-center py-auto">
-                              High
-                          </td>
-                          <td class="text-center py-auto">
-                              Low
-                          </td>
-                          <td class="text-center py-auto">
-                              High
-                          </td>
-                          <td class="font-bold text-center text-red-600 py-auto">
-                              High
-                          </td>
-                          <td class="py-1 ">
-                            <Link :href="'/spoof/view/' + spoof.id" class="w-16 py-1 mx-auto transition-all duration-150 ease-linear tableButton visited:bg-pink-300 active:bg-yellow-200 hover:bg-yellow-200 focus:outline-none" preserve-scroll>
-                                View
-                            </Link>
-                          </td>
-                      </tr>
+                          
+                          > -->
+                <tr class=" tableRow
+                      transition-colors duration-300 hover:!bg-yellow-200 border-solid border-white text-black"
+                      v-for="(spoof, index) in paginatedSpoofList" :key="index"
+                 :class="{ 'hidden': spoof.spoofed_domain == domain.domain_name }"
+                  :style="{'background-color': methods.overallRatingLabel(methods.overallRating(spoof)) === 'High' && spoof.spoofed_domain == domain.domain_name ? '#EBF7E7' : methods.overallRatingLabel(methods.overallRating(spoof)) === 'High' ? '#FDE6E6' : methods.overallRatingLabel(methods.overallRating(spoof)) === 'medium' ? '#FEF1E9' : '#EBF7E7'}"
+                  >
+                  <!--  :style="{ background: index % 2 !== 1 ? '#FDE6E6' : '#F7E6E4' }" -->
+                <td class="pl-3 overflow-auto py-auto" style="max-width: 190px;">
+                  {{ spoof.spoofed_domain }}
+                </td>
+                <td class="text-center py-auto">
+                  {{ methods.spoofStatus(spoof) }}
+                </td>
+                <td class="text-center py-auto">
+                  {{ methods.webflowRatingLabel(methods.webflowRating(spoof)) }}
+                </td>
+                <td class="text-center py-auto">
+                  {{ methods.domainRatingLabel(methods.domainRating(spoof)) }}
+                </td>
+                <td class="text-center py-auto">
+                  {{ methods.interfaceRatingLabel(methods.interfaceRating(spoof)) }}
+                </td>
+                <td class="font-bold text-center py-auto"
+                :style="{'color': methods.overallRatingLabel(methods.overallRating(spoof)) === 'High' ? '#ED0707' : methods.overallRatingLabel(methods.overallRating(spoof)) === 'medium' ? '#F7610D' : '#3AAC11'}">
+                  {{ methods.overallRatingLabel(methods.overallRating(spoof)) }}
+                </td>
+                <td class="py-1">
+                  <Link :href="'/spoof/view/' + spoof.id"
+                        class="w-16 py-1 mx-auto transition-all duration-150 ease-linear tableButton focus:outline-none"
+                        :style="{'background-color': methods.overallRatingLabel(methods.overallRating(spoof)) === 'High' ? '#F89999' : methods.overallRatingLabel(methods.overallRating(spoof)) === 'medium' ? '#FCBE9C' : '#AEDD9D'}"
+
+                        >
+                    View
+                  </Link>
+              </td>
+            </tr>
                   </tbody>
               </table>
 
               </div>
 
                <div class="flex justify-center mt-4" style="">
-                  <button class="px-3 py-2 mr-2 cursor-pointer round gray"  @click="changePage(--page)">
+
+                  <button v-if="currentPage > 1" class="px-3 py-2 mr-2 cursor-pointer round gray paginationButtons"  @click="changePage(--currentPage)">
                     <i class="fa fa-chevron-left" aria-hidden="true"></i>
                   </button>
-                  <button
-                    v-for="page in totalPages"
-                    :key="page"
+                  <div v-for="page in totalPages"
+                    :key="page">
+                    <button
+                    v-if="page > currentPage - 4 && page < currentPage + 4"
                     @click="changePage(page)"
-                    :class="{ 'primaryColor paginationButtons': page === currentPage, 'gray text-gray-700': page !== currentPage }"
+                    :class="{ 'primaryColor paginationButtons ': page === currentPage, 'paginationButtons gray text-gray-700': page !== currentPage }"
                     class="px-3 py-2 mr-2 rounded cursor-pointer"
                   >
                     {{ page }}
                   </button >
-                  
-                  <button class="px-3 py-2 mr-2 cursor-pointer round gray"  @click="changePage(++page)">
+                  </div>
+                  <button v-if="currentPage < totalPages" class="px-3 py-2 mr-2 cursor-pointer round gray paginationButtons"  @click="changePage(++currentPage)">
                     <i class="fa fa-chevron-right" aria-hidden="true"></i>
                   </button>
                 </div>
@@ -301,6 +493,21 @@ const active = toggleTable(0 , props.domainList[0].id);
     </AuthenticatedLayout>
 </template>
 <style>
+.table-container {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out;
+}
+
+.table-container.open {
+    max-height: 500px;
+    /* Set a suitable max-height */
+    transition: max-height 0.5s ease-in;
+    overflow-x:auto ;
+}
+
+/* */
+
 .height{
   margin-top: -100%;
 }
@@ -323,6 +530,7 @@ const active = toggleTable(0 , props.domainList[0].id);
   border: 1px solid var(--dark-neutral-dark-neutral-4, #F0F0F0);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.10) inset;
   background: #dc8f8f;
+  border-top-width: 6px;
 }
 .tableButton{
 display: flex;

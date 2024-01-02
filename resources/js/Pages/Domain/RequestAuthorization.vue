@@ -126,6 +126,56 @@ const changeIDPlus = (activeId) => {
 //      }
 // }
 
+
+const form = useForm({
+    abuse_type: '',
+    evidence_urls: props.spoofData.spoofed_domain,
+    additional_notes: '',
+    observed_date: props.spoofData.created_at,
+    attachments: '',
+    carbon_copy_request_to: '',
+    reported_via: 'takedown',
+    targetDomain: props.spoofData.domain_id,
+    id: props.spoofData.id,
+});
+
+function submit() {
+    // Validate the form fields
+    if (!form.abuse_type || !form.evidence_urls) {
+        Toast.fire({
+            icon: 'error',
+            title: 'All fields are required',
+        });
+        return;
+    }
+    console.log(form);
+    const formData = new FormData();
+    formData.append('abuse_type', form.abuse_type);
+    formData.append('evidence_urls', form.evidence_urls);
+    formData.append('additional_notes', form.additional_notes);
+    formData.append('targetDomain', form.targetDomain);
+    formData.append('id', form.id);
+    // Append the file to the FormData object if it's not an empty string
+    if (form.attachments !== '') {
+        formData.append('attachments', file);
+    }
+
+    formData.append('carbon_copy_request_to', form.carbon_copy_request_to);
+    
+    // Send a POST request using Inertia
+    // inertia.post('/ReportSpoofySite', form);
+    router.post('/ReportSpoofySite', form)
+        // Handle the success response
+        Toast.fire({
+            icon: 'success',
+            title: 'Reported Successfully',
+        });
+
+        // You can also redirect to another page if needed
+        // router.push('/some-other-page');
+   
+}
+
 </script>
 
 <template>
@@ -143,9 +193,9 @@ const changeIDPlus = (activeId) => {
     <h2 class="my-auto text-gray-600 pl-7 h3 riskpush">{{ spoofData.spoofed_domain }}</h2>
     <h2 class="my-auto risk h3">High Risk</h2>
    </div>
-    <div class="flex flex-row justify-between mx-4 mt-2">
-    <form class="" style="width: 67%; height: 65vh;">
-        <div class="flex pt-2 w-100 justify-evenly">
+    <div class="justify-between mx-4 mt-2 lg:flex lg:flex-row">
+    <form class="" style="min-width: 67%; max-height: 65vh;">
+        <!-- <div class="flex pt-2 w-100 justify-evenly">
           <label for="Abuse Type" class="p-3 w-50 reportFormText">
             Abuse Type
           </label>
@@ -153,13 +203,27 @@ const changeIDPlus = (activeId) => {
             <div class="mt-3 ml-3">Choose Abuse Type</div>
             <i class="mt-3 mr-4 fa fa-chevron-down"></i>
           </div>
-        </div>
+        </div> -->
+      <div class="flex pt-2 w-100 justify-evenly">
+        <label for="abuseType" class="p-3 w-50 reportFormText">Abuse Type</label>
+          <div class="relative w-50">
+              <select id="abuseType" name="abuseType" class="w-full h-10 pl-3 pr-10 text-gray-300 bg-yellow-100 border border-gray-300 rounded-md reportFormText" v-model="form.abuse_type">
+                  <option value="" disabled selected class="text-black ">...Choose Abuse Type...</option>
+                  <option value="Spoofing" class="text-black">Spoofing</option>
+                  <option value="Phishing" class="text-black">Phishing</option>
+                  <!-- Add more options as needed -->
+              </select>
+              <div class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                  <!-- <i class="fa fa-chevron-down"></i> -->
+              </div>
+          </div>
+      </div>
         <div class="flex pt-2 w-100 justify-evenly">
           <label for="Other URLs" class="p-3 w-50 reportFormText">
             Other URLs
           </label>
           <div class="mr-1 w-50">
-            <textarea type="url" id="fname" name="fname" class="text-gray-700 bg-yellow-100 border-none h-100 w-100 reportFormText">Type  each URLs(if any) in separate line</textarea>
+            <textarea type="url" id="fname" name="fname" class="text-gray-700 bg-yellow-100 border-none h-100 w-100 reportFormText" placeholder="provide URL" v-model="form.evidence_urls" > </textarea>
           </div>
         </div>
         <div class="flex pt-2 w-100 justify-evenly">
@@ -167,7 +231,7 @@ const changeIDPlus = (activeId) => {
             Additional Notes
           </label>
           <div class="flex justify-around mr-1 bg-yellow-100 w-50">
-             <textarea type="url" id="fname" name="Additional Notes" class="text-gray-700 bg-yellow-100 border-none h-100 w-100 reportFormText" rows="7">Please provide details of abuse</textarea>
+             <textarea type="url" id="fname" name="Additional Notes" class="text-gray-700 bg-yellow-100 border-none h-100 w-100 reportFormText" rows="7" placeholder="Please provide details of abuse" v-model="form.additional_notes"></textarea>
           </div>
         </div>
         <div class="flex pt-2 w-100 justify-evenly">
@@ -184,11 +248,11 @@ const changeIDPlus = (activeId) => {
             Carbon Copy (CC) the Request 
           </label>
           <div class="flex justify-around mr-1 bg-yellow-100 w-50">
-            <input type="email" id="fname" name="Carbon Copy (CC) the Request" class="placeholder-gray-700 bg-yellow-100 border-none h-100 w-100 reportFormText" placeholder="james.name@example.com"/>
+            <input type="email" id="fname" name="Carbon Copy (CC) the Request" class="placeholder-gray-700 bg-yellow-100 border-none h-100 w-100 reportFormText" v-model="form.carbon_copy_request_to" placeholder="james.name@example.com"/>
           </div>
         </div>
       </form>
-    <div class="ml-1 box-style" style=" height: 65vh; width: 30%;">
+    <div class="ml-1 box-style" style=" max-height: 65vh; min-width: 30%;">
       <div class="align-middle bg-gray-100 rounded-t-lg" style="height: 45px; width: 100%;">
         <div class="py-3 pl-3 chechdetails">Definitions</div>
         <!-- will do js here -->
@@ -198,7 +262,7 @@ const changeIDPlus = (activeId) => {
    </div>
    <div class="relative justify-between pt-3 w-100"><!-- flex -->
     <div class="flex justify-between float-right w-64 pr-14">
-       <button class="my-2 buttons buttonsText">cancel</button>
+       <Link class="my-2 buttons buttonsText" >cancel</Link>
         <button class="my-auto bg-yellow-300 buttons buttonsText" @click="openModal">confirm</button>
     </div>
     <!-- <div class="flex justify-between mr-6 w-80"> -->
@@ -229,10 +293,10 @@ const changeIDPlus = (activeId) => {
                 <div class="relative flex my-2 modelText">
                    <img class="pr-3 " :src="'/assets/systemImages/Promo.svg'"/>
                    <img class="absolute m-2" :src="'/assets/systemImages/bookmark.svg'"/>
-                  <div class="my-auto">Do you want to Report FakeSite.2?</div>
+                  <div class="my-auto">Do you want to Report <span class="text-yellow-500">{{spoofData.spoofed_domain}}</span>?</div>
                 </div>
                 <div class="relative w-100" >
-                   <Link class="float-right px-4 bg-yellow-300 buttons buttonsText">confirm</Link>
+                   <Link class="float-right px-4 bg-yellow-300 buttons buttonsText" type="submit" @click="submit()">confirm</Link>
                 </div>
               </div>
               </div>
@@ -415,6 +479,11 @@ line-height: 120%; /* 14.4px */
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 /* Add more custom styles as needed */
+@media (max-width: 740px) {
+  .risk{
+margin-left: 40%;
+}
+}
 </style>
 
 

@@ -7,17 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Organization extends Model
 {
-   use HasFactory;
+    use HasFactory;
 
-   protected $fillable = ['name', 'user_id', 'last_search'];
+    protected $fillable = [
+        'id', 'name', 'user_id', 'last_search', 'email', 'phone', 'terms_and_conditions', 'plan_id'
+    ];
 
-   public function domains()
-   {
-       return $this->hasMany(OrgDomain::class, 'organization_id', 'id');
-   }
-   public function user()
-   {
-       return $this->belongsTo(User::class, 'user_id', 'id');
-   }
-
+    public function domains()
+    {
+        return $this->hasMany(OrgDomain::class, 'organization_id', 'id');
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }

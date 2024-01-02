@@ -186,16 +186,16 @@ const active = toggleTable(0 , props.domainList[0].id);
         <section class="py-1 pt-6 bg-blueGray-50">
           
         <!-- testing place -->
-          <div class="mr-12" v-for="(domain, index) in domainList" :key="index">
+          <div class="lg:mr-7" v-for="(domain, index) in domainList" :key="index">
             <div
-              class="flex items-center justify-between w-full mx-4 my-2 cursor-pointer h-14"
-                style="border-radius: 6px; "
+              class="flex items-center justify-between w-full my-2 cursor-pointer lg:mx-4 h-14 hover:bg-gray-300"
+                 style="border-radius: 6px; box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);"
                 id="myDiv"
                 :class="showTable && index == indexStore ? 'bigDropdownBgActive' : 'bigDropdownBg'"     
               @click="toggleTable(index, domain.id), scrollToElement(index)"
             >
               <div class="ml-5 text-2xl font-semibold text-blueGray-700">
-                  <h3 class="orgDomain text-capitalize ">{{ domain.domain_name }}</h3>
+                  <h3 class="orgDomain ">{{ domain.domain_name }}</h3>
               </div>
               <div class="mr-5 botton ">
                 <i
@@ -210,12 +210,12 @@ const active = toggleTable(0 , props.domainList[0].id);
             </div>
              <div
                 v-if="showTable && index === indexStore"
-                class="items-center ml-6 overflow-auto bg-transparent border-collapse smooth"
+                class="items-center overflow-auto bg-transparent border-collapse lg:ml-6 md:ml-4 smooth"
                 :class="{ 'smoothDropDown': showTable }"
                 id="smoothDropDown"
                   > 
               <div class="overflow-x-auto ">
-                <table class="w-full text-sm ">
+                <table class="w-full text-sm " style="min-width: 600px;">
                   <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                       <tr class="container justify-evenly">
                           <th  class="py-3 pl-2" >
@@ -250,7 +250,7 @@ const active = toggleTable(0 , props.domainList[0].id);
                       v-for="(spoof, index) in paginatedSpoofList" :key="index"
                           :style="{ background: index % 2 !== 1 ? '#FDE6E6' : '#F7E6E4' }"
                           >
-                          <td class="pl-3 overflow-auto py-auto" style="max-width: 90px;">
+                          <td class="pl-3 overflow-auto py-auto" style="max-width: 190px;">
                               {{ spoof.spoofed_domain }}
                           </td>
                           <td class="text-center py-auto">
@@ -283,20 +283,22 @@ const active = toggleTable(0 , props.domainList[0].id);
               </div>
 
                <div class="flex justify-center mt-4" style="">
-                  <button class="px-3 py-2 mr-2 cursor-pointer round gray"  @click="changePage(--page)">
+
+                  <button v-if="currentPage > 1" class="px-3 py-2 mr-2 cursor-pointer round gray paginationButtons"  @click="changePage(--currentPage)">
                     <i class="fa fa-chevron-left" aria-hidden="true"></i>
                   </button>
-                  <button
-                    v-for="page in totalPages"
-                    :key="page"
+                  <div v-for="page in totalPages"
+                    :key="page">
+                    <button
+                    v-if="page > currentPage - 4 && page < currentPage + 4"
                     @click="changePage(page)"
-                    :class="{ 'primaryColor paginationButtons': page === currentPage, 'gray text-gray-700': page !== currentPage }"
+                    :class="{ 'primaryColor paginationButtons ': page === currentPage, 'paginationButtons gray text-gray-700': page !== currentPage }"
                     class="px-3 py-2 mr-2 rounded cursor-pointer"
                   >
                     {{ page }}
                   </button >
-                  
-                  <button class="px-3 py-2 mr-2 cursor-pointer round gray"  @click="changePage(++page)">
+                  </div>
+                  <button v-if="currentPage < totalPages" class="px-3 py-2 mr-2 cursor-pointer round gray paginationButtons"  @click="changePage(++currentPage)">
                     <i class="fa fa-chevron-right" aria-hidden="true"></i>
                   </button>
                 </div>

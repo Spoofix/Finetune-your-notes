@@ -27,7 +27,7 @@ const Toast = Swal.mixin({
     <Head title="Profile" />
 
     <AuthenticatedLayout>
-        <div class="col-md-12">
+        <div class="mt-7 col-md-12">
             <div class="block block-rounded">
                 <div class="px-5 block-header">
                     <Link class="mr-3 btn btn-secondary text-capitalize" :href="route('dashboard')">Back</Link>

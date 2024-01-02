@@ -2,6 +2,7 @@
 
 use Inertia\Inertia;
 use App\Models\Domain;
+use App\Mail\ResetPassword;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Artisan;
@@ -58,10 +59,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/domain-search', [DomainController::class, 'index'])->name('domain.list');
     Route::get('/rescan-domain/{domainId}', [RescanController::class, 'rescan'])->name('rescan.domain');
     Route::get('/spoof/{domainId}', [SpoofController::class, 'spoof'])->name('spoof.domain');
-    Route::get('/spoof/view/{spoofId}', [SpoofViewController::class, 'spoofView'])->name('spoof.view');
+    Route::get('/spoof/view/{spoofId}', [SpoofViewController::class, 'spoofView'])->middleware(['auth', 'verified'])->name('spoof.view');
     Route::get('/spoof/requestAuthorization/{spoofId}', [SpoofViewController::class, 'requestAuthorization'])->name('spoof.requestAuthorization');
     Route::get('/spoof/report/{spoofId}', [SpoofViewController::class, 'spoofReport'])->name('spoof.report');
     Route::get('/report', [ReportController::class, 'report'])->name('report');
+
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::get('/profile-update', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/profile-update', [ProfileController::class, 'update'])->name('profile.update');
@@ -81,9 +83,17 @@ Route::middleware('auth')->group(function () {
     Route::get('/settings/notifications', [SettingsController::class, 'notifications'])->name('settings.notifications');
     Route::get('/settings/pricingandbilling', [SettingsController::class, 'pricingandbilling'])->name('settings.pricingandbilling');
     Route::get('/settings/policies', [SettingsController::class, 'policies'])->name('settings.policies');
+    Route::post('/settings/terms_and_conditions', [SettingsController::class, 'terms_and_conditions'])->name('settings.terms_and_conditions');
     Route::get('/settings/moniteredaccounts', [SettingsController::class, 'moniteredaccounts'])->name('settings.moniteredaccounts');
     Route::get('/settings/users', [SettingsController::class, 'users'])->name('settings.users');
-
+    Route::post('/notification-update', [SettingsController::class, 'notifications_update'])->name('notification.update');
+    // /notification-update
+    // email addUser
+    Route::post('/settings/addUser', [SettingsController::class, 'addUser'])->name('settings.addUser');
+    Route::get('/settings/resetPassword', [SettingsController::class, 'sendResetPasswordEmail'])->name('settings.resetPassword');
+    // test showMap, live.screenshot
+    Route::get('/screenshot/{spoofId}', [SpoofViewController::class, 'screenshot'])->name('live.screenshot');
+    Route::get('/maps/{spoofId}', [SpoofViewController::class, 'showMap'])->name('spoof.maps');
 
 
     Route::get('/domain/{org_id}/{id}/{domain}', [DomainController::class, 'index'])->name('domain');
@@ -91,12 +101,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/ReportForm', [DomainController::class, 'ReportForm'])->name('ReportForm');
     Route::get('/Messages', [DomainController::class, 'Messages'])->name('Messages');
     Route::post('/add_domain', [DomainController::class, 'store'])->name('add_domain');
-
     Route::get('/report/{domain}/{id}', [ReportController::class, 'index'])->name('report');
     // Route::get('/domains', [SpoofController::class, 'spoof'])->name('spoof.domain');
     Route::get('/domains', [ScannedController::class, 'index'])->middleware(['auth', 'verified'])->name('domains');
     Route::get('/InProgress', [ScannedController::class, 'InProgress'])->middleware(['auth', 'verified'])->name('InProgress');
     Route::get('/Completed', [ScannedController::class, 'Completed'])->middleware(['auth', 'verified'])->name('Completed');
+
+    Route::post('/ReportSpoofySite', [DomainController::class, 'ReportSpoofySite'])->middleware(['auth', 'verified'])->name('ReportSpoofySite');
+
     Route::middleware('is_admin')->group(function () {
         Route::get('/users', [UsersController::class, 'index'])->name('users.list');
         Route::get('/user/{user_id}', [UsersController::class, 'view'])->name('user.view');
@@ -107,6 +119,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/user-create', [UsersController::class, 'create'])->name('user.create');
         Route::post('/user-create', [UsersController::class, 'store'])->name('user.create');
     });
+    // will work on
+    Route::post('/user/approve', [UsersController::class, 'approve'])->name('user.approve');
+    Route::post('/user/lock', [UsersController::class, 'lock'])->name('user.lock');
+    // Route::get('/user/{user_id}', [UsersController::class, 'view'])->name('user.view');
 });
 
 require __DIR__ . '/auth.php';

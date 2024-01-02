@@ -3,11 +3,13 @@
 namespace App\Http\Requests\Auth;
 
 use App\Models\Otp;
+use App\Mail\MOtp;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use App\Notifications\OtpNotification;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\RateLimiter;
@@ -81,9 +83,9 @@ class LoginRequest extends FormRequest
 
         $otp = rand(9999, 999999);
         Otp::create(['user_id' => $user->id, 'for' => 'login', 'pin' => $otp, 'expires_at' => now()->addMinutes(15)]);
-        $user->notify(new OtpNotification($otp));
+        // $user->notify(new OtpNotification($otp));
+        Mail::to($user->email)->send(new MOtp($user, $otp));
         return encrypt(['email' => $this->email, 'password' => $this->password]);
-
     }
 
     public function check_otp()
@@ -99,7 +101,6 @@ class LoginRequest extends FormRequest
         $otp->status = "EXPIRED";
         $otp->expires_at = now();
         $otp->save();
-
     }
 
     /**

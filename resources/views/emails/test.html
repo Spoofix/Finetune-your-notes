@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .table-container {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+
+        .table-container.open {
+            max-height: 500px;
+            /* Set a suitable max-height */
+            transition: max-height 0.5s ease-in;
+        }
+
+        /* Add your additional styles for the table and button as needed */
+ 
+    </style>
+</head>
+
+<body>
+
+    <button onclick="toggleTable()">Toggle Table</button>
+    <div id="table-container" class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Header 1</th>
+                    <th>Header 2</th>
+                    <!-- Add more headers as needed -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Data 1</td>
+                    <td>Data 2</td>
+                    <!-- Add more data rows as needed -->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function toggleTable() {
+            var tableContainer = document.getElementById('table-container');
+            tableContainer.classList.toggle('open');
+        }
+    </script>
+
+</body>
+
+</html>

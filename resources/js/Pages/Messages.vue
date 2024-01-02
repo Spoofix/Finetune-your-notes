@@ -132,8 +132,8 @@ defineComponent({
   <Head title="Messages" />
 
  <AuthenticatedLayout  class="overflow-scroll fontFamily" style="height:100vh; background: #FFF;"> <!-- v-if=" props.userid === userId" -->
-   <div class="flex justify-between mt-6 border-b-4 border-black w-100 ">
-    <div class="relative ml-6 ">
+   <div class="flex justify-between mt-6 mr-8 border-b-4 border-black max-w-100 lg;ml-6 md:ml-6 ml-0">
+    <div class="relative ">
       <button class="absolute w-40 h-12 px-3 rounded-tr-full bg-dark tabsText" style="">Domain</button>
       <button class="w-56 h-12 pr-4 bg-gray-300 rounded-tr-full tabsText pl-9" style="margin-left: 106px;">Social Media</button>
     </div>
@@ -162,8 +162,8 @@ defineComponent({
         </div>
       </div>
     </div>
-    <div class="flex flex-row justify-between mx-4 mt-2">
-    <div class="" style="width: 67%; height: 65vh;">
+    <div class="justify-between mx-4 mt-2 lg:flex lg:flex-row">
+    <div class="" style="min-width: 67%; height: 65vh;">
        <button class="my-2 mb-2 bg-yellow-100 buttons buttonsText h-14"><i class="mx-1 fa fa-plus"></i>Compose Message </button>
        <table class="w-full mt-3 text-sm">
                   <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 tablehead">
@@ -202,7 +202,7 @@ defineComponent({
                   </tbody>
               </table>
     </div>
-    <div class="ml-1 box-style" style=" height: 65vh; width: 30%; margin-top: 60px;">
+    <div class="ml-1 box-style" style=" height: 65vh; min-width: 50%; margin-top: 60px;">
       <div class="align-middle rounded-t-lg " style="height: 45px; width: 100%; ">
         <!-- will do js here -->
             From: [Your Name] <br>

@@ -7,6 +7,7 @@ import { defineComponent } from 'vue';
 import { defineProps, onMounted } from 'vue';
 import { ref, watch } from 'vue';
 
+
 const isModalVisible = ref(false);
 
 const openModal = () => {
@@ -17,114 +18,74 @@ const closeModal = () => {
   isModalVisible.value = false;
 };
 
-// // Add a watcher to close the modal after a delay
-// watch(isModalVisible, (newValue) => {
-//   if (!newValue) {
-//     setTimeout(() => {
-//       // Close the modal after the fade-out transition
-//       closeModal();
-//     }, 300); // Adjust the delay to match the transition duration
-//   }
-// });
 
+const props = defineProps({
+    domainList: {
+        type:Object,
+    },
+});
+console.log(props.domainList)
 
-// defineComponent({
-//   components: {
-//     Link
-//   },
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 7000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+})
 
-// });
-// const Toast = Swal.mixin({
-//   toast: true,
-//   position: 'top-end',
-//   showConfirmButton: false,
-//   timer: 7000,
-//   timerProgressBar: true,
-//   didOpen: (toast) => {
-//     toast.addEventListener('mouseenter', Swal.stopTimer)
-//     toast.addEventListener('mouseleave', Swal.resumeTimer)
-//   }
-// })
+const form = useForm({
+    abuse_type: '',
+    evidence_urls: '',
+    additional_notes: '',
+    observed_date: '',
+    attachments: '',
+    carbon_copy_request_to: '',
+    reported_via: 'report_form',
+    Confirm: '',
+    targetDomain: '',
+});
 
+function submit() {
+    // Validate the form fields
+    if (!form.abuse_type || !form.evidence_urls || !form.Confirm) {
+        Toast.fire({
+            icon: 'error',
+            title: 'All fields are required',
+        });
+        return;
+    }
+    console.log(form);
+    const formData = new FormData();
+    formData.append('abuse_type', form.abuse_type);
+    formData.append('evidence_urls', form.evidence_urls);
+    formData.append('additional_notes', form.additional_notes);
+    formData.append('observed_date', form.observed_date);
+    formData.append('targetDomain', form.targetDomain);
+    // Append the file to the FormData object if it's not an empty string
+    if (form.attachments !== '') {
+        formData.append('attachments', file);
+    }
 
-// const props = defineProps({
-//   domain: {
-//     type: Object,
-//   },
-//   details: {
-//     type: Object,
-//   },
-//   spoofData: {
-//     type: Object,
-//   },
-//   userid: {
-//     type: Object,
-//   },
-//   spoofList: {
-//     type: Object,
-//   }
-  
-// });
-// const heading = ref('Screenshots');
-// const changePageContent = (buttonCLicked) =>{
-//     heading.value = buttonCLicked;
-// }
- 
-// // Data
-// const bladeViewUrl = ref("");
+    formData.append('carbon_copy_request_to', form.carbon_copy_request_to);
+    
+    // Send a POST request using Inertia
+    // inertia.post('/ReportSpoofySite', form);
+    router.post('/ReportSpoofySite', form)
+        // Handle the success response
+        Toast.fire({
+            icon: 'success',
+            title: 'Reported Successfully',
+        });
 
-// // Set the URL of your Blade view when the component is mounted
-// onMounted(() => {
-//   bladeViewUrl.value = "http://127.0.0.1:5500/resources/views/map.html"; // Replace with the actual relative path
-// });
-
-// const userId = props.domain[0].user_id;
-
-// // const nextId = props.spoofList[1].id;
-// const nextId = ref(props.spoofData.id + 1);
-// const nextId2 = ref(props.spoofData.id - 1);
-// // console.log(props.spoofList);
-// // console.log("hello");
-// const changeID = (activeId) => {
-//   let index = props.spoofList.length - 1; 
-//   console.log("hello");
-//   console.log(props.spoofList.length - 1);
-//   while(index > 0){
-//      console.log(props.spoofList[index].id);
-//     if(activeId === props.spoofList[index].id){
-//       index--;
-//       nextId.value = props.spoofList[index].id;
-//       break; 
-//     }else{
-//       index--;
-//     }
-//   }
-// }
-
-// const changeIDPlus = (activeId) => {
-//   let index = 0; 
-//   console.log("hello");
-//   console.log(props.spoofList[index].id);
-//   while(index < props.spoofList.length){
-//     console.log(props.spoofList[index].id);
-//     if(activeId === props.spoofList[index].id){
-//       index++;
-//       nextId.value = props.spoofList[index].id;
-//       break; 
-//     }else{
-//       index++;
-//     }
-//   }
-// }
-
-// function checkImageExists(imageUrlL) {
-//   let imageUrl = `http://127.0.0.1:8000/assets/screenshots/${imageUrlL}.png`;
-//   fetch(imageUrl, { method: 'HEAD' })
-//     .then((response) => {
-//      if(response.status === 200){
-
-//      }
-// }
+        // You can also redirect to another page if needed
+        // router.push('/some-other-page');
+   
+}
 
 </script>
 
@@ -133,8 +94,8 @@ const closeModal = () => {
 
  <AuthenticatedLayout  class="overflow-scroll fontFamily" style="height:100vh; background: #FFF;"> 
   <!-- v-if=" props.userid === userId" -->
-   <div class="flex justify-between mt-6 w-100">
-    <div class="relative ml-6">
+   <div class="flex justify-between mt-6 mr-7 border-b-4 border-black max-w-100 lg;ml-6 md:ml-6 ml-0">
+    <div class="relative">
       <button class="absolute w-40 h-12 px-3 rounded-tr-full bg-dark tabsText" style="">Domain</button>
       <button class="w-56 h-12 pr-4 bg-gray-300 rounded-tr-full tabsText pl-9" style="margin-left: 106px;">Social Media</button>
     </div>
@@ -144,31 +105,50 @@ const closeModal = () => {
     <!-- <h2 class="my-auto text-gray-600 pl-7 h3 riskpush">{{ spoofData.spoofed_domain }}</h2> -->
     <!-- <h2 class="my-auto risk h3">High Risk</h2> -->
    <!-- </div> -->
-    <div class="flex flex-row justify-between mx-4 mt-2">
-    <form class="" style="width: 67%; height: 65vh;">
+    <div class="justify-between mx-4 mt-2 lg:flex-row lg:flex">
+    <form class="" style="lg:width: 67%; md:width:67%; height: 65vh;"  @submit.prevent="submitForm">
         <div class="flex pt-2 w-100 justify-evenly">
-          <label for="Abuse Type" class="p-3 w-50 reportFormText">
-            Abuse Type
-          </label>
-          <div class="flex justify-between mr-1 bg-yellow-100 w-50">
-            <div class="mt-3 ml-3">Choose Abuse Type</div>
-            <i class="mt-3 mr-4 fa fa-chevron-down"></i>
+        <label for="abuseType" class="p-3 w-50 reportFormText">Abuse Type</label>
+          <div class="relative w-50">
+              <select id="abuseType" name="abuseType" class="w-full h-10 pl-3 pr-10 text-gray-300 bg-yellow-100 border border-gray-300 rounded-md reportFormText" v-model="form.abuse_type" >
+                  <option value="" disabled selected class="text-black ">...Choose Abuse Type...</option>
+                  <option value="Spoofing" class="text-black">Spoofing</option>
+                  <option value="Phishing" class="text-black">Phishing</option>
+              </select>
+              <div class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                  <!-- <i class="fa fa-chevron-down"></i> -->
+              </div>
           </div>
-        </div>
+      </div>
         <div class="flex pt-2 w-100 justify-evenly">
           <label for="Other URLs" class="p-3 w-50 reportFormText">
             Evidence URLs
           </label>
           <div class="mr-1 w-50">
-            <textarea type="url" id="fname" name="fname" class="text-gray-700 bg-yellow-100 border-none h-100 w-100 reportFormText">Please provide details of abuse</textarea>
+            <textarea type="url" id="fname" name="fname" class="text-gray-700 bg-yellow-100 border-none h-100 w-100 reportFormText" placeholder="provide URL" v-model="form.evidence_urls" ></textarea>
           </div>
         </div>
+        <div class="flex pt-2 w-100 justify-evenly">
+        <label for="targetDomain" class="p-3 w-50 reportFormText">Target Domain</label>
+          <div class="relative w-50">
+              <select id="targetDomain" name="targetDomain" class="w-full h-10 pl-3 pr-10 text-gray-300 bg-yellow-100 border border-gray-300 rounded-md reportFormText" v-model="form.targetDomain" >
+                  <option value="" disabled selected class="text-black ">...Choose Targeted domain...</option>
+                <option  v-for="(domain, index) in domainList" :key="index">
+                  <option :value="domain.domain_name" class="text-black">{{domain.domain_name}}</option>
+                </option>
+                  <!-- <option value="Phishing" class="text-black">Phishing</option> -->
+              </select>
+              <div class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                  <!-- <i class="fa fa-chevron-down"></i> -->
+              </div>
+          </div>
+      </div>
         <div class="flex pt-2 w-100 justify-evenly">
           <label for="Other URLs" class="p-3 w-50 reportFormText">
             Additional Notes
           </label>
           <div class="flex justify-around mr-1 bg-yellow-100 w-50">
-             <textarea type="url" id="fname" name="Additional Notes" class="text-gray-700 bg-yellow-100 border-none h-100 w-100 reportFormText" rows="7">Please provide details of abuse</textarea>
+             <textarea type="url" id="fname" name="Additional Notes" class="text-gray-700 bg-yellow-100 border-none h-100 w-100 reportFormText" rows="7" placeholder="Please provide details of abuse" v-model="form.additional_notes" ></textarea>
           </div>
         </div>
         <div class="flex pt-2 w-100 justify-evenly">
@@ -176,7 +156,7 @@ const closeModal = () => {
             Observed  Date
           </label>
           <div class="mr-1 w-50">
-            <input type="date" id="fname" name="fname" class="text-gray-700 bg-yellow-100 border-none h-100 w-100 reportFormText"/>
+            <input type="date" id="fname" name="fname" class="text-gray-700 bg-yellow-100 border-none h-100 w-100 reportFormText" v-model="form.observed_date" />
           </div>
         </div>
         <div class="flex pt-2 w-100 justify-evenly">
@@ -185,7 +165,7 @@ const closeModal = () => {
           </label>
           <div class="flex mr-1 bg-yellow-100 w-50">
             <i class="mx-3 mt-2 text-xl fa fa-paperclip"></i>
-            <input type="file" class="pt-2 h-100 w-100" placeholder="Attachment.dox" tooltip="Attachment.dox">
+            <input type="file" class="pt-2 h-100 w-100" placeholder="Attachment.dox" @change="handleFileChange" tooltip="Attachment.dox"/>
           </div>
         </div>
         <div class="flex pt-2 w-100 justify-evenly">
@@ -193,7 +173,7 @@ const closeModal = () => {
             Carbon Copy (CC) the Request 
           </label>
           <div class="flex justify-around mr-1 bg-yellow-100 w-50">
-            <input type="email" id="fname" name="Carbon Copy (CC) the Request" class="placeholder-gray-700 bg-yellow-100 border-none h-100 w-100 reportFormText" placeholder="james.name@example.com"/>
+            <input type="email" id="fname" name="Carbon Copy (CC) the Request" class="placeholder-gray-700 bg-yellow-100 border-none h-100 w-100 reportFormText" v-model="form.carbon_copy_request_to" placeholder="james.name@example.com"/>
           </div>
         </div>
         <div class="flex pt-2 w-100 justify-evenly">
@@ -201,33 +181,14 @@ const closeModal = () => {
             Please Confirm
           </label>
           <div class="flex mr-1 text-gray-700 bg-yellow-100 border-none w-50 reportFormText">
-            <input type="checkbox" id="fname" name="fname" class="mx-3 text-yellow-300"/>
+            <input type="checkbox" id="fname" name="fname" class="mx-3 text-yellow-300" v-model="form.Confirm"/>
             <div>I confirm that the website I am reporting is a fake, phishing, or spoofing site. I understand that false reports can 
               harm legitimate websites and agree to report only suspicious websites that I am certain about. 
               I take full responsibility for this report
             </div>
           </div>
         </div>
-      </form>
-    <div class="ml-1 box-style" style=" height: 65vh; width: 30%;">
-      <div class="align-middle bg-gray-100 rounded-t-lg" style="height: 45px; width: 100%;">
-        <div class="py-3 pl-3 chechdetails">Definitions</div>
-        <!-- will do js here -->
-        
-      </div>
-    </div>
-   </div>
-   <div class="relative justify-between pt-3 w-100"><!-- flex -->
-    <div class="flex justify-between float-right w-64 pr-14">
-       <button class="my-2 buttons buttonsText">cancel</button>
-        <button class="my-auto bg-yellow-300 buttons buttonsText" @click="openModal">confirm</button>
-    </div>
-    <!-- <div class="flex justify-between mr-6 w-80"> -->
-       <!-- <Link class="my-auto buttons buttonsText" @click="changeID(spoofData.id)" :href="'/spoof/view/' + nextId2"><i class="pr-2 fa fa-chevron-left" aria-hidden="true"></i> Previous Item</Link> -->
-        <!-- <Link class="my-auto buttons buttonsText" @click="changeIDPlus(spoofData.id)" :href="'/spoof/view/' + nextId ">Next Item<i class="pr-2 fa fa-chevron-right" aria-hidden="true"></i> </Link> -->
-    <!-- </div> -->
-   </div>
-   <!-- Modal -->
+           <!-- Modal -->
     <transition name="modal-fade" >
       <div v-if="isModalVisible" class="backlight" @click="closeModal">
         <div
@@ -250,10 +211,10 @@ const closeModal = () => {
                 <div class="relative flex my-2 modelText">
                    <img class="pr-3 " :src="'/assets/systemImages/Promo.svg'"/>
                    <img class="absolute m-2" :src="'/assets/systemImages/bookmark.svg'"/>
-                  <div class="my-auto">Do you want to Report FakeSite.2?</div>
+                  <div class="my-auto">Do you want to Report <span class="text-yellow-500">{{form.evidence_urls}}</span>?</div>
                 </div>
                 <div class="relative w-100" >
-                   <Link class="float-right px-4 bg-yellow-300 buttons buttonsText">confirm</Link>
+                   <button class="float-right px-4 bg-yellow-300 buttons buttonsText" type="submit" @click="submit()">confirm</button>
                 </div>
               </div>
               </div>
@@ -262,6 +223,26 @@ const closeModal = () => {
         </div>
       </div>
     </transition>
+      </form>
+    <div class="ml-1 box-style sm_hidden" style=" height: 65vh; width: 100%; ">
+      <div class="align-middle bg-gray-100 rounded-t-lg" style="height: 45px; width: 100%;">
+        <div class="py-3 pl-3 chechdetails">Definitions</div>
+        <!-- will do js here -->
+        
+      </div>
+    </div>
+   </div>
+   <div class="relative justify-between pt-3 w-100"><!-- flex -->
+    <div class="flex justify-between float-right w-64 pr-14">
+       <Link class="my-2 buttons buttonsText" @click="reload">cancel</Link>
+        <button class="my-auto bg-yellow-300 buttons buttonsText" @click="openModal">confirm</button>
+    </div>
+    <!-- <div class="flex justify-between mr-6 w-80"> -->
+       <!-- <Link class="my-auto buttons buttonsText" @click="changeID(spoofData.id)" :href="'/spoof/view/' + nextId2"><i class="pr-2 fa fa-chevron-left" aria-hidden="true"></i> Previous Item</Link> -->
+        <!-- <Link class="my-auto buttons buttonsText" @click="changeIDPlus(spoofData.id)" :href="'/spoof/view/' + nextId ">Next Item<i class="pr-2 fa fa-chevron-right" aria-hidden="true"></i> </Link> -->
+    <!-- </div> -->
+   </div>
+
   </AuthenticatedLayout>
 </template>
 

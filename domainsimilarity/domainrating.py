@@ -12,6 +12,12 @@ domain_list = domain_string.split(',')
 domainOne = domain_list[0].strip()  # Use strip() to remove any leading or trailing whitespaces
 domainTwo = domain_list[1].strip()
 
+domainOne = domainOne.split('.')
+domainTwo = domainTwo.split('.')
+
+domainOne = domainOne[0].strip()  # Use strip() to remove any leading or trailing whitespaces
+domainTwo = domainTwo[0].strip()
+
 import distance
 import re
 from sklearn.feature_extraction.text import CountVectorizer

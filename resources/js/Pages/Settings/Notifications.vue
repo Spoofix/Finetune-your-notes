@@ -34,11 +34,76 @@ defineComponent({
   components: {
     Link
   },
-
 });
-const activeOne = ref('on');
-const menu =(now) => {
-  activeOne.value = now;
+
+
+const props = defineProps({
+  notificationSettings: {
+    type: Object,
+  },
+});
+
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 7000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+})
+
+
+const activeOne = ref(props.notificationSettings.all_notifications);
+const active2 = ref(props.notificationSettings.takedown_requests);
+const active3 = ref(props.notificationSettings.takedown_completed);
+const active4 = ref(props.notificationSettings.news_and_updates);
+const active5 = ref(props.notificationSettings.reminders);
+const menu =(now, index) => {
+  if(index == 1){
+    activeOne.value = now;
+    console.log(activeOne.value);
+  }else if(index == 2){
+    active2.value = now;
+  }else if(index == 3){
+    active3.value = now;
+  }else if(index == 4){
+    active4.value = now;
+  }else if(index == 5){
+    active5.value = now;
+  }
+   
+}
+console.log('form');
+console.log(activeOne.value);
+
+const form = useForm({
+    all_notifications: activeOne._value,
+    takedown_requests: active2._value,
+    takedown_completed: active3._value,
+    news_and_updates: active4._value,
+    reminders: active5._value,
+});
+
+function submit() {
+  form.all_notifications = activeOne._value;
+  form.takedown_requests = active2._value;
+  form.takedown_completed = active3._value;
+  form.news_and_updates = active4._value;
+  form.reminders = active5._value;
+ console.log(activeOne._value); 
+    // console.log('form');
+    // console.log(form);
+ 
+    router.post('/notification-update', form)
+   
+    Toast.fire({
+        icon: 'success',
+        title: 'Notifications Settings Updates Successfully'
+    })
+    //  location.reload();
 }
 
 </script>
@@ -46,16 +111,16 @@ const menu =(now) => {
 <template>
   <Head title="Notifications" />
 
- <SettingsLayout  class="overflow-scroll fontFamily" style="height:100vh; background: #FFF;"> <!-- v-if=" props.userid === userId" -->
-   <div class="flex justify-between mt-6 border-b-4 border-black h-14 w-100">
-    <div class="relative mt-2 ml-6">
-      <button @click="menu('Profile')" class="absolute w-40 h-12 px-3 rounded-tr-full tabsText bg-dark">Notifications</button>
+ <SettingsLayout  class="overflow-scroll fontFamily" style="height:100vh; width: 100vh background: #FFF;"> <!-- v-if=" props.userid === userId" -->
+   <div class="flex justify-between mt-6 ml-0 mr-8 border-b-4 border-black lg:h-14 md:h-14 max-w-100 lg:ml-6 md:ml-6 ">
+    <div class="mt-2 ">
+      <button @click="menu('Profile')" class="w-40 h-10 px-3 rounded-tr-full sm:mb-4 md:h-12 lg:h-12 tabsText bg-dark">Notifications</button>
     </div>
-      <Link class="my-auto buttons buttonsText mr-9" ><i class="pr-2 fa fa-chevron-left" aria-hidden="true" preserve-scroll></i> Back</Link>
+      <!-- <Link class="my-auto buttons buttonsText mr-9" ><i class="pr-2 fa fa-chevron-left" aria-hidden="true" preserve-scroll></i> Back</Link> -->
    </div>
 
     <div
-      class="flex items-center justify-between mx-4 mt-3 mr-6 cursor-pointer bigDropdownBg h-14"
+       class="flex items-center justify-between my-2 cursor-pointer lg:mx-6 sm:mx-2 sm:mr-3 bigDropdownBg h-14"
         style="border-radius: 6px; "
         id="myDiv"
     >
@@ -64,96 +129,123 @@ const menu =(now) => {
       </div>
     </div>
 
-    <div class="mx-4 mt-2 " style=" height: 35vh; border-radius: 6px; border: 1px solid #BFBFBF; ">
-       <div class="flex flex-row mx-4 mb-3" style=" height: 7vh; width:100%; ">
-        <div class="my-auto font-bold ml-9" style="width: 16%;" >All Notifications</div>
-        <div class="my-auto ml-48 activeBtn" @click="menu('on')" v-if="activeOne === 'off'">
+    <div class="mt-2 lg:mx-6 sm:mx-2 sm:mr-3" style=" height: 35vh; border-radius: 6px; border: 1px solid #BFBFBF; ">
+
+
+      <div class="flex mx-4 my-4 mb-3 " style="max-height: 7vh; min-width: 600px;">
+        <div class="flex" >
+        <div class="my-auto font-bold lg:ml-9 md:ml-9" style="width: 200px;" >All Notifications</div>
+        <div class="my-auto" style="min-width: 200px;">
+            <div class="mx-auto my-auto activeBtn" @click="menu('false',1)" v-if="activeOne === 'true' ">
           <div class="my-auto ml-5 bg-yellow-300 rounded-full btnSwitch" >
             <!-- button -->
           </div>
         </div>
-        <div class="my-auto ml-48 activeBtn"  @click="menu('off')" v-if="activeOne === 'on'">
+        <div class="mx-auto my-auto activeBtn"  @click="menu('true',1)" v-if="activeOne === 'false'">
           <div class="my-auto bg-gray-300 rounded-full btnSwitch">
             <!-- button -->
           </div>
         </div>
-        <div class="my-auto ml-80">Receive all system notifications </div>
+        </div>
+        </div>
+        <div class="my-auto ml-8 lg:mt-0 md:ml-6 lg:ml-8" style="width: 300px;">Receive all system notifications </div>
       </div>
-      <div class="flex flex-row mx-4 mb-3" style=" height: 7vh; width:100%;  ">
-        <div class="my-auto font-bold ml-9" style="width: 16%;" >Takedown Requests</div>
-        <div class="my-auto ml-48 activeBtn" @click="menu('on')" v-if="activeOne === 'off'">
+      
+      <div class="flex mx-4 my-5 mb-3 " style="max-height: 7vh; min-width: 600px;">
+        <div class="flex" >
+        <div class="my-auto font-bold lg:ml-9 md:ml-9" style="width: 200px;" >Takedown Requests</div>
+        <div class="my-auto" style="min-width: 200px;">
+            <div class="mx-auto my-auto activeBtn" @click="menu('false',2)" v-if="active2 === 'true' ">
           <div class="my-auto ml-5 bg-yellow-300 rounded-full btnSwitch" >
             <!-- button -->
           </div>
         </div>
-        <div class="my-auto ml-48 activeBtn"  @click="menu('off')" v-if="activeOne === 'on'">
+        <div class="mx-auto my-auto activeBtn"  @click="menu('true',2)" v-if="active2 === 'false'">
           <div class="my-auto bg-gray-300 rounded-full btnSwitch">
             <!-- button -->
           </div>
         </div>
-        <div class="my-auto ml-80">Recieve all takedown requests processed.  </div>
+        </div>
+        </div>
+        <div class="my-auto ml-8 lg:mt-0 md:ml-6 lg:ml-8" style="width: 300px;">Recieve all takedown requests processed. </div>
       </div>
-       <div class="flex flex-row mx-4 mb-3" style=" height: 7vh; width:100%;  ">
-        <div class="my-auto font-bold ml-9" style="width: 16%;" >Takedown Completed</div>
-        <div class="my-auto ml-48 activeBtn" @click="menu('on')" v-if="activeOne === 'off'">
+
+      <div class="flex mx-4 my-5 mb-3 " style="max-height: 7vh; min-width: 600px;">
+        <div class="flex" >
+        <div class="my-auto font-bold lg:ml-9 md:ml-9" style="width: 200px;" >Takedown Completed</div>
+        <div class="my-auto" style="min-width: 200px;">
+            <div class="mx-auto my-auto activeBtn" @click="menu('false',3)" v-if="active3 === 'true' ">
           <div class="my-auto ml-5 bg-yellow-300 rounded-full btnSwitch" >
             <!-- button -->
           </div>
         </div>
-        <div class="my-auto ml-48 activeBtn"  @click="menu('off')" v-if="activeOne === 'on'">
+        <div class="mx-auto my-auto activeBtn"  @click="menu('true',3)" v-if="active3 === 'false'">
           <div class="my-auto bg-gray-300 rounded-full btnSwitch">
             <!-- button -->
           </div>
         </div>
-        <div class="my-auto ml-80">Receive all takedown completed confirmations.  </div>
+        </div>
+        </div>
+        <div class="my-auto ml-8 lg:mt-0 md:ml-6 lg:ml-8" style="width: 300px;">Receive all takedown completed confirmations. </div>
       </div>
 
    </div>
 
     <div
-      class="flex items-center justify-between mx-4 my-2 mr-6 cursor-pointer bigDropdownBg h-14"
+      class="flex items-center justify-between my-2 cursor-pointer lg:mx-6 sm:mx-2 sm:mr-3 bigDropdownBg h-14"
         style="border-radius: 6px; "
         id="myDiv">
       <div class="ml-5 text-2xl text-black">
           <h3 class="orgDomain text-capitalize ">Push Notifications</h3>
       </div>
     </div>
-  <div class="mx-4 mt-2" style=" height: 20vh; border-radius: 6px; border: 1px solid #BFBFBF; ">
-       <div class="flex flex-row mx-4 mb-3" style=" height: 7vh; width:100%;  ">
-        <div class="my-auto font-bold ml-9" style="width: 16%;" >News And Updates</div>
-        <div class="my-auto ml-48 activeBtn" @click="menu('on')" v-if="activeOne === 'off'">
+  <div class="mt-2 lg:mx-6 sm:mx-2 sm:mr-3" style=" height: 20vh; border-radius: 6px; border: 1px solid #BFBFBF; ">
+       
+      <div class="flex mx-4 my-3 mb-3 " style="max-height: 7vh; min-width: 600px;">
+        <div class="flex" >
+        <div class="my-auto font-bold lg:ml-9 md:ml-9" style="width: 200px;" >News And Updates</div>
+        <div class="my-auto" style="min-width: 200px;">
+            <div class="mx-auto my-auto activeBtn" @click="menu('false',4)" v-if="active4 === 'true' ">
           <div class="my-auto ml-5 bg-yellow-300 rounded-full btnSwitch" >
             <!-- button -->
           </div>
         </div>
-        <div class="my-auto ml-48 activeBtn"  @click="menu('off')" v-if="activeOne === 'on'">
+        <div class="mx-auto my-auto activeBtn"  @click="menu('true',4)" v-if="active4 === 'false'">
           <div class="my-auto bg-gray-300 rounded-full btnSwitch">
             <!-- button -->
           </div>
         </div>
-        <div class="my-auto ml-80">Receive all updates notifications </div>
+        </div>
+        </div>
+        <div class="my-auto ml-8 lg:mt-0 md:ml-6 lg:ml-8" style="width: 300px;">Receive all updates notifications  </div>
       </div>
-       <div class="flex flex-row mx-4 mb-3" style=" height: 7vh; width:100%;  ">
-        <div class="my-auto font-bold ml-9" style="width: 16%;" >Reminders</div>
-        <div class="my-auto ml-48 activeBtn" @click="menu('on')" v-if="activeOne === 'off'">
+
+            <div class="flex mx-4 my-5 mb-3 " style="max-height: 7vh; min-width: 600px;">
+        <div class="flex" >
+        <div class="my-auto font-bold lg:ml-9 md:ml-9" style="width: 200px;" >Reminders</div>
+        <div class="my-auto" style="min-width: 200px;">
+            <div class="mx-auto my-auto activeBtn" @click="menu('false',5)" v-if="active5 === 'true' ">
           <div class="my-auto ml-5 bg-yellow-300 rounded-full btnSwitch" >
             <!-- button -->
           </div>
         </div>
-        <div class="my-auto ml-48 activeBtn"  @click="menu('off')" v-if="activeOne === 'on'">
+        <div class="mx-auto my-auto activeBtn"  @click="menu('true',5)" v-if="active5 === 'false'">
           <div class="my-auto bg-gray-300 rounded-full btnSwitch">
             <!-- button -->
           </div>
         </div>
-        <div class="my-auto ml-80">Notifications to remind you of updates you might have missed </div>
+        </div>
+        </div>
+        <div class="my-auto ml-8 lg:mt-0 md:ml-6 lg:ml-8" style="width: 300px;">Recieve all takedown requests processed. </div>
       </div>
+      
    </div>
        <div class="flex justify-between float-right h-16 mr-6 w-60">
-       <button class="my-auto bg-gray-300 buttons buttonsText" @click="openModal" > Reset</button>
+       <Link class="my-auto bg-gray-300 buttons buttonsText" href=" " > Reset</Link>
         <button class="my-auto bg-yellow-300 buttons buttonsText" @click="openModal"> Save Changes </button>
     </div>
 
-        <!-- Modal -->
+     <!-- Modal -->
     <transition name="modal-fade" >
       <div v-if="isModalVisible" class="backlight" @click="closeModal">
         <div
@@ -176,10 +268,10 @@ const menu =(now) => {
                 <div class="relative flex my-2 modelText">
                    <img class="pr-3 " :src="'/assets/systemImages/Promo.svg'"/>
                    <img class="absolute m-2" :src="'/assets/systemImages/bookmark.svg'"/>
-                  <div class="my-auto">Are you sure you want to reset data?</div>
+                  <div class="my-auto">Are you sure you want to you want to change notification settings?</div>
                 </div>
                 <div class="relative w-100" >
-                   <Link class="float-right px-4 bg-yellow-300 buttons buttonsText">confirm</Link>
+                   <button class="float-right px-4 bg-yellow-300 buttons buttonsText" @click="submit()">confirm</button>
                 </div>
               </div>
               </div>
@@ -253,7 +345,7 @@ background: var(--dark-neutral-dark-neutral-9, #454545);
   margin: auto;
 }
 .modelStyle{
-  width: 624px;
+  max-width: 624px;
   height: 237px;
   display: flex;
   padding: 30px 40px;
@@ -304,7 +396,7 @@ box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 
 }
 .modelText{
-width: 474px;
+ max-width: 474px;
 color: #2A2A2A;
 
 /* Regular/Heading 5/Regular */
@@ -410,7 +502,14 @@ line-height: 120%; /* 14.4px */
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
-/* Add more custom styles as needed */
+.arWidth{
+  width: 50%;
+}
+@media (max-width: 1200px) {
+  .arWidth{
+  width: 90%;
+}
+}
 </style>
 
 

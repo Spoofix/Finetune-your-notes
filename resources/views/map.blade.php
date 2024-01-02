@@ -62,15 +62,17 @@
 
 <body>
 
-
+@if ($latitude && $longitude)
     <div class="folium-map" id="map_a547671471a4f81a5828924aa034da6f"></div>
-
+@else
+ <div style="margin: 30px; font-size: 20px; ">location not available for <span style="">{{$spoofdomain}}</span></div>
+@endif
 </body>
 <script>
     var map_a547671471a4f81a5828924aa034da6f = L.map(
                 "map_a547671471a4f81a5828924aa034da6f",
                 {
-                    center: [-4.0547,  39.6636],
+                    center: [{{$latitude}}, {{$longitude}}],
                     crs: L.CRS.EPSG3857,
                     zoom: 10,
                     zoomControl: true,
@@ -89,7 +91,7 @@
         
     
             var marker_9fbdd0b3158906aaa671ccf3117bfa3a = L.marker(
-                [-4.0547, 39.6636],
+                [{{$latitude}},{{$longitude}}],
                 {}
             ).addTo(map_a547671471a4f81a5828924aa034da6f);
         
@@ -104,7 +106,7 @@
 
         
             
-                var html_d13e99ff6ec3646b7cd3d9e1645fa599 = $(`<div id="html_d13e99ff6ec3646b7cd3d9e1645fa599" style="width: 100.0%; height: 100.0%;">mut.ac.ke</div>`)[0];
+                var html_d13e99ff6ec3646b7cd3d9e1645fa599 = $(`<div id="html_d13e99ff6ec3646b7cd3d9e1645fa599" style="width: 100.0%; height: 100.0%;">${{$spoofdomain}}</div>`)[0];
                 popup_a088dece8e829e7c1106a4b54a0f9bee.setContent(html_d13e99ff6ec3646b7cd3d9e1645fa599);
             
         

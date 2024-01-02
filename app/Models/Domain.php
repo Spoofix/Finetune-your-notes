@@ -10,28 +10,27 @@ class Domain extends Model
 {
     use HasFactory;
 
-    protected $table="domains";
+    protected $table = "domains";
 
     protected $fillable = [
-        'user_id', 'domain_name', 'status'
+        'user_id', 'domain_name', 'status', 'org_id'
     ];
 
-   protected $appends =['formated_updated_at','is_queued'];
+    protected $appends = ['formated_updated_at', 'is_queued'];
 
-   public function getFormatedUpdatedAtAttribute($key)
-   {
-      return $this->created_at->format("Y-m-d H:i");
-   }
+    public function getFormatedUpdatedAtAttribute($key)
+    {
+        return $this->created_at->format("Y-m-d H:i");
+    }
 
     public function getIsQueuedAttribute()
     {
         try {
-            return SpoofedDomain::processingDomains()->where('domain_id',$this->id)->exists();
-        }catch (\Exception $exception){
-            Log::error("Error > ".$exception->getMessage().' <> '.$exception->getTraceAsString());
+            return SpoofedDomain::processingDomains()->where('domain_id', $this->id)->exists();
+        } catch (\Exception $exception) {
+            Log::error("Error > " . $exception->getMessage() . ' <> ' . $exception->getTraceAsString());
         }
 
         return false;
     }
-
 }

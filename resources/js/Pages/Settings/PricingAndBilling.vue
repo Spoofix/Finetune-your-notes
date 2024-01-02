@@ -36,14 +36,26 @@ defineComponent({
   },
 
 });
+
+const props = defineProps({
+  plan: {
+    type: Object,
+  },
+});
+
 const activeOne = ref('Pricing');
 const menu =(now) => {
   activeOne.value = now;
 }
-const activeCards = ref('Free');
+const activeCards = ref(props.plan.plan);
+console.log(props.plan.plan);
 const cards =(now) => {
-  activeCards.value = now;
+  // activeCards.value = now;
 }
+
+const freePlan = ['monthly scans',' 1 domain', 'risk assessment', 'automatic takedowns', 'helpcenter', 'takedowns', '1 organization user account', 'takedown on behalf'];
+const basicPlan = ['weekly scans', '2 domains', 'risk assessment', 'automatic takedowns','helpcenter', '10 takedowns',  '2 organization user accounts', '5 takedown on behalf'];
+const premiumPlan = ['daily scans', '4 domains', 'risk assessment', 'automatic takedowns', 'helpcenter', '50 takedowns','5 organization user accounts', '20 takedown on behalf'];
 
 </script>
 
@@ -51,50 +63,62 @@ const cards =(now) => {
   <Head title="Pricing And Billing" />
 
  <SettingsLayout  class="overflow-scroll fontFamily" style="height:100vh; background: #FFF;"> <!-- v-if=" props.userid === userId" -->
-   <div class="flex justify-between mt-6 border-b-4 border-black w-100 ">
-    <div class="relative ml-6 ">
-      <button @click="menu('Pricing')" class="absolute w-40 h-12 px-3 rounded-tr-full tabsText" :class="activeOne === 'Pricing' ? 'bg-dark' : 'bg-gray-300'" style="">Pricing</button>
-      <button @click="menu('Billing')" class="w-56 h-12 pr-4 rounded-tr-full tabsText pl-9" style="margin-left: 106px;" :class="activeOne === 'Billing' ? 'bg-dark' : 'bg-gray-300'" >Billing</button>
+   <div class="flex justify-between mt-6 mr-8 border-b-4 border-black max-w-100 lg:ml-6 md:ml-6">
+    <div class="relative ml-0 ">
+      <button @click="menu('Pricing')" class="absolute h-10 rounded-tr-full lg:h-12 md:h-12 w-36 lg:px-3 lg:w-40 tabsText md:w-40" :class="activeOne === 'Pricing' ? 'bg-dark' : 'bg-gray-300'" style="">Pricing</button>
+      <button @click="menu('Billing')" class="h-10 pl-5 rounded-tr-full md:h-12 lg:h-12 lg:pr-4 w-44 lg:w-56 tabsText lg:pl-9 md:pl-9 md:w-56 rightTab" style="margin-left: 106px;" :class="activeOne === 'Billing' ? 'bg-dark' : 'bg-gray-300'" >Billing</button>
     </div>
-      <Link class="my-auto buttons buttonsText mr-9" ><i class="pr-2 fa fa-chevron-left" aria-hidden="true" preserve-scroll></i> Back</Link>
+      <!-- <Link class="my-auto buttons buttonsText mr-9" ><i class="pr-2 fa fa-chevron-left" aria-hidden="true" preserve-scroll></i> Back</Link> -->
    </div>
 
     <div
-      class="flex items-center justify-between mx-4 my-2 mr-6 h-14"
+      class="flex items-center justify-between mx-3 my-2 mr-3 h-14"
       v-if="activeOne === 'Pricing'"
     >
+    
+         <div
+       class="flex items-center justify-between my-2 cursor-pointer lg:mx-3 sm:mx-2 sm:mr-4 bigDropdownBg h-14 w-100"
+        style="border-radius: 6px; "
+        id="myDiv"
+    >
       <div class="ml-5 text-2xl text-black">
-          <h3 class=" text-capitalize">Plans and Prices</h3>
+          <h3 class="orgDomain text-capitalize ">Plans and Prices</h3>
       </div>
     </div>
-    <div class="flex justify-between flex-auto ml-7" style="height: 65vh; width: 95%;" v-if="activeOne === 'Pricing'">
+    </div>
+    <div class="flex flex-wrap justify-around flex-auto m-auto lg:ml-7 " style="height: 75vh; width: 95%;" v-if="activeOne === 'Pricing'">
       <!-- free -->
-      <div class="relative bg-white w-96" style="border-radius: 6px; border: 1px solid #BFBFBF;" @click="cards('Free')">
+      <div class="relative mb-3 bg-white widthy" style="border-radius: 6px; border: 1px solid #BFBFBF; " @click="cards('Free')">
         <div class="w-full" style="height: 100px; border-radius: 6px;" :style="activeCards === 'Free' ? 'background: var(--dark-neutral-dark-neutral-8, #595959);' : 'background: var(--dark-neutral-dark-neutral-5, #D9D9D9);'">
           <h1 class="p-4 text-4xl font-extrabold bigText" :class="activeCards === 'Free' ? 'text-white' :'text-black'">Free</h1>
         </div>
         <div class="absolute mx-16 -mt-8 rounded w-60" :class="activeCards === 'Free' ? 'bg-yellow-300' :'bg-yellow-100'">
           <h1 class="p-4 text-5xl font-extrabold text-black ml-7 bigText">$ 0.00</h1>
         </div>
-        <div class="flex mx-16 mt-20">
-          <i class="mr-6 text-black fa fa-check" style="border-radius: 6px; border: 2px solid #000;"></i>
-          <h1 class="h-1 text-black h5">Check Domain Status</h1>
+        <div class="h-10 mx-4 mt-20 mb-2 rounded" :class="activeCards === 'Free' ? 'bg-yellow-300' :'bg-yellow-100'">
+          <h1 class="pt-2 ml-16 text-black h5">Monthly Offers</h1>
         </div>
-         <div class="flex mx-16 mt-2">
-          <i class="mr-6 text-black fa fa-check" style="border-radius: 6px; border: 2px solid #000;"></i>
-          <h1 class="h-1 text-black h5">Check Domain Status</h1>
+        <div v-for="(freePlans, index) in freePlan" :key="index" >
+          <!-- <div class="flex mx-16 mt-20">
+            <i class="mr-6 text-black fa fa-check" style="border-radius: 6px; border: 2px solid #000;"></i>
+            <h1 class="h-1 text-black h5">{{freePlans}}</h1>
+          </div> -->
+        <div class="flex mx-16 mt-2">
+          <i v-if="freePlans === 'automatic takedowns' || freePlans ===  'helpcenter' || freePlans ===  'takedowns'  || freePlans === 'takedown on behalf'" class="mr-6 text-black fa fa-x" style="border-radius: 6px; border: 4px solid red;"></i>
+          <i v-else class="mr-6 text-black fa fa-check" style="border-radius: 6px; border: 4px solid yellow;"></i>
+
+          <h1  v-if="freePlans === 'automatic takedowns' || freePlans ===  'helpcenter' || freePlans ===  'takedowns' || freePlans === 'takedown on behalf'"  class="h-1 text-black line-through capitalize min-w-max h5">{{freePlans}}</h1>
+          <h1 v-else class="h-1 text-black capitalize h5 min-w-max">{{freePlans}}</h1>
         </div>
-         <div class="flex mx-16 mt-2">
-          <i class="mr-6 text-black fa fa-check" style="border-radius: 6px; border: 2px solid #000;"></i>
-          <h1 class="h-1 text-black h5">Check Domain Status</h1>
         </div>
+
         <div class="relative w-full mt-3">
-          <Link class="float-right my-auto mr-6 w-28 buttons buttonsText" :class="activeCards === 'Free' ? 'bg-yellow-300' :'bg-yellow-100'"> Current Plan </Link>
+          <Link class="float-right my-auto mr-6 w-28 buttons buttonsText" :class="activeCards === 'Free' ? 'bg-yellow-300' :'bg-yellow-100'" href=" "> Current Plan </Link>
         </div>
         
       </div>
       <!-- basic -->
-       <div class="relative bg-white w-96" style="border-radius: 6px; border: 1px solid #BFBFBF;" @click="cards('Basic')">
+       <div class="relative mb-3 bg-white widthy" style="border-radius: 6px; border: 1px solid #BFBFBF;" @click="cards('Basic')">
         <div class="w-full" style="height: 100px; border-radius: 6px; " :style="activeCards === 'Basic' ? 'background: var(--dark-neutral-dark-neutral-8, #595959);' : 'background: var(--dark-neutral-dark-neutral-5, #D9D9D9);'">
           <h1 class="p-4 text-4xl font-extrabold bigText" :class="activeCards === 'Basic' ? 'text-white' :'text-black'">Basic</h1>
         </div>
@@ -102,26 +126,27 @@ const cards =(now) => {
           <h1 class="p-4 text-5xl font-extrabold text-black ml-7 bigText">$ 15.99</h1>
         </div>
         <div class="h-10 mx-4 mt-20 rounded" :class="activeCards === 'Basic' ? 'bg-yellow-300' :'bg-yellow-100'">
-          <h1 class="pt-2 ml-16 text-black h5">Check Domain Status</h1>
+          <h1 class="pt-2 ml-16 text-black h5">Monthly Offers</h1>
         </div>
-        <div class="flex mx-16 mt-2">
-          <i class="mr-6 text-black fa fa-check" style="border-radius: 6px; border: 2px solid #000;"></i>
-          <h1 class="h-1 text-black h5">Check Domain Status</h1>
+        <div v-for="(basicPlans, index) in basicPlan" :key="index" >
+           <div class="flex mx-16 mt-2">
+
+          <i v-if="basicPlans === 'automatic takedowns'" class="mr-6 font-bold text-black align-middle fa fa-x" style="border-radius: 6px; border: 4px solid red;"></i>
+          <i v-else class="mr-6 font-bold text-black fa fa-check" style="border-radius: 6px; border: 4px solid #fefcf8;"></i>
+
+          <h1 v-if="basicPlans === 'automatic takedowns'" class="h-1 text-black capitalize h5 min-w-max" style="text-decoration-line: line-through;">{{basicPlans}}</h1>
+          <h1 v-else class="h-1 text-black capitalize min-w-max h5">{{basicPlans}}</h1>
+          
         </div>
-         <div class="flex mx-16 mt-2">
-          <i class="mr-6 text-black fa fa-check" style="border-radius: 6px; border: 2px solid #000;"></i>
-          <h1 class="h-1 text-black h5">Check Domain Status</h1>
         </div>
-         <div class="flex mx-16 mt-2">
-          <i class="mr-6 text-black fa fa-check" style="border-radius: 6px; border: 2px solid #000;"></i>
-          <h1 class="h-1 text-black h5">Check Domain Status</h1>
-        </div>
+       
+      
         <div class="relative w-full mt-3">
-          <Link class="float-right my-auto mr-6 w-28 buttons buttonsText" :class="activeCards === 'Basic' ? 'bg-yellow-300' :'bg-yellow-100'"> Buy Now </Link>
+          <Link href=" " class="float-right my-auto mr-6 w-28 buttons buttonsText" :class="activeCards === 'Basic' ? 'bg-yellow-300' :'bg-yellow-100'"> Buy Now </Link>
         </div>
-        
+        <!-- premium -->
       </div>
-       <div class="relative bg-white w-96" style="border-radius: 6px; border: 1px solid #BFBFBF;" @click="cards('Premium')">
+       <div class="relative mb-3 bg-white widthy" style="border-radius: 6px; border: 1px solid #BFBFBF;" @click="cards('Premium')">
         <div class="w-full" style="height: 100px; border-radius: 6px;" :style="activeCards === 'Premium' ? 'background: var(--dark-neutral-dark-neutral-8, #595959);' : 'background: var(--dark-neutral-dark-neutral-5, #D9D9D9);'">
           <h1 class="p-4 text-4xl font-extrabold bigText" :class="activeCards === 'Premium' ? 'text-white' :'text-black'">Premium</h1>
         </div>
@@ -129,22 +154,17 @@ const cards =(now) => {
           <h1 class="p-4 text-5xl font-extrabold text-black ml-7 bigText">$ 25.99</h1>
         </div>
         <div class="h-10 mx-4 mt-20 rounded" :class="activeCards === 'Premium' ? 'bg-yellow-300' :'bg-yellow-100'">
-          <h1 class="pt-2 ml-16 text-black h5">Check Domain Status</h1>
+          <h1 class="pt-2 ml-16 text-black h5">Monthly Offers</h1>
         </div>
-        <div class="flex mx-16 mt-2">
-          <i class="mr-6 text-black fa fa-check" style="border-radius: 6px; border: 2px solid #000;"></i>
-          <h1 class="h-1 text-black h5">Check Domain Status</h1>
+        <div v-for="(premiumPlans,index) in premiumPlan" :key="index">
+          <div class="flex mx-16 mt-2">
+          <i class="mr-6 text-black fa fa-check" style="border-radius: 6px; border: 4px solid #fefce8;"></i>
+          <h1 class="h-1 text-black capitalize h5 min-w-max">{{premiumPlans}}</h1>
         </div>
-         <div class="flex mx-16 mt-2">
-          <i class="mr-6 text-black fa fa-check" style="border-radius: 6px; border: 2px solid #000;"></i>
-          <h1 class="h-1 text-black h5">Check Domain Status</h1>
         </div>
-         <div class="flex mx-16 mt-2">
-          <i class="mr-6 text-black fa fa-check" style="border-radius: 6px; border: 2px solid #000;"></i>
-          <h1 class="h-1 text-black h5">Check Domain Status</h1>
-        </div>
+        
         <div class="relative w-full mt-3">
-          <Link class="float-right my-auto mr-6 w-28 buttons buttonsText" :class="activeCards === 'Premium' ? 'bg-yellow-300' :'bg-yellow-100'" >Buy Now </Link>
+          <Link href=" " class="float-right my-auto mr-6 w-28 buttons buttonsText" :class="activeCards === 'Premium' ? 'bg-yellow-300' :'bg-yellow-100'" >Buy Now </Link>
         </div>
         
       </div>
@@ -164,15 +184,14 @@ const cards =(now) => {
     <div class="flex flex-row justify-between mx-4 mt-2" style=" height: 20vh; border-radius: 6px; border: 1px solid #BFBFBF; ">
     <div class="w-full" style="width: 74%;">
         <form action="">
-            <div class="flex mt-2 mr-20 ml-9 ">
+            <div class="mt-3 mr-20 lg:flex md:flex ml-9 ">
                   <label for="FirstName" class="my-auto font-bold" style="width: 40%;">Plan</label>
-                <input type="text" class=" ml-14 rounded-3xl" style="width: 60%;" name="FirstName" placeholder="premium"/>
+                <input type="text" class=" ml-14 rounded-3xl widthy2" style="" name="FirstName" placeholder="premium"/>
             </div>
-              <div class="flex mt-4 mr-20 ml-9 ">
+              <div class="mt-3 mr-20 lg:flex md:flex ml-9 ">
                 <label for="PhoneNumber" class="my-auto font-bold" style="width: 40%;" >Payment</label>
-                <input type="number" class=" ml-14 rounded-3xl" style="width: 60%;" name="PhoneNumber" placeholder="$ 25.99"/>
+                <input type="number" class=" ml-14 rounded-3xl widthy2" style="" name="Payment" placeholder="$ 25.99"/>
             </div>
-            <div class="pl-12 mt-1 ml-96">Did not get a verification email?  <Link class="text-gray-400">Send again</Link></div>
 
         </form>
     </div>
@@ -188,20 +207,24 @@ const cards =(now) => {
       </div>
     </div>
    <div class="relative justify-between pt-3 w-100"><!-- flex -->
-      <div class="flex flex-row justify-between mx-4 mt-2" style=" height: 25vh; border-radius: 6px; border: 1px solid #BFBFBF; ">
+      <div class="flex flex-row justify-between mx-4 -mt-2" style=" min-height: 25vh; border-radius: 6px; border: 1px solid #BFBFBF; ">
     <div class="w-full" style="width: 74%;">
         <form action="">
-            <div class="flex mt-3 mr-20 ml-9 ">
+            <div class="mt-3 mr-20 lg:flex md:flex ml-9 ">
+              <div class="flex">
                 <input type="checkbox" class="mx-4 my-auto text-6xl text-yellow-300 border-black rounded-full h-7 w-7">
                 <img  class="my-auto" style="width: 80px;" src="/assets/systemImages/visa.png" />
-                <input type="text" class=" ml-14 rounded-3xl" style="width: 60%;" name="FirstName" placeholder="premium"/>
+              </div>
+                <input type="text" class="mt-3 ml-14 rounded-3xl" style="" name="FirstName" placeholder="premium"/>
             </div>
-              <div class="flex mt-4 mr-20 ml-9 ">
-                <input type="checkbox" class="mx-4 my-auto text-6xl text-yellow-300 border-black rounded-full h-7 w-7">
+              <div class="mt-3 mr-20 lg:flex md:flex ml-9 ">
+                <div class="flex">
+                  <input type="checkbox" class="mx-4 my-auto text-6xl text-yellow-300 border-black rounded-full h-7 w-7">
                 <img  class="my-auto" style="width: 80px;" src="/assets/systemImages/mastercard.png" />
-                <input type="number" class=" ml-14 rounded-3xl" style="width: 60%;" name="PhoneNumber" placeholder="$ 25.99"/>
+                </div>
+                <input type="number" class="mt-3 ml-14 rounded-3xl" style="" name="PhoneNumber" placeholder="$ 25.99"/>
             </div>
-        <div class="flex flex-row h-10 mx-5 mt-3 rounded w-80"  :class="activeCards === 'Basic' ? 'bg-yellow-300' :'bg-yellow-100'">
+        <div class="flex flex-row h-10 mx-5 mt-3 mb-3 rounded w-80"  :class="activeCards === 'Basic' ? 'bg-yellow-300' :'bg-yellow-100'">
           <i class="my-auto ml-6 fa-solid fa-plus"></i>
           <h1 class="pt-2 ml-8 text-black h5">New Payment Method</h1>
         </div>
@@ -467,7 +490,20 @@ line-height: 120%; /* 14.4px */
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
-/* Add more custom styles as needed */
+
+.widthy{
+  width: 32%;
+  min-width: 360px;
+  max-width: 400px;
+  min-height: 500px;
+}
+@media (max-width: 767px) {
+.widthy{
+  width: 96%;
+  margin-top: 20px;
+ 
+}
+}
 </style>
 
 

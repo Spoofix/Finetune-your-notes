@@ -1,17 +1,14 @@
 # # pip install selenium requests_cache beautifulsoup4 nltk scikit-learn
 
 with open('keywords.txt', 'r') as file:
-    # Read the contents of the file
     contents = file.read()
 
-    # Assuming you have a string containing the two domains separated by a comma
 domain_string = contents
 
-# Split the string at the comma to get the individual domains
+
 domain_list = domain_string.split(',')
 
-# Assign the domains to different variables
-domainOne = domain_list[0].strip()  # Use strip() to remove any leading or trailing whitespaces
+domainOne = domain_list[0].strip() 
 domainTwo = domain_list[1].strip()
 
 
@@ -23,19 +20,20 @@ from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.common.by import By
 from urllib.parse import urlparse
 
-# ... (other code remains the same)
+
 
 def take_screenshot(url):
     try:
-        chrome_service = ChromeService(executable_path='/usr/bin/chromedriver')  # Replace with the path to chromedriver
+        chrome_service = ChromeService(executable_path='/usr/bin/chromedriver')  # path to chromedriver
         chrome_options = ChromeOptions()
         chrome_options.add_argument('--headless')
+
         # Set window size to match your laptop screen resolution
         chrome_options.add_argument('--window-size=1366,768')
         driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
 
         driver.get(url)
-        # Rest of your code for interacting with the web page, if needed.
+        #
 
         # Create the 'screenshots' subdirectory if it doesn't exist
         if not os.path.exists("../public/assets/screenshots"):

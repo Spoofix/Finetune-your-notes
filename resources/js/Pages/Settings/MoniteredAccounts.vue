@@ -40,23 +40,29 @@ const activeOne = ref('Profile');
 const menu =(now) => {
   // activeOne.value = now;
 }
+// 'OrgDomains'
 
+const props = defineProps({
+  OrgDomains: {
+    type: Object,
+  },
+});
 </script>
 
 <template>
   <Head title="Monitered Accounts" />
 
  <SettingsLayout  class="overflow-scroll fontFamily" style="height:100vh; background: #FFF;"> <!-- v-if=" props.userid === userId" -->
-   <div class="flex justify-between mt-6 border-b-4 border-black w-100 ">
-    <div class="relative ml-6 ">
-      <button @click="menu('Profile')" class="absolute w-40 h-12 px-3 rounded-tr-full tabsText" :class="activeOne === 'Profile' ? 'bg-dark' : 'bg-gray-300'" style="">Profile</button>
-      <button @click="menu('Organization')" class="w-56 h-12 pr-4 rounded-tr-full tabsText pl-9" style="margin-left: 106px;" :class="activeOne === 'Organization' ? 'bg-dark' : 'bg-gray-300'" >Organization</button>
+   <div class="flex justify-between mt-6 ml-0 border-b-4 border-black max-w-100 mr-7 lg:ml-6 md:ml-6">
+    <div class="">
+      <button @click="menu('Profile')" class="h-10 rounded-tr-full lg:h-12 md:h-12 w-36 lg:px-3 lg:w-40 tabsText md:w-40" :class="activeOne === 'Profile' ? 'bg-dark' : 'bg-gray-300'" style="">Organization</button>
+      <!-- <button @click="menu('Organization')" class="h-10 pl-5 rounded-tr-full md:h-12 lg:h-12 lg:pr-4 w-44 lg:w-56 tabsText lg:pl-9 md:pl-9 md:w-56 rightTab" style="margin-left: 106px;" :class="activeOne === 'Organization' ? 'bg-dark' : 'bg-gray-300'" >Organization</button> -->
     </div>
-      <Link class="my-auto buttons buttonsText mr-9" ><i class="pr-2 fa fa-chevron-left" aria-hidden="true" preserve-scroll></i> Back</Link>
+      <!-- <Link class="my-auto buttons buttonsText mr-9" ><i class="pr-2 fa fa-chevron-left" aria-hidden="true" preserve-scroll></i> Back</Link> -->
    </div>
 
     <div
-      class="flex items-center justify-between mx-4 my-2 mr-6 cursor-pointer bigDropdownBg h-14"
+      class="flex items-center justify-between my-2 cursor-pointer lg:mx-6 sm:mx-2 sm:mr-3 bigDropdownBg h-14"
         style="border-radius: 6px; "
         id="myDiv"
     >
@@ -65,73 +71,28 @@ const menu =(now) => {
       </div>
     </div>
     <!-- profile -->
-    <div class="flex flex-row justify-between mx-4 mt-2" style=" height: 30vh; border-radius: 6px; border: 1px solid #BFBFBF; " v-if="activeOne === 'Profile'">
+     <div class="flex flex-wrap justify-between mt-0 lg:mx-4 lg:flex-row" v-if="activeOne === 'Profile'" style=" min-height: 24vh; overflow: auto;  border-radius: 6px; border: 1px solid #BFBFBF; ">
     <div class="w-full" style="width: 74%;">
-        <form action="">
-            <div class="flex mt-3 mr-20 ml-9 ">
-                <label for="FirstName" class="my-auto font-bold" style="width: 40%;" v-if="activeOne === 'Profile'">Domain 1</label>
-                                <label for="FirstName" class="my-auto font-bold" style="width: 40%;" v-else>First Name</label>
-                <input type="text" class=" ml-14 rounded-3xl" style="width: 60%;" name="FirstName" placeholder="organization.com"/>
+        <form action="" v-for="(OrgDomain, index) in OrgDomains" :key="index">
+            <div class="mt-3 lg:flex md:mr-12 md:flex lg:mr-20 ml-9">
+                <label for="FirstName" class="my-auto font-bold" style="width: 40%;" >Domain{{index+1}}</label>
+                <div class="relative ml-10" style="min-width: 60%;">
+                  <!-- <i class="absolute pl-2 m-2 text-2xl fa-brands fa-facebook-f" style="color: #1877F2;"></i> -->
+                <input type="text" class="pl-10 rounded-3xl active:border-yellow-400" style="width: 100%;" name="FirstName" v-model="OrgDomain.domain_name" placeholder="abc.com"/>
+                </div>
             </div>
-              <div class="flex mt-3 mr-20 ml-9 " v-if="activeOne === 'Profile'">
-                <label for="LastName" class="my-auto font-bold" style="width: 40%;"  >Domain 2</label>
-                <input type="text" class=" ml-14 rounded-3xl" style="width: 60%;" name="LastName" placeholder="organization.com"/>
-            </div>
-              <div class="flex mt-3 mr-20 ml-9 ">
-                <label for="PhoneNumber" class="my-auto font-bold" style="width: 40%;" >Domain 3</label>
-                <input type="text" class=" ml-14 rounded-3xl" style="width: 60%;" name="PhoneNumber" placeholder="organization.com"/>
-            </div>
-              <div class="flex mt-3 mr-20 ml-9 ">
-                <label for="EmailAddress" class="my-auto font-bold" style="width: 40%;" > Domain 4</label>
-                <input type="text" class=" ml-14 rounded-3xl" style="width: 60%;" name="EmailAddress" placeholder="organization.com"/>
-            </div>
-
-
         </form>
+        <!-- <div class="ml-1" style="width:100%;"> -->
+          <Link class="float-right w-48 my-2 bg-yellow-300 lg:mr-20 buttons buttonsText md:mr-12 " href=" " > Manage Media Accounts </Link>
+        <!-- </div> -->
     </div>
-    <div class="ml-1" style=" width: 40%; max-width: 365px: min-width: 350px;">
-     <Link class="bg-yellow-300 my-7 buttons buttonsText mx-14"> Manage  Domains </Link>
-    </div>
+    <!-- <div class="ml-1" style=" width: 40%; max-width: 365px: min-width: 350px;">
+     <Link class="bg-yellow-300 my-7 buttons buttonsText mx-14"> Manage Media Accounts </Link>
+    </div> -->
    </div>
    <!-- organization -->
-     <div class="flex flex-row justify-between mx-4 mt-2" style=" height: 60vh; border-radius: 6px; border: 1px solid #BFBFBF; " v-if="activeOne !== 'Profile'"> 
-    <div class="w-full" style="width: 74%;">
-        <h3 class="mt-4 ml-8 text-black h3">Add Another Account</h3>
-         <form action="">
-            <div class="flex mt-3 mr-20 ml-9 ">
-                <label for="FirstName" class="my-auto font-bold" style="width: 40%;" >First Name</label>
-                <input type="text" class=" ml-14 rounded-3xl" style="width: 60%;" name="FirstName" placeholder="John"/>
-            </div>
-              <div class="flex mt-3 mr-20 ml-9 " >
-                <label for="LastName" class="my-auto font-bold" style="width: 40%;"  >Last Name</label>
-                <input type="text" class=" ml-14 rounded-3xl" style="width: 60%;" name="LastName" placeholder="Doe"/>
-            </div>
-              <div class="flex mt-3 mr-20 ml-9 ">
-                <label for="PhoneNumber" class="my-auto font-bold" style="width: 40%;" >Phone Number</label>
-                <input type="number" class=" ml-14 rounded-3xl" style="width: 60%;" name="PhoneNumber" placeholder="+ 1 888-888-8888"/>
-            </div>
-              <div class="flex mt-3 mr-20 ml-9 ">
-                <label for="EmailAddress" class="my-auto font-bold" style="width: 40%;" >Email Address</label>
-                <input type="email" class="ml-14 rounded-3xl" style="width: 60%;" name="EmailAddress" placeholder="johdooe@abc.com"/>
-            </div>
-               <div class="flex mt-3 mr-20 ml-9 ">
-                <label for="EmailAddress" class="my-auto font-bold" style="width: 40%;" >User Role</label>
-                <div class="relative ml-10" style="width: 57%;">
-                  <input type="text" class=" rounded-3xl" style="width: 100%;" name="FirstName" placeholder="user"/>
-                  <i class="absolute mt-2 text-xl -ml-7 fa-solid fa-chevron-down " style="color: #000;"></i>
-                 </div>
-            </div>
-            
-
-        </form>
-    </div>
-    <div class="ml-1" style=" width: 40%; max-width: 365px: min-width: 350px;">
-     <Link class="text-lg text-black bg-gray-300 mt-96 buttons mx-14"><i class="my-auto fa-solid fa-plus"></i> Add Another Account </Link>
-    </div>
-   </div>
-
     <div
-      class="flex items-center justify-between mx-4 my-2 mr-6 cursor-pointer bigDropdownBg h-14"
+      class="flex items-center justify-between mt-2 cursor-pointer lg:mx-6 sm:mx-2 sm:mr-3 bigDropdownBg h-14"
         style="border-radius: 6px; "
         v-if="activeOne === 'Profile'"
         id="myDiv">
@@ -140,47 +101,50 @@ const menu =(now) => {
       </div>
     </div>
    <div class="relative justify-between pt-3 w-100"><!-- flex -->
-  <div class="flex flex-row justify-between mx-4 mt-2" v-if="activeOne === 'Profile'" style=" height: 24vh; overflow: auto;  border-radius: 6px; border: 1px solid #BFBFBF; ">
+  <div class="flex flex-wrap justify-between mt-0 lg:mx-4 lg:flex-row" v-if="activeOne === 'Profile'" style=" min-height: 24vh; overflow: auto;  border-radius: 6px; border: 1px solid #BFBFBF; ">
     <div class="w-full" style="width: 74%;">
         <form action="">
-            <div class="flex mt-3 mr-20 ml-9">
+            <div class="mt-3 lg:flex md:flex md:mr-12 lg:mr-20 ml-9">
                 <label for="FirstName" class="my-auto font-bold" style="width: 40%;" >Facebook</label>
-                <div class="relative ml-10" style="width: 60%;">
+                <div class="relative ml-10" style="min-width: 60%;">
                   <i class="absolute pl-2 m-2 text-2xl fa-brands fa-facebook-f" style="color: #1877F2;"></i>
                 <input type="text" class="pl-10 rounded-3xl" style="width: 100%;" name="FirstName" placeholder="johdooe@abc.com"/>
                 </div>
             </div>
-              <div class="flex mt-3 mr-20 ml-9 " v-if="activeOne === 'Profile'">
+              <div class="mt-3 lg:mr-20 md:mr-12 lg:flex md:flex ml-9 " v-if="activeOne === 'Profile'">
                 <label for="LastName" class="my-auto font-bold" style="width: 40%;"  >LinkedIn</label>
-                <div class="relative ml-10" style="width: 60%;">
+                <div class="relative ml-10" style="min-width: 60%;">
                   <i class="absolute pl-2 m-2 text-2xl fa-brands fa-linkedin" style="color: #0A66C2;"></i>
                   <input type="text" class="pl-10 rounded-3xl" style="width: 100%;" name="FirstName" placeholder="johdooe@abc.com"/>
                 </div>
             </div>
-              <div class="flex mt-3 mr-20 ml-9 ">
+              <div class="mt-3 lg:mr-20 md:mr-12 lg:flex md:flex ml-9 ">
                 <label for="PhoneNumber" class="my-auto font-bold" style="width: 40%;" >X Account</label>
-                <div class="relative ml-10" style="width: 60%;">
+                <div class="relative ml-10" style="min-width: 60%;">
                   <i class="absolute pl-2 m-2 text-2xl hover:text-blue-300 fa-brands fa-twitter" style="color: #1DA1F2;"></i>
                   <input type="text" class="pl-10 rounded-3xl" style="width: 100%;" name="FirstName" placeholder="johdooe@abc.com"/>
                 </div>            </div>
-              <div class="flex mt-3 mr-20 ml-9 ">
+              <div class="mt-3 lg:mr-20 md:mr-12 lg:flex md:flex ml-9 ">
                 <label for="EmailAddress" class="my-auto font-bold" style="width: 40%;" > Instagram</label>
-                <div class="relative ml-10" style="width: 60%;">
+                <div class="relative ml-10" style="min-width: 60%;">
                   <i class="absolute pl-2 m-2 text-2xl fa-brands fa-square-instagram" style="color: #E4405F;"></i>
                   <input type="text" class="pl-10 rounded-3xl" style="width: 100%;" name="FirstName" placeholder="johdooe@abc.com"/>
                 </div>            </div>
-              <div class="flex mt-3 mr-20 ml-9 ">
+              <div class="mt-3 mb-2 lg:mr-20 md:mr-12 lg:flex md:flex ml-9">
                 <label for="EmailAddress" class="my-auto font-bold" style="width: 40%;" > Youtube</label>
-                <div class="relative ml-10" style="width: 60%;">
+                <div class="relative ml-10" style="min-width: 60%;">
                   <i class="absolute pl-2 m-2 text-2xl fa-brands fa-youtube" style="color: #FF0000;"></i>
                   <input type="text" class="pl-12 rounded-3xl" style="width: 100%;" name="FirstName" placeholder="johdooe@abc.com"/>
                 </div>            
               </div>
+              <!-- <div class="ml-1" style="width:100%;"> -->
+                <Link class="float-right w-48 my-2 bg-yellow-300 lg:mr-20 buttons buttonsText md:mr-12 " href=" "> Manage Media Accounts </Link>
+              <!-- </div> -->
         </form>
     </div>
-    <div class="ml-1" style=" width: 40%; max-width: 365px: min-width: 350px;">
+    <!-- <div class="ml-1" style=" width: 40%; max-width: 365px: min-width: 350px;">
      <Link class="bg-yellow-300 my-7 buttons buttonsText mx-14"> Manage Media Accounts </Link>
-    </div>
+    </div> -->
    </div>
     <div class="flex justify-between float-right h-16 mr-6 w-60">
        <button class="my-auto bg-gray-300 buttons buttonsText" @click="openModal" > Reset Item</button>
@@ -213,7 +177,7 @@ const menu =(now) => {
                   <div class="my-auto">Are you sure you want to reset data?</div>
                 </div>
                 <div class="relative w-100" >
-                   <Link class="float-right px-4 bg-yellow-300 buttons buttonsText">confirm</Link>
+                   <Link class="float-right px-4 bg-yellow-300 buttons buttonsText" href=" ">confirm</Link>
                 </div>
               </div>
               </div>

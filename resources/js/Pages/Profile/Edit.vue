@@ -46,17 +46,14 @@ const Toast = Swal.mixin({
 
 const form = useForm({
     user_id: props.auth_user.id,
-    // first_name: props.auth_user.first_name,
     name: props.auth_user.name,
-    organization: props.auth_user.organization,
+    second_name: props.auth_user.second_name,
     phone_number: props.auth_user.phone_number,
     email: props.auth_user.email,
-    // domain : props.auth_user.domain,
-    // timezone: props.auth_user.timezone,
 });
 
 function submit() {
-    if (form.first_name == null || form.last_name == null  || form.address == null || form.phone_number == null || form.city == null || form.province == null || form.timezone == null) {
+    if (form.name == null || form.phone_number == null || form.email == null || form.second_name == null) {
         Toast.fire({
             icon: 'error',
             title: 'All fields are required'
@@ -77,7 +74,7 @@ function submit() {
     <Head title=" Update Profile" />
 
     <AuthenticatedLayout>
-        <div class="col-md-12">
+        <div class="mt-7 col-md-12">
             <div class="block block-rounded" href="javascript:void(0)">
                 <div class="px-5 block-header">
                     <Link class="mr-3 btn btn-info text-capitalize" :href="route('profile')">Back</Link>
@@ -90,11 +87,11 @@ function submit() {
                                 <div class="mb-4 row">
                                     <div class="col-6">
                                         <label class="form-label">Name</label>
-                                        <input type="text" class="form-control form-control-lg"  v-model="form.name" placeholder="Enter your name...">
+                                        <input type="text" class="form-control form-control-lg"  v-model="form.name" placeholder="Enter your first_name...">
                                     </div>
                                     <div class="col-6">
-                                        <label class="form-label">Organization</label>
-                                        <input type="text" class="form-control form-control-lg"  v-model="form.organization" placeholder="Enter your organization...">
+                                        <label class="form-label">Second Name</label>
+                                        <input type="text" class="form-control form-control-lg"  v-model="form.second_name" placeholder="Enter your second_name...">
                                     </div>
                                 </div>
                             </div>
@@ -110,7 +107,7 @@ function submit() {
                             <div class="mb-4 row">
                                 <div class="col-12">
                                         <label class="form-label">Email</label>
-                                        <input type="text" class="form-control form-control-lg"  v-model="form.email" placeholder="Enter your city..">
+                                        <input type="text" class="form-control form-control-lg"  v-model="form.email" placeholder="Enter your email..">
                                 </div>
                             </div>
                              <div class="mb-5 col-md-12">

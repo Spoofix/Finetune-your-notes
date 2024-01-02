@@ -11,6 +11,48 @@ import DropdownLink from '@/Components/DropdownLink.vue';
 
 
 
+// Run the function every second (1000 milliseconds)
+// var intervalId = setInterval(updatePageTitle, 1000);
+
+// function updatePageTitle() 
+onMounted(() => {
+  // Load Google Charts library
+  if (typeof google === 'undefined' || typeof google.charts === 'undefined') {
+    // If Google Charts library is not loaded, load it dynamically
+    const script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = 'https://www.gstatic.com/charts/loader.js';
+    script.onload = () => {
+      google.charts.load('current', {'packages': ['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+    };
+    document.head.appendChild(script);
+  } else {
+    // If Google Charts library is already loaded, proceed to draw the chart
+    drawChart();
+  }
+
+  function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+      ['Day', 'new domains', 'High Risk'],
+      ['monday',  50,      10],
+      ['tuesday',  100,      20],
+      ['wednesday',  100,       20],
+      ['thursday',  80,      10],
+      ['friday', 40, 10],
+      ['saturday', 30, 5],
+      ['sunday', 70, 30]
+    ]);
+
+    var options = {
+      title: 'Domains In Days',
+      legend: { position: 'bottom' }
+    };
+
+    var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+    chart.draw(data, options);
+  }
+});
 
 
 defineComponent({
@@ -138,9 +180,9 @@ function activate(id) {
 <template>
     <Head title="Dashboard" />
 
-    <AuthenticatedLayout>
+    <AuthenticatedLayout style="height: 100vh;">
 
-        <div class="mt-6 ml-4 row" v-if="$page.props.auth.user.role_id == 1">
+        <div class="mt-6 ml-4 row" v-if="$page.props.auth.user.role_id == 1" >
 <!--            admin content-->
 <div class="flex sm:flex-col lg:flex-row ">
     <div class="overflow-x-auto lg:w-1/2 sm:-mx-3 lg:-mx-4">
@@ -642,20 +684,17 @@ function activate(id) {
 
         </div> 
 
-<!--            user-->
-            <div class="row" v-if="$page.props.auth.user.role_id == 2">
-                <div>
-                    <div class="block block-rounded">
-
-       
+<!--user-->
+    <div class=" row" v-if="$page.props.auth.user.role_id == 2">
+        <div>
+            <div class="block block-rounded" style="height: 100vh;">
         <!-- hello -->
-        
-               <div class="relative pt-20 pb-3 bg-lightBlue-500">
-                  <div class="w-full px-4 mx-auto md:px-6">
+               <div class="pt-20 pb-3 bg-lightBlue-500" style="">
+                  <div class="w-full px-1 mx-auto lg:px-4 md:px-6">
                      <div>
                         <div class="flex flex-wrap">
-                           <div class="w-full px-4 lg:w-6/12 xl:w-4/12">
-                              <div class="relative flex flex-col min-w-0 mb-3 break-words bg-white rounded-lg shadow-lg xl:mb-0">
+                           <div class="w-full lg:w-6/12 xl:w-4/12">
+                              <div class="relative flex flex-col min-w-0 mb-3 break-words bg-yellow-100 rounded-lg shadow-lg xl:mb-0">
                                  <div class="flex-auto p-4">
                                     <div class="flex flex-wrap">
                                        <div class="relative flex-1 flex-grow w-full max-w-full pr-4">
@@ -670,8 +709,24 @@ function activate(id) {
                                  </div>
                               </div>
                            </div>
-                           <div class="w-full px-4 lg:w-6/12 xl:w-4/12">
-                              <div class="relative flex flex-col min-w-0 mb-3 break-words bg-white rounded-lg shadow-lg xl:mb-0">
+                             <div class="w-full lg:w-6/12 xl:w-4/12">
+                              <div class="relative flex flex-col min-w-0 mb-3 break-words bg-pink-100 rounded-lg shadow-lg xl:mb-0">
+                                 <div class="flex-auto p-4">
+                                    <div class="flex flex-wrap">
+                                       <div class="relative flex-1 flex-grow w-full max-w-full pr-4">
+                                          <h5 class="text-xs font-bold uppercase text-blueGray-400">Organization Domains</h5>
+                                          <span class="text-xl font-bold">3</span>
+                                       </div>
+                                       <div class="relative flex-initial w-auto pl-4">
+                                          <div class="inline-flex items-center justify-center w-12 h-12 p-3 text-center text-white bg-red-500 rounded-full shadow-lg"><i class="far fa-chart-bar"></i></div>
+                                       </div>
+                                    </div>
+                                    <p class="mt-4 text-sm text-blueGray-500"><span class="mr-2 text-emerald-500"></span><span class="whitespace-nowrap">view domains</span></p>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="w-full lg:w-6/12 xl:w-4/12">
+                              <div class="relative flex flex-col min-w-0 mb-3 break-words bg-black rounded-lg shadow-lg xl:mb-0">
                                  <div class="flex-auto p-4">
                                     <div class="flex flex-wrap">
                                        <div class="relative flex-1 flex-grow w-full max-w-full pr-4">
@@ -686,8 +741,8 @@ function activate(id) {
                                  </div>
                               </div>
                            </div>
-                           <div class="w-full px-4 lg:w-6/12 xl:w-4/12">
-                              <div class="relative flex flex-col min-w-0 mb-3 break-words bg-white rounded-lg shadow-lg xl:mb-0">
+                           <div class="w-full lg:w-12/12 xl:w-12/12">
+                              <div class="relative flex flex-col min-w-0 mb-3 break-words bg-green-100 rounded-lg shadow-lg xl:mb-0">
                                  <div class="flex-auto p-4">
                                     <div class="flex flex-wrap">
                                        <div class="relative flex-1 flex-grow w-full max-w-full pr-4">
@@ -709,27 +764,28 @@ function activate(id) {
                </div>
                <!-- <div class="w-full px-4 mx-auto -mt-24 md:px-6"> -->
                    <div class="flex flex-wrap">
-                     <div class="w-full px-4 xl:w-8/12">
-                        <div class="relative flex flex-col w-full min-w-0 mb-8 break-words rounded-lg shadow-lg bg-blueGray-800">
+                     <div class="w-full px-1 lg:px-4 xl:w-8/12">
+                        <div class="relative flex flex-col w-full min-w-0 mb-3 break-words bg-yellow-100 rounded-lg shadow-sm">
                            <div class="px-4 py-3 mb-0 bg-transparent rounded-t">
                               <div class="flex flex-wrap items-center">
                                  <div class="relative flex-1 flex-grow w-full max-w-full">
                                     <h6 class="mb-1 text-xs font-semibold uppercase text-blueGray-200">Domains</h6>
-                                    <h2 class="text-xl font-semibold text-white">Sales value</h2>
+                                    <h2 class="text-xl font-semibold text-red-500">domain statistics</h2>
                                  </div>
                               </div>
                            </div>
                            <div class="flex-auto p-4">
                               <div class="relative h-350-px">
                                  <!-- <canvas id="myChart"></canvas> -->
-                                 <canvas id="myChart"></canvas><!-- <canvas width="221" height="291" style="display: block; box-sizing: border-box; height: 350px; width: 265.7px;" id="bar-chart"></canvas> -->
+                                   <div id="curve_chart" style="width: 900px; height: 500px"></div>
+                                 <!-- <canvas width="221" height="291" style="display: block; box-sizing: border-box; height: 350px; width: 265.7px;" id="bar-chart"></canvas> -->
                               </div>
                            </div>
                         </div>
                      </div>
                      <!-- <canvas id="myChart"></canvas> -->
-                     <div class="w-full px-4 xl:w-4/12">
-                        <div class="relative flex flex-col w-full min-w-0 mb-3 break-words bg-white rounded-lg shadow-lg">
+                     <div class="w-full px-1 lg:px-4 xl:w-4/12">
+                        <div class="relative flex flex-col w-full min-w-0 mb-3 break-words bg-black rounded-lg shadow-sm">
                            <div class="px-4 py-3 mb-0 bg-transparent rounded-t">
                               <div class="flex flex-wrap items-center">
                                  <div class="relative flex-1 flex-grow w-full max-w-full">
@@ -748,8 +804,9 @@ function activate(id) {
                   </div>
                   
 
-     
-                
+    <!--  -->
+    
+                <!--  -->
                    
                     </div>
                 </div>

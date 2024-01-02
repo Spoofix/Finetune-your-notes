@@ -33,7 +33,6 @@ class UsersController extends Controller
             'users' => $users,
             'page' => 'pending',
         ]);
-
     }
 
     public function view(Request $request, $user_id)
@@ -49,7 +48,6 @@ class UsersController extends Controller
             'provinces' => config('provinces'),
             'timezones' => config('timezones'),
         ]);
-
     }
 
     public function approve(Request $request)
@@ -84,11 +82,11 @@ class UsersController extends Controller
             'name' => $request->first_name . " " . $request->last_name,
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
-            'address' => $request->address,
+            // 'address' => $request->address,
             'phone_number' => $request->phone_number,
-            'city' => $request->city,
-            'province' => $request->province,
-            'timezone' => $request->timezone,
+            // 'city' => $request->city,
+            // 'province' => $request->province,
+            // 'timezone' => $request->timezone,
             'email' => $request->email_address,
             'password' => Hash::make($temp_password),
             'temp_password' => $temp_password,
@@ -99,7 +97,6 @@ class UsersController extends Controller
         $user->notify((new TempPasswordNotification($temp_password))->delay(now()->addSeconds(30)));
 
         return Redirect::route('users.list');
-
     }
 
     public function update(UserUpdateRequest $request)
@@ -110,14 +107,13 @@ class UsersController extends Controller
             'name' => $request->first_name . " " . $request->last_name,
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
-            'address' => $request->address,
+            // 'address' => $request->address,
             'phone_number' => $request->phone_number,
-            'city' => $request->city,
-            'province' => $request->province,
-            'timezone' => $request->timezone,
+            // 'city' => $request->city,
+            // 'province' => $request->province,
+            // 'timezone' => $request->timezone,
         ]);
 
         return back();
-
     }
 }

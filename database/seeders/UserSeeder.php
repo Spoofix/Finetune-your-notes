@@ -21,6 +21,9 @@ class UserSeeder extends Seeder
             'password' => Hash::make('1qa2ws3ed4rf'),
             'role_id' => 1,
             'status' => "ACTIVE",
+            'org_id' => 1,
+            'org_role_id' => 1,
+            'profile' => ''
         ]);
     }
 }

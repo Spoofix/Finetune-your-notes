@@ -24,16 +24,11 @@ class EmailController extends Controller
 
             $fromEmail = 'info@spoofix.com';
             $fromName = 'ernest'; // Replace with your name or any desired sender name
-            $fromOrganization = 'Yield'; // Replace with your organization name
+            $fromOrganization = 'Spoofix'; // Replace with your organization name
             $employeePosition = 'Employee Position'; // Replace with the employee position
 
             foreach ($emailAddresses as $email) {
-                Mail::to($email)
-                    // ->from($fromEmail, $fromName)
-                    // ->sender($fromEmail, $fromName, $fromOrganization)
-                    // ->attachData($employeePosition, 'employee_position.txt')
-                    ->send(new SpoofDomainReporting($data, $subject));
-                // Replace YourMailClass with the actual class for your email (implementing Mailable)
+                Mail::to($email)->send(new SpoofDomainReporting($data, $subject));
             }
 
             return response()->json(['message' => 'All emails sent.'], 200);

@@ -1,0 +1,47 @@
+[
+  {
+    "HTTP_Status_Code": 406
+  },
+  {
+    "Cookies": []
+  },
+  {
+    "Console_Messages": []
+  },
+  {
+    "Security_Headers": "X-XSS-Protection not found"
+  },
+  {
+    "Security_Headers": "X-XSS-Protection not found"
+  },
+  {
+    "Security_Headers": "X-XSS-Protection not found"
+  },
+  {
+    "Security_Headers": "X-XSS-Protection not found"
+  },
+  {
+    "Security_Headers": "X-XSS-Protection not found"
+  },
+  {
+    "Web_Server": "Apache"
+  },
+  {
+    "Geolocation_Information": {
+      "IP Address": "192.254.233.61",
+      "City": "Provo",
+      "Region": "Utah",
+      "Country": "US",
+      "Latitude": "40.2338",
+      "Longitude": "-111.6585",
+      "Organization": "AS46606 Unified Layer",
+      "ISP": "Layer"
+    }
+  },
+  {
+    "IP_Address": "192.254.233.61"
+  },
+  {
+    "SSL-Certificate_Details": "Subject: {b'CN': b'www.zoogle.com.negativeinterestrates.com'}, Issuer: {b'C': b'US', b'O': b\"Let's Encrypt\", b'CN': b'R3'}"
+  }
+]

@@ -7,6 +7,7 @@ use App\Models\User;
 use Inertia\Inertia;
 use Inertia\Response;
 use App\Models\Domain;
+use App\Models\Notifications;
 use App\Jobs\ScanDomains;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -19,9 +20,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Validation\Rules\Password;
 use App\Notifications\WelcomeNotification;
 use App\Console\Commands\ScanSpoofingDomains;
-
-
-
+use App\Models\Organization;
 
 class RegisteredUserController extends Controller
 {
@@ -31,8 +30,8 @@ class RegisteredUserController extends Controller
     public function create(): Response
     {
         return Inertia::render('Auth/Register', [
-            'provinces' => config('provinces'),
-            'timezones' => config('timezones'),
+            // 'provinces' => config('provinces'),
+            // 'timezones' => config('timezones'),
         ]);
     }
 
@@ -50,24 +49,77 @@ class RegisteredUserController extends Controller
             'domains' => 'required|string',
             'email' => 'required|string|email|max:255|unique:' . User::class,
             'password' => ['required', 'confirmed', Password::defaults()],
-            // 'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        // $user = User::create([
+        //     'name' => $request->name,
+        //     'organization' => $request->organization,
+        //     'phone_number' => $request->phone_number,
+        //     'email' => $request->email,
+        //     'password' => Hash::make($request->password),
+        // ]);
+
+        // $emails = user::where('email', $request->email)->get();
+        // foreach ($emails as $email) {
+        //     if ($request->email === $email->email) {
+        //         log::alert('cant repeat that again');
+        //         return;
+        //     }
+        // }
+
+        // if ($request->user_role == 'User') {
+        //     $user_id = 2;
+        // } else {
+        //     $user_id = 1;
+        // }
+        // // mail::to($request->email)->queue($user);
+        // log::alert($request);
+
+        $org = Organization::create([
+            'name' => $request->organization,
+            'user_id' => -1,
+            // 'last_search' => time(),
+            'status' => 'ACTIVE',
+            'email' => $request->email,
+            'phone' => $request->phone_number,
+            'terms_and_conditions' => null,
+            'plan_id' => 1
+
+        ]);
+        $org_id = Organization::where('name', $request->organization)->first();
         $user = User::create([
             'name' => $request->name,
-            'organization' => $request->organization,
+            // 'organization' => $org_id->id,
             'phone_number' => $request->phone_number,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'org_id' => $org_id->id,
+            'role_id' => 2,
+            'org_role_id' => 1,
+            'status' => 'ACTIVE',
+            'profile' => '',
+            'second_name' => $request->name,
+            'password' => Hash::make('reset'),
         ]);
-
-
+        $org_id->user_id = User::where('email', $request->email)->first()->id;
+        $org_id->save();
+        // // log::alert($user);
+        $new_user_id = user::where('email', $request->email)->first();
+        $new_user_id = $new_user_id->id;
+        $notificationSettings = Notifications::create([
+            'user_id' => $new_user_id,
+            'all_notifications' => 'true',
+            'take_down_request' => 'true',
+            'takedown_completed' => 'true',
+            'news_and_updates' => 'true',
+            'reminders' => 'true'
+        ]);
 
         $domains = explode(",", $request->domains);
         foreach ($domains as $domain) {
             Domain::create([
                 'domain_name' => trim($domain),
-                'user_id' => $user->id
+                'user_id' => $new_user_id,
+                'org_id' => $org_id->id,
             ]);
         }
 

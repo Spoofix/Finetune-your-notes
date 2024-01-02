@@ -1,10 +1,15 @@
-
+/* 
 @tailwind base;
 @tailwind components;
-@tailwind utilities;
+@tailwind utilities; */
+/* resources/css/app.css */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
+/* Your custom styles go here */
 
 .btn-primary-custom {
-    background-color: #0284c7;
+    background-color: #fcf346;
 }
 

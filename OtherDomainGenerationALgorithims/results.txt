@@ -1,0 +1,12 @@
+play.google.com
+support.google.com
+grow.google.com
+tv.google.com
+ai.google.com
+cloud.google.com
+lens.google.com
+edu.google.com
+accounts.google.com
+workspace.google.com
+store.google.com
+maps.google.com
