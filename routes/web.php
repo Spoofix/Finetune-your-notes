@@ -89,6 +89,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/settings/pricingandbilling', [SettingsController::class, 'pricingandbilling'])->name('settings.pricingandbilling');
     Route::get('/settings/policies', [SettingsController::class, 'policies'])->name('settings.policies');
     Route::post('/settings/terms_and_conditions', [SettingsController::class, 'terms_and_conditions'])->name('settings.terms_and_conditions');
+    Route::get('/settings/terms_and_conditions', [SettingsController::class, 'terms_and_conditions'])->name('settings.terms_and_conditions');
     Route::get('/settings/moniteredaccounts', [SettingsController::class, 'moniteredaccounts'])->name('settings.moniteredaccounts');
     Route::get('/settings/users', [SettingsController::class, 'users'])->name('settings.users');
     Route::post('/notification-update', [SettingsController::class, 'notifications_update'])->name('notification.update');
