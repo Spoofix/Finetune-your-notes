@@ -30,6 +30,11 @@ use App\Http\Controllers\OrganizationController;
 |
  */
 
+// Route::get('/{page}', function () {
+//     return Inertia::render('DefaultPage');
+// })->where('page', '.*');
+
+
 Route::get('/', function () {
     //    Domain::create([
     //        'user_id'=>2,
