@@ -23,6 +23,7 @@ class UserSeeder extends Seeder
             'status' => "ACTIVE",
             'org_id' => 1,
             'org_role_id' => 1,
+            'second_name' => "kiromo",
             'profile' => ''
         ]);
     }

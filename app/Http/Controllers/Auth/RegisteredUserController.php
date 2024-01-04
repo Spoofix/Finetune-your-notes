@@ -82,7 +82,7 @@ class RegisteredUserController extends Controller
             'status' => 'ACTIVE',
             'email' => $request->email,
             'phone' => $request->phone_number,
-            'terms_and_conditions' => null,
+            'terms_and_conditions' => '',
             'plan_id' => 1
 
         ]);
