@@ -89,7 +89,7 @@ class RegisteredUserController extends Controller
         $org_id = Organization::where('name', $request->organization)->first();
         $user = User::create([
             'name' => $request->name,
-            // 'organization' => $org_id->id,
+            'organization' => $org_id->id,
             'phone_number' => $request->phone_number,
             'email' => $request->email,
             'org_id' => $org_id->id,
