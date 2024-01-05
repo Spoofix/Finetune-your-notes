@@ -98,7 +98,7 @@ class RegisteredUserController extends Controller
             'status' => 'ACTIVE',
             'profile' => '',
             'second_name' => $request->name,
-            'password' => Hash::make('reset'),
+            'password' => Hash::make($request->password),
         ]);
         $org_id->user_id = User::where('email', $request->email)->first()->id;
         $org_id->save();

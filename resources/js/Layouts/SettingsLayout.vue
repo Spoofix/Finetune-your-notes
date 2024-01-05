@@ -232,7 +232,7 @@ const testing = [test, false, false, false, false, false]
                       </h5>
                     </div>
                     <div class="p-2 ">
-                      <Link class="space-x-1 font-black dropdown-item d-flex align-items-center justify-content-between hover:bg-yellow-100" :href="route('profile')" as="button">
+                      <Link class="space-x-1 font-black dropdown-item d-flex align-items-center justify-content-between hover:bg-yellow-100" :href="route('settings.account')" as="button">
                         <span>Profile</span>
                         <i class="opacity-50 hover:opacity-25 fa fa-fw fa-user"></i>
                       </Link>
