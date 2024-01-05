@@ -96,7 +96,7 @@ setTimeout(function() {
         <div class="relative flex flex-row" id="page-container">   <!-- id="page-container class="sidebar-o"" -->
          <!-- sidebar hear-->
         <div class="hidden1" >
-          <nav class="absolute top-0 bottom-0 left-0 flex py-2 transition-all duration-300 ease-in-out transform shadow-xl smooth bg-blue flex-nowrap md:z-10 z-9999 md:translate-x-0"  style="z-index: 3; background: var(--dark-neutral-dark-neutral-10, #262626); top-0; min-height: 100vh; position: fixed;" :class="{'navWidth px-2 ': isSidebarOpen, 'navWidthColups w-24 -mx-3 -translate-x-full ': !isSidebarOpen }" >
+          <nav class="absolute top-0 bottom-0 left-0 flex py-2 transition-all duration-300 ease-in-out transform shadow-xl smooth bg-blue flex-nowrap md:z-10 z-9999 md:translate-x-0"  style="z-index: 3; background: var(--dark-neutral-dark-neutral-10, #262626); top-0; min-height: 100vh;  position: fixed;" :class="{'navWidth px-2 ': isSidebarOpen, 'navWidthColups w-24 -mx-3 -translate-x-full ': !isSidebarOpen }" >
             <!-- id="sidebar" -->
 
             <!-- Sidebar Content -->

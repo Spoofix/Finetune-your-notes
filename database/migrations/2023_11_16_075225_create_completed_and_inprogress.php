@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date('authorization_date');
             $table->date('start_date');
             $table->date('end_date');
-            $table->time('time_elapsed'); // Assuming you want to store the time elapsed
+            $table->time('time_elapsed');
             $table->enum('status', ['waiting_for_authorization', 'initiated', 'completed'])->default('waiting_for_authorization');
             $table->timestamps();
         });

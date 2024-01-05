@@ -226,7 +226,7 @@ const active = toggleTable(0 , props.domainList[0].id);
                 id="smoothDropDown"
                   > 
               <div class="overflow-x-auto ">
-                <table class="w-full text-sm " style="min-width: 700px;">
+                <table class="w-full text-sm " style="min-width: 700px;" v-if="paginatedSpoofList.length !== 0">
                   <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                       <tr class="container justify-evenly">
                           <th  class="py-3 pl-2 min-w-max" >
@@ -293,6 +293,15 @@ const active = toggleTable(0 , props.domainList[0].id);
                       </tr>
                   </tbody>
               </table>
+              
+               <div class="bg-white" style="width: 100%; height: 330px" v-if="paginatedSpoofList.length === 0">
+                <div class="mx-auto ">
+                  <h1 class="pt-6 text-center max-w-60 h6">No spoofing site takedown currently in progress for domain "{{domain.domain_name }}". <br>We'll update takedown progress here if any! If you have any questions or need further assistance, feel free to reach out.<br> Your satisfaction is our priority.</h1>
+                  <div style="display: flex; justify-content: center; align-items: center; height: 50px;">
+                    <h1 class="border-l-white border-y-yellow-300 spinner-border border-r-yellow-100"></h1>
+                  </div>
+                </div>
+               </div>
 
               </div>
 

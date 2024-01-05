@@ -53,9 +53,9 @@ const cards =(now) => {
   // activeCards.value = now;
 }
 
-const freePlan = ['monthly scans',' 1 domain', 'risk assessment', 'automatic takedowns', 'helpcenter', 'takedowns', '1 organization user account', 'takedown on behalf'];
-const basicPlan = ['weekly scans', '2 domains', 'risk assessment', 'automatic takedowns','helpcenter', '10 takedowns',  '2 organization user accounts', '5 takedown on behalf'];
-const premiumPlan = ['daily scans', '4 domains', 'risk assessment', 'automatic takedowns', 'helpcenter', '50 takedowns','5 organization user accounts', '20 takedown on behalf'];
+const freePlan = ['monthly scans',' 1 domain', 'risk assessment', '1 organization user account', 'helpcenter', 'takedowns', 'takedown on behalf', 'automatic takedowns'];
+const basicPlan = ['weekly scans', '2 domains', 'risk assessment' , '2 organization user accounts','helpcenter', '10 takedowns', '5 takedown on behalf', 'automatic takedowns'];
+const premiumPlan = ['daily scans', '4 domains', 'risk assessment', '5 organization user accounts', 'helpcenter', '50 takedowns', '20 takedown on behalf', 'automatic takedowns'];
 
 </script>
 

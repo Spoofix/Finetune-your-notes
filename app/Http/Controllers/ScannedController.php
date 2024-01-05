@@ -62,19 +62,20 @@ class ScannedController extends Controller
                 // Log::alert($reported);
                 if ($spoofDetail && $reported) {
                     $spoofDetails = array_merge($spoofDetail->toArray(), $reported->toArray());
+                    // changed this for test
+                    $user = User::where('id', $spoofDetails['reported_by_user_id'])->first();
                 }
-                $user = User::where('id', $spoofDetails['reported_by_user_id'])->first();
                 // $user = $user->name;
                 // log::alert($user);
                 // $reported = array_pop($reported->id);
                 if ($spoofDetail && $reported) {
                     $spoofDetails = array_merge($reported->toArray(), $spoofDetail->toArray(), ['user_name' => $user->name]);
-                }
 
-                // Log::alert($spoofDetails);
-                if ($spoofDetails !== [] || $spoofDetails !== null) {
-                    $appeniding = array_push($reportDetails, $spoofDetails);
-                    // log::alert($spoofDetails);
+                    // Log::alert($spoofDetails);
+                    if ($spoofDetails !== [] || $spoofDetails !== null) {
+                        $appeniding = array_push($reportDetails, $spoofDetails);
+                        // log::alert($spoofDetails);
+                    }
                 }
                 // $reportDetails = array_merge($reportDetails, $spoofDetails);
                 // log::alert($spoofDetails);

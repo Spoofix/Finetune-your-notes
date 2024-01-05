@@ -365,7 +365,9 @@ function reported(){
               <div class="mt-3 ml-3 w-50 DetailsTableRowText">{{ScanDetail.key}}</div>
               <div class="mt-3 ml-50 w-100 DetailsTableRowText"  v-if="Array.isArray(makeToArray(spoofData[ScanDetail.value]))">
                 <div class="mt-2" v-for="(data, index) in  makeToArray(spoofData[ScanDetail.value])" :key="index">
-                  {{spoofData[ScanDetail.value]}}
+                <div v-if="spoofData[ScanDetail.value] === '' || typeof spoofData[ScanDetail.value] === 'undefined' || !spoofData[ScanDetail.value]" class="text-gray-400">info not available</div>
+                <div v-else>{{ makeToArray(spoofData[ScanDetail.value]) }}</div>
+                  <!-- {{spoofData[ScanDetail.value]}} -->
                 </div>
               </div>
               <div class="mt-3 ml-50 w-100 DetailsTableRowText" v-else >{{ makeToArray(spoofData[ScanDetail.value]) }}</div>  
@@ -514,7 +516,7 @@ function reported(){
               <div class="mt-3 ml-50 w-100 DetailsTableRowText" v-else >
                 <!-- {{ makeToArray(spoofData[domainDetail.value]) }} -->
                  <div v-if="spoofData[domainDetail.value] === '' || typeof spoofData[domainDetail.value] === 'undefined'" class="text-gray-400">info not available</div>
-                <div v-else>{{ makeToArray(spoofData[domainDetail.value])  }}</div>
+                <div v-else>{{ spoofData[domainDetail.value]  }}</div>
               </div>  
             </div>
           </div>
@@ -524,12 +526,14 @@ function reported(){
               <div class="mt-3 ml-3 w-50 DetailsTableRowText">{{ScanDetail.key}}</div>
               <div class="mt-3 ml-50 w-100 DetailsTableRowText"  v-if="Array.isArray(makeToArray(spoofData[ScanDetail.value]))">
                 <div class="mt-2" v-for="(data, index) in  makeToArray(spoofData[ScanDetail.value])" :key="index">
-                  {{spoofData[ScanDetail.value]}}
+                  <div v-if="spoofData[ScanDetail.value] === '' || typeof spoofData[ScanDetail.value] === 'undefined' || !spoofData[ScanDetail.value]" class="text-gray-400">info not available</div>
+                  <div v-else>{{ spoofData[ScanDetail.value] }}</div>
+                  <!-- {{spoofData[ScanDetail.value]}} -->
                 </div>
               </div>
               <div class="mt-3 ml-50 w-100 DetailsTableRowText" v-else >
                 <!-- {{ makeToArray(spoofData[ScanDetail.value]) }} -->
-               <div v-if="spoofData[ScanDetail.value] === '' || typeof spoofData[ScanDetail.value] === 'undefined'" class="text-gray-400">info not available</div>
+               <div v-if="spoofData[ScanDetail.value] === '' || typeof spoofData[ScanDetail.value] === 'undefined' || !spoofData[ScanDetail.value]" class="text-gray-400">info not available</div>
                 <div v-else>{{ makeToArray(spoofData[ScanDetail.value])  }}</div>
               </div>  
             </div>
@@ -542,13 +546,13 @@ function reported(){
                 <div class="mt-2" v-for="(data, index) in  makeToArray(spoofData[pageStatistic.value])" :key="index">
                   <!-- {{spoofData[pageStatistic.value]}} -->
                 <div v-if="spoofData[pageStatistic.value] === '' || typeof spoofData[pageStatistic.value] === 'undefined' || !spoofData[pageStatistic.value]" class="text-gray-400">info not available</div>
-                <div v-else>{{ makeToArray(spoofData[pageStatistic.value])  }}</div>                  
+                <div v-else>{{ spoofData[pageStatistic.value]  }}</div>                  
                 </div>
               </div>
               <div class="mt-3 ml-50 w-100 DetailsTableRowText" v-else >
                 <!-- {{ makeToArray(spoofData[pageStatistic.value]) }} -->
                 <div v-if="spoofData[pageStatistic.value] === '' || typeof spoofData[pageStatistic.value] === 'undefined' || !spoofData[pageStatistic.value]" class="text-gray-400">info not available</div>
-                <div v-else>{{ makeToArray(spoofData[pageStatistic.value])  }}</div>
+                <div v-else>{{ spoofData[pageStatistic.value] }}</div>
               </div>  
             </div>
           </div>
@@ -564,8 +568,8 @@ function reported(){
                 </div>
               </div>
               <div class="mt-3 ml-50 w-100 DetailsTableRowText" v-else >
-                <div v-if="spoofData[httpRedirect.value] === '' || typeof spoofData[httpRedirect.value] === 'undefined'" class="text-gray-400">info not available</div>
-                <div v-else>{{ makeToArray(spoofData[httpRedirect.value]) }}</div>
+                <div v-if="spoofData[httpRedirect.value] === '' || typeof spoofData[httpRedirect.value] === 'undefined' || !spoofData[ScanDetail.value]" class="text-gray-400">info not available</div>
+                <div v-else>{{ spoofData[httpRedirect.value] }}</div>
               </div>  
             </div>
           </div>
@@ -581,7 +585,7 @@ function reported(){
               </div>
               <div class="mt-3 ml-50 w-100 DetailsTableRowText" v-else >
                 <div v-if="spoofData[riskRating.value]  === '' || typeof spoofData[riskRating.value] === 'undefined'" class="text-gray-400">info not available</div>
-                <div v-else>{{ makeToArray(spoofData[riskRating.value])  }}</div>
+                <div v-else>{{ spoofData[riskRating.value]  }}</div>
               </div>  
             </div>
           </div>

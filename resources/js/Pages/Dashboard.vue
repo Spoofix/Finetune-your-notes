@@ -15,44 +15,44 @@ import DropdownLink from '@/Components/DropdownLink.vue';
 // var intervalId = setInterval(updatePageTitle, 1000);
 
 // function updatePageTitle() 
-onMounted(() => {
-  // Load Google Charts library
-  if (typeof google === 'undefined' || typeof google.charts === 'undefined') {
-    // If Google Charts library is not loaded, load it dynamically
-    const script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.src = 'https://www.gstatic.com/charts/loader.js';
-    script.onload = () => {
-      google.charts.load('current', {'packages': ['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
-    };
-    document.head.appendChild(script);
-  } else {
-    // If Google Charts library is already loaded, proceed to draw the chart
-    drawChart();
-  }
+// onMounted(() => {
+//   // Load Google Charts library
+//   if (typeof google === 'undefined' || typeof google.charts === 'undefined') {
+//     // If Google Charts library is not loaded, load it dynamically
+//     const script = document.createElement('script');
+//     script.type = 'text/javascript';
+//     script.src = 'https://www.gstatic.com/charts/loader.js';
+//     script.onload = () => {
+//       google.charts.load('current', {'packages': ['corechart']});
+//       google.charts.setOnLoadCallback(drawChart);
+//     };
+//     document.head.appendChild(script);
+//   } else {
+//     // If Google Charts library is already loaded, proceed to draw the chart
+//     drawChart();
+//   }
 
-  function drawChart() {
-    var data = google.visualization.arrayToDataTable([
-      ['Day', 'new domains', 'High Risk'],
-      ['monday',  50,      10],
-      ['tuesday',  100,      20],
-      ['wednesday',  100,       20],
-      ['thursday',  80,      10],
-      ['friday', 40, 10],
-      ['saturday', 30, 5],
-      ['sunday', 70, 30]
-    ]);
+//   function drawChart() {
+//     var data = google.visualization.arrayToDataTable([
+//       ['Day', 'new domains', 'High Risk'],
+//       ['monday',  50,      10],
+//       ['tuesday',  100,      20],
+//       ['wednesday',  100,       20],
+//       ['thursday',  80,      10],
+//       ['friday', 40, 10],
+//       ['saturday', 30, 5],
+//       ['sunday', 70, 30]
+//     ]);
 
-    var options = {
-      title: 'Domains In Days',
-      legend: { position: 'bottom' }
-    };
+//     var options = {
+//       title: 'Domains In Days',
+//       legend: { position: 'bottom' }
+//     };
 
-    var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-    chart.draw(data, options);
-  }
-});
+//     var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+//     chart.draw(data, options);
+//   }
+// });
 
 
 defineComponent({
@@ -682,11 +682,9 @@ function activate(id) {
       </div>
 </div>
 
-        </div> 
 
-<!--user-->
-    <div class=" row" v-if="$page.props.auth.user.role_id == 2">
-        <div>
+<!-- later -->
+    <div>
             <div class="block block-rounded" style="height: 100vh;">
         <!-- hello -->
                <div class="pt-20 pb-3 bg-lightBlue-500" style="">
@@ -802,14 +800,52 @@ function activate(id) {
                         </div>
                      </div>
                   </div>
-                  
 
-    <!--  -->
-    
-                <!--  -->
-                   
                     </div>
-                </div>
-            </div>
+        </div>
+        </div> 
+<!--user-->
+    <div class=" row" v-if="$page.props.auth.user.role_id == 2" style="height: 100vh;">
+        <div class="mx-auto ">
+            <h1 class="font-extrabold text-center flicker mt-9 h1"><span class="text-yellow-300">spoo</span>fix dashboard</h1>
+            <h1 class="text-center h3 seesaw"> coming soon!</h1>
+        </div>
+    </div>
     </AuthenticatedLayout>
 </template>
+<style>
+@keyframes flickerAnimation {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% {
+        opacity: 1;
+    }
+
+    20%, 24%, 55% {
+        opacity: 0.2;
+        color: #facd5b;
+    }
+}
+
+.flicker {
+    animation: flickerAnimation 7s infinite;
+}
+@keyframes seesawAnimation {
+    0%, 100% {
+        transform: rotate(-15deg);
+    }
+
+    50% {
+        transform: rotate(15deg);
+    }
+}
+
+.seesaw {
+    transform-origin: top center;
+    animation: seesawAnimation 3s infinite;
+}
+
+
+
+</style>
+    <!-- </div>
+    </AuthenticatedLayout>
+</template> -->

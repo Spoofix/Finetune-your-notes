@@ -381,17 +381,17 @@ const active = toggleTable(0 , props.domainList[0].id);
             </div>
              <div
                 v-if="showTable && index === indexStore"
-                class="items-center overflow-auto bg-transparent border-collapse lg:ml-6 md:ml-4 md:-mr-3 smooth "
+                class="items-center overflow-auto bg-transparent border-collapse lg:ml-4 md:ml-4 md:-mr-3 smooth "
                 :class="{ 'smoothDropDown': showTable }"
                 id="smoothDropDown"
                   > 
               <div :class="{ 'table-container.open': showTable, 'table-container' : !showTable}">
                 <!-- <div> -->
-                <table class="w-full text-sm " style="min-width: 600px;">
+                <table class="w-full text-sm " style="min-width: 600px;" v-if="paginatedSpoofList.length !== 0">
                   <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                       <tr class="container justify-evenly">
                           <th  class="py-3 pl-2 min-w-max" >
-                              Domain
+                              Domain 
                           </th>
                           <th  class="py-3 text-center">
                               Status
@@ -463,7 +463,21 @@ const active = toggleTable(0 , props.domainList[0].id);
             </tr>
                   </tbody>
               </table>
-
+              <div class="bg-white" style="width: 100%; height: 330px" v-if="paginatedSpoofList.length === 0">
+                <div class="mx-auto ">
+                  <h1 class="pt-6 text-center max-w-60 h6"
+                    :class="{
+                      'text-red-500': domain.status === 'NOT_SCANNED',
+                      'text-yellow-400': domain.status === 'PROCESSING'
+                    }">
+                      {{ domain.status }}
+                  </h1>
+                  <h1 class="pt-1 text-center max-w-60 h6">Thank you for your submission! Our team is diligently working on scanning your domain "{{domain.domain_name }}" to ensure a thorough analysis. <br>We appreciate your patience and understanding. If you have any questions or need further assistance, feel free to reach out.<br> Your satisfaction is our priority.</h1>
+                  <div style="display: flex; justify-content: center; align-items: center; height: 50px;">
+                    <h1 class="border-l-white border-y-yellow-300 spinner-border border-r-yellow-100"></h1>
+                  </div>
+                </div>
+               </div>
               </div>
 
                <div class="flex justify-center mt-4" style="">

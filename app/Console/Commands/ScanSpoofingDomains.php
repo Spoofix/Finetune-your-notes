@@ -32,22 +32,26 @@ class ScanSpoofingDomains extends Command
 
         $domain = Domain::query();
 
-        if(!empty($user_id)){
-            $domain = $domain->where('user_id',$user_id);
+        if (!empty($user_id)) {
+            $domain = $domain->where('user_id', $user_id);
         }
 
-        if(!empty($domain_id)){
-            $domain = $domain->where('id',$domain_id);
+        if (!empty($domain_id)) {
+            $domain = $domain->where('id', $domain_id);
         }
+        $domainLength = $domain->count();;
+        echo "The length is: $domain";
 
-        $domain->chunkById(5,function ($domains){ // process 5 at a time
-            $last_batch=time(); // Will explain its purpose
+        info("The length is: $domain");
+
+        $domain->chunkById(5, function ($domains) { // process 5 at a time
+            $last_batch = time(); // Will explain its purpose
             foreach ($domains as $domain) {
                 $domain->status = "PROCESSING";
                 $domain->save();
 
                 info("-- CALL SearchSimilarDomain STARTED --");
-                Artisan::call(SearchSimilarDomain::class,['--domain_id'=>$domain->id,'--last_batch'=>$last_batch]);
+                Artisan::call(SearchSimilarDomain::class, ['--domain_id' => $domain->id, '--last_batch' => $last_batch]);
                 info("-- CALL SearchSimilarDomain ENDED --");
 
                 $domain->status = "SCANNED";
