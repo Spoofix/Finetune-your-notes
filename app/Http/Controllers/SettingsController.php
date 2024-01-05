@@ -84,8 +84,11 @@ class SettingsController extends Controller
             $cleanedString = str_replace("'", '', $id);
             $id = intval($cleanedString);
             // dd($id);
+
             $theUser = User::where('id', $id)->first();
-            $theUser = [$theUser->name, $theUser->second_name];
+            if ($theUser) {
+                $theUser = [$theUser->name, $theUser->second_name];
+            }
             // dd($theUser->name);
             return Inertia::render('Settings/Policies', [
                 'organization' => $organization,
