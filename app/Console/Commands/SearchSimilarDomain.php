@@ -80,6 +80,7 @@ class SearchSimilarDomain extends Command
         }
 
         $unique_domains = array_values(array_unique($domains));
+
         foreach ($unique_domains as $unique_domain) {
             $created = SpoofedDomain::create([
                 'domain_id' => $domain->id,
@@ -90,6 +91,7 @@ class SearchSimilarDomain extends Command
                 'htmls' => 'processing',
                 'phashes' => 'processing',
                 'last_batch' => $last_batch,
+                'current_scan_status' => 'not_scanned'
             ]);
 
             WhoIsRating::dispatch($created);

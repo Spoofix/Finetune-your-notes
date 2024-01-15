@@ -39,10 +39,9 @@ class ScanSpoofingDomains extends Command
         if (!empty($domain_id)) {
             $domain = $domain->where('id', $domain_id);
         }
-        $domainLength = $domain->count();;
-        echo "The length is: $domain";
 
-        info("The length is: $domain");
+        //new for testing
+        // $domain = $domain->get();
 
         $domain->chunkById(5, function ($domains) { // process 5 at a time
             $last_batch = time(); // Will explain its purpose

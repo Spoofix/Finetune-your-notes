@@ -1,8 +1,10 @@
 <?php
 
+use App\Models\User;
 use Inertia\Inertia;
 use App\Models\Domain;
 use App\Mail\ResetPassword;
+use App\Models\Organization;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Artisan;
@@ -18,6 +20,8 @@ use App\Http\Controllers\SettingsController;
 use App\Console\Commands\ScanSpoofingDomains;
 use App\Http\Controllers\SpoofViewController;
 use App\Http\Controllers\OrganizationController;
+use App\Http\Controllers\UserSwitchesController;
+use App\Http\Middleware\UserSwitchMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,13 +56,19 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard', [
-        'domainList' => Domain::where('user_id', auth()->id())->get()
+        'domainList' => Domain::where('user_id', auth()->id())->get(),
+        'organization' => Organization::all(),
+        'users' => User::all()
     ]);
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified', 'user_switch_data'])->name('dashboard');
+Route::get('/dashboard/{user_id}', [UserSwitchesController::class, 'index'])->middleware('user_switch_data')->name('dashboard2');
+Route::get('/back_to_admin/{admin_id}', [UserSwitchesController::class, 'back_to_admin'])->middleware('user_switch_data')->name('back_to_admin');
+
+
 
 Route::get('/search-domain', [SearchController::class, 'index'])->name('search.domain');
 Route::post('/search-domain', [SearchController::class, 'index'])->name('search.domain');
-Route::middleware('auth')->group(function () {
+Route::middleware('auth', 'user_switch_data')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/domain-search', [DomainController::class, 'index'])->name('domain.list');

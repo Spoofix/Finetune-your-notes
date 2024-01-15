@@ -98,6 +98,9 @@ class LocationSslAndRedirectsJob implements ShouldQueue
         $this->spoofed_domain->server_os  = $serverOs;
         $this->spoofed_domain->spoof_status = 'REPORTED';
         $this->spoofed_domain->spoof_status_new = 'inprogress';
+        $this->spoofed_domain->current_scan_status = 'scanned';
+
+
         $this->spoofed_domain->save();
         Log::alert('ni hear the end');
     }

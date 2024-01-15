@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
-use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\User;
 use Inertia\Inertia;
 use Inertia\Response;
 use App\Models\Domain;
-use App\Models\Notifications;
 use App\Jobs\ScanDomains;
+use App\Models\Organization;
 use Illuminate\Http\Request;
+use App\Models\Notifications;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -17,10 +17,10 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Auth\Events\Registered;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Artisan;
+use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Validation\Rules\Password;
 use App\Notifications\WelcomeNotification;
 use App\Console\Commands\ScanSpoofingDomains;
-use App\Models\Organization;
 
 class RegisteredUserController extends Controller
 {
@@ -87,8 +87,10 @@ class RegisteredUserController extends Controller
 
         ]);
         $org_id = Organization::where('name', $request->organization)->first();
+        $first_name = explode(' ', $request->name)[0];
+        $second_name = explode(' ', $request->name)[1];
         $user = User::create([
-            'name' => $request->name,
+            'name' => $first_name,
             'organization' => $org_id->id,
             'phone_number' => $request->phone_number,
             'email' => $request->email,
@@ -97,7 +99,7 @@ class RegisteredUserController extends Controller
             'org_role_id' => 1,
             'status' => 'ACTIVE',
             'profile' => '',
-            'second_name' => $request->name,
+            'second_name' => $second_name,
             'password' => Hash::make($request->password),
         ]);
         $org_id->user_id = User::where('email', $request->email)->first()->id;
@@ -132,9 +134,7 @@ class RegisteredUserController extends Controller
         Auth::login($user);
         $user->notify(new WelcomeNotification());
 
-        //        Alert::success('SuccessAlert','Registration succesful, we are scanning the domains that you provided to identify possible spoof domains');
-
-
+        //Alert::success('SuccessAlert','Registration succesful, we are scanning the domains that you provided to identify possible spoof domains');
         return redirect(RouteServiceProvider::HOME);
     }
 }

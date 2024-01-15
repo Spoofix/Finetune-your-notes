@@ -1,12 +1,16 @@
 [
   {
-    "HTTP_Status_Code": 200
+    "HTTP_Status_Code": 403
   },
   {
     "Cookies": []
   },
   {
-    "Console_Messages": []
+    "Console_Messages": [
+      "\n  if (!navigator.cookieEnabled) {\n    window.addEventListener('DOMContentLoaded', function () {\n      var cookieEl = document.getElementById('cookie-alert');\n      cookieEl.style.display = 'block';\n    })\n  }\n",
+      "(function(){function d(){var b=a.getElementById(\"cf-footer-item-ip\"),c=a.getElementById(\"cf-footer-ip-reveal\");b&&\"classList\"in b&&(b.classList.remove(\"hidden\"),c.addEventListener(\"click\",function(){c.classList.add(\"hidden\");a.getElementById(\"cf-footer-ip\").classList.remove(\"hidden\")}))}var a=document;document.addEventListener&&a.addEventListener(\"DOMContentLoaded\",d)})();",
+      "\n  window._cf_translation = {};\n  \n  \n"
+    ]
   },
   {
     "Security_Headers": "X-XSS-Protection not found"
@@ -24,24 +28,24 @@
     "Security_Headers": "X-XSS-Protection not found"
   },
   {
-    "Web_Server": "o2switch-PowerBoost-v3"
+    "Web_Server": "cloudflare"
   },
   {
     "Geolocation_Information": {
-      "IP Address": "109.234.165.90",
-      "City": "Paris",
-      "Region": "\u00cele-de-France",
-      "Country": "FR",
-      "Latitude": "48.8534",
-      "Longitude": "2.3488",
-      "Organization": "AS50474 O2SWITCH SARL",
-      "ISP": "SARL"
+      "IP Address": "104.19.154.92",
+      "City": "San Francisco",
+      "Region": "California",
+      "Country": "US",
+      "Latitude": "37.7621",
+      "Longitude": "-122.3971",
+      "Organization": "AS13335 Cloudflare, Inc.",
+      "ISP": "Inc."
     }
   },
   {
-    "IP_Address": "109.234.165.90"
+    "IP_Address": "104.19.154.92"
   },
   {
-    "SSL-Certificate_Details": "Subject: {b'CN': b'cicbk.com'}, Issuer: {b'C': b'US', b'O': b\"Let's Encrypt\", b'CN': b'R3'}"
+    "SSL-Certificate_Details": "Subject: {b'CN': b'cibb.com'}, Issuer: {b'C': b'US', b'O': b'Google Trust Services LLC', b'CN': b'GTS CA 1P5'}"
   }
 ]

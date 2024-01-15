@@ -87,7 +87,18 @@ var intervalId = setInterval(updatePageTitle, 10);
 setTimeout(function() {
   clearInterval(intervalId);
 }, 200); 
+// console.log($page);
+//
+// function getCookie(name) {
+//     const cookieValue = document.cookie
+//         .split('; ')
+//         .find(row => row.startsWith(name + '='));
 
+//     return cookieValue ? cookieValue.split('=')[1] : null;
+// }
+
+// const uuid = getCookie('uuid');
+// console.log(uuid);
 </script>
 
 
@@ -134,25 +145,25 @@ setTimeout(function() {
                         <span class="nav-main-link-name sidenav_text hover:!active-text" v-if="isSidebarOpen" :class="pageTitle === 'Dashboard - Spoofix' ? 'active-text sidenav_text' : 'sidenav_text'">Dashboard</span>
                       </Link>
                     </li>
-                    <li class="nav-main-item" :class="{'pl-4': isSidebarOpen, 'pl-3 w-6': !isSidebarOpen }">
+                    <li class="nav-main-item" :class="{'pl-4': isSidebarOpen, 'pl-3 w-6': !isSidebarOpen }" v-if="$page.props.auth.user.role_id == 2">
                         <Link class="nav-main-link" :href="route('domains')" @click="active('Active', 'Active2')">
                         <i class="justify-center pt-1 my-2 text-xl text-black rounded h-9 align-center w-9 nav-main-link-icon fa fa-server nav-icons-background" :class="pageTitle === 'Scanned - Spoofix' ? 'active-bg' : 'nav-icons-background'"></i>
                         <span class="nav-main-link-name sidenav_text hover:active-text" :class="pageTitle === 'Scanned - Spoofix' ? 'active-text sidenav_text' : 'sidenav_text'">Scanned</span>
                       </Link>
                     </li>
-                    <li class="nav-main-item"  :class="{'pl-4': isSidebarOpen, 'pl-3 w-6': !isSidebarOpen }">
+                    <li class="nav-main-item"  :class="{'pl-4': isSidebarOpen, 'pl-3 w-6': !isSidebarOpen }" v-if="$page.props.auth.user.role_id == 2">
                       <Link class="nav-main-link" :href="route('ReportForm')" @click="active('Scanned')">
                         <i class="justify-center pt-1 my-2 text-xl text-black rounded nav-icons-background h-9 align-center w-9 nav-main-link-icon fa-regular fa-pen-to-square" :class="pageTitle === 'ReportForm - Spoofix' ? 'active-bg' : 'nav-icons-background'"></i>
                         <span class="nav-main-link-name sidenav_text hover:active-text min-w-max" v-if="isSidebarOpen" :class="pageTitle === 'ReportForm - Spoofix' ? 'active-text sidenav_text' : 'sidenav_text'">Report Form</span>
                       </Link>
                     </li>
-                       <li class="nav-main-item"  :class="{'pl-4': isSidebarOpen, 'pl-3 w-6': !isSidebarOpen }">
+                       <li class="nav-main-item"  :class="{'pl-4': isSidebarOpen, 'pl-3 w-6': !isSidebarOpen }" v-if="$page.props.auth.user.role_id == 2">
                       <Link class="nav-main-link" :href="route('InProgress')" @click="active('Scanned')">
                         <i class="justify-center pt-1 my-2 text-xl text-black rounded nav-icons-background h-9 align-center w-9 nav-main-link-icon fa-solid fa-square-poll-vertical" :class="pageTitle === 'InProgress - Spoofix' ? 'active-bg' : 'nav-icons-background'"></i>
                         <span class="nav-main-link-name sidenav_text hover:active-text min-w-max" v-if="isSidebarOpen" :class="pageTitle === 'InProgress - Spoofix' ? 'active-text sidenav_text' : 'sidenav_text'">In Progress</span>
                       </Link>
                     </li>
-                       <li class="nav-main-item"  :class="{'pl-4': isSidebarOpen, 'pl-3 w-6': !isSidebarOpen }">
+                       <li class="nav-main-item"  :class="{'pl-4': isSidebarOpen, 'pl-3 w-6': !isSidebarOpen }" v-if="$page.props.auth.user.role_id == 2">
                       <Link class="nav-main-link" :href="route('Completed')">
                         <i class="justify-center pt-1 my-2 text-xl text-black rounded nav-icons-background h-9 align-center w-9 nav-main-link-icon fa fa-check" :class="pageTitle === 'Completed - Spoofix' ? 'active-bg' : 'nav-icons-background'"></i>
                         <span class="nav-main-link-name sidenav_text hover:active-text" v-if="isSidebarOpen" :class="pageTitle === 'Completed - Spoofix' ? 'active-text sidenav_text' : 'sidenav_text'">Completed</span>
@@ -164,17 +175,18 @@ setTimeout(function() {
                         <span class="nav-main-link-name sidenav_text hover:active-text" v-if="isSidebarOpen" :class="pageTitle === 'Messages - Spoofix' ? 'active-text sidenav_text' : 'sidenav_text'">Messages</span>
                       </Link>
                     </li>
-                    <li class="nav-main-item" v-if="$page.props.auth.user.role_id == 1">
+                    <!-- <li class="nav-main-item" v-if="$page.props.auth.user.role_id == 1">
                       <Link class="nav-main-link" :href="route('users.list')">
                         <i class="text-xl nav-main-link-icon fa fa-grip-vertical"></i>
                         <span class="nav-main-link-name sidenav_text" v-if="isSidebarOpen">Users</span>
                       </Link>
-                    </li>
-                 
+                    </li> -->
+                <!-- <li class="text-yellow-300">{{$page.props.user_switch_data}} </li> -->
+                   
                   </ul>
                   </div>
                    <div class=" content-side content-side-full">
-                  <ul class="nav-main ">
+                  <ul class="nav-main " v-if="$page.props.auth.user.role_id == 2">
                      <div class="absolute bottom-0 mb-3 float" style="position: fixed;">
                       
                   <li class="nav-main-item"  :class="{'pl-4': isSidebarOpen, 'pl-3 w-6': !isSidebarOpen }">
@@ -222,7 +234,7 @@ setTimeout(function() {
                     
                     <img
                     class="h-9 w-9 rounded-full object-cover d-lg=none mx-3"
-                    src="https://randomuser.me/api/portraits/men/30.jpg"
+                    src="https://randomuser.me/api/portraits/men/34.jpg"
                     alt=""
                   />
                   <div class="my-auto userName text-capitalize" style="">
@@ -237,12 +249,12 @@ setTimeout(function() {
                       </h5>
                     </div>
                     <div class="p-2 ">
-                      <Link class="space-x-1 font-black dropdown-item d-flex align-items-center justify-content-between hover:bg-yellow-100" :href="route('settings.account')">
+                      <Link class="space-x-1 font-black dropdown-item d-flex align-items-center justify-content-between hover:bg-yellow-100" :href="route('settings.account')" v-if="$page.props.auth.user.role_id == 2">
                         <span>Profile</span>
                         <i class="opacity-50 hover:opacity-25 fa fa-fw fa-user"></i>
                       </Link>
                       <div class="dropdown-divider"></div>
-                      <Link class="space-x-1 font-black dropdown-item d-flex align-items-center justify-content-between hover:bg-yellow-100" :href="route('logout')" method="post" >
+                      <Link class="space-x-1 font-black dropdown-item d-flex align-items-center justify-content-between hover:bg-yellow-100" as="button" :href="route('logout')" method="post" >
                         <span>Log Out</span>
                         <i class="opacity-50 hover:opacity-25 fa fa-fw fa-sign-out-alt"></i>
                       </Link>
@@ -253,11 +265,11 @@ setTimeout(function() {
 
               </div>
             <!-- header buttons -->
-              <div class="flex flex-row ">
-                <Link class="-mr-8 nav-main-link" :href="route('settings.notifications')">
+              <div class="flex flex-row" :class="{ 'mt-5': $page.props.auth.user.role_id === 1 }">
+                <Link class="-mr-8 nav-main-link" :href="route('settings.notifications')" v-if="$page.props.auth.user.role_id == 2">
                     <i class="justify-center pt-1 text-xl text-black rounded nav-icons-background h-9 align-center w-9 nav-main-link-icon fa fa-bell"></i>
                   </Link>
-                <Link class="nav-main-link" :href="route('settings.account')">
+                <Link class="nav-main-link" :href="route('settings.account')" v-if="$page.props.auth.user.role_id == 2">
                   <i class="justify-center pt-1 text-xl text-black rounded nav-icons-background h-9 align-center w-9 nav-main-link-icon fa fa-gear"></i>
                 </Link>
               </div>
@@ -267,11 +279,22 @@ setTimeout(function() {
           <!-- Main Container -->
           <main id="" >
             <!-- Page Content -->
-            <div class="overflow-auto -mt-14 WidthOnSmall" >
+            <div class="relative overflow-auto -mt-14 WidthOnSmall" >
               <!-- style="margin-left: 295px;" -->
+              <!-- && uuid -->
+              <!-- && uuid -->
+              <div v-if="$page.props.user_switch_data " >
+             <div v-if="$page.props.auth.user.role_id == 2 && $page.props.auth.user.id === $page.props.user_switch_data.user_id " 
+                   class="fixed bottom-0 right-0 z-10 flex items-center p-4 m-4 text-lg font-extrabold text-black bg-yellow-400 rounded-lg shadow-2xl hover:shadow-yellow-800">
+            <Link :href="'/back_to_admin/' + $page.props.user_switch_data.admin_id" as="button">
+                <!-- {{$page.props.user_switch_data.admin_ip}} -->
+                <span class="capitalize">Exit {{$page.props.auth.user.name}}</span>
+                <i class="ml-4 fas fa-arrow-left"></i>
+              </Link>
+            </div>
 
-
-                <slot />
+            </div>
+            <slot />
 
             </div>
             <!-- END Page Content -->

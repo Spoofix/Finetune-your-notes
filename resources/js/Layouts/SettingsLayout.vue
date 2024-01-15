@@ -268,11 +268,20 @@ const testing = [test, false, false, false, false, false]
           <!-- Main Container -->
           <main id="" >
             <!-- Page Content -->
-            <div class="overflow-x-hidden overflow-y-auto -mt-14 WidthOnSmall" >
+              <div class="relative overflow-auto -mt-14 WidthOnSmall" >
               <!-- style="margin-left: 295px;" -->
+              <div v-if="$page.props.user_switch_data" >
+             <div v-if="$page.props.auth.user.role_id == 2 && $page.props.auth.user.id === $page.props.user_switch_data.user_id" 
+                   class="fixed bottom-0 right-0 z-10 flex items-center p-4 m-4 text-lg font-extrabold text-black bg-yellow-400 rounded-lg shadow-2xl hover:shadow-yellow-800">
+              <Link :href="'/back_to_admin/' + $page.props.user_switch_data.admin_id" as="button">
+                <!-- {{$page.props.user_switch_data.admin_ip}} -->
+                <span class="capitalize">Exit {{$page.props.auth.user.name}}</span>
+                <i class="ml-4 fas fa-arrow-left"></i>
+              </Link>
+            </div>
 
-
-                <slot />
+            </div>
+            <slot />
 
             </div>
             <!-- END Page Content -->
