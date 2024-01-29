@@ -11,6 +11,9 @@ const isModalVisible = ref(false);
 
 const openModal = () => {
   isModalVisible.value = true;
+    setTimeout(() => {
+    closeModal();
+  }, 7000);
 };
 
 const closeModal = () => {
@@ -284,6 +287,25 @@ function submit() {
 </template>
 
 <style scoped>
+/* animation*/
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+      opacity: 96%
+    }
+    40% {
+      transform: translateY(-20px);
+      opacity: 98%
+    }
+    60% {
+      transform: translateY(-10px);
+      opacity: 100%
+    }
+  }
+
+  .modal-content {
+    animation: bounce 800ms 1;
+  }
 .btnSwitch{
 width: 21.124px;
 height: 18px;

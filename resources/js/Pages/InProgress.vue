@@ -188,6 +188,35 @@ const active = toggleTable(0 , props.domainList[0].id);
         // behavior: 'smooth'
     });
 }
+const formating =(createdDate) =>{
+  let options = { day: 'numeric', month: 'numeric', year: 'numeric' };
+  let formattedDate = createdDate.toLocaleDateString(undefined, options);
+  return formattedDate;
+}
+
+
+const timing =(inputDate) =>{
+  const currentDate = new Date();
+  const timeDifference = currentDate - inputDate;
+
+  const months = Math.floor((timeDifference / (1000 * 60 * 60 * 24 * 30)));
+  const days = Math.floor((timeDifference % (1000 * 60 * 60 * 24 * 30))/ (1000 * 60 * 60 * 24));
+  const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+  const formattedDuration = `${months != 0 ? months+'M:' : ''}${days != 0 ? days+ 'D:': ''}${hours}H`;
+
+  return formattedDuration;
+}
+
+function startDate(inputDateString) {
+  const options = { month: 'short', day: 'numeric', year: '2-digit' };
+  const inputDate = new Date(inputDateString);
+  const formattedDate = new Intl.DateTimeFormat('en-US', options).format(inputDate);
+
+  const yearSubstring = formattedDate.slice(-2);
+
+  return `${formattedDate}`;
+}
 </script>
 
 <template>
@@ -232,22 +261,22 @@ const active = toggleTable(0 , props.domainList[0].id);
                           <th  class="py-3 pl-2 min-w-max" >
                               Domain
                           </th>
-                          <th  class="py-3 text-center">
+                          <th  class="py-3 text-left">
                               Source
                           </th>
-                          <th  class="py-3 text-center">
+                          <th  class="py-3 text-left">
                                User
                           </th>
-                          <th  class="py-3 text-center">
+                          <th  class="py-3 text-left">
                                Authorization
                           </th>
-                          <th  class="py-3 text-center">
+                          <th  class="py-3 text-left">
                               Start Date
                           </th>
-                          <th  class="py-3 text-center">
+                          <th  class="py-3 text-left">
                               Progress
                           </th>
-                          <th  class="py-3 text-center">
+                          <th  class="py-3 text-left">
                               Time Elapsed
                           </th>
                           <th  class="py-3 text-center">
@@ -264,26 +293,26 @@ const active = toggleTable(0 , props.domainList[0].id);
                           <td class="pl-3 overflow-auto py-auto" style="max-width: 190px;">
                               {{ spoof.spoofed_domain }}
                           </td>
-                          <td class="text-center py-auto" v-if="spoof.reported_via === 'report_form'">
+                          <td class="text-left py-auto" v-if="spoof.reported_via === 'report_form'">
                               Self Reported
                           </td>
-                           <td class="text-center py-auto" v-else>
+                           <td class="text-left py-auto" v-else>
                               System Scan
                           </td>
-                          <td class="text-center capitalize py-auto">
+                          <td class="text-left capitalize py-auto">
                               {{spoof.user_name}}
                           </td>
-                          <td class="text-center py-auto">
-                              {{spoof.created_at}}
+                          <td class="text-left py-auto">
+                              {{formating(new Date(spoof.created_at))}}
                           </td>
-                          <td class="text-center py-auto">
-                              Oct 13, 23
-                          </td>
-                          <td class="text-center py-auto">
+                          <td class="text-left py-auto">
+                              {{startDate(new Date(spoof.created_at))}}
+                          </td><!--Oct 13, 23-->
+                          <td class="text-left py-auto">
                               Initiated 
                           </td>
-                          <td class="text-center py-auto">
-                              01D:21H
+                          <td class="text-left py-auto">
+                              {{timing(new Date(spoof.created_at))}}
                           </td>
                           <td class="py-1 ">
                             <Link :href="'/spoof/view/' + spoof.id" class="w-16 py-1 mx-auto transition-all duration-150 ease-linear tableButton visited:bg-pink-300 active:bg-yellow-200 hover:bg-yellow-200 focus:outline-none" preserve-scroll>

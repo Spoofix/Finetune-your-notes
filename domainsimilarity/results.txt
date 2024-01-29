@@ -1,15 +1,32 @@
 [
   {
-    "HTTP_Status_Code": 403
+    "HTTP_Status_Code": 200
   },
   {
-    "Cookies": []
+    "Cookies": [
+      {
+        "name": "_abck",
+        "value": "55118DF8E652933A2DA64E7F84129EF7~-1~YAAQLJ82FwMvUxKNAQAANsGVPAvX150iannuLqc6L+AimUKGj+GEA9IZPxNx9BUnbRjyi4SzIz5vs1xhDzIKeTf3j8mTLZYPAVSGaC7dD2FtJ8KK0kD6DYBZn6q/MRU6Efu9xCoCS36nPqhvjhwgW1Cnj1rIV7z3ueocy19YoFdiFp9lclM4GXr3dXisOMJOqls7LZPwQ6cmxpJ6ikXdBKO7vJ7/1Mb+WdM8EB0BUL9cqqnaNTS7WZEcGF5kLAtgNCsbm9rWD+tbkg70g8D7yNRjI4OsljYgGh6blzzN+BqUMnnGIkoIxcnoxbN+2J2x8IoEy6IciRJwLCO5cEYo7ZXryqQimsSLrqrvPU5Yo9GqwCkFHrOnNybebIyu~-1~-1~-1",
+        "domain": ".scotiabank.com",
+        "path": "/",
+        "expires": 1737654464,
+        "secure": true,
+        "httpOnly": false
+      },
+      {
+        "name": "bm_sz",
+        "value": "D7804EA319A11D06BD89688599C7F513~YAAQLJ82FwQvUxKNAQAANsGVPBZHvKxscqhp+3lzju0wJynDUy+39rl4/zeC1elfAVPAPfm9SRDd3yOwnj+oKSAjrwUGsUY0IfXsOtfqvcxGsf1Q1hiBT/HRKAwQJ55rJP8Sv7mXuO5FG7I3MbwDUMSeXE7V8yYvk9KCWUISaNWD/7M2rzOlogroPCQuBvRrn6zPsUJx9IY0ovLXjZNEqc6lD/s3dOSYHb3vjnD5WfmHA8F9exgESkxssgZJ+hSw8bL5awESLJcMM/9oIzL2K8po7/BAd0lz4PH4OGU41Hsw4BDuc7PWhD672tFx/yfgDiL67gTUjYE3zr5Fa/WBN7aB~3486787~3552579",
+        "domain": ".scotiabank.com",
+        "path": "/",
+        "expires": 1706132864,
+        "secure": false,
+        "httpOnly": false
+      }
+    ]
   },
   {
     "Console_Messages": [
-      "\n  if (!navigator.cookieEnabled) {\n    window.addEventListener('DOMContentLoaded', function () {\n      var cookieEl = document.getElementById('cookie-alert');\n      cookieEl.style.display = 'block';\n    })\n  }\n",
-      "(function(){function d(){var b=a.getElementById(\"cf-footer-item-ip\"),c=a.getElementById(\"cf-footer-ip-reveal\");b&&\"classList\"in b&&(b.classList.remove(\"hidden\"),c.addEventListener(\"click\",function(){c.classList.add(\"hidden\");a.getElementById(\"cf-footer-ip\").classList.remove(\"hidden\")}))}var a=document;document.addEventListener&&a.addEventListener(\"DOMContentLoaded\",d)})();",
-      "\n  window._cf_translation = {};\n  \n  \n"
+      "\n<!--\n function redirect()\n { \n  window.location = \"http://www.scotiabank.com/pa/es/0,,3784,00.html\"\n }\n setTimeout(\"redirect();\", 0)\n//-->\n"
     ]
   },
   {
@@ -28,24 +45,24 @@
     "Security_Headers": "X-XSS-Protection not found"
   },
   {
-    "Web_Server": "cloudflare"
+    "Web_Server": "AkamaiNetStorage"
   },
   {
     "Geolocation_Information": {
-      "IP Address": "104.19.154.92",
-      "City": "San Francisco",
-      "Region": "California",
-      "Country": "US",
-      "Latitude": "37.7621",
-      "Longitude": "-122.3971",
-      "Organization": "AS13335 Cloudflare, Inc.",
-      "ISP": "Inc."
+      "IP Address": "2.21.98.80",
+      "City": "Edenvale",
+      "Region": "Gauteng",
+      "Country": "ZA",
+      "Latitude": "-26.1333",
+      "Longitude": "28.1833",
+      "Organization": "AS20940 Akamai International B.V.",
+      "ISP": "B.V."
     }
   },
   {
-    "IP_Address": "104.19.154.92"
+    "IP_Address": "2.21.98.80"
   },
   {
-    "SSL-Certificate_Details": "Subject: {b'CN': b'cibb.com'}, Issuer: {b'C': b'US', b'O': b'Google Trust Services LLC', b'CN': b'GTS CA 1P5'}"
+    "SSL-Certificate_Details": "Subject: {b'C': b'CA', b'ST': b'Ontario', b'L': b'Toronto', b'O': b'Bank of Nova Scotia', b'CN': b'scotiabank.ca'}, Issuer: {b'C': b'US', b'O': b'Entrust, Inc.', b'OU': b'(c) 2012 Entrust, Inc. - for authorized use only', b'CN': b'Entrust Certification Authority - L1K'}"
   }
 ]

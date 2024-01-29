@@ -7,12 +7,29 @@ use App\Models\Domain;
 use Illuminate\Http\Request;
 use App\Models\SpoofedDomain;
 use App\Models\ReportformTakedownDetails;
+use Illuminate\Support\Facades\Auth;
 
 class SpoofViewController extends Controller
 {
     public function spoofView($spoofId)
     {
-        $spoofData = SpoofedDomain::where('id', $spoofId)->first();
+        $user = Auth::user();
+        try {
+            $spoofData = SpoofedDomain::where('id', $spoofId)->first();
+
+            if ($spoofData) {
+                $userDomainTest = Domain::where('id', $spoofData->domain_id)->first();
+            } else {
+                return Inertia::render('DefaultPage');
+            }
+        } catch (\Exception $e) {
+            return Inertia::render('DefaultPage');
+        }
+        if ($user->id !== $userDomainTest->user_id) {
+            return Inertia::render('DefaultPage');
+        }
+
+        $firstSeen = SpoofedDomain::where('spoofed_domain', $spoofData->spoofed_domain)->first()->created_at;
         if (!$spoofData) {
             return;
         }
@@ -33,11 +50,27 @@ class SpoofViewController extends Controller
             'spoofData' => $spoofData,
             'userid' => auth()->id(),
             'domain' => Domain::where('user_id', auth()->id())->get(),
+            'firstSeen' => $firstSeen
             // 'response' => true,
         ]);
     }
     public function requestAuthorization($spoofId)
     {
+        $user = Auth::user();
+        try {
+            $spoofData = SpoofedDomain::where('id', $spoofId)->first();
+
+            if ($spoofData) {
+                $userDomainTest = Domain::where('id', $spoofData->domain_id)->first();
+            } else {
+                return Inertia::render('DefaultPage');
+            }
+        } catch (\Exception $e) {
+            return Inertia::render('DefaultPage');
+        }
+        if ($user->id !== $userDomainTest->user_id) {
+            return Inertia::render('DefaultPage');
+        }
         $spoofData = SpoofedDomain::where('id', $spoofId)->first();
         $check = ReportformTakedownDetails::where('evidence_urls', $spoofData['spoofed_domain'])->first();
         // 

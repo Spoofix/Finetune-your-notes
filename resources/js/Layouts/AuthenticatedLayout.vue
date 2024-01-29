@@ -77,7 +77,6 @@ let pageTitle = ref();
 // var pageTitle = document.title;
 function updatePageTitle() {
   pageTitle.value = document.title;
-  // Do something with the pageTitle if needed
   // console.log(document);
 }
 
@@ -147,8 +146,8 @@ setTimeout(function() {
                     </li>
                     <li class="nav-main-item" :class="{'pl-4': isSidebarOpen, 'pl-3 w-6': !isSidebarOpen }" v-if="$page.props.auth.user.role_id == 2">
                         <Link class="nav-main-link" :href="route('domains')" @click="active('Active', 'Active2')">
-                        <i class="justify-center pt-1 my-2 text-xl text-black rounded h-9 align-center w-9 nav-main-link-icon fa fa-server nav-icons-background" :class="pageTitle === 'Scanned - Spoofix' ? 'active-bg' : 'nav-icons-background'"></i>
-                        <span class="nav-main-link-name sidenav_text hover:active-text" :class="pageTitle === 'Scanned - Spoofix' ? 'active-text sidenav_text' : 'sidenav_text'">Scanned</span>
+                        <i class="justify-center pt-1 my-2 text-xl text-black rounded h-9 align-center w-9 nav-main-link-icon fa fa-server nav-icons-background" :class="pageTitle === 'Scanned - Spoofix' || pageTitle === 'RequestAuthorization - Spoofix' || pageTitle === 'Domain - Spoofix' ? 'active-bg' : 'nav-icons-background'"></i>
+                        <span class="nav-main-link-name sidenav_text hover:active-text" :class="pageTitle === 'Scanned - Spoofix' || pageTitle === 'RequestAuthorization - Spoofix' || pageTitle === 'Domain - Spoofix' ? 'active-text sidenav_text' : 'sidenav_text'">Scanned</span>
                       </Link>
                     </li>
                     <li class="nav-main-item"  :class="{'pl-4': isSidebarOpen, 'pl-3 w-6': !isSidebarOpen }" v-if="$page.props.auth.user.role_id == 2">
@@ -159,14 +158,14 @@ setTimeout(function() {
                     </li>
                        <li class="nav-main-item"  :class="{'pl-4': isSidebarOpen, 'pl-3 w-6': !isSidebarOpen }" v-if="$page.props.auth.user.role_id == 2">
                       <Link class="nav-main-link" :href="route('InProgress')" @click="active('Scanned')">
-                        <i class="justify-center pt-1 my-2 text-xl text-black rounded nav-icons-background h-9 align-center w-9 nav-main-link-icon fa-solid fa-square-poll-vertical" :class="pageTitle === 'InProgress - Spoofix' ? 'active-bg' : 'nav-icons-background'"></i>
-                        <span class="nav-main-link-name sidenav_text hover:active-text min-w-max" v-if="isSidebarOpen" :class="pageTitle === 'InProgress - Spoofix' ? 'active-text sidenav_text' : 'sidenav_text'">In Progress</span>
+                        <i class="justify-center pt-1 my-2 text-xl text-black rounded nav-icons-background h-9 align-center w-9 nav-main-link-icon fa-solid fa-square-poll-vertical" :class="pageTitle === 'InProgress - Spoofix'|| pageTitle === 'ScannedInProgress - Spoofix' ? 'active-bg' : 'nav-icons-background'"></i>
+                        <span class="nav-main-link-name sidenav_text hover:active-text min-w-max" v-if="isSidebarOpen" :class="pageTitle === 'InProgress - Spoofix' || pageTitle === 'ScannedInProgress - Spoofix' ? 'active-text sidenav_text' : 'sidenav_text'">In Progress</span>
                       </Link>
                     </li>
                        <li class="nav-main-item"  :class="{'pl-4': isSidebarOpen, 'pl-3 w-6': !isSidebarOpen }" v-if="$page.props.auth.user.role_id == 2">
                       <Link class="nav-main-link" :href="route('Completed')">
-                        <i class="justify-center pt-1 my-2 text-xl text-black rounded nav-icons-background h-9 align-center w-9 nav-main-link-icon fa fa-check" :class="pageTitle === 'Completed - Spoofix' ? 'active-bg' : 'nav-icons-background'"></i>
-                        <span class="nav-main-link-name sidenav_text hover:active-text" v-if="isSidebarOpen" :class="pageTitle === 'Completed - Spoofix' ? 'active-text sidenav_text' : 'sidenav_text'">Completed</span>
+                        <i class="justify-center pt-1 my-2 text-xl text-black rounded nav-icons-background h-9 align-center w-9 nav-main-link-icon fa fa-check" :class="pageTitle === 'Completed - Spoofix' || pageTitle === 'ScannedCompleted - Spoofix' ? 'active-bg' : 'nav-icons-background'"></i>
+                        <span class="nav-main-link-name sidenav_text hover:active-text" v-if="isSidebarOpen" :class="pageTitle === 'Completed - Spoofix' || pageTitle === 'ScannedCompleted - Spoofix'? 'active-text sidenav_text' : 'sidenav_text'">Completed</span>
                       </Link>
                     </li>
                        <li class="nav-main-item "  :class="{'pl-4': isSidebarOpen, 'pl-3 w-6': !isSidebarOpen }">

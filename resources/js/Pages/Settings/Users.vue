@@ -12,19 +12,22 @@ const isModalVisible = ref(false);
 
 const openModal = () => {
   isModalVisible.value = true;
+  setTimeout(() => {
+    closeModal();
+  }, 7000);
 };
 
 const closeModal = () => {
   isModalVisible.value = false;
 };
 
-// Add a watcher to close the modal after a delay
+
 watch(isModalVisible, (newValue) => {
   if (!newValue) {
     setTimeout(() => {
-      // Close the modal after the fade-out transition
+      // Close the modal
       closeModal();
-    }, 300); // Adjust the delay to match the transition duration
+    }, 300); 
   }
 });
 
@@ -126,20 +129,12 @@ function submit() {
     formData.append('email', form.observed_date);
     formData.append('user_role', form.targetDomain);
 
-
-    
-    
-    // Send a POST request using Inertia
-    // inertia.post('/ReportSpoofySite', form);
     router.post('/settings/addUser', form)
-        // Handle the success response
         Toast.fire({
             icon: 'success',
             title: 'Email to reset password has been sent to the new users email Successfully',
         });
         activeOne.value = 'Organization';
-        // You can also redirect to another page if needed
-        // router.push('/some-other-page');
    
 }
 
@@ -345,7 +340,25 @@ onMounted(async () => {
 </template>
 
 <style scoped>
+/* animation*/
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+      opacity: 96%
+    }
+    40% {
+      transform: translateY(-20px);
+      opacity: 98%
+    }
+    60% {
+      transform: translateY(-10px);
+      opacity: 100%
+    }
+  }
 
+  .modal-content {
+    animation: bounce 800ms 1;
+  }
 .custom-file-upload {
   display: inline-block;
   padding: 10px 20px;

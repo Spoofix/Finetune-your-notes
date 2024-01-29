@@ -21,10 +21,11 @@ class ScannedController extends Controller
     {
         $DomainDetail = Domain::where('user_id', auth()->id())->get();
         $IdsList = array();
+        $modifiedIdsList = array();
         foreach ($DomainDetail as $Id) {
             // if (is_array($Id)) {
             $domainId = $Id['id'];
-            // }
+            // };
             $last_batch = SpoofedDomain::where('domain_id', $domainId)->orderBy('id', 'desc')->first();
             $list =  SpoofedDomain::validDomains()->where('domain_id', $domainId);
             if ($last_batch) {
@@ -33,8 +34,15 @@ class ScannedController extends Controller
             $list = $list->get();
             $IdsList = array_merge($IdsList, $list->toArray());
         }
+        foreach ($IdsList as $isNew) {
+            $isNewValue = $isNew['spoofed_domain'];
+            $firstSeen = SpoofedDomain::where('spoofed_domain', $isNewValue)->first()->created_at;
+            $isNew['first_seen'] = $firstSeen;
+            $modifiedIdsList = array_merge($modifiedIdsList, [$isNew]);
+            // Log::info($isNew);
+        }
         return Inertia::render('Domains', [
-            'spoofList' => $IdsList,
+            'spoofList' => $modifiedIdsList,
             'domainList' => Domain::where('user_id', auth()->id())->get()
         ]);
     }

@@ -65,7 +65,14 @@
 @if ($latitude && $longitude)
     <div class="folium-map" id="map_a547671471a4f81a5828924aa034da6f"></div>
 @else
- <div style="margin: 30px; font-size: 20px; ">location not available for <span style="">{{$spoofdomain}}</span></div>
+<div style=" text-align: center;">
+    <img src="https://static.vecteezy.com/system/resources/previews/025/902/368/non_2x/no-gps-icon-map-location-pin-isolate-not-available-sign-design-isolate-on-white-background-vector.jpg"
+        style="height: 100px; width: 100px;" alt="...">
+    <h2>uh-oh!</h2>
+    <p>Location not available for <span style="font-weight: 700;">{{$spoofdomain}}</span></p>
+</div>
+    
+
 @endif
 </body>
 <script>

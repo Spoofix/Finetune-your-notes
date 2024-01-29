@@ -34,104 +34,42 @@ defineComponent({
   },
 
 });
-// const Toast = Swal.mixin({
-//   toast: true,
-//   position: 'top-end',
-//   showConfirmButton: false,
-//   timer: 7000,
-//   timerProgressBar: true,
-//   didOpen: (toast) => {
-//     toast.addEventListener('mouseenter', Swal.stopTimer)
-//     toast.addEventListener('mouseleave', Swal.resumeTimer)
-//   }
-// })
 
 
-// const props = defineProps({
-//   domain: {
-//     type: Object,
-//   },
-//   details: {
-//     type: Object,
-//   },
-//   spoofData: {
-//     type: Object,
-//   },
-//   userid: {
-//     type: Object,
-//   },
-//   spoofList: {
-//     type: Object,
-//   }
-  
-// });
-// const heading = ref('Screenshots');
-// const changePageContent = (buttonCLicked) =>{
-//     heading.value = buttonCLicked;
-// }
- 
-// Data
-// const bladeViewUrl = ref("");
+const props = defineProps({
+  domains: {
+    type: Object,
+  },
+  info: {
+    type: Object,
+  },
+  messages: {
+    type: Object,
+  },
+});
 
-// Set the URL of your Blade view when the component is mounted
-// onMounted(() => {
-//   bladeViewUrl.value = "http://127.0.0.1:5500/resources/views/map.html"; // Replace with the actual relative path
-// });
+function date(inputDateString) {
+  const options = { month: 'short', day: 'numeric', year: '2-digit' };
+  const inputDate = new Date(inputDateString);
+  const formattedDate = new Intl.DateTimeFormat('en-US', options).format(inputDate);
 
-// const userId = props.domain[0].user_id;
+  // const yearSubstring = formattedDate.slice(-2);
 
-// const nextId = props.spoofList[1].id;
-// const nextId = ref(props.spoofData.id + 1);
-// const nextId2 = ref(props.spoofData.id - 1);
-// console.log(props.spoofList);
-// console.log("hello");
-// const changeID = (activeId) => {
-//   let index = props.spoofList.length - 1; 
-//   console.log("hello");
-//   console.log(props.spoofList.length - 1);
-//   while(index > 0){
-//      console.log(props.spoofList[index].id);
-//     if(activeId === props.spoofList[index].id){
-//       index--;
-//       nextId.value = props.spoofList[index].id;
-//       break; 
-//     }else{
-//       index--;
-//     }
-//   }
-// }
-
-// const changeIDPlus = (activeId) => {
-//   let index = 0; 
-//   console.log("hello");
-//   console.log(props.spoofList[index].id);
-//   while(index < props.spoofList.length){
-//     console.log(props.spoofList[index].id);
-//     if(activeId === props.spoofList[index].id){
-//       index++;
-//       nextId.value = props.spoofList[index].id;
-//       break; 
-//     }else{
-//       index++;
-//     }
-//   }
-// }
-
-// function checkImageExists(imageUrlL) {
-//   let imageUrl = `http://127.0.0.1:8000/assets/screenshots/${imageUrlL}.png`;
-//   fetch(imageUrl, { method: 'HEAD' })
-//     .then((response) => {
-//      if(response.status === 200){
-
-//      }
-// }
-
+  return `${formattedDate}`;
+}
+const messageRef = ref(props.messages[0]);
+const messaging = (index, messageId) => {
+   console.log('hello');
+    if(props.messages[index].id === messageId){
+      messageRef.value = props.messages[index];
+    } 
+}
 </script>
 
 <template>
   <Head title="Messages" />
 
- <AuthenticatedLayout  class="overflow-scroll fontFamily" style="height:100vh; background: #FFF;"> <!-- v-if=" props.userid === userId" -->
+ <AuthenticatedLayout  class="overflow-x-hidden overflow-y-scroll fontFamily" style="height:100vh; background: #FFF;"> <!-- v-if=" props.userid === userId" -->
    <div class="flex justify-between mt-6 mr-8 border-b-4 border-black max-w-100 lg;ml-6 md:ml-6 ml-0">
     <div class="relative ">
       <button class="absolute w-40 h-12 px-3 rounded-tr-full bg-dark tabsText" style="">Domain</button>
@@ -148,10 +86,33 @@ defineComponent({
         style="border-radius: 6px; "
         id="myDiv"
     >
-      <div class="ml-5 text-2xl font-semibold text-blueGray-700">
-          <h3 class="orgDomain text-capitalize ">domain.id</h3>
+      <div class="w-full h-full text-2xl font-semibold text-blueGray-700 select_wrapper">
+          <!-- <h3 class="orgDomain text-capitalize ">domain.id </h3> -->
+          <div class="h-full bg-transparent border-none dropdown lg:w-full md:w-full orgDomain ">
+            <button class="relative flex dropbtn bigDropdownBg">
+              <p>_._._.com </p>
+              <div class="absolute right-0 mr-5 botton min-w-fit ">
+                  <i
+                    class="text-sm fa fa-chevron-down"
+                    
+                    aria-hidden="true"
+                  ></i>
+                    <div class="text-sm font-normal">
+                    Spoofing sites 
+                  </div>
+                </div>
+            </button>
+            <div class="dropdown-content bigDropdownBg" >
+              <div v-for="(domain, index) in domains" :key="index">
+              <a class="bigDropdownBg hover:bg-transparent">
+                  {{domain.domain_name}}
+              </a>
+              </div>
+            </div>
+          </div>
+
       </div>
-      <div class="mr-5 botton ">
+      <!-- <div class="mr-5 botton ">
         <i
           class="fa fa-chevron-down"
           
@@ -160,74 +121,77 @@ defineComponent({
           <div>
           Spoofing sites 
         </div>
-      </div>
+      </div> -->
     </div>
-    <div class="justify-between mx-4 mt-2 lg:flex lg:flex-row">
-    <div class="" style="min-width: 67%; height: 65vh;">
+    <div class="justify-between mx-4 mt-2 lg:flex lg:flex-row" style="">
+    <div style="min-width: 57%; height: 65vh;">
        <button class="my-2 mb-2 bg-yellow-100 buttons buttonsText h-14"><i class="mx-1 fa fa-plus"></i>Compose Message </button>
-       <table class="w-full mt-3 text-sm">
-                  <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 tablehead">
-                      <tr class="container justify-evenly">
-                          <th  class="py-3 pl-2" >
-                              Date
-                          </th>
-                          <th  class="py-3 text-center">
-                              From
-                          </th>
-                          <th  class="py-3 text-center">
-                              To
-                          </th>
-                          <th  class="py-3 text-center">
-                              Subject
-                          </th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                      <tr class=" tableRow
-                      transition-colors duration-300 hover:!bg-yellow-50"
-                          >
-                          <td class="pl-3 overflow-auto py-auto" style="max-width: 90px;">
-                              Oct 13, 23
-                          </td>
-                          <td class="text-center py-auto">
-                              John E.
-                          </td>
-                          <td class="text-center py-auto">
-                              Peter P.
-                          </td>
-                          <td class="text-center py-auto">
-                              Take Down Instructions
-                          </td>
-                      </tr>
-                  </tbody>
-              </table>
+       <!-- <table class="w-full mt-3 text-sm" style="max-height: 20px;"> -->
+        <div class="max-h-full overflow-auto " >
+        <table class="w-full mt-3 overflow-x-auto text-sm">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 tablehead">
+                <tr class="container justify-evenly">
+                    <th  class="py-3 pl-2" >
+                        Date
+                    </th>
+                    <th  class="py-3 text-left">
+                        From
+                    </th>
+                    <th  class="py-3 text-left">
+                        To
+                    </th>
+                    <th  class="py-3 text-left">
+                        Subject
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="transition-colors duration-300 cursor-pointer tableRow "
+                  :class="{ 'bg-yellow-300': messageRef.id == message.id, 'bg-yellow-100 hover:bg-yellow-50': messageRef.id != message.id }"
+                v-for="(message, index) in messages" :key="index"
+                    @click="messaging(index, message.id)"
+                    >
+                    <td class="pl-3 overflow-auto py-auto" style="max-width: 90px;"  >
+                        {{date(message.created_at)}}
+                    </td>
+                    <td class="text-left capitalize py-auto">
+                        Spoofix
+                    </td>
+                    <td class="text-left capitalize py-auto">
+                        {{info.name}} {{info.second_name}}
+                    </td>
+                    <td class="text-left py-auto">
+                        {{message.subject}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+         </div>
     </div>
-    <div class="ml-1 box-style" style=" height: 65vh; min-width: 50%; margin-top: 60px;">
-      <div class="align-middle rounded-t-lg " style="height: 45px; width: 100%; ">
-        <!-- will do js here -->
-            From: [Your Name] <br>
-            To: [Recipient's Name] <br>
-            Subject: [Email Subject] <br>
-            Reference: [Reference Number] <br>
-            Date/Time: [Date and Time] <br>
+    <div class="w-full ml-2 box-style" style=" height: 65vh; min-width: 31%; margin-top: 60px; ">
+      <div class="ml-2 align-middle rounded-t-lg" style="height: 45px;  ">
+            From: info@spoofix.com <br>
+            To: {{info.email}} <br>
+            Subject: {{messageRef.subject}} <br>
+            Reference: MSG0000{{messageRef.id}}<br>
+            Date:  {{date(messageRef.created_at)}} <br>
+            <br>
+            Dear <span class="capitalize">{{info.name}} {{info.second_name}}</span>, <br>
 
-            Dear [Recipient's Name], <br>
-
-            I hope this email finds you well. I am writing to inform you about [brief description of the purpose of the email]. We have noted your recent inquiry regarding [specific topic/issue], and I wanted to provide you with the following information: <br>
-
-            [Body of the Email - Provide detailed information, instructions, or responses to the recipient's query.] <br>
-
-            If you have any further questions or concerns, please feel free to reach out to us. We appreciate your [mention any specific action by the recipient, if applicable]. <br>
+            I hope this email finds you well. I am writing to inform you about [brief description of the purpose of the email]. We have noted your recent inquiry regarding '{{messageRef.subject}}', and I wanted to provide you with the following information: <br>
+            <br>
+           {{messageRef.messages}}<br>
+            <br>
+            If you have any further questions or concerns, please feel free to reach out to us. <br>
 
             Thank you for your attention and cooperation. <br>
-
+            <br>
             Best regards, <br>
-
-            [Your Full Name] <br>
-            [Your Position] <br>
-            [Your Company] <br>
-            [Your Email Address] <br>
-        
+            <br>
+            Spoofix Management, <br>
+            <!-- [Your position], <br> -->
+            Spoofix<br>
+            info@spoofix.com <br>
       </div>
     </div>
    </div>
@@ -281,7 +245,66 @@ defineComponent({
 
 <style scoped>
 /*animation*/
+
+/* Style The Dropdown Button */
+.dropbtn {
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  border-radius: 10px;
+  transition-duration: 2s;
+  max-height: 100%;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+  transition-duration: 2s;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  position: absolute;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  visibility: hidden;
+  transition: opacity 0.3s ease, max-height 0.9s ease, visibility 0.9s;
+  width: 100%;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ffe386}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    opacity: 1;
+  max-height: 200px; 
+  visibility: visible;
+  overflow: auto;
+  
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+  background-color: #ffe386;
+}
+
 /* Add your custom CSS here */
+
 
 .backlight {
   position: fixed;
@@ -350,7 +373,6 @@ background: var(--yellow-yellow-400, #FFD633);
   background: #FFEFB0;
 }
 .tableRow{
-  background: var(--yellow-yellow-100, #FFEFB0);
   height: 45px;
 }
 .tablehead{

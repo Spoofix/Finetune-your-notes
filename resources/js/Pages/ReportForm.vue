@@ -3,15 +3,27 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, router, useForm } from '@inertiajs/vue3';
 import Swal from 'sweetalert2'
 import { Link } from "@inertiajs/vue3"
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 import { defineProps, onMounted } from 'vue';
-import { ref, watch } from 'vue';
+import {  watch, computed } from 'vue';
 
+
+defineComponent({
+  components: {
+    Link
+  },
+  props: {
+    error: Object
+  },
+});
 
 const isModalVisible = ref(false);
 
 const openModal = () => {
   isModalVisible.value = true;
+    setTimeout(() => {
+    closeModal();
+  }, 5000);
 };
 
 const closeModal = () => {
@@ -24,7 +36,7 @@ const props = defineProps({
         type:Object,
     },
 });
-console.log(props.domainList)
+// console.log(props.domainList)
 
 const Toast = Swal.mixin({
     toast: true,
@@ -43,49 +55,79 @@ const form = useForm({
     evidence_urls: '',
     additional_notes: '',
     observed_date: '',
-    attachments: '',
+    attachment: null,
     carbon_copy_request_to: '',
     reported_via: 'report_form',
     Confirm: '',
     targetDomain: '',
 });
 
-function submit() {
+const submit = () => {
     // Validate the form fields
-    if (!form.abuse_type || !form.evidence_urls || !form.Confirm) {
-        Toast.fire({
-            icon: 'error',
-            title: 'All fields are required',
-        });
-        return;
-    }
-    console.log(form);
+    // if (!form.abuse_type || !form.evidence_urls || !form.Confirm || !form.targetDomain) {
+        // Toast.fire({
+        //     icon: 'error',
+        //     title: 'All fields are required',
+        // });
+        // return;
+    // }
+    // console.log(form);
     const formData = new FormData();
     formData.append('abuse_type', form.abuse_type);
     formData.append('evidence_urls', form.evidence_urls);
     formData.append('additional_notes', form.additional_notes);
     formData.append('observed_date', form.observed_date);
     formData.append('targetDomain', form.targetDomain);
+    formData.append('Confirm', form.Confirm);
+
     // Append the file to the FormData object if it's not an empty string
-    if (form.attachments !== '') {
-        formData.append('attachments', file);
+    if (form.attachment !== null) {
+        formData.append('attachment', file);
     }
 
     formData.append('carbon_copy_request_to', form.carbon_copy_request_to);
-    
-    // Send a POST request using Inertia
-    // inertia.post('/ReportSpoofySite', form);
-    router.post('/ReportSpoofySite', form)
-        // Handle the success response
-        Toast.fire({
-            icon: 'success',
-            title: 'Reported Successfully',
-        });
 
-        // You can also redirect to another page if needed
-        // router.push('/some-other-page');
+    // const response = router.post('/ReportSpoofySite', form)
+    const response = form.post(route('ReportSpoofySite'))
+
+    // Handle the success response
+    if(response.errors == {}){
+        Toast.fire({
+          icon: 'success',
+          title: 'Reported Successfully',
+        });
+    }
+
+
+   // router.push('/some-other-page');
    
 }
+const imageUrl = ref(null);
+
+const handleFileChange = (event) => {
+  form.attachments = event.target.files[0];
+
+    const fileInput = event.target;
+
+  if (fileInput.files.length > 0) {
+    const uploadedFile = fileInput.files[0];
+
+    const reader = new FileReader();
+
+    reader.onload = (e) => {
+      // The result property contains the file's data as a data URL
+      imageUrl.value = e.target.result;
+    };
+
+    // Read the contents of the file as a data URL
+    reader.readAsDataURL(uploadedFile);
+  }
+};
+
+const maxDate = computed(() => {
+  return new Date().toISOString().split('T')[0];
+});
+
 
 </script>
 
@@ -106,15 +148,17 @@ function submit() {
     <!-- <h2 class="my-auto risk h3">High Risk</h2> -->
    <!-- </div> -->
     <div class="justify-between mx-4 mt-2 lg:flex-row lg:flex">
-    <form class="" style="lg:width: 67%; md:width:67%; height: 65vh;"  @submit.prevent="submitForm">
+    <form class="overflow-y-auto" style="lg:width: 67%; md:width:67%; height: 70vh;"  @submit.prevent="submitForm">
         <div class="flex pt-2 w-100 justify-evenly">
-        <label for="abuseType" class="p-3 w-50 reportFormText">Abuse Type</label>
+        <label for="abuseType" class="p-3 w-50 reportFormText">Abuse Type<span class="text-red-500 h5">*</span></label>
           <div class="relative w-50">
               <select id="abuseType" name="abuseType" class="w-full h-10 pl-3 pr-10 text-gray-300 bg-yellow-100 border border-gray-300 rounded-md reportFormText" v-model="form.abuse_type" >
                   <option value="" disabled selected class="text-black ">...Choose Abuse Type...</option>
                   <option value="Spoofing" class="text-black">Spoofing</option>
                   <option value="Phishing" class="text-black">Phishing</option>
               </select>
+              <small v-if="form.errors.abuse_type" class="text-red-700">{{form.errors.abuse_type}}</small>
+
               <div class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                   <!-- <i class="fa fa-chevron-down"></i> -->
               </div>
@@ -122,22 +166,25 @@ function submit() {
       </div>
         <div class="flex pt-2 w-100 justify-evenly">
           <label for="Other URLs" class="p-3 w-50 reportFormText">
-            Evidence URLs
+            Evidence URLs<span class="text-red-500 h5">*</span>
           </label>
           <div class="mr-1 w-50">
-            <textarea type="url" id="fname" name="fname" class="text-gray-700 bg-yellow-100 border-none h-100 w-100 reportFormText" placeholder="provide URL" v-model="form.evidence_urls" ></textarea>
+            <textarea type="url" id="fname" name="fname" class="text-gray-700 bg-yellow-100 border-none w-100 reportFormText" placeholder="provide domain, eg example.com" v-model="form.evidence_urls" ></textarea>
+            <small v-if="form.errors.evidence_urls" class="text-red-700">{{form.errors.evidence_urls}}</small>
           </div>
         </div>
         <div class="flex pt-2 w-100 justify-evenly">
-        <label for="targetDomain" class="p-3 w-50 reportFormText">Target Domain</label>
+        <label for="targetDomain" class="p-3 w-50 reportFormText">Target Domain<span class="text-red-500 h5">*</span></label>
           <div class="relative w-50">
               <select id="targetDomain" name="targetDomain" class="w-full h-10 pl-3 pr-10 text-gray-300 bg-yellow-100 border border-gray-300 rounded-md reportFormText" v-model="form.targetDomain" >
                   <option value="" disabled selected class="text-black ">...Choose Targeted domain...</option>
-                <option  v-for="(domain, index) in domainList" :key="index">
+                  <option  v-for="(domain, index) in domainList" :key="index">
                   <option :value="domain.domain_name" class="text-black">{{domain.domain_name}}</option>
                 </option>
                   <!-- <option value="Phishing" class="text-black">Phishing</option> -->
               </select>
+              <small v-if="form.errors.targetDomain" class="text-red-700">{{form.errors.targetDomain}}</small>
+
               <div class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                   <!-- <i class="fa fa-chevron-down"></i> -->
               </div>
@@ -147,46 +194,62 @@ function submit() {
           <label for="Other URLs" class="p-3 w-50 reportFormText">
             Additional Notes
           </label>
-          <div class="flex justify-around mr-1 bg-yellow-100 w-50">
+          <div class="w-50">
+          <div class="justify-around mr-1 bg-yellow-100 ">
              <textarea type="url" id="fname" name="Additional Notes" class="text-gray-700 bg-yellow-100 border-none h-100 w-100 reportFormText" rows="7" placeholder="Please provide details of abuse" v-model="form.additional_notes" ></textarea>
           </div>
+              <small v-if="form.errors.additional_notes" class="text-red-700">{{form.errors.additional_notes}}</small>
+            </div>
         </div>
         <div class="flex pt-2 w-100 justify-evenly">
           <label for="Other URLs" class="p-3 w-50 reportFormText">
             Observed  Date
           </label>
-          <div class="mr-1 w-50">
-            <input type="date" id="fname" name="fname" class="text-gray-700 bg-yellow-100 border-none h-100 w-100 reportFormText" v-model="form.observed_date" />
+          <div class="w-50">
+          <div class="mr-1 ">
+            <input type="date" id="fname" name="fname" class="text-gray-700 bg-yellow-100 border-none h-100 w-100 reportFormText" v-model="form.observed_date" min="2023-01-01" :max="maxDate"/>
+          </div>
+            <small v-if="form.errors.observed_date" class="text-red-700">{{form.errors.observed_date}}</small>
           </div>
         </div>
         <div class="flex pt-2 w-100 justify-evenly">
           <label class="p-3 w-50 reportFormText">
             Attachments
           </label>
-          <div class="flex mr-1 bg-yellow-100 w-50">
+          <div class=" w-50">
+          <div class="flex mr-1 bg-yellow-100">
             <i class="mx-3 mt-2 text-xl fa fa-paperclip"></i>
             <input type="file" class="pt-2 h-100 w-100" placeholder="Attachment.dox" @change="handleFileChange" tooltip="Attachment.dox"/>
+          </div>
+            <small v-if="form.errors.attachment" class="text-red-700">{{form.errors.attachment}}</small>
           </div>
         </div>
         <div class="flex pt-2 w-100 justify-evenly">
           <label class="p-3 w-50 reportFormText">
             Carbon Copy (CC) the Request 
           </label>
-          <div class="flex justify-around mr-1 bg-yellow-100 w-50">
+          <div class="w-50">
+          <div class="flex justify-around mr-1 bg-yellow-100">
             <input type="email" id="fname" name="Carbon Copy (CC) the Request" class="placeholder-gray-700 bg-yellow-100 border-none h-100 w-100 reportFormText" v-model="form.carbon_copy_request_to" placeholder="james.name@example.com"/>
+          </div>
+            <small v-if="form.errors.carbon_copy_request_to" class="text-red-700">{{form.errors.carbon_copy_request_to}}</small>
           </div>
         </div>
         <div class="flex pt-2 w-100 justify-evenly">
           <label for="Other URLs" class="p-3 w-50 reportFormText">
-            Please Confirm
+            Please Confirm<span class="text-red-500 h5">*</span>
           </label>
-          <div class="flex mr-1 text-gray-700 bg-yellow-100 border-none w-50 reportFormText">
+          <div class="mr-1 text-gray-700 border-none w-50 reportFormText">
+            <div class="flex bg-yellow-100">
             <input type="checkbox" id="fname" name="fname" class="mx-3 text-yellow-300" v-model="form.Confirm"/>
             <div>I confirm that the website I am reporting is a fake, phishing, or spoofing site. I understand that false reports can 
               harm legitimate websites and agree to report only suspicious websites that I am certain about. 
               I take full responsibility for this report
             </div>
           </div>
+              <br>
+              <small v-if="form.errors.Confirm" class="text-red-700">{{form.errors.Confirm}}</small>
+            </div>
         </div>
            <!-- Modal -->
     <transition name="modal-fade" >
@@ -224,11 +287,30 @@ function submit() {
       </div>
     </transition>
       </form>
-    <div class="ml-1 box-style sm_hidden" style=" height: 65vh; width: 100%; ">
+    <div class="ml-1 overflow-y-auto box-style sm_hidden" style=" height: 70vh; width: 100%; ">
       <div class="align-middle bg-gray-100 rounded-t-lg" style="height: 45px; width: 100%;">
         <div class="py-3 pl-3 chechdetails">Definitions</div>
         <!-- will do js here -->
-        
+        <div v-if="form.abuse_type == 'Spoofing'">
+          <h1 class="text-lg font-bold">Spoofing:</h1>
+          <p>Spoofing refers to the act of deceiving or tricking someone or something by falsifying information or pretending to
+          be someone or something else. In the context of computer security, spoofing commonly involves manipulating data, 
+          IP addresses, or electronic communications to appear as though they originate from a trustworthy source.</p>
+        </div>
+        <div v-if="form.abuse_type == 'Phishing'">
+          <h1 class="text-lg font-bold">Phishing:</h1>
+           <p> Phishing is a type of cyber attack in which attackers attempt to trick individuals into revealing sensitive information, such as
+            login credentials or personal details, by posing as a trustworthy entity.
+            This is often done through deceptive emails, messages, or websites that
+              mimic legitimate sources to deceive the target into providing confidential information.</p>
+        </div>
+        <div v-if="form.evidence_urls && form.abuse_type">
+          <br>
+          <p>Reporting <span class="text-lg text-bold h3">{{form.evidence_urls}}</span> <span v-if="form.targetDomain">for {{form.abuse_type}} <span class="text-lg text-bold h3">{{form.targetDomain}}</span></span></p>
+        </div>
+        <div v-if="form.attachments">
+           <img v-if="imageUrl" :src="imageUrl" alt="Please Upload Image!" style="height: 300px; width: auto;"/>
+        </div>
       </div>
     </div>
    </div>
@@ -248,6 +330,24 @@ function submit() {
 
 <style scoped>
 /*animation*/
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+      opacity: 96%
+    }
+    40% {
+      transform: translateY(-20px);
+      opacity: 98%
+    }
+    60% {
+      transform: translateY(-10px);
+      opacity: 100%
+    }
+  }
+
+  .modal-content {
+    animation: bounce 800ms 1;
+  }
 /* Add your custom CSS here */
 
 .backlight {

@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Models\ReportformTakedownDetails;
 use App\Models\SpoofedDomain;
 use App\Services\LocationSslAndRedirects;
 use App\Traits\RatingAlreadyScanned;
@@ -97,10 +98,12 @@ class LocationSslAndRedirectsJob implements ShouldQueue
         $this->spoofed_domain->security_headers = $securityHeaders;
         $this->spoofed_domain->server_os  = $serverOs;
         $this->spoofed_domain->spoof_status = 'REPORTED';
-        $this->spoofed_domain->spoof_status_new = 'inprogress';
-        $this->spoofed_domain->current_scan_status = 'scanned';
-
-
+        $isInprogress = ReportformTakedownDetails::where('evidence_urls', $this->spoofed_domain->spoofed_domain);
+        if ($isInprogress) {
+            $this->spoofed_domain->spoof_status_new = 'inprogress';
+        } else {
+            $this->spoofed_domain->current_scan_status = 'scanned';
+        }
         $this->spoofed_domain->save();
         Log::alert('ni hear the end');
     }

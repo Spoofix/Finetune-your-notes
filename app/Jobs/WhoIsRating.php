@@ -35,11 +35,17 @@ class WhoIsRating implements ShouldQueue
     public function handle(): void
     {
         if ($this->copyRating($this->spoofed_domain, "WHOIS")) {
-            Log::alert('hello');
+            Log::alert('..whois error..');
             return;
         }
+        $file_path = '/assets/screenshots/' . $this->spoofed_domain->spoofed_domain . '.png';
 
-        $screenshot = ('/assets/screenshots/' . $this->spoofed_domain->spoofed_domain . '.png');
+        if (file_exists($file_path)) {
+            $screenshot = ('/assets/screenshots/' . $this->spoofed_domain->spoofed_domain . '.png');
+        } else {
+            $screenshot = '';
+        }
+
         $output = WhoIsSearch::search($this->spoofed_domain->spoofed_domain);
 
         $this->spoofed_domain->registrar  = $output[1] ?? '';

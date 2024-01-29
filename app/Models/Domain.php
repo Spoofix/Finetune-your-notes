@@ -13,7 +13,7 @@ class Domain extends Model
     protected $table = "domains";
 
     protected $fillable = [
-        'user_id', 'domain_name', 'status', 'org_id'
+        'id', 'user_id', 'domain_name', 'status', 'org_id'
     ];
 
     protected $appends = ['formated_updated_at', 'is_queued'];

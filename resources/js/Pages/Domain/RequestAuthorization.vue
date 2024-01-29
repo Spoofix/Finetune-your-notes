@@ -179,7 +179,10 @@ function submit() {
 </script>
 
 <template>
-  <Head title="RequestAuthorization" />
+      <Head v-if="spoofData.spoof_status_new == 'completed'" title="ScannedCompleted" /> 
+  <Head v-else-if="spoofData.spoof_status_new == 'inprogress'"  title="ScannedInProgress" /> 
+  <Head v-else title="RequestAuthorization" /> 
+  <!-- <Head title="RequestAuthorization" /> -->
 
  <AuthenticatedLayout v-if=" props.userid === userId" class="overflow-scroll fontFamily" style="height:100vh; background: #FFF;"> 
    <div class="flex justify-between mt-6 w-100">
@@ -256,7 +259,19 @@ function submit() {
       <div class="align-middle bg-gray-100 rounded-t-lg" style="height: 45px; width: 100%;">
         <div class="py-3 pl-3 chechdetails">Definitions</div>
         <!-- will do js here -->
-        
+        <div v-if="form.abuse_type == 'Spoofing'">
+          <h1 class="text-lg font-bold">Spoofing:</h1>
+          <p>Spoofing refers to the act of deceiving or tricking someone or something by falsifying information or pretending to
+          be someone or something else. In the context of computer security, spoofing commonly involves manipulating data, 
+          IP addresses, or electronic communications to appear as though they originate from a trustworthy source.</p>
+        </div>
+        <div v-if="form.abuse_type == 'Phishing'">
+          <h1 class="text-lg font-bold">Phishing:</h1>
+           <p> Phishing is a type of cyber attack in which attackers attempt to trick individuals into revealing sensitive information, such as
+            login credentials or personal details, by posing as a trustworthy entity.
+            This is often done through deceptive emails, messages, or websites that
+              mimic legitimate sources to deceive the target into providing confidential information.</p>
+        </div>
       </div>
     </div>
    </div>
@@ -310,7 +325,24 @@ function submit() {
 
 <style scoped>
 /*animation*/
-/* Add your custom CSS here */
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+      opacity: 96%
+    }
+    40% {
+      transform: translateY(-20px);
+      opacity: 98%
+    }
+    60% {
+      transform: translateY(-10px);
+      opacity: 100%
+    }
+  }
+
+  .modal-content {
+    animation: bounce 800ms 1;
+  }
 
 .backlight {
   position: fixed;

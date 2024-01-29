@@ -64,8 +64,6 @@ Route::get('/dashboard', function () {
 Route::get('/dashboard/{user_id}', [UserSwitchesController::class, 'index'])->middleware('user_switch_data')->name('dashboard2');
 Route::get('/back_to_admin/{admin_id}', [UserSwitchesController::class, 'back_to_admin'])->middleware('user_switch_data')->name('back_to_admin');
 
-
-
 Route::get('/search-domain', [SearchController::class, 'index'])->name('search.domain');
 Route::post('/search-domain', [SearchController::class, 'index'])->name('search.domain');
 Route::middleware('auth', 'user_switch_data')->group(function () {

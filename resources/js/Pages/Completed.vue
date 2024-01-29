@@ -221,25 +221,25 @@ const active = toggleTable(0 , props.domainList[0].id);
                           <th  class="py-3 pl-2" >
                               Domain
                           </th>
-                          <th  class="py-3 text-center">
+                          <th  class="py-3 text-left">
                               Source
                           </th>
-                          <th  class="py-3 text-center">
+                          <th  class="py-3 text-left">
                                User
                           </th>
-                          <th  class="py-3 text-center">
+                          <th  class="py-3 text-left">
                                Start Date
                           </th>
-                          <th  class="py-3 text-center">
+                          <th  class="py-3 text-left">
                                 End Date
                           </th>
-                          <th  class="py-3 text-center">
+                          <th  class="py-3 text-left">
                               Status
                           </th>
-                          <th  class="py-3 text-center">
+                          <th  class="py-3 text-left">
                               Total Time
                           </th>
-                          <th  class="py-3 text-center">
+                          <th  class="py-3 text-left">
                               Action
                           </th>
                       </tr>
@@ -253,22 +253,22 @@ const active = toggleTable(0 , props.domainList[0].id);
                           <td class="pl-3 overflow-auto py-auto" style="max-width: 190px;">
                               {{ spoof.spoofed_domain }}
                           </td>
-                          <td class="text-center py-auto">
+                          <td class="text-left py-auto">
                               Self Reported
                           </td>
-                          <td class="text-center py-auto">
+                          <td class="text-left py-auto">
                               Phil
                           </td>
-                          <td class="text-center py-auto">
+                          <td class="text-left py-auto">
                               Oct 12, 23
                           </td>
-                          <td class="text-center py-auto">
+                          <td class="text-left py-auto">
                               Oct 13, 23
                           </td>
-                          <td class="text-center py-auto">
+                          <td class="text-left py-auto">
                               Completed 
                           </td>
-                          <td class="text-center py-auto">
+                          <td class="text-left py-auto">
                               01D:21H
                           </td>
                           <td class="py-1 ">

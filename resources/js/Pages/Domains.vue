@@ -125,8 +125,20 @@ const props = defineProps({
 
 const methods = {
     spoofStatus(spoof) {
-      //
-      return 'New';
+      const status = spoof.progress_status;
+      let firstSeen = spoof.first_seen;
+      let firstSeenDate = new Date(firstSeen);
+      let currentDate = new Date();
+      let timeDifference = currentDate - firstSeenDate;
+      let oneWeekInMillis = 7 * 24 * 60 * 60 * 1000;
+      if(status == 'monitoring'){
+        return "monitoring";
+      }
+      if (timeDifference > oneWeekInMillis) {
+           return "Pending Authorization";
+      } else {
+           return "New";
+      }
     },
     webflowRating(spoof) {
     const [webflowRating, domainRating, interfaceRating, overallRating]  = ratingsValues(spoof.csscolor, spoof.phashes, spoof.htmls, spoof.domainsimilarityrate, 2, true, spoof.domain_rating);
@@ -354,7 +366,7 @@ const active = toggleTable(0 , props.domainList[0].id);
     <AuthenticatedLayout class="overflow-scroll " style="height: 100vh;">
         <section class="py-1 pt-6 bg-blueGray-50">
           
-        <!-- testing place -->
+        <!--  place -->
           <div class="mr-4 lg:mr-7" v-for="(domain, index) in domainList" :key="index">
             <div
               class="flex items-center justify-between w-full my-2 cursor-pointer md:mx-3 lg:mx-4 h-14 hover:bg-gray-300"
@@ -393,19 +405,19 @@ const active = toggleTable(0 , props.domainList[0].id);
                           <th  class="py-3 pl-2 min-w-max" >
                               Domain 
                           </th>
-                          <th  class="py-3 text-center">
-                              Status
+                          <th  class="py-3 text-left ">
+                              <span class="lg:mr-9">Status</span>
                           </th>
-                          <th  class="py-3 text-center">
+                          <th  class="py-3 text-left">
                               Webflow Rating
                           </th>
-                          <th  class="py-3 text-center">
+                          <th  class="py-3 text-left">
                               Domain Rating
                           </th>
-                          <th  class="py-3 text-center">
+                          <th  class="py-3 text-left">
                               Interface Rating
                           </th>
-                            <th class="py-3 text-center" @click="sortByOverall">
+                            <th class="py-3 text-left" @click="sortByOverall">
                               Overall
                               <i class="ml-1 fa fa-sort-up"></i> <!-- v-if="sortOrder === 'asc'"-->
                               <i class="ml-1 fa fa-sort-down"></i> <!--v-if="sortOrder === 'desc'" -->
@@ -435,19 +447,35 @@ const active = toggleTable(0 , props.domainList[0].id);
                 <td class="pl-3 overflow-auto py-auto" style="max-width: 190px;">
                   {{ spoof.spoofed_domain }}
                 </td>
-                <td class="text-center py-auto">
+                <td class="text-left py-auto" v-if="spoof.current_scan_status === 'not_scanned' && spoof.phashes === 'processing'">
+                  <h1 class="border-l-white border-y-yellow-300 spinner-border border-r-yellow-100"></h1>
+                </td>
+                <td class="text-left py-auto" v-else>
                   {{ methods.spoofStatus(spoof) }}
                 </td>
-                <td class="text-center py-auto">
+                <td class="text-left py-auto" v-if="spoof.current_scan_status === 'not_scanned' && spoof.phashes === 'processing'">
+                  <h1 class="border-l-white border-y-yellow-300 spinner-border border-r-yellow-100"></h1>
+                </td>
+                <td class="text-left py-auto" v-else>
                   {{ methods.webflowRatingLabel(methods.webflowRating(spoof)) }}
                 </td>
-                <td class="text-center py-auto">
+                <td class="text-left py-auto" v-if="spoof.current_scan_status === 'not_scanned' && spoof.phashes === 'processing'">
+                  <h1 class="border-l-white border-y-yellow-300 spinner-border border-r-yellow-100"></h1>
+                </td>
+                <td class="text-left py-auto" v-else>
                   {{ methods.domainRatingLabel(methods.domainRating(spoof)) }}
                 </td>
-                <td class="text-center py-auto">
+                <td class="text-left py-auto" v-if="spoof.current_scan_status === 'not_scanned' && spoof.phashes === 'processing'">
+                  <h1 class="border-l-white border-y-yellow-300 spinner-border border-r-yellow-100"></h1>
+                </td>
+                <td class="text-left py-auto" v-else>
                   {{ methods.interfaceRatingLabel(methods.interfaceRating(spoof)) }}
                 </td>
-                <td class="font-bold text-center py-auto"
+                <td class="text-left py-auto" v-if="spoof.current_scan_status === 'not_scanned' && spoof.phashes === 'processing'">
+                  <h1 class="border-l-white border-y-yellow-300 spinner-border border-r-yellow-100 "></h1>
+                </td>
+                <td class="font-bold text-left py-auto"
+                v-else
                 :style="{'color': methods.overallRatingLabel(methods.overallRating(spoof)) === 'High' ? '#ED0707' : methods.overallRatingLabel(methods.overallRating(spoof)) === 'medium' ? '#F7610D' : '#3AAC11'}">
                   {{ methods.overallRatingLabel(methods.overallRating(spoof)) }}
                 </td>
