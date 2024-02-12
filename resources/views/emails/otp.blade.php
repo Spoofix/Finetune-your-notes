@@ -116,12 +116,12 @@
             <p>This OTP is valid for only 15 minutes. Please copy it and verify your email.</p>
             <p>If this email is not intended to you please ignore and delete it. Thank you for understanding.</p>
         </div>
-        <div style="margin-top: 20px; padding: 20px;">For further assistance , please contact our customer service
+        <div style="margin-top: 10px; padding: 10px;">For further assistance , please contact our customer service
             center:
             <a href="http://127.0.0.1:8000/profile-change-password"
                 style="color: #4285F4; text-decoration: none;">support@spoofixcustomercare.com</a>
         </div>
-        <div style="width: 100; margin-top:10px;">
+        <div style="width: 100; margin-top:1px;">
             <small class="footer">Copyright &copy; Spoofix {{ date('Y') }}. All Rights Reserved.</small>
         </div>
     </div>

@@ -9,7 +9,142 @@ import { defineComponent, onMounted } from 'vue';
 import { ref, computed } from 'vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
+import VueApexCharts from 'vue3-apexcharts';
 
+/*const chartOptions = ref({
+  series: [{
+    data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
+  }],
+  chart: {
+    type: 'bar',
+    height: 350
+  },
+  plotOptions: {
+    bar: {
+      borderRadius: 4,
+      horizontal: true,
+    }
+  },
+  dataLabels: {
+    enabled: false
+  },
+  xaxis: {
+    categories: ['South Korea', 'Canada', 'United Kingdom', 'Netherlands', 'Italy', 'France', 'Japan',
+      'United States', 'China', 'Germany'
+    ],
+  }
+});
+
+const chartRef = ref(null);
+
+onMounted(() => {
+  const chart = new ApexCharts(chartRef.value, chartOptions.value);
+  chart.render();
+});
+
+// next
+const barChartOptions = ref({
+  series: [{
+    name: 'Marine Sprite',
+    data: [44, 55, 41, 37, 22, 43, 21]
+  }, {
+    name: 'Striking Calf',
+    data: [53, 32, 33, 52, 13, 43, 32]
+  }, {
+    name: 'Tank Picture',
+    data: [12, 17, 11, 9, 15, 11, 20]
+  }, {
+    name: 'Bucket Slope',
+    data: [9, 7, 5, 8, 6, 9, 4]
+  }, {
+    name: 'Reborn Kid',
+    data: [25, 12, 19, 32, 25, 24, 10]
+  }],
+  chart: {
+    type: 'bar',
+    height: 350,
+    stacked: true,
+  },
+  plotOptions: {
+    bar: {
+      horizontal: true,
+      dataLabels: {
+        total: {
+          enabled: true,
+          offsetX: 0,
+          style: {
+            fontSize: '13px',
+            fontWeight: 900
+          }
+        }
+      }
+    },
+  },
+  stroke: {
+    width: 1,
+    colors: ['#fff']
+  },
+  title: {
+    text: 'Fiction Books Sales'
+  },
+  xaxis: {
+    categories: [2008, 2009, 2010, 2011, 2012, 2013, 2014],
+    labels: {
+      formatter: function (val) {
+        return val + "K"
+      }
+    }
+  },
+  yaxis: {
+    title: {
+      text: undefined
+    },
+  },
+  tooltip: {
+    y: {
+      formatter: function (val) {
+        return val + "K"
+      }
+    }
+  },
+  fill: {
+    opacity: 1
+  },
+  legend: {
+    position: 'top',
+    horizontalAlign: 'left',
+    offsetX: 40
+  }
+});
+
+const radialChartOptions = ref({
+  series: [70],
+  chart: {
+    height: 350,
+    type: 'radialBar',
+  },
+  plotOptions: {
+    radialBar: {
+      hollow: {
+        size: '70%',
+      }
+    },
+  },
+  labels: ['Cricket'],
+});
+
+const barChartRef = ref(null);
+const radialChartRef = ref(null);
+
+onMounted(() => {
+  const barChart = new ApexCharts(barChartRef.value, barChartOptions.value);
+  barChart.render();
+
+  const radialChart = new ApexCharts(radialChartRef.value, radialChartOptions.value);
+  radialChart.render();
+});*/
+
+// next
 
 
 // Run the function every second (1000 milliseconds)
@@ -319,12 +454,79 @@ const toggleTable = async (index, domainid) => {
         </div>
         </div> 
 <!--user-->
-    <div class=" row" v-if="$page.props.auth.user.role_id == 2 || props.isAdminSwitched" style="height: 100vh;">
-        <div class="mx-auto ">
-            <h1 class="font-extrabold text-center flicker mt-9 h1"><span class="text-yellow-300">spoo</span>fix dashboard</h1>
-            <h1 class="text-center h3 seesaw"> coming soon!</h1>
-        </div>
-    </div>
+    <div class="row" v-if="$page.props.auth.user.role_id == 2 || props.isAdminSwitched" style="height: 100vh;">
+      <div class="mx-auto ">
+          <h1 class="font-extrabold text-center flicker mt-9 h1"><span class="text-yellow-300">spoo</span>fix dashboard</h1>
+          <h1 class="text-center h3 seesaw"> coming soon!</h1>
+      </div>
+      <!-- test -->
+      <!-- <div class="grid grid-cols-1 gap-4 mt-6 ml-4 mr-7 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-8 min-h-10"> -->
+          <!-- Card 1 -->
+          <!-- <div class="max-h-full p-4 bg-white rounded-md shadow-md"> -->
+              <!-- Card content goes here -->
+              <!-- Card 1 -->
+          <!-- </div> -->
+          <!-- Card 2 -->
+          <!-- <div class="p-4 bg-white rounded-md shadow-md"> -->
+              <!-- Card content goes here -->
+              <!-- Card 2 -->
+          <!-- </div> -->
+          <!-- Card 3 -->
+          <!-- <div class="p-4 bg-white rounded-md shadow-md"> -->
+              <!-- Card content goes here -->
+              <!-- Card 3 -->
+          <!-- </div> -->
+          <!-- Card 4 -->
+          <!-- <div class="p-4 bg-white rounded-md shadow-md"> -->
+              <!-- Card content goes here -->
+              <!-- Card 4 -->
+          <!-- </div> -->
+          <!-- Card 5 -->
+          <!-- <div class="p-4 bg-white rounded-md shadow-md"> -->
+              <!-- Card content goes here -->
+              <!-- Card 5 -->
+          <!-- </div> -->
+          <!-- Card 6 -->
+          <!-- <div class="p-4 bg-white rounded-md shadow-md"> -->
+              <!-- Card content goes here -->
+              <!-- Card 6 -->
+          <!-- </div> -->
+          <!-- Card 7 -->
+          <!-- <div class="p-4 bg-white rounded-md shadow-md"> -->
+              <!-- Card content goes here -->
+              <!-- Card 7 -->
+          <!-- </div> -->
+          <!-- Card 8 -->
+          <!-- <div class="p-4 bg-white rounded-md shadow-md"> -->
+              <!-- Card content goes here -->
+              <!-- Card 8 -->
+          <!-- </div>
+      </div>
+      <div class="flex flex-wrap items-center justify-center h-full">
+          <div class="w-full p-4 md:w-1/2 lg:w-1/3">
+              <div class="bg-white rounded-md shadow-md">
+                <div ref="chartRef" class="">
+                  <vue-apex-charts v-if="chartOptions" :options="chartOptions" ref="chartRef" />
+                </div>
+              </div>
+          </div>
+          <div class="w-full p-4 md:w-1/2 lg:w-1/3">
+              <div class="bg-white rounded-md shadow-md">
+                <div ref="barChartRef" >>
+                  <vue-apex-charts v-if="barChartOptions" :options="barChartOptions" ref="barChartRef" />
+                </div>
+              </div>
+          </div>
+          <div class="w-full p-4 md:w-1/2 lg:w-1/3">
+              <div class="bg-white rounded-md shadow-md">
+                <div ref="radialChartRef" class="">
+                  <vue-apex-charts v-if="radialChartOptions" :options="radialChartOptions" ref="radialChartRef" />
+                </div>
+              </div>
+          </div>
+      </div> -->
+  </div>
+  
     </AuthenticatedLayout>
 </template>
 <style>

@@ -5,29 +5,68 @@ import Swal from 'sweetalert2'
 import { Link } from "@inertiajs/vue3"
 import { defineComponent } from 'vue';
 import { defineProps, onMounted } from 'vue';
-import { ref, watch } from 'vue';
-
-// const isModalVisible = ref(false);
-
-// const openModal = () => {
-//   isModalVisible.value = true;
-// };
-
-// const closeModal = () => {
-//   isModalVisible.value = false;
-// };
-
-// Add a watcher to close the modal after a delay
-// watch(isModalVisible, (newValue) => {
-//   if (!newValue) {
-//     setTimeout(() => {
-//       // Close the modal after the fade-out transition
-//       closeModal();
-//     }, 300); // Adjust the delay to match the transition duration
-//   }
-// });
+import { ref, watch, computed } from 'vue';
 
 
+const isModalVisible = ref(false);
+
+const openModal = () => {
+  isModalVisible.value = true;
+};
+
+const closeModal = () => {
+  isModalVisible.value = false;
+};
+
+
+watch(isModalVisible, (newValue) => {
+  if (!newValue) {
+    setTimeout(() => {
+   
+      closeModal();
+    }, 300); 
+  }
+});
+
+const isModalVisible1 = ref(false);
+
+const openModal1 = () => {
+  isModalVisible1.value = true;
+};
+
+const closeModal1 = () => {
+  isModalVisible1.value = false;
+};
+
+
+watch(isModalVisible1, (newValue) => {
+  if (!newValue) {
+    setTimeout(() => {
+   
+      closeModal1();
+    }, 300); 
+  }
+});
+
+const ComposeModalVisible = ref(false);
+
+const openComposeModal = () => {
+  ComposeModalVisible.value = true;
+};
+
+const closeComposeModal = () => {
+  ComposeModalVisible.value = false;
+};
+
+
+watch(ComposeModalVisible, (newValue) => {
+  if (!newValue) {
+    setTimeout(() => {
+   
+      closeComposeModal();
+    }, 300); 
+  }
+});
 defineComponent({
   components: {
     Link
@@ -58,11 +97,68 @@ function date(inputDateString) {
   return `${formattedDate}`;
 }
 const messageRef = ref(props.messages[0]);
-const messaging = (index, messageId) => {
-   console.log('hello');
-    if(props.messages[index].id === messageId){
-      messageRef.value = props.messages[index];
+const messaging = (index, messageId, currentPage) => {
+  //  console.log('hello');
+    const index1 = (currentPage-1)*8 + index;
+    if(props.messages[index1].id === messageId){
+      messageRef.value = props.messages[index1] ;
     } 
+}
+
+
+const filteredSpoofListCurrentValue = ref([]); 
+
+
+function filteredSpoofList(domainid) {
+  const spoofList = props.spoofList;
+  const filteredSpoofListValue = [];
+  for (const spoof of spoofList) {
+    if (spoof.domain_id === domainid) {
+      filteredSpoofListValue.push(spoof);
+    }
+  }
+  filteredSpoofListCurrentValue.value = filteredSpoofListValue;
+  return filteredSpoofListValue;
+}
+
+// Define the current page and items per page
+const currentPage = ref(1);
+const itemsPerPage = 8;
+// if(props.messages){
+  // Calculate the total number of pages
+  const totalPages = computed(() => Math.ceil(props.messages.length / itemsPerPage));
+
+  // Slice the messages array based on the current page
+  const paginatedMessages = computed(() => {
+    const startIndex = (currentPage.value - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    return props.messages.slice(startIndex, endIndex);
+  });
+
+  // Function to change the current page
+  const changePage = (page) => {
+    if (page >= 1 && page <= totalPages.value) {
+      currentPage.value = page;
+    }
+  };
+// }
+
+
+const form = useForm({
+    from: '',
+    date: '',
+    subject: '',
+});
+
+const submit = () => {
+    const formData = new FormData();
+    formData.append('from', form.from);
+    formData.append('date', form.date);
+    formData.append('subject', form.subject);
+    console.log(form.subject);
+    // if(form.from || form.date || form.subject){
+      form.post(route('Messages'));
+    // }
 }
 </script>
 
@@ -75,59 +171,58 @@ const messaging = (index, messageId) => {
       <button class="absolute w-40 h-12 px-3 rounded-tr-full bg-dark tabsText" style="">Domain</button>
       <button class="w-56 h-12 pr-4 bg-gray-300 rounded-tr-full tabsText pl-9" style="margin-left: 106px;">Social Media</button>
     </div>
-      <!-- <Link class="my-auto buttons buttonsText mr-9"  :href="'/spoof/view/' + spoofData.id"><i class="pr-2 fa fa-chevron-left" aria-hidden="true" preserve-scroll></i> Back</Link> -->
    </div>
-   <!-- <div class="flex flex-row mx-4 mt-3 bg-yellow-100 h-14 rounded-t-xl"> -->
-    <!-- <h2 class="my-auto text-gray-600 pl-7 h3 riskpush">Domain.com</h2> -->
-    <!-- <h2 class="my-auto risk h3">High Risk</h2> -->
-   <!-- </div> -->
-    <div
-      class="flex items-center justify-between mx-4 my-2 mr-6 cursor-pointer bigDropdownBg h-14"
-        style="border-radius: 6px; "
-        id="myDiv"
-    >
-      <div class="w-full h-full text-2xl font-semibold text-blueGray-700 select_wrapper">
-          <!-- <h3 class="orgDomain text-capitalize ">domain.id </h3> -->
-          <div class="h-full bg-transparent border-none dropdown lg:w-full md:w-full orgDomain ">
-            <button class="relative flex dropbtn bigDropdownBg">
-              <p>_._._.com </p>
-              <div class="absolute right-0 mr-5 botton min-w-fit ">
-                  <i
-                    class="text-sm fa fa-chevron-down"
-                    
-                    aria-hidden="true"
-                  ></i>
-                    <div class="text-sm font-normal">
-                    Spoofing sites 
-                  </div>
-                </div>
-            </button>
-            <div class="dropdown-content bigDropdownBg" >
-              <div v-for="(domain, index) in domains" :key="index">
-              <a class="bigDropdownBg hover:bg-transparent">
-                  {{domain.domain_name}}
-              </a>
+   <div
+   class="flex items-center justify-between my-2 cursor-pointer md:mx-3 lg:mx-4 h-14 hover:bg-gray-300 bigDropdownBg"
+   style="border-radius: 6px; box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25); "
+   id="myDiv"
+   @click="toggleTable(index, domain.id), scrollToElement(index)"
+ >
+   <div class="ml-5 text-2xl font-semibold text-blueGray-700">
+     <h3 class="orgDomain">
+       <Link>messages</Link> 
+     </h3>
+   </div>
+   <div class="mr-5 botton" @click="openModal">
+     <i class="fa fa-magnifying-glass" aria-hidden="true"></i>
+     <div>Find & Filter</div>
+   </div>
+ </div>
+         <!-- Modal -->
+         <div v-if="isModalVisible" class="absolute z-50 float-right p-2 -mt-3 bg-white rounded shadow-lg w-96 model h-96" style="buttom: calc(100% - 10px); right: 32px;">
+          <!-- <i @click="closeModal" class="justify-center w-6 h-6 text-yellow-300 align-middle bg-black rounded-full fa fa-x"></i> -->
+          <div class="relative w-full">
+            <img @click="closeModal" class="absolute flex items-center justify-center float-right mt-2 mr-2 cursor-pointer w-9 h-9 right-1" :src="'/assets/systemImages/Exit.svg'"/>
+            <div class="h-12 -mt-2 -ml-2 -mr-2 bg-gray-300 rounded-t-lg sm:flex sm:items-start">
+              <div class="mt-1 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                <h3 class="mt-2 text-lg font-medium text-gray-900 tabsText1" id="modal-headline">
+                  Find & Filter
+                </h3>
               </div>
             </div>
           </div>
+          <form action="" class="mt-2" @submit.prevent="submitForm">
+            <label for="from" class="block mt-3 mb-2 text-sm font-bold text-gray-700">From:</label>
+            <input v-model="form.from" type="text" name="from" class="w-full px-3 py-2 bg-yellow-100 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-200 focus:border-indigo-300"><br>
+            
+            <label for="date" class="block mt-3 mb-2 text-sm font-bold text-gray-700">Date:</label>
+            <input v-model="form.date" type="date" name="date" class="w-full px-3 py-2 bg-yellow-100 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-200 focus:border-indigo-300"><br>
+            
+            <label for="subject"  class="block mt-3 mb-2 text-sm font-bold text-gray-700">Subject:</label>
+            <input v-model="form.subject" type="text" name="subject" class="w-full px-3 py-2 mb-3 bg-yellow-100 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-200 focus:border-indigo-300">
+            
+            <div class="flex float-right mr-3">
+              <button class="my-auto mr-2 bg-yellow-100 buttons buttonsText" @click="closeModal">Cancel</button>
+              <button class="my-auto bg-yellow-300 buttons buttonsText" @click="submit" type="submit">Apply</button>
+            </div>
+          </form>
 
-      </div>
-      <!-- <div class="mr-5 botton ">
-        <i
-          class="fa fa-chevron-down"
-          
-          aria-hidden="true"
-        ></i>
-          <div>
-          Spoofing sites 
         </div>
-      </div> -->
-    </div>
     <div class="justify-between mx-4 mt-2 lg:flex lg:flex-row" style="">
     <div style="min-width: 57%; height: 65vh;">
-       <button class="my-2 mb-2 bg-yellow-100 buttons buttonsText h-14"><i class="mx-1 fa fa-plus"></i>Compose Message </button>
+       <button @click="openComposeModal" class="my-2 mb-2 bg-yellow-100 buttons buttonsText h-14"><i class="mx-1 fa fa-plus"></i>Compose Message </button>
        <!-- <table class="w-full mt-3 text-sm" style="max-height: 20px;"> -->
-        <div class="max-h-full overflow-auto " >
+        <div class="max-h-full overflow-auto" >
         <table class="w-full mt-3 overflow-x-auto text-sm">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 tablehead">
                 <tr class="container justify-evenly">
@@ -145,11 +240,12 @@ const messaging = (index, messageId) => {
                     </th>
                 </tr>
             </thead>
-            <tbody>
-                <tr class="transition-colors duration-300 cursor-pointer tableRow "
+            <tbody v-if="props.messages">
+                <!-- <tr class="transition-colors duration-300 bg-yellow-100 cursor-pointer tableRow" -->
+                  <tr class="duration-300 bg-yellow-100 cursor-pointer tableRow1"
                   :class="{ 'bg-yellow-300': messageRef.id == message.id, 'bg-yellow-100 hover:bg-yellow-50': messageRef.id != message.id }"
-                v-for="(message, index) in messages" :key="index"
-                    @click="messaging(index, message.id)"
+                v-for="(message, index) in paginatedMessages" :key="index"
+                    @click="messaging(index, message.id, currentPage)"
                     >
                     <td class="pl-3 overflow-auto py-auto" style="max-width: 90px;"  >
                         {{date(message.created_at)}}
@@ -166,10 +262,30 @@ const messaging = (index, messageId) => {
                 </tr>
             </tbody>
         </table>
+        <div class="flex justify-center mt-4" style="">
+
+          <button v-if="currentPage > 1" class="px-3 py-2 mr-2 cursor-pointer round gray paginationButtons"  @click="changePage(--currentPage)">
+            <i class="fa fa-chevron-left" aria-hidden="true"></i>
+          </button>
+          <div v-for="page in totalPages"
+            :key="page">
+            <button
+            v-if="page > currentPage - 4 && page < currentPage + 4"
+            @click="changePage(page)"
+            :class="{ 'primaryColor paginationButtons ': page === currentPage, 'paginationButtons gray text-gray-700': page !== currentPage }"
+            class="px-3 py-2 mr-2 rounded cursor-pointer"
+          >
+            {{ page }}
+          </button >
+          </div>
+          <button v-if="currentPage < totalPages" class="px-3 py-2 mr-2 cursor-pointer round gray paginationButtons"  @click="changePage(++currentPage)">
+            <i class="fa fa-chevron-right" aria-hidden="true"></i>
+          </button>
+        </div>
          </div>
     </div>
     <div class="w-full ml-2 box-style" style=" height: 65vh; min-width: 31%; margin-top: 60px; ">
-      <div class="ml-2 align-middle rounded-t-lg" style="height: 45px;  ">
+      <div v-if="props.messages != undefined && messageRef" class="ml-2 align-middle rounded-t-lg" style="height: 45px;  ">
             From: info@spoofix.com <br>
             To: {{info.email}} <br>
             Subject: {{messageRef.subject}} <br>
@@ -197,114 +313,109 @@ const messaging = (index, messageId) => {
    </div>
    <div class="relative justify-between pt-3 w-100"><!-- flex -->
     <div class="flex justify-between float-right w-64 pr-14">
-       <!-- <button class="my-2 buttons buttonsText">cancel</button> -->
-        <!-- <button class="my-auto bg-yellow-300 buttons buttonsText" @click="openModal">confirm</button> -->
     </div>
-    <!-- <div class="flex justify-between mr-6 w-80"> -->
-       <!-- <Link class="my-auto buttons buttonsText" @click="changeID(spoofData.id)" :href="'/spoof/view/' + nextId2"><i class="pr-2 fa fa-chevron-left" aria-hidden="true"></i> Previous Item</Link> -->
-        <!-- <Link class="my-auto buttons buttonsText" @click="changeIDPlus(spoofData.id)" :href="'/spoof/view/' + nextId ">Next Item<i class="pr-2 fa fa-chevron-right" aria-hidden="true"></i> </Link> -->
-    <!-- </div> -->
    </div>
-   <!-- Modal -->
-    <!-- <transition name="modal-fade" >
-      <div v-if="isModalVisible" class="backlight" @click="closeModal">
-        <div
-          role="dialog"
-          aria-modal="true"
-          class="fade image-modal dark modal show backlight"
-          tabindex="-1"
-          style="padding-left: 14px; display: block;"
-        >
-          <div class="modal-dialog modal-xl modal-dialog-centered" style="">
-            <div class="modal-content">
-              <div class="">
-                <div
-                  class="mx-auto bg-white modelStyle"
-                  style=""
-                >
-                <div class="relative w-100"> 
-                  <img class="float-right" :src="'/assets/systemImages/Exit.svg'"/>
-                </div>
-                <div class="relative flex my-2 modelText">
-                   <img class="pr-3 " :src="'/assets/systemImages/Promo.svg'"/>
-                   <img class="absolute m-2" :src="'/assets/systemImages/bookmark.svg'"/>
-                  <div class="my-auto">Do you want to Report FakeSite.2?</div>
-                </div>
-                <div class="relative w-100" >
-                   <Link class="float-right px-4 bg-yellow-300 buttons buttonsText">confirm</Link>
-                </div>
-              </div>
-              </div>
+
+
+<!-- Compose Email Modal -->
+<!-- Compose Email Modal -->
+<div class="fixed inset-0 z-40 flex items-end justify-center px-4 py-6 pointer-events-none sm:p-0 sm:items-center sm:justify-end" x-show="isComposeModalOpen" @keydown.escape="closeComposeModal" v-if="ComposeModalVisible">
+  <div class="bottom-0 w-full max-w-lg bg-red-300 rounded-lg shadow-lg pointer-events-auto -mb-80">
+    <div class="bg-white rounded-lg sm:p-6 sm:pb-1">
+      <img @click="closeComposeModal" class="absolute items-center justify-center float-right mr-10 -mt-4 cursor-pointer w-9 h-9 right-1" :src="'/assets/systemImages/Exit.svg'"/>
+      <div class="h-12 -mt-6 -ml-6 -mr-6 bg-gray-300 rounded-t-lg sm:flex sm:items-start">
+        <div class="mt-1 text-center sm:mt-0 sm:ml-4 sm:text-left">
+          <h3 class="mt-2 text-lg font-medium text-gray-900 tabsText1" id="modal-headline">
+            Compose Email
+          </h3>
+        </div>
+      </div>
+      <form class="mt-3 sm:mt-2" @submit.prevent="submitForm">
+        <div class="mb-3">
+          <label for="to" class="block mb-2 text-sm font-bold text-gray-700">To:</label>
+          <input type="text" id="to" name="to" placeholder="Recipient's email" required class="w-full px-3 py-2 bg-yellow-100 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-200 focus:border-indigo-300">
+        </div>
+        <div class="mb-4">
+          <label for="subject" class="block mb-2 text-sm font-bold text-gray-700">Subject:</label>
+          <input type="text" id="subject" name="subject" placeholder="Subject" class="w-full px-3 py-2 bg-yellow-100 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-200 focus:border-indigo-300">
+        </div>
+        <div class="mb-4">
+          <label for="message" class="block mb-2 text-sm font-bold text-gray-700">Message:</label>
+          <textarea id="message" name="message" rows="3" placeholder="Write your message..." class="w-full px-3 py-2 bg-yellow-100 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-200 focus:border-indigo-300"></textarea>
+        </div>
+        <div class="mt-3 mb-3 sm:mt-6 sm:flex sm:flex-row-reverse">
+            <div class="flex float-right mr-3">
+              <button class="my-auto mr-2 bg-yellow-100 buttons buttonsText" @click="closeComposeModal">Cancel</button>
+              <button class="my-auto bg-yellow-300 buttons buttonsText" @click="openModal1" type="submit">Send</button>
             </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+  <!-- Modal -->
+  <transition name="modal-fade" >
+  <div v-if="isModalVisible1" class="backlight" @click="closeModal1">
+    <div
+      role="dialog"
+      aria-modal="true"
+      class="fade image-modal dark modal show backlight"
+      tabindex="-1"
+      style="padding-left: 14px; display: block;"
+    >
+      <div class="modal-dialog modal-xl modal-dialog-centered" style="">
+        <div class="modal-content">
+          <div class="">
+            <div
+              class="mx-auto bg-white modelStyle"
+              style=""
+            >
+            <div class="relative w-100"> 
+              <img class="float-right" :src="'/assets/systemImages/Exit.svg'"/>
+            </div>
+            <div class="relative flex my-2 modelText">
+                <img class="pr-3 " :src="'/assets/systemImages/Promo.svg'"/>
+                <img class="absolute m-2" :src="'/assets/systemImages/bookmark.svg'"/>
+              <div class="my-auto">Do you want to send email<span class="text-yellow-500">{{form.evidence_urls}}</span>?</div>
+            </div>
+            <div class="relative w-100">
+                <button  class="float-right px-4 bg-yellow-300 buttons buttonsText" @click="submit" type="submit">confirm</button>
+            </div>
+          </div>
           </div>
         </div>
       </div>
-    </transition> -->
+    </div>
+  </div>
+</transition>
+
   </AuthenticatedLayout>
 </template>
 
+
 <style scoped>
 /*animation*/
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+      opacity: 96%
+    }
+    40% {
+      transform: translateY(-20px);
+      opacity: 98%
+    }
+    60% {
+      transform: translateY(-10px);
+      opacity: 100%
+    }
+  }
 
-/* Style The Dropdown Button */
-.dropbtn {
-  padding: 10px;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  text-align: left;
-  border-radius: 10px;
-  transition-duration: 2s;
-  max-height: 100%;
-}
-
-/* The container <div> - needed to position the dropdown content */
-.dropdown {
-  position: relative;
-  display: inline-block;
-  transition-duration: 2s;
-}
-
-/* Dropdown Content (Hidden by Default) */
-.dropdown-content {
-  opacity: 0;
-  max-height: 0;
-  overflow: hidden;
-  position: absolute;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-  visibility: hidden;
-  transition: opacity 0.3s ease, max-height 0.9s ease, visibility 0.9s;
-  width: 100%;
-}
-
-/* Links inside the dropdown */
-.dropdown-content a {
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-/* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #ffe386}
-
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
-    opacity: 1;
-  max-height: 200px; 
-  visibility: visible;
-  overflow: auto;
-  
-}
-
-/* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {
-  background-color: #ffe386;
-}
-
+  .modal-content {
+    animation: bounce 800ms 1;
+  }
 /* Add your custom CSS here */
-
 
 .backlight {
   position: fixed;
@@ -357,26 +468,6 @@ font-size: 14px;
 font-style: normal;
 font-weight: 400;
 line-height: 120%; /* 16.8px */
-}
-.botton{
-  display: flex;
-width: 159px;
-height: 34px;
-justify-content: center;
-align-items: center;
-gap: 16px;
-flex-shrink: 0;
-border-radius: 30px;
-background: var(--yellow-yellow-400, #FFD633);
-}
-.bigDropdownBg{
-  background: #FFEFB0;
-}
-.tableRow{
-  height: 45px;
-}
-.tablehead{
-  background: var(--dark-neutral-dark-neutral-4, #F0F0F0);
 }
 .riskpush{
   width: 36%;
@@ -455,6 +546,13 @@ font-family: Poppins;
 font-size: 20px;
 font-weight: 600;
 }
+.tabsText1{
+color: var(--default-white, #595959);
+/* Semibold/Heading 5/Semibold */
+font-family: Poppins;
+font-size: 20px;
+font-weight: 600;
+}
 .detailsNav{
 color: var(--dark-neutral-dark-neutral-8, #595959);
 
@@ -492,16 +590,85 @@ line-height: 120%; /* 14.4px */
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
+
+.height{
+  margin-top: -100%;
+}
+.height2{
+  margin-top: 0%;
+}
+.smoothDropDown{
+  transition-duration: 1s;
+  transition-delay: 20ms;
+}
+.bigDropdownBgActive{
+  background: var(--dark-neutral-dark-neutral-5, #D9D9D9);
+}
+.bigDropdownBg{
+  background: #FFEFB0;
+  margin-right: 30px;
+  right: -300px;
+}
+.tableRow1{
+  height: 45px;
+  flex-shrink: 0;
+  border: 1px solid var(--dark-neutral-dark-neutral-4, #F0F0F0);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.10) inset;
+}
+.tableButton{
+display: flex;
+height: 39px;
+justify-content: center;
+align-items: center;
+border-radius: 30px;
+}
+.smooth{
+   transition-duration: 1s;
+ transition-delay: 20ms;
+}
+.gray{
+  background-color: #BFBFBF;
+}
+.round{
+  border-radius:24px ;
+  
+}
+.paginationButtons{
+  color: var(--dark-neutral-dark-neutral-9, #454545);
+font-family: Poppins;
+font-size: 12px;
+font-style: normal;
+font-weight: 600;
+line-height: 120%; /* 14.4px */
+}
+.primaryColor{
+  background-color: #FFE88A;
+}
+.botton{
+  display: flex;
+width: 159px;
+height: 34px;
+justify-content: center;
+align-items: center;
+gap: 16px;
+flex-shrink: 0;
+border-radius: 30px;
+background: var(--yellow-yellow-400, #FFD633);
+}
+.orgDomain{
+  color: var(--dark-neutral-dark-neutral-8, #595959);
+
+/* Semibold/Heading 5/Semibold */
+font-family: Poppins;
+font-size: 20px;
+font-style: normal;
+font-weight: 600;
+line-height: 120%; /* 24px */
+}
+  .bigDropdown{
+  height: 68px;
+  border-radius: 6px;
+background: var(--yellow-yellow-50, #FFFAE6);
+}
 /* Add more custom styles as needed */
 </style>
-
-
-
-
-
-
-
-
-
-
- 

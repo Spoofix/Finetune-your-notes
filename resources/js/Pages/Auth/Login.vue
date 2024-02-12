@@ -2,7 +2,7 @@
 import { Head, useForm } from "@inertiajs/vue3";
 import Swal from "sweetalert2";
 import { Link } from "@inertiajs/vue3";
-import { defineComponent } from "vue";
+import { defineComponent, ref} from "vue";
 
 defineComponent({
     components: {
@@ -54,6 +54,15 @@ const submitToken = () => {
         onFinish: () => form.reset("password"),
     });
 };
+
+const passwordInput = document.getElementsByClassName('passwordThing');
+const passwordVisible = ref(false);
+
+
+const passwordDetails = () => {
+  passwordVisible.value = !passwordVisible.value;
+};
+
 </script>
 
 <template >
@@ -92,11 +101,12 @@ const submitToken = () => {
                         </div>
                     </div>
                     <div class="relative">
-                        <input type="password" id="login-password_outlined"  v-model="form.password" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-white rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-yellow-300 focus:outline-none focus:ring-0 focus:border-yellow-300 peer" :class="{ 'is-invalid': form.errors.password }" required  placeholder=" " />
+                        <input :type="!passwordVisible ? 'password' : 'text'" id="login-password_outlined"  v-model="form.password" class="passwordThing block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-white rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-yellow-300 focus:outline-none focus:ring-0 focus:border-yellow-300 peer" :class="{ 'is-invalid': form.errors.password }" required  placeholder=" " />
+                        <i v-if="passwordVisible" class="absolute z-50 w-8 h-6 text-center cursor-pointer fa-regular fa-eye top-7 right-3" @click="passwordDetails()"></i>
+                        <i v-else class="absolute top-7 right-3 fa-regular fa-eye-slash"  @click="passwordDetails()"></i>
                         <label for="login-password_outlined" class="absolute round text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-yellow-300 peer-focus:dark:text-yellow-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1" >Password</label>
                         <small  v-if="form.errors.password" class="text-red-600 invalid-feedback animated fadeIn" >{{ form.errors.password }}</small>
                     </div>
-
                     <div class="row">
                         <div class="col-sm-6 d-sm-flex align-items-center push">
                             <div class="form-check">

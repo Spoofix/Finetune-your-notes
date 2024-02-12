@@ -103,27 +103,23 @@ const submit = () => {
    
 }
 const imageUrl = ref(null);
-
 const handleFileChange = (event) => {
   form.attachments = event.target.files[0];
-
-    const fileInput = event.target;
+  const fileInput = event.target;
 
   if (fileInput.files.length > 0) {
     const uploadedFile = fileInput.files[0];
-
+    form.attachment = uploadedFile;
     const reader = new FileReader();
 
     reader.onload = (e) => {
-      // The result property contains the file's data as a data URL
       imageUrl.value = e.target.result;
+
     };
 
-    // Read the contents of the file as a data URL
     reader.readAsDataURL(uploadedFile);
   }
 };
-
 const maxDate = computed(() => {
   return new Date().toISOString().split('T')[0];
 });
@@ -148,7 +144,7 @@ const maxDate = computed(() => {
     <!-- <h2 class="my-auto risk h3">High Risk</h2> -->
    <!-- </div> -->
     <div class="justify-between mx-4 mt-2 lg:flex-row lg:flex">
-    <form class="overflow-y-auto" style="lg:width: 67%; md:width:67%; height: 70vh;"  @submit.prevent="submitForm">
+    <form class="overflow-y-auto" style="lg:width: 67%; md:width:67%; height: 79vh; max-height:700px;"  @submit.prevent="submitForm" enctype="multipart/form-data">
         <div class="flex pt-2 w-100 justify-evenly">
         <label for="abuseType" class="p-3 w-50 reportFormText">Abuse Type<span class="text-red-500 h5">*</span></label>
           <div class="relative w-50">
@@ -287,9 +283,9 @@ const maxDate = computed(() => {
       </div>
     </transition>
       </form>
-    <div class="ml-1 overflow-y-auto box-style sm_hidden" style=" height: 70vh; width: 100%; ">
+    <div class="ml-1 overflow-y-auto box-style sm_hidden" style="width: 100%; height: 75vh; max-height:700px;">
       <div class="align-middle bg-gray-100 rounded-t-lg" style="height: 45px; width: 100%;">
-        <div class="py-3 pl-3 chechdetails">Definitions</div>
+        <div class="py-3 pl-3 chechdetails">Details</div>
         <!-- will do js here -->
         <div v-if="form.abuse_type == 'Spoofing'">
           <h1 class="text-lg font-bold">Spoofing:</h1>
@@ -315,9 +311,9 @@ const maxDate = computed(() => {
     </div>
    </div>
    <div class="relative justify-between pt-3 w-100"><!-- flex -->
-    <div class="flex justify-between float-right w-64 pr-14">
+    <div class="flex justify-between float-right w-64 pr-14 bottom-5 -mt-11">
        <Link class="my-2 buttons buttonsText" @click="reload">cancel</Link>
-        <button class="my-auto bg-yellow-300 buttons buttonsText" @click="openModal">confirm</button>
+        <button class="my-auto bg-yellow-300 buttons buttonsText" @click="openModal">submit</button>
     </div>
     <!-- <div class="flex justify-between mr-6 w-80"> -->
        <!-- <Link class="my-auto buttons buttonsText" @click="changeID(spoofData.id)" :href="'/spoof/view/' + nextId2"><i class="pr-2 fa fa-chevron-left" aria-hidden="true"></i> Previous Item</Link> -->

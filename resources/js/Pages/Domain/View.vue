@@ -7,6 +7,42 @@ import { defineComponent } from 'vue';
 import { defineProps, onMounted } from 'vue';
 import { ref, watch } from 'vue';
 
+const props = defineProps({
+  domain: {
+    type: Object,
+  },
+  details: {
+    type: Object,
+  },
+  spoofData: {
+    type: Object,
+  },
+  userid: {
+    type: Object,
+  },
+  spoofList: {
+    type: Object,
+  },
+  response: {
+    type: Object,
+  },
+  firstSeen:{
+    type: Object,
+  },
+  isValidTakedown:{
+    type: Object
+  }
+  
+});
+
+function ageContribution(age) {
+    const decayFactor = 1.9; //decayValue
+    const baseValue = 100;    //Initial contribution value
+
+    const contribution = baseValue * Math.exp(-decayFactor * age);
+    return contribution;
+}
+
 // age
 const calculateTimeDifference = (dateString) => {
   try {
@@ -93,33 +129,106 @@ function calculateWeightedSum(ratings, weights) {
 }
 
 function ratingsValues(cssRating, screenshotSimilarityRating, htmlRating, domainNameSimilarityRating, age, sslValidity, domainrating) {
+  const agedecay = ageContribution(age);
     const ratings = {
         cssRating,
         screenshotSimilarityRating,
         htmlRating,
         domainNameSimilarityRating,
-        age,
+        agedecay,
         sslValidity,
         domainrating
     };
+      let weights =[];
+      if(agedecay > 3 && agedecay < 5){
+        weights = {
+          webflow: {
+            cssRating: 0.1,
+            screenshotSimilarityRating: 0.25,
+            htmlRating: 0.25,
+            agedecay: 0.4,
+          },
+          domain: {
+            domainNameSimilarityRating: 0.1,
+            agedecay: 0.05,
+            sslValidity: 0.05,
+            domainrating: 0.8
+          },
+          interface: {
+            cssRating: 0.2,
+            screenshotSimilarityRating: 0.4,
+            agedecay: 0.4,
+          },
+        };
+      }
+      else if(agedecay > 5){
+        weights = {
+          webflow: {
+            cssRating: 0.1,
+            screenshotSimilarityRating: 0.25,
+            htmlRating: 0.25,
+            agedecay: 0.4,
+          },
+          domain: {
+            domainNameSimilarityRating: 0.1,
+            agedecay: 0.05,
+            sslValidity: 0.05,
+            domainrating: 0.8
+          },
+          interface: {
+            cssRating: 0.2,
+            screenshotSimilarityRating: 0.4,
+            agedecay: 0.4,
+          },
+        };
+      }else{
+        weights = {
+          webflow: {
+            cssRating: 0.1,
+            screenshotSimilarityRating: 0.35,
+            htmlRating: 0.35,
+            agedecay: 0.1,
+          },
+          domain: {
+            domainNameSimilarityRating: 0.1,
+            agedecay: 0.05,
+            sslValidity: 0.05,
+            domainrating: 0.8
+          },
+          interface: {
+            cssRating: 0.3,
+            screenshotSimilarityRating: 0.45,
+            agedecay: 0.25,
+          },
+        };
+      }
+  //   const ratings = {
+  //       cssRating,
+  //       screenshotSimilarityRating,
+  //       htmlRating,
+  //       domainNameSimilarityRating,
+  //       age,
+  //       sslValidity,
+  //       domainrating
+  //   };
 
-  const weights = {
-      webflow: {
-        cssRating: 0.2,
-        screenshotSimilarityRating: 0.4,
-        htmlRating: 0.4,
-      },
-      domain: {
-        domainNameSimilarityRating: 0.1,
-        age: 0.05,
-        sslValidity: 0.05,
-        domainrating: 0.8
-      },
-      interface: {
-        cssRating: 0.3,
-        screenshotSimilarityRating: 0.7,
-      },
-    };
+  // const weights = {
+  //     webflow: {
+  //       cssRating: 0.2,
+  //       screenshotSimilarityRating: 0.4,
+  //       htmlRating: 0.4,
+  //     },
+  //     domain: {
+  //       domainNameSimilarityRating: 0.1,
+  //       age: 0.05,
+  //       sslValidity: 0.05,
+  //       domainrating: 0.8
+  //     },
+  //     interface: {
+  //       cssRating: 0.3,
+  //       screenshotSimilarityRating: 0.7,
+  //     },
+  //   };
 
     const webflowRating = calculateWeightedSum(ratings, weights.webflow);
     const domainRating = calculateWeightedSum(ratings, weights.domain);
@@ -131,45 +240,131 @@ function ratingsValues(cssRating, screenshotSimilarityRating, htmlRating, domain
 }
 
 const methods = {
-    spoofStatus(spoof) {
-      //
-      return 'New';
-    },
-    webflowRating(spoof) {
-    const [webflowRating, domainRating, interfaceRating, overallRating]  = ratingsValues(spoof.csscolor, spoof.phashes, spoof.htmls, spoof.domainsimilarityrate, 2, true, spoof.domain_rating);
+  webflowRating(spoof) {
+    const [webflowRating, domainRating, interfaceRating, overallRating]  = ratingsValues(spoof.csscolor, spoof.phashes, spoof.htmls, spoof.domainsimilarityrate, calculateTimeDifference(spoof.registrationDate), true, spoof.domain_rating);
     return webflowRating; 
     },
 
     domainRating(spoof) {
-    const [webflowRating, domainRating, interfaceRating, overallRating]  = ratingsValues(spoof.csscolor, spoof.phashes, spoof.htmls, spoof.domainsimilarityrate, 2, true, spoof.domain_rating);
+    const [webflowRating, domainRating, interfaceRating, overallRating]  = ratingsValues(spoof.csscolor, spoof.phashes, spoof.htmls, spoof.domainsimilarityrate, calculateTimeDifference(spoof.registrationDate), true, spoof.domain_rating);
 
       return domainRating; 
     },
     interfaceRating(spoof) {
       // Calculate interface rating for the spoof
-    const [webflowRating, domainRating, interfaceRating, overallRating]  = ratingsValues(spoof.csscolor, spoof.phashes, spoof.htmls, spoof.domainsimilarityrate, 2, true, spoof.domain_rating);
+    const [webflowRating, domainRating, interfaceRating, overallRating]  = ratingsValues(spoof.csscolor, spoof.phashes, spoof.htmls, spoof.domainsimilarityrate, calculateTimeDifference(spoof.registrationDate), true, spoof.domain_rating);
 
       return interfaceRating; 
     },
     overallRating(spoof) {
-    const [webflowRating, domainRating, interfaceRating, overallRating]  = ratingsValues(spoof.csscolor, spoof.phashes, spoof.htmls, spoof.domainsimilarityrate, 2, true, spoof.domain_rating);
+    const [webflowRating, domainRating, interfaceRating, overallRating]  = ratingsValues(spoof.csscolor, spoof.phashes, spoof.htmls, spoof.domainsimilarityrate, calculateTimeDifference(spoof.registrationDate), true, spoof.domain_rating);
       return overallRating; 
     },
-    webflowRatingLabel(rating) {
+    webflowRatingLabel(rating, spoof) {
+      const age = calculateTimeDifference2(props.spoofData.registrationDate);
+      if(age > 3 && age < 5){
+        props.spoofData['webflowRatingLabel'] = "Low";
+        return "Low";
+      }
+      if(age > 5){
+        props.spoofData['webflowRatingLabel'] = "No Risk";
+        return "No ";
+      }
+      props.spoofData['webflowRatingLabel'] =  rating > 5 ? 'High' : rating > 4 ? 'medium' : 'low';
       return rating > 5 ? 'High' : rating > 4 ? 'medium' : 'low';
-      
     },
     domainRatingLabel(rating) {
+      props.spoofData['domainRatingLabel'] =  rating > 5 ? 'High' : rating > 4 ? 'medium' : 'low';
       return rating > 5 ? 'High' : rating > 4 ? 'medium' : 'low';
     },
     interfaceRatingLabel(rating) {
+      const age = calculateTimeDifference2(props.spoofData.registrationDate);
+      if(age > 3 && age < 5){
+        props.spoofData['interfaceRatingLabel'] = "Low";
+        return "Low";
+      }
+      if(age > 5){
+        props.spoofData['interfaceRatingLabel'] = "No Risk";
+        return "No ";
+      }
+      props.spoofData['interfaceRatingLabel'] = rating > 5 ? 'High' : rating > 4 ? 'medium' : 'Low';
       return rating > 5 ? 'High' : rating > 4 ? 'medium' : 'low';
     },
     overallRatingLabel(rating) {
+      const age = calculateTimeDifference2(props.spoofData.registrationDate);
+      if(age > 3 && age < 5){
+        props.spoofData['overallRatingLabel'] = "No Risk";
+        return "Low";
+      }
+      if(age > 5){
+        props.spoofData['overallRatingLabel'] = "No Risk";
+        return "No ";
+      }
+      props.spoofData['overallRatingLabel'] = rating > 4 ? 'High' : rating > 3 ? 'medium' : 'Low';
       return rating > 4 ? 'High' : rating > 3 ? 'medium' : 'Low';
     },
-  };
+    // spoofStatus(spoof) {
+    //   //
+    //   return 'New';
+    // },
+    // webflowRating(spoof) {
+    // const [webflowRating, domainRating, interfaceRating, overallRating]  = ratingsValues(spoof.csscolor, spoof.phashes, spoof.htmls, spoof.domainsimilarityrate, 2, true, spoof.domain_rating);
+    // return webflowRating; 
+    // },
 
+    // domainRating(spoof) {
+    // const [webflowRating, domainRating, interfaceRating, overallRating]  = ratingsValues(spoof.csscolor, spoof.phashes, spoof.htmls, spoof.domainsimilarityrate, 2, true, spoof.domain_rating);
+
+    //   return domainRating; 
+    // },
+    // interfaceRating(spoof) {
+    //   // Calculate interface rating for the spoof
+    // const [webflowRating, domainRating, interfaceRating, overallRating]  = ratingsValues(spoof.csscolor, spoof.phashes, spoof.htmls, spoof.domainsimilarityrate, 2, true, spoof.domain_rating);
+
+    //   return interfaceRating; 
+    // },
+    // overallRating(spoof) {
+    // const [webflowRating, domainRating, interfaceRating, overallRating]  = ratingsValues(spoof.csscolor, spoof.phashes, spoof.htmls, spoof.domainsimilarityrate, 2, true, spoof.domain_rating);
+    //   return overallRating; 
+    // },
+    // webflowRatingLabel(rating) {
+    //   return rating > 5 ? 'High' : rating > 4 ? 'medium' : 'low';
+    // },
+    // domainRatingLabel(rating) {
+    //   return rating > 5 ? 'High' : rating > 4 ? 'medium' : 'low';
+    // },
+    // interfaceRatingLabel(rating) {
+    //   return rating > 5 ? 'High' : rating > 4 ? 'medium' : 'low';
+    // },
+    // overallRatingLabel(rating) {
+    //   return rating > 4 ? 'High' : rating > 3 ? 'medium' : 'Low';
+    // },
+  };
+  const calculateTimeDifference2 = (dateString) => {
+  try {
+    dateString = JSON.parse(dateString);
+  } catch (e) {}
+  if (typeof dateString === "string") {
+    const firstDate = new Date(dateString);
+    const currentDate = new Date();
+
+    // Calculate the time difference in milliseconds
+    const diffInMilliseconds = currentDate - firstDate;
+
+    // Calculate the time difference in years, months, days, and hours
+    const diffInYears = diffInMilliseconds / (365 * 24 * 60 * 60 * 1000);
+
+    return `${diffInYears}`;
+  } else if (Array.isArray(dateString)) {
+    // If the dateString is an array, get the first date from the array
+    const firstDateString = dateString[0];
+    if (typeof firstDateString === "string") {
+      // Calculate the time difference for the first date in the array
+      return calculateTimeDifference2(firstDateString);
+    }
+  }
+  return 'none';
+};
 
 
 const isModalVisible = ref(false);
@@ -186,17 +381,88 @@ const closeModal = () => {
   isModalVisible.value = false;
 };
 
-// Add a watcher to close the modal after a delay
+
 watch(isModalVisible, (newValue) => {
   if (!newValue) {
     setTimeout(() => {
-      // Close the modal after the fade-out transition
+    
       closeModal();
-    }, 300); // Adjust the delay to match the transition duration
+    }, 300);
   }
 });
 
+// model2
+const isModalVisibler = ref(false);
 
+const openModalr = () => {
+  isModalVisibler.value = true;
+  
+  setTimeout(() => {
+    closeModalr();
+  }, 7000);
+};
+
+const closeModalr = () => {
+  isModalVisibler.value = false;
+};
+
+
+watch(isModalVisibler, (newValue) => {
+  if (!newValue) {
+    setTimeout(() => {
+    
+      closeModalr();
+    }, 300);
+  }
+});
+
+//model2
+const isModalVisiblem = ref(false);
+
+const openModalm = () => {
+  isModalVisiblem.value = true;
+      setTimeout(() => {
+    closeModalm();
+  }, 5000);
+};
+
+const closeModalm = () => {
+  isModalVisiblem.value = false;
+};
+
+
+watch(isModalVisiblem, (newValue) => {
+  if (!newValue) {
+    setTimeout(() => {
+     
+      closeModalm();
+    }, 300);
+  }
+});
+
+//modelt
+const isModalVisiblet = ref(false);
+
+const openModalt = () => {
+  isModalVisiblet.value = true;
+      setTimeout(() => {
+    closeModalt();
+  }, 5000);
+};
+
+const closeModalt = () => {
+  isModalVisiblet.value = false;
+};
+
+
+watch(isModalVisiblet, (newValue) => {
+  if (!newValue) {
+    setTimeout(() => {
+     
+      closeModalt();
+    }, 300);
+  }
+});
 defineComponent({
   components: {
     Link
@@ -216,30 +482,7 @@ const Toast = Swal.mixin({
 })
 
 
-const props = defineProps({
-  domain: {
-    type: Object,
-  },
-  details: {
-    type: Object,
-  },
-  spoofData: {
-    type: Object,
-  },
-  userid: {
-    type: Object,
-  },
-  spoofList: {
-    type: Object,
-  },
-  response: {
-    type: Object,
-  },
-  firstSeen:{
-    type: Object,
-  }
-  
-});
+
 const heading = ref('Scan Details');
 const changePageContent = (buttonCLicked) =>{
     heading.value = buttonCLicked;
@@ -253,52 +496,41 @@ onMounted(() => {
   // bladeViewUrl.value = "http://127.0.0.1:5500/resources/views/map.html"; /emails/reset_password// Replace with the actual relative path
  const spoofID = props.spoofData.id;
 //  bladeViewUrl.value = `http://127.0.0.1:8000/maps/${spoofID}`;
- bladeViewUrl.value = `https://dev.spoofix.com/maps/${spoofID}`;
+ bladeViewUrl.value = `https://uat.spoofix.com/maps/${spoofID}`;
 
 });
 
 const userId = props.domain[0].user_id;
 
 // const nextId = props.spoofList[1].id;
-const nextId = ref(props.spoofData.id + 1);
-const nextId2 = ref(props.spoofData.id - 1);
-// console.log(props.spoofList);
-// console.log("hello");
-const changeID = (activeId) => {
-  let index = props.spoofList.length - 1; 
-  // console.log("hello");
-  // console.log(props.spoofList.length - 1);
-  while(index > 0){
-    //  console.log(props.spoofList[index].id);
-    if(1==1){
-      index--;
-      nextId.value = props.spoofList[index].id;
-      // break; 
-      return true;
-    }else{
-      index--;
-    }
-  }
+// let isNumberInSpoofList, isNumberInSpoofListPlus;
+// if(!props.isValidTakedown){
+//     isNumberInSpoofList = props.spoofList.some(obj => Object.values(obj).includes(props.spoofData.id - 1));
+//     isNumberInSpoofListPlus = props.spoofList.some(obj => Object.values(obj).includes(props.spoofData.id + 1));
+// }else{
+//    isNumberInSpoofList = props.spoofList.some(obj => Object.values(obj).includes(props.spoofData.id - 1));
+//    isNumberInSpoofListPlus = props.spoofList.some(obj => Object.values(obj).includes(props.spoofData.id + 1));
+// }
+
+// const nextId = ref(isNumberInSpoofListPlus ? props.spoofData.id + 1 : props.spoofData.id);
+// const nextId2 = ref(isNumberInSpoofList ? props.spoofData.id - 1: props.spoofData.id);
+
+let nextId, nextId2;
+
+if (!props.isValidTakedown) {
+    const nextIdIndex = props.spoofList.findIndex(obj => Object.values(obj).includes(props.spoofData.id + 1));
+    const nextId2Index = props.spoofList.findIndex(obj => Object.values(obj).includes(props.spoofData.id - 1));
+
+    nextId = ref(nextIdIndex !== -1 ? props.spoofList[nextIdIndex].id : props.spoofData.id);
+    nextId2 = ref(nextId2Index !== -1 ? props.spoofList[nextId2Index].id : props.spoofData.id);
+} else {
+    const nextIdIndex = props.spoofList.findIndex(obj => Object.values(obj).includes(props.spoofData.id + 1));
+    const nextId2Index = props.spoofList.findIndex(obj => Object.values(obj).includes(props.spoofData.id - 1));
+
+    nextId = ref(nextIdIndex !== -1 ? props.spoofList[nextIdIndex].id : props.spoofData.id);
+    nextId2 = ref(nextId2Index !== -1 ? props.spoofList[nextId2Index].id : props.spoofData.id);
 }
 
-const changeIDPlus = (activeId) => {
-  let index = 0; 
-  // console.log("hello");
-  // console.log(props.spoofList[index].id);
-  while(index < props.spoofList.length){
-    // console.log(props.spoofList[index].id);
-    if(activeId === props.spoofList[index].id  && props.spoofList[index].domain_id === domain.id && props.spoofList[index].domain_id === props.spoofList[index++].domain_id){
-      index++;
-      nextId.value = props.spoofList[index].id;
-      break; 
-    }else{
-      index++;
-    }
-  }
-}
-// const domainDetails = Array('registrar', 'registrationDate', 'country', 'emails', 'update_date', 'name', 'city', 'whois_server', 'expiration_date', 'name_servers', 'status', 'dnssec', 'org', 'address', 'state', 'registrant-postal_code', 'spoof_status');
-// const ScanDetails = Array('created_at', 'phash', 'htmls', 'id' );
-// const RiskRating = Array('country', 'phashes', 'htmls', 'domainsimilarityrate', 'csscolor', 'domain_rating', 'rating');
 
 const scanDetails = [
   { key: 'Domain Name', value: 'spoofed_domain' },
@@ -307,12 +539,12 @@ const scanDetails = [
   { key: 'Scan Id', value: 'id' },
   { key: 'Country Registered', value: 'country' },
   { key: 'Server Country', value: 'server_country' },
-  { key: 'Organization', value: 'org' },
-  { key: 'IP Address', value: 'ip_address' },
-  // location
-    // { key: 'Server Country', value: 'server_country' },
   { key: 'Server Region', value: 'region' },
   { key: 'Server City', value: 'server_city' },
+  { key: 'IP Address', value: 'ip_address' },
+  { key: 'Organization', value: 'org' },
+  // location
+    // { key: 'Server Country', value: 'server_country' },
   { key: 'Logitude ', value: 'longitude' },
   { key: 'Latitude', value: 'latitude' },
 ];
@@ -385,12 +617,16 @@ const makeToArray = (theString) => {
     return theString;
   }
 }
+const reporte = ref('');
+// const reporte = ref('Do you want to report ' + props.spoofData.spoofed_domain + ' for takedown.');
 
 function reported(){
-     Toast.fire({
-            icon: 'error',
-            title: 'This spoofing site is already reported for take down.',
-        });
+    reporte.value = props.spoofData.spoofed_domain + ' is reported for takedown. Do you want to stop takedown?';
+     openModalt();
+    //  Toast.fire({
+    //         icon: 'error',
+    //         title: 'This spoofing site is already reported for take down.',
+    //     });
 }
 
 const extraction = (dateString) => {
@@ -404,11 +640,26 @@ const extraction = (dateString) => {
     return 'info not found';
   }
 }
+
+// const submit = () => {
+
+// const formData = new FormData();
+// formData.append('abuse_type', form.abuse_type);
+
+// const response = form.post(route('ReportSpoofySite'));
+//   // const response = router.post('/ReportSpoofySite', form)
+// if(response.errors == {}){
+//     Toast.fire({
+//       icon: 'success',
+//       title: 'Stopped Takedown Successfully',
+//     });
+// }
+// }
 </script>
 
 <template>
     <Head v-if="spoofData.spoof_status_new == 'completed'" title="ScannedCompleted" /> 
-  <Head v-else-if="spoofData.spoof_status_new == 'inprogress'"  title="ScannedInProgress" /> 
+  <Head v-else-if="spoofData.spoof_status_new == 'inprogress' || isValidTakedown"  title="ScannedInProgress" /> 
   <Head v-else title="Domain" /> 
 
 
@@ -420,7 +671,8 @@ const extraction = (dateString) => {
       <button class="absolute w-40 h-12 px-3 rounded-tr-full bg-dark tabsText" style="">Domain</button>
       <button class="w-56 h-12 pr-4 bg-gray-300 rounded-tr-full tabsText pl-9" style="margin-left: 106px;">Social Media</button>
     </div>
-      <Link class="my-auto buttons buttonsText mr-9 hover:bg-yellow-300" :href="'/domains'"><i class="pr-2 fa fa-chevron-left" aria-hidden="true" preserve-scroll></i> Back</Link>
+      <Link v-if="isValidTakedown" class="my-auto buttons buttonsText mr-9 hover:bg-yellow-300" :href="'/InProgress'"><i class="pr-2 fa fa-chevron-left" aria-hidden="true" preserve-scroll></i> Back</Link>
+      <Link v-else class="my-auto buttons buttonsText mr-9 hover:bg-yellow-300" :href="'/domains'"><i class="pr-2 fa fa-chevron-left" aria-hidden="true" preserve-scroll></i> Back</Link>
    </div>
    <div class="flex flex-row mx-4 mt-3 bg-yellow-100 h-14 rounded-t-xl">
     <h2 class="my-auto text-gray-600 pl-7 h3 riskpush">{{ spoofData.spoofed_domain }}</h2>
@@ -770,20 +1022,21 @@ const extraction = (dateString) => {
                  <div v-else-if="riskRating.key === 'Status'">
                   <div v-if="spoofData[riskRating.value] === '200' || spoofData[riskRating.value] === 200" class="p-1 -mt-3 bg-yellow-300 rounded-lg shadow-xl w-fit bottom-2">active</div>
                   <div v-else-if="spoofData[riskRating.value] === null">...</div>
-                  <div v-else>not active</div>
+                  <div v-else class="p-1 -mt-3 bg-green-300 rounded-lg shadow-xl w-fit bottom-2">not active</div>
                 </div>
                  <div v-else> {{spoofData[riskRating.value]}}</div>
                 </div>
               </div>
               <div class="mt-3 ml-50 w-100 DetailsTableRowText" v-else >
-                <div v-if="spoofData[riskRating.value]  === '' || typeof spoofData[riskRating.value] === 'undefined' && riskRating.value !== 'High' && riskRating.value !== 'low' && riskRating.value !== 'medium' && riskRating.key !== 'Age'" class="text-gray-400">info not available</div>
+                <div v-if="spoofData[riskRating.value]  === '' || typeof spoofData[riskRating.value] === 'undefined' && riskRating.value !== 'High' && riskRating.value !== 'low' && riskRating.value !== 'No ' && riskRating.value !== 'medium' && riskRating.key !== 'Age'" class="text-gray-400">info not available</div>
                 <!-- <div v-else-if="spoofData[riskRating.key] === 'Status'">
                   <div v-if="spoofData[riskRating.value] === 200">active</div>
                   <div v-else-if="spoofData[riskRating.value] === null">...</div>
                   <div v-else>not active</div>
                 </div> -->
                 <div v-else>{{ spoofData[riskRating.value]  }} </div>
-                 <div v-if="riskRating.value === 'High' || riskRating.value === 'low' || riskRating.value === 'medium' || riskRating.key === 'Age'"> {{riskRating.value}}</div>
+                 <div v-if="riskRating.value === 'High' || riskRating.value === 'low' || riskRating.value === 'medium' || riskRating.key === 'Age'" > {{riskRating.value}}</div>
+                 <div v-if="riskRating.value === 'No '" > {{riskRating.value}}Risk</div>
 
               </div>  
             </div>
@@ -796,10 +1049,10 @@ const extraction = (dateString) => {
    </div>
    <div class="flex justify-between pt-3 mb-6">
     <div class="flex justify-between w-96 pl-7">
-       <Link class="my-2 buttons buttonsText hover:bg-yellow-300 sm:hidden lg:flex md:flex hidding">Ignore</Link>
-        <Link class="my-auto bg-yellow-100 buttons buttonsText hover:bg-yellow-300 sm:hidden lg:flex md:flex hidding">Monitor</Link>
-          <Link v-if="response  || spoofData.spoof_status_new == 'completed' || spoofData.spoof_status_new == 'inprogress'" class="my-auto bg-gray-300 buttons buttonsText hover:bg-gray-300" as='button' @click="reported" >Take Down<i class="text-xl fa-solid fa-ban"></i></Link>   <!-- || spoofData.spoof_status_new == 'inprogress' -->
-          <Link v-else class="my-auto bg-yellow-300 buttons buttonsText hover:bg-yellow-300" :href="'/spoof/requestAuthorization/' + spoofData.id">Take Down</Link>
+       <button class="my-2 buttons buttonsText hover:bg-yellow-300 sm:hidden lg:flex md:flex hidding" title="Mark As No Risk" @click="openModalr">Mark As No Risk</button>
+        <button class="my-auto bg-yellow-100 buttons buttonsText hover:bg-yellow-300 sm:hidden lg:flex md:flex hidding" @click="openModalm">Monitor</button>
+          <button v-if="isValidTakedown" class="my-auto bg-yellow-300 buttons buttonsText hover:bg-yellow-400" as='button' @click="reported">Stop TakeDown</button>   <!-- || spoofData.spoof_status_new == 'inprogress'|| response  || spoofData.spoof_status_new == 'completed' || spoofData.spoof_status_new == 'inprogress' <i class="text-xl fa-solid fa-ban"></i>-->
+          <button v-else class="my-auto bg-yellow-300 buttons buttonsText hover:bg-yellow-300" @click="openModalt">Take Down</button>
          
     </div>
     <div class="flex justify-between mr-6 w-80">
@@ -832,7 +1085,7 @@ const extraction = (dateString) => {
         </div>
       </div>
     </transition> -->
-    <!-- Modal -->
+    <!--image Modal -->
 <transition name="modal-fade">
   <div v-if="isModalVisible " class="backlight" @click="closeModal">
     <!-- && spoofData.screenshot !== null -->
@@ -858,10 +1111,134 @@ const extraction = (dateString) => {
     </div>
   </div>
 </transition>
+<!--moniter Modal -->
+<transition name="modal-fade" >
+  <div v-if="isModalVisiblem" class="backlight" @click="closeModalm">
+    <div
+      role="dialog"
+      aria-modal="true"
+      class="fade image-modal dark modal show backlight"
+      tabindex="-1"
+      style="padding-left: 14px; display: block;"
+    >
+      <div class="modal-dialog modal-xl modal-dialog-centered" style="">
+        <div class="modal-content">
+          <div class="">
+            <div
+              class="mx-auto bg-white modelStyle"
+              style=""
+            >
+            <div class="relative w-100"> 
+              <img class="float-right" :src="'/assets/systemImages/Exit.svg'"/>
+            </div>
+            <div class="relative flex my-2 modelText">
+               <img class="pr-3 mb-3" :src="'/assets/systemImages/Promo.svg'"/>
+               <img class="absolute m-2" :src="'/assets/systemImages/bookmark.svg'"/>
+              <div class="my-auto">By setting the status to 'monitoring', you are indicating that <span class="text-yellow-500">{{spoofData.spoofed_domain}} will be under constant surveillance</span> . Are you sure you want to proceed?</div>
+            </div>
+            <div class="relative w-100" >
+              <!-- <button class="float-right px-4 mr-3 bg-gray-300 buttons buttonsText" @click="closeModal" type="button">cancel</button> -->
+               <Link class="float-right px-4 bg-yellow-300 buttons buttonsText" :href="'/spoof/Monitor/' + spoofData.id">confirm</Link>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</transition>
+<!--norisk Modal -->
+<transition name="modal-fade" >
+  <div v-if="isModalVisibler" class="backlight" @click="closeModalr">
+    <div
+      role="dialog"
+      aria-modal="true"
+      class="fade image-modal dark modal show backlight"
+      tabindex="-1"
+      style="padding-left: 14px; display: block;"
+    >
+      <div class="modal-dialog modal-xl modal-dialog-centered" style="">
+        <div class="modal-content">
+          <div class="">
+            <div
+              class="mx-auto bg-white modelStyle"
+              style=""
+            >
+            <div class="relative w-100"> 
+              <img class="float-right" :src="'/assets/systemImages/Exit.svg'"/>
+            </div>
+            <div class="relative flex my-2 modelText">
+               <img class="pr-3 " :src="'/assets/systemImages/Promo.svg'"/>
+               <img class="absolute m-2" :src="'/assets/systemImages/bookmark.svg'"/>
+              <div class="my-auto">By clicking 'Mark as Norisk', you are indicating that <span class="text-yellow-500">{{spoofData.spoofed_domain}} will be ignored</span> . Are you sure you want to proceed?</div>
+            </div>
+            <div class="relative w-100" >
+              <!-- <button class="float-right px-4 mr-3 bg-gray-300 buttons buttonsText" @click="closeModal" type="button">cancel</button> -->
+               <Link class="float-right px-4 bg-yellow-300 buttons buttonsText" :href="'/spoof/markAsNoRisk/' + spoofData.id">confirm</Link>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</transition>
+<!--norisk Modal -->
+<transition name="modal-fade" >
+  <div v-if="isModalVisiblet" class="backlight" @click="closeModalt">
+    <div
+      role="dialog"
+      aria-modal="true"
+      class="fade image-modal dark modal show backlight"
+      tabindex="-1"
+      style="padding-left: 14px; display: block;"
+    >
+      <div class="modal-dialog modal-xl modal-dialog-centered" style="">
+        <div class="modal-content">
+          <div class="">
+            <div
+              class="mx-auto bg-white modelStyle"
+              style=""
+            >
+            <div class="relative w-100"> 
+              <img class="float-right" :src="'/assets/systemImages/Exit.svg'"/>
+            </div>
+            <div class="relative flex my-2 modelText">
+               <img class="pr-3 " :src="'/assets/systemImages/Promo.svg'"/>
+               <img class="absolute m-2" :src="'/assets/systemImages/bookmark.svg'"/>
+              <div class="my-auto"><span v-if="reporte == ''">Do you want to report <span class="text-yellow-500">{{spoofData.spoofed_domain}}</span> for takedown?</span><span v-if="reporte != ''">{{reporte}} </span></div>
+            </div>
+            <div class="relative w-100" >
+              <!-- <button class="float-right px-4 mr-3 bg-gray-300 buttons buttonsText" @click="closeModal" type="button">cancel</button> -->
+               <Link v-if="reporte == ''" class="float-right px-4 bg-yellow-300 buttons buttonsText" :href="'/spoof/requestAuthorization/' + spoofData.id">confirm</Link>
+               <!-- <Link @click="closeModalt" v-if="reporte != ''" class="float-right px-4 bg-yellow-300 buttons buttonsText">cancel</Link> -->
+               <button v-if="reporte != ''" class="float-right px-4 bg-yellow-300 buttons buttonsText" @click="submit()"> stop Takedown </button>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</transition>
   </AuthenticatedLayout>
 </template>
 
 <style scoped>
+.modelStyle{
+  max-width: 624px;
+  height: 237px;
+  display: flex;
+  padding: 30px 40px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 30px;
+  border-radius: 20px;
+  background: #FFF;
+  box-shadow: 0px 4px 50px 0px rgba(0, 0, 0, 0.25);
+}
+
 /*animation*/
   @keyframes bounce {
     0%, 20%, 50%, 80%, 100% {
@@ -912,7 +1289,20 @@ const extraction = (dateString) => {
   opacity: 0;
   transform: translateY(-20px);
 }
-
+.modelText{
+  max-width: 474px;
+  color: #2A2A2A;
+  
+  /* Regular/Heading 5/Regular */
+  font-family: Poppins;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%; /* 24px */
+  background: #FFF;
+  
+  
+  }
 .image-container {
   max-width: 390px;
   max-height: 239px;

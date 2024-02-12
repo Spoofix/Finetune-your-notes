@@ -63,6 +63,15 @@ const premiumPlan = ['daily scans', '4 domains', 'risk assessment', '5 organizat
   <Head title="Pricing And Billing" />
 
  <SettingsLayout  class="overflow-scroll fontFamily" style="height:100vh; background: #FFF;"> <!-- v-if=" props.userid === userId" -->
+  <div class=" row" v-if="$page.props.auth.user.role_id == 2 || props.isAdminSwitched" style="height: 100vh;">
+    <div class="mx-auto ">
+        <h1 class="font-extrabold text-center flicker mt-9 h1"><span class="text-yellow-300">spoo</span>fix pricing</h1>
+        <h1 class="text-center h3 seesaw"> coming soon!</h1>
+    </div>
+</div>
+<div v-else>
+
+
    <div class="flex justify-between mt-6 mr-8 border-b-4 border-black max-w-100 lg:ml-6 md:ml-6">
     <div class="relative ml-0 ">
       <button @click="menu('Pricing')" class="absolute h-10 rounded-tr-full lg:h-12 md:h-12 w-36 lg:px-3 lg:w-40 tabsText md:w-40" :class="activeOne === 'Pricing' ? 'bg-dark' : 'bg-gray-300'" style="">Pricing</button>
@@ -274,6 +283,7 @@ const premiumPlan = ['daily scans', '4 domains', 'risk assessment', '5 organizat
         </div>
       </div>
     </transition>
+  </div>
   </SettingsLayout>
 </template>
 

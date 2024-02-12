@@ -216,9 +216,15 @@ const testing = [test, false, false, false, false, false]
                   <button type="button" class="w-40 border-none md:w-52 btn btn-sm hover:bg-yellow-300 active:bg-yellow-300 d-flex" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     
                     <img
+                    v-if="!$page.props.auth.user.profile_pic"
                     class="h-9 w-9 rounded-full object-cover d-lg=none mx-3"
                     src="https://randomuser.me/api/portraits/men/30.jpg"
                     alt=""
+                  />
+                  <img v-else 
+                  :src="$page.props.auth.user.profile_pic"
+                   alt="Profile Picture"
+                  class="h-8 w-8 rounded-full object-cover d-lg=none mx-3"
                   />
                   <div class="my-auto userName text-capitalize" style="">
                     <span class="">{{ $page.props.auth.user.name }}</span>

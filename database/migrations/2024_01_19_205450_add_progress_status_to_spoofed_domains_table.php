@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('spoofed_domains', function (Blueprint $table) {
-            $table->enum('progress_status', ['new', 'monitoring', 'pending_authentication'])->default('new');
+            $table->enum('progress_status', ['new', 'monitoring', 'pending_authentication', 'norisk'])->default('new');
         });
     }
 

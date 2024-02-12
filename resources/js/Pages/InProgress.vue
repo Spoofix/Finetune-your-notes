@@ -315,7 +315,7 @@ function startDate(inputDateString) {
                               {{timing(new Date(spoof.created_at))}}
                           </td>
                           <td class="py-1 ">
-                            <Link :href="'/spoof/view/' + spoof.id" class="w-16 py-1 mx-auto transition-all duration-150 ease-linear tableButton visited:bg-pink-300 active:bg-yellow-200 hover:bg-yellow-200 focus:outline-none" preserve-scroll>
+                            <Link :href="'/spoof/view/' + spoof.id2" class="w-16 py-1 mx-auto transition-all duration-150 ease-linear tableButton visited:bg-pink-300 active:bg-yellow-200 hover:bg-yellow-200 focus:outline-none" preserve-scroll>
                                <div class="px-4 my-auto">View</div> 
                             </Link>
                           </td>

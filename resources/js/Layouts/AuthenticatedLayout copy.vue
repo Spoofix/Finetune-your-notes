@@ -200,10 +200,14 @@ const active = (link) => {
                   <button type="button" class="btn btn-sm btn-alt-secondary d-flex hover:text-gray-500 " id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-user d-sm-none"></i>
                     <img
+                    v-if="!props.auth_user.profile_pic"
                     class="h-8 w-8 rounded-full object-cover d-lg=none mx-3"
                     src="https://randomuser.me/api/portraits/men/30.jpg"
                     alt=""
                   />
+                  <div v-else class="w-8 h-8 mx-auto my-2 overflow-hidden rounded-full">
+                    <img :src="props.auth_user.profile_pic" alt="Profile Picture" style="min-height: 14rem; width: auto;" />
+                  </div>
                     <span class="my-auto d-none d-sm-inline-block fw-semibold">{{ $page.props.auth.user.name }}</span>
                     <i class="my-auto opacity-50 fa fa-angle-down ms-1"></i>
                   </button>

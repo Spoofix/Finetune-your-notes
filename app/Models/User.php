@@ -31,7 +31,8 @@ class User extends Authenticatable
         'status',
         'org_id',
         'org_role_id',
-        'profile'
+        'profile',
+        'profile_pic'
     ];
 
     /**

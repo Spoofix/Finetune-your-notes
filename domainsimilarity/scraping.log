@@ -33313,3 +33313,5 @@ Stacktrace:
 2024-01-24 21:10:56 - ERROR - Error fetching content from https://google.com: WebDriver.__init__() got an unexpected keyword argument 'executable_path'
 2024-01-24 21:12:59 - ERROR - Error fetching content from https://google.com: WebDriver.__init__() got an unexpected keyword argument 'executable_path'
 2024-01-24 21:13:01 - ERROR - Error fetching content from https://google.com: WebDriver.__init__() got an unexpected keyword argument 'executable_path'
+2024-02-10 17:06:47 - ERROR - Error fetching content from https://google.com: WebDriver.__init__() got an unexpected keyword argument 'executable_path'
+2024-02-10 17:06:49 - ERROR - Error fetching content from https://google.com: WebDriver.__init__() got an unexpected keyword argument 'executable_path'

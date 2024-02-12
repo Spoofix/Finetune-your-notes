@@ -37,7 +37,23 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-
+    $request->validate([
+            'attachment' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+        $fileName = '';
+        $path = null;
+        $mipath = null;
+        if ($request->hasFile('attachment')) {
+        $attachment = $request->file('attachment');
+            if ($attachment->isValid()) {
+                $fileType = $attachment->getClientOriginalExtension();
+                $fileName = $request->name . '.' . $fileType;
+                // $path = $attachment->storeAs('public/assets/profiles', $fileName);
+                $path = $attachment->move(public_path('assets/profiles'), $fileName);
+                $mipath = '/assets/profiles/' . $fileName;
+            }
+        }
+         
         $request->user()->fill($request->validated());
 
         if ($request->user()->isDirty('email')) {
@@ -47,6 +63,7 @@ class ProfileController extends Controller
         $request->user()->name = $request->name;
         $request->user()->second_name = $request->second_name;
         $request->user()->email = $request->email;
+        $request->user()->profile_pic = $mipath;
         $request->user()->save();
 
         return Redirect::route('settings.account'); //profile

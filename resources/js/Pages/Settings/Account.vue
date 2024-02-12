@@ -11,7 +11,6 @@ import UpdatePasswordForm from '../Profile/Partials/UpdatePasswordForm.vue';
 import UpdateProfileInformationForm from '../Profile/Partials/UpdateProfileInformationForm.vue';
 import 'intl-tel-input/build/css/intlTelInput.css';
 
-
 const isModalVisible = ref(false);
 
 const openModal = () => {
@@ -83,9 +82,30 @@ const form = useForm({
     second_name: props.auth_user.second_name,
     phone_number: props.auth_user.phone_number,
     email: props.auth_user.email,
+    attachment: props.attachment ? props.attachment : null,
     // domain : props.auth_user.domain,
     // timezone: props.auth_user.timezone,
 });
+
+const imageUrl = ref(null);
+
+const handleFileChange = (event) => {
+  form.attachments = event.target.files[0];
+  const fileInput = event.target;
+
+  if (fileInput.files.length > 0) {
+    const uploadedFile = fileInput.files[0];
+    form.attachment = uploadedFile;
+    const reader = new FileReader();
+
+    reader.onload = (e) => {
+      imageUrl.value = e.target.result;
+
+    };
+
+    reader.readAsDataURL(uploadedFile);
+  }
+};
 
 function submit() {
     if (form.name == null || form.phone_number == null || form.email == null || form.second_name == null) {
@@ -95,13 +115,22 @@ function submit() {
         })
         return;
     }
-
-    router.post('/profile-update', form)
-
+    const formData = new FormData();
+    if (form.attachment !== null) {
+        formData.append('attachment', form.attachment);
+        console.log('it is not null')
+    }else{
+      console.log('it is null')
+    }
+    // router.post('/profile-update', form)
+    const response = form.post(route('profile.update'));
     Toast.fire({
         icon: 'success',
         title: 'Profile Created Successfully'
     })
+    imageUrl.value = null;
+    form.attachment = null;
+    reload();
 }
 
 function emailSent(){
@@ -131,6 +160,11 @@ onMounted(async () => {
   }
 
 });
+// const profile_pic = "../../../../../storage/app/${props.auth_user.profile_pic}";
+// const profile_pic = `../../../../storage/app/${props.auth_user.profile_pic}`;
+// const profile_pic = '../../../../../storage/app/' + props.auth_user.profile_pic;
+const profile_pic = props.auth_user.profile_pic;
+console.log(profile_pic);
 </script>
 
 <template>
@@ -183,17 +217,27 @@ onMounted(async () => {
           </div>
     </div>
     <div class="mx-auto ml-1 bg-yellow-100 " style=" width: 100%; max-width: 465px: min-width: 350px;">
-      <div class="w-56 h-56 mx-auto my-2 bg-black rounded-full"> 
-        <div style="font-size: 88px; padding: 60px;">
+      <div v-if="form.attachment" class="w-56 h-56 mx-auto my-2 overflow-hidden rounded-full">
+        <img v-if="imageUrl" :src="imageUrl" alt="Please Upload Image!" style="min-height: 14rem; width: auto;"/>
+     </div>
+     <!-- <div v-else-if="props.auth_user.profile_pic" class="w-56 h-56 mx-auto my-2 overflow-hidden rounded-full"> -->
+      <!-- <img v-if="profile_pic" :src="profile_pic" alt="Profile Picture" style="min-height: 14rem; width: auto;" /> -->
+      <!-- storage/app/public/assets/profiles/ernest.jpg /home/kiromo/Desktop/Domain/storage/app/public/assets/profiles/ernest.jpg-->
+   <!-- </div> -->
+   <div v-else-if="props.auth_user.profile_pic" class="w-56 h-56 mx-auto my-2 overflow-hidden rounded-full">
+    <img :src="profile_pic" alt="Profile Picture" style="min-height: 14rem; width: auto;" />
+  </div>
+      <div v-else class="w-56 h-56 mx-auto my-2 bg-black rounded-full"> 
+        <div v-if="imageUrl == null " style="font-size: 88px; padding: 60px;">
           <h1 class="flex text-yellow-300 text-bold"><span class="capitalize">{{props.auth_user.name[0]}}</span><span class="capitalize">{{props.auth_user.second_name[0]}}</span></h1>
         </div>
-         <div class="float-right w-5 h-5 mr-3 -mt-16 bg-yellow-300 rounded-full">
+         <div v-if="imageUrl == null" class="float-right w-5 h-5 mr-3 -mt-16 bg-yellow-300 rounded-full">
           <i class="ml-1 -mt-1 text-lg font-bold text-black fa-solid fa-xmark"></i>
           </div>
       </div>
-     <form class="mx-auto w-fit">
+     <form class="mx-auto w-fit"  enctype="multipart/form-data">
       <label for="custom-file-input" class="-mt-5 custom-file-upload">
-        <input type="file" id="custom-file-input" accept=".jpg, .jpeg, .png" />
+        <input type="file" id="custom-file-input" accept=".jpg, .jpeg, .png"  @change="handleFileChange"/>
         <div style="font-size: 22px;">
           <i class="fa-regular fa-image"></i> Upload Image
         </div>
@@ -221,7 +265,7 @@ onMounted(async () => {
       </div>
     <div class="flex justify-between float-right h-16 mb-5 lg:mx-6 sm:mx-2 sm:mr-3 w-60">
        <Link class="my-auto bg-gray-300 buttons buttonsText"  type="button" href=" "> Reset Item</Link>
-        <button class="my-auto bg-yellow-300 buttons buttonsText" type="button" @click="openModal"> Save Changes </button>
+        <button class="my-auto bg-yellow-300 buttons buttonsText" :class="form.attachment ? 'fa-bounce ': 'buttonsText'" type="button" @click="openModal"> Save Changes </button>
     </div>
    </div>
   

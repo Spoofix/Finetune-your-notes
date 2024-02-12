@@ -3,7 +3,7 @@
 /public/build
 /public/hot
 /public/storage
-# /public/assets/screenshots
+/public/assets/screenshots
 /storage/*.key
 /vendor
 .env
@@ -18,8 +18,9 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
-# /dnstwist
+/dnstwist
 public/assets/screenshots
 opensquat
-domainsimilarity
-
+/domainsimilarity
+/storage
+/OtherDomainGenerationALgorithims

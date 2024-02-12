@@ -10,6 +10,13 @@ import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 
+function ageContribution(age) {
+    const decayFactor = 1.9; //decayValue
+    const baseValue = 100;    //Initial contribution value
+
+    const contribution = baseValue * Math.exp(-decayFactor * age);
+    return contribution;
+}
 
 function calculateWeightedSum(ratings, weights) {
   // Initialize sum to 0
@@ -47,33 +54,80 @@ function calculateWeightedSum(ratings, weights) {
 }
 
 function ratingsValues(cssRating, screenshotSimilarityRating, htmlRating, domainNameSimilarityRating, age, sslValidity, domainrating) {
+    const agedecay = ageContribution(age);
     const ratings = {
         cssRating,
         screenshotSimilarityRating,
         htmlRating,
         domainNameSimilarityRating,
-        age,
+        agedecay,
         sslValidity,
         domainrating
     };
+      let weights =[];
+      if(agedecay > 3 && agedecay < 5){
+        weights = {
+          webflow: {
+            cssRating: 0.1,
+            screenshotSimilarityRating: 0.25,
+            htmlRating: 0.25,
+            agedecay: 0.4,
+          },
+          domain: {
+            domainNameSimilarityRating: 0.1,
+            agedecay: 0.05,
+            sslValidity: 0.05,
+            domainrating: 0.8
+          },
+          interface: {
+            cssRating: 0.2,
+            screenshotSimilarityRating: 0.4,
+            agedecay: 0.4,
+          },
+        };
+      }
+      else if(agedecay > 5){
+        weights = {
+          webflow: {
+            cssRating: 0.1,
+            screenshotSimilarityRating: 0.25,
+            htmlRating: 0.25,
+            agedecay: 0.4,
+          },
+          domain: {
+            domainNameSimilarityRating: 0.1,
+            agedecay: 0.05,
+            sslValidity: 0.05,
+            domainrating: 0.8
+          },
+          interface: {
+            cssRating: 0.2,
+            screenshotSimilarityRating: 0.4,
+            agedecay: 0.4,
+          },
+        };
+      }else{
+        weights = {
+          webflow: {
+            cssRating: 0.1,
+            screenshotSimilarityRating: 0.35,
+            htmlRating: 0.35,
+            agedecay: 0.1,
+          },
+          domain: {
+            domainNameSimilarityRating: 0.1,
+            agedecay: 0.05,
+            sslValidity: 0.05,
+            domainrating: 0.8
+          },
+          interface: {
+            cssRating: 0.3,
+            screenshotSimilarityRating: 0.45,
+            agedecay: 0.25,
+          },
+        };
+      }
 
-    const weights = {
-      webflow: {
-        cssRating: 0.2,
-        screenshotSimilarityRating: 0.4,
-        htmlRating: 0.4,
-      },
-      domain: {
-        domainNameSimilarityRating: 0.1,
-        age: 0.05,
-        sslValidity: 0.05,
-        domainrating: 0.8
-      },
-      interface: {
-        cssRating: 0.3,
-        screenshotSimilarityRating: 0.7,
-      },
-    };
 
     const webflowRating = calculateWeightedSum(ratings, weights.webflow);
     const domainRating = calculateWeightedSum(ratings, weights.domain);
@@ -133,7 +187,10 @@ const methods = {
       let oneWeekInMillis = 7 * 24 * 60 * 60 * 1000;
       if(status == 'monitoring'){
         return "monitoring";
-      }
+      } 
+      if(status == 'norisk'){
+        return "Ignored";
+      } 
       if (timeDifference > oneWeekInMillis) {
            return "Pending Authorization";
       } else {
@@ -141,43 +198,73 @@ const methods = {
       }
     },
     webflowRating(spoof) {
-    const [webflowRating, domainRating, interfaceRating, overallRating]  = ratingsValues(spoof.csscolor, spoof.phashes, spoof.htmls, spoof.domainsimilarityrate, 2, true, spoof.domain_rating);
+    const [webflowRating, domainRating, interfaceRating, overallRating]  = ratingsValues(spoof.csscolor, spoof.phashes, spoof.htmls, spoof.domainsimilarityrate, calculateTimeDifference(spoof.registrationDate), true, spoof.domain_rating);
     return webflowRating; 
     },
 
     domainRating(spoof) {
-    const [webflowRating, domainRating, interfaceRating, overallRating]  = ratingsValues(spoof.csscolor, spoof.phashes, spoof.htmls, spoof.domainsimilarityrate, 2, true, spoof.domain_rating);
+    const [webflowRating, domainRating, interfaceRating, overallRating]  = ratingsValues(spoof.csscolor, spoof.phashes, spoof.htmls, spoof.domainsimilarityrate, calculateTimeDifference(spoof.registrationDate), true, spoof.domain_rating);
 
       return domainRating; 
     },
     interfaceRating(spoof) {
       // Calculate interface rating for the spoof
-    const [webflowRating, domainRating, interfaceRating, overallRating]  = ratingsValues(spoof.csscolor, spoof.phashes, spoof.htmls, spoof.domainsimilarityrate, 2, true, spoof.domain_rating);
+    const [webflowRating, domainRating, interfaceRating, overallRating]  = ratingsValues(spoof.csscolor, spoof.phashes, spoof.htmls, spoof.domainsimilarityrate, calculateTimeDifference(spoof.registrationDate), true, spoof.domain_rating);
 
       return interfaceRating; 
     },
     overallRating(spoof) {
-    const [webflowRating, domainRating, interfaceRating, overallRating]  = ratingsValues(spoof.csscolor, spoof.phashes, spoof.htmls, spoof.domainsimilarityrate, 2, true, spoof.domain_rating);
+    const [webflowRating, domainRating, interfaceRating, overallRating]  = ratingsValues(spoof.csscolor, spoof.phashes, spoof.htmls, spoof.domainsimilarityrate, calculateTimeDifference(spoof.registrationDate), true, spoof.domain_rating);
       return overallRating; 
     },
-    webflowRatingLabel(rating) {
+    webflowRatingLabel(rating, spoof) {
+      const age = calculateTimeDifference(spoof.registrationDate);
+      if(age > 3 && age < 5){
+        spoof['webflowRatingLabel'] = "Low";
+        return "Low";
+      }
+      if(age > 5){
+        spoof['webflowRatingLabel'] = "No Risk";
+        return "No Risk";
+      }
+      spoof['webflowRatingLabel'] =  rating > 5 ? 'High' : rating > 4 ? 'medium' : 'low';
       return rating > 5 ? 'High' : rating > 4 ? 'medium' : 'low';
     },
-    domainRatingLabel(rating) {
+    domainRatingLabel(rating, spoof) {
+      spoof['domainRatingLabel'] =  rating > 5 ? 'High' : rating > 4 ? 'medium' : 'low';
       return rating > 5 ? 'High' : rating > 4 ? 'medium' : 'low';
     },
-    interfaceRatingLabel(rating) {
+    interfaceRatingLabel(rating, spoof) {
+      const age = calculateTimeDifference(spoof.registrationDate);
+      if(age > 3 && age < 5){
+        spoof['interfaceRatingLabel'] = "Low";
+        return "Low";
+      }
+      if(age > 5){
+        spoof['interfaceRatingLabel'] = "No Risk";
+        return "No Risk";
+      }
+      spoof['interfaceRatingLabel'] = rating > 5 ? 'High' : rating > 4 ? 'medium' : 'Low';
       return rating > 5 ? 'High' : rating > 4 ? 'medium' : 'low';
     },
-    overallRatingLabel(rating) {
+    overallRatingLabel(rating, spoof) {
+      const age = calculateTimeDifference(spoof.registrationDate);
+      if(age > 3 && age < 5){
+        spoof['overallRatingLabel'] = "No Risk";
+        return "Low";
+      }
+      if(age > 5){
+        spoof['overallRatingLabel'] = "No Risk";
+        return "No Risk";
+      }
+      spoof['overallRatingLabel'] = rating > 4 ? 'High' : rating > 3 ? 'medium' : 'Low';
       return rating > 4 ? 'High' : rating > 3 ? 'medium' : 'Low';
     },
   };
-
-const calculateTimeDifference = (dateString) => {
-  try{
-      dateString = JSON.parse(dateString);
-  }catch(e){}
+  const calculateTimeDifference = (dateString) => {
+  try {
+    dateString = JSON.parse(dateString);
+  } catch (e) {}
   if (typeof dateString === "string") {
     const firstDate = new Date(dateString);
     const currentDate = new Date();
@@ -186,39 +273,12 @@ const calculateTimeDifference = (dateString) => {
     const diffInMilliseconds = currentDate - firstDate;
 
     // Calculate the time difference in years, months, days, and hours
-    const diffInYears = Math.round(diffInMilliseconds / (365 * 24 * 60 * 60 * 1000));
-    // const diffInMonths = Math.round(diffInMilliseconds / (30 * 24 * 60 * 60 * 1000));
-    // const diffInDays = Math.round(diffInMilliseconds / (24 * 60 * 60 * 1000));
-    // const diffInHours = Math.round(diffInMilliseconds / (60 * 60 * 1000));
+    const diffInYears = diffInMilliseconds / (365 * 24 * 60 * 60 * 1000);
 
-    // Determine the appropriate unit based on the rounded time difference
-    // let unit, timeDiff;
-    // if (diffInYears > 0) {
-      // unit = "year";
-      timeDiff = diffInYears;
-    // } else if (diffInMonths > 0) {
-    //   unit = "month";
-    //   timeDiff = diffInMonths;
-    // } else if (diffInDays > 0) {
-    //   unit = "day";
-    //   timeDiff = diffInDays;
-    // } else if (diffInHours) {
-    //   unit = "hour";
-    //   timeDiff = diffInHours;
-    // }else {
-    //   unit = "hour";
-    //   timeDiff = 'past';
-    // }
-    //
-    // if (timeDiff !== 1) {
-    //   unit += "s";
-    // }
-
-    return ` ${timeDiff} `; //${unit}
+    return `${diffInYears}`;
   } else if (Array.isArray(dateString)) {
     // If the dateString is an array, get the first date from the array
     const firstDateString = dateString[0];
-    // console.log(firstDateString);
     if (typeof firstDateString === "string") {
       // Calculate the time difference for the first date in the array
       return calculateTimeDifference(firstDateString);
@@ -226,6 +286,7 @@ const calculateTimeDifference = (dateString) => {
   }
   return 'none';
 };
+// console.log(calculateTimeDifference(["2021-07-25 16:32:55","2021-07-25 11:32:55"]));
 
 const filteredSpoofListCurrentValue = ref([]); 
 
@@ -323,12 +384,90 @@ const itemsPerPage = 7;
 
 
 // const spooflist = filteredSpoofListCurrentValue.value;
-const paginatedSpoofList = computed(() => {
-  // console.log(filteredSpoofListCurrentValue.value);
+// const paginatedSpoofList = computed(() => {
+//   // console.log(filteredSpoofListCurrentValue.value);
+//   const start = (currentPage.value - 1) * itemsPerPage;
+//   const end = start + itemsPerPage;
+//   return filteredSpoofListCurrentValue.value.slice(start, end);
+// });
+// Define a function to sort the list
+const asc = ref(true);
+const whichSort = ref('interfaceRatingLabel');
+
+// // overallRatingLabel
+// // spoofed_domain
+// // webflowRatingLabel
+// // interfaceRatingLabel
+// // domainRatingLabel
+
+// const sortedList = sortList(filteredSpoofListCurrentValue.value);
+function sortList(list) {
+    // Step 1: Sort by spoofed_domain
+    list.sort((a, b) => {
+        const domainA = (a.spoofed_domain || '').toLowerCase();
+        const domainB = (b.spoofed_domain || '').toLowerCase();
+
+        if (domainA < domainB) return -1;
+        if (domainA > domainB) return 1;
+        return 0;
+    });
+
+    // Step 2: Sort by webflowRatingLabel
+    // list.sort((a, b) => {
+    //     const ratingA = (a.overallRatingLabel || '').toLowerCase();
+    //     const ratingB = (b.overallRatingLabel || '').toLowerCase();
+
+    //     // Exemption condition: 'm' comes before 'l'
+    //     if (ratingA === 'm' && ratingB === 'l') return -1;
+    //     if (ratingA === 'l' && ratingB === 'm') return 1;
+
+    //     if (ratingA < ratingB) return -1;
+    //     if (ratingA > ratingB) return 1;
+    //     return 0;
+    // });
+    
+    // Step 2: Sort by webflowRatingLabel
+    list.sort((a, b) => {
+        const ratingA = (a[whichSort.value] || '').toLowerCase();
+        const ratingB = (b[whichSort.value] || '').toLowerCase();
+
+        // Custom order: high, medium, low, no risk
+        const order = { 'high': 0, 'medium': 1, 'low': 2, 'no risk': 3 };
+
+        // Compare ratings based on custom order
+        const indexA = order[ratingA] !== undefined ? order[ratingA] : Infinity;
+        const indexB = order[ratingB] !== undefined ? order[ratingB] : Infinity;
+
+        // If both ratings are found in the custom order, compare them directly
+        if (indexA !== Infinity && indexB !== Infinity) {
+            return indexA - indexB;
+        }
+
+        return ratingA.localeCompare(ratingB);
+    });
+
+
+    return list;
+}
+
+const sortedList = sortList(filteredSpoofListCurrentValue.value);
+
+
+let paginatedSpoofList = computed(() => {
   const start = (currentPage.value - 1) * itemsPerPage;
   const end = start + itemsPerPage;
-  return filteredSpoofListCurrentValue.value.slice(start, end);
+
+  let sortedList = sortList(filteredSpoofListCurrentValue.value);
+  const slicedList = filteredSpoofListCurrentValue.value.slice(start, end);
+
+
+  // let sortedList = sortList(slicedList);
+
+  // return sortedList;
+  return slicedList;
 });
+console.log(paginatedSpoofList);
+
 
 const totalPages = computed(() => Math.ceil(filteredSpoofListCurrentValue.value.length / itemsPerPage));
 
@@ -338,7 +477,7 @@ const changePage = (page) => {
     return;
   }else{
     currentPage.value = page;
-   console.log(page);
+  //  console.log(page);
   }
 };
 // console.log(Object.keys(totalPages).length - 1);
@@ -358,6 +497,9 @@ const active = toggleTable(0 , props.domainList[0].id);
     });
 }
 
+function sortbyvalue(update){
+  whichSort.value = update;
+} 
 </script>
 
 <template>
@@ -402,25 +544,35 @@ const active = toggleTable(0 , props.domainList[0].id);
                 <table class="w-full text-sm " style="min-width: 600px;" v-if="paginatedSpoofList.length !== 0">
                   <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                       <tr class="container justify-evenly">
-                          <th  class="py-3 pl-2 min-w-max" >
+                          <th  class="py-3 pl-2 cursor-pointer min-w-max" @click="sortbyvalue('spoofed_domain')">
                               Domain 
+                              <i class="ml-1 fa fa-sort-up" v-if="whichSort && whichSort != 'spoofed_domain'"></i> <!-- v-if="sortOrder === 'asc'"-->
+                              <i class="ml-1 fa fa-sort-down" v-else></i> <!--v-if="sortOrder === 'desc'" -->
                           </th>
-                          <th  class="py-3 text-left ">
+                          <th  class="py-3 text-left cursor-pointer" @click="sortbyvalue('status')">
                               <span class="lg:mr-9">Status</span>
+                            <!--  <i class="ml-1 fa fa-sort-up" v-if="whichSort && whichSort == 'status'"></i>--> <!-- v-if="sortOrder === 'asc'"-->
+                              <!--<i class="ml-1 fa fa-sort-down" v-else></i>--> <!--v-if="sortOrder === 'desc'" -->
                           </th>
-                          <th  class="py-3 text-left">
+                          <th  class="py-3 text-left cursor-pointer" @click="sortbyvalue('webflowRatingLabel')">
                               Webflow Rating
+                              <i class="ml-1 fa fa-sort-up" v-if="whichSort && whichSort != 'webflowRatingLabel'"></i> <!-- v-if="sortOrder === 'asc'"-->
+                              <i class="ml-1 fa fa-sort-down" v-else></i> <!--v-if="sortOrder === 'desc'" -->
                           </th>
-                          <th  class="py-3 text-left">
+                          <th  class="py-3 text-left cursor-pointer" @click="sortbyvalue('domainRatingLabel')">
                               Domain Rating
+                              <i class="ml-1 fa fa-sort-up" v-if="whichSort && whichSort != 'domainRatingLabel'"></i> <!-- v-if="sortOrder === 'asc'"-->
+                              <i class="ml-1 fa fa-sort-down" v-else></i> <!--v-if="sortOrder === 'desc'" -->
                           </th>
-                          <th  class="py-3 text-left">
+                          <th  class="py-3 text-left cursor-pointer" @click="sortbyvalue('interfaceRatingLabel')">
                               Interface Rating
+                              <i class="ml-1 fa fa-sort-up" v-if="whichSort && whichSort != 'interfaceRatingLabel'"></i> <!-- v-if="sortOrder === 'asc'"-->
+                              <i class="ml-1 fa fa-sort-down" v-else></i> <!--v-if="sortOrder === 'desc'" -->
                           </th>
-                            <th class="py-3 text-left" @click="sortByOverall">
+                            <th class="py-3 text-left cursor-pointer" @click="sortbyvalue('overallRatingLabel')">
                               Overall
-                              <i class="ml-1 fa fa-sort-up"></i> <!-- v-if="sortOrder === 'asc'"-->
-                              <i class="ml-1 fa fa-sort-down"></i> <!--v-if="sortOrder === 'desc'" -->
+                              <i class="ml-1 fa fa-sort-up" v-if="whichSort && whichSort != 'overallRatingLabel'"></i> <!-- v-if="sortOrder === 'asc'"-->
+                              <i class="ml-1 fa fa-sort-down" v-else></i> <!--v-if="sortOrder === 'desc'" -->
                             </th>
                           <!-- <th  class="py-3 text-center">
                               Overall
@@ -441,7 +593,7 @@ const active = toggleTable(0 , props.domainList[0].id);
                       transition-colors duration-300 hover:!bg-yellow-200 border-solid border-white text-black"
                       v-for="(spoof, index) in paginatedSpoofList" :key="index"
                  :class="{ 'hidden': spoof.spoofed_domain == domain.domain_name }"
-                  :style="{'background-color': methods.overallRatingLabel(methods.overallRating(spoof)) === 'High' && spoof.spoofed_domain == domain.domain_name ? '#EBF7E7' : methods.overallRatingLabel(methods.overallRating(spoof)) === 'High' ? '#FDE6E6' : methods.overallRatingLabel(methods.overallRating(spoof)) === 'medium' ? '#FEF1E9' : '#EBF7E7'}"
+                  :style="{'background-color': methods.overallRatingLabel(methods.overallRating(spoof), spoof) === 'High' && spoof.spoofed_domain == domain.domain_name ? '#EBF7E7' : methods.overallRatingLabel(methods.overallRating(spoof), spoof) === 'High' ? '#FDE6E6' : methods.overallRatingLabel(methods.overallRating(spoof), spoof) === 'medium' ? '#FEF1E9' : '#EBF7E7'}"
                   >
                   <!--  :style="{ background: index % 2 !== 1 ? '#FDE6E6' : '#F7E6E4' }" -->
                 <td class="pl-3 overflow-auto py-auto" style="max-width: 190px;">
@@ -457,32 +609,32 @@ const active = toggleTable(0 , props.domainList[0].id);
                   <h1 class="border-l-white border-y-yellow-300 spinner-border border-r-yellow-100"></h1>
                 </td>
                 <td class="text-left py-auto" v-else>
-                  {{ methods.webflowRatingLabel(methods.webflowRating(spoof)) }}
+                  {{ methods.webflowRatingLabel(methods.webflowRating(spoof), spoof) }}
                 </td>
                 <td class="text-left py-auto" v-if="spoof.current_scan_status === 'not_scanned' && spoof.phashes === 'processing'">
                   <h1 class="border-l-white border-y-yellow-300 spinner-border border-r-yellow-100"></h1>
                 </td>
                 <td class="text-left py-auto" v-else>
-                  {{ methods.domainRatingLabel(methods.domainRating(spoof)) }}
+                  {{ methods.domainRatingLabel(methods.domainRating(spoof), spoof) }}
                 </td>
                 <td class="text-left py-auto" v-if="spoof.current_scan_status === 'not_scanned' && spoof.phashes === 'processing'">
                   <h1 class="border-l-white border-y-yellow-300 spinner-border border-r-yellow-100"></h1>
                 </td>
                 <td class="text-left py-auto" v-else>
-                  {{ methods.interfaceRatingLabel(methods.interfaceRating(spoof)) }}
+                  {{ methods.interfaceRatingLabel(methods.interfaceRating(spoof), spoof) }}
                 </td>
                 <td class="text-left py-auto" v-if="spoof.current_scan_status === 'not_scanned' && spoof.phashes === 'processing'">
                   <h1 class="border-l-white border-y-yellow-300 spinner-border border-r-yellow-100 "></h1>
                 </td>
                 <td class="font-bold text-left py-auto"
                 v-else
-                :style="{'color': methods.overallRatingLabel(methods.overallRating(spoof)) === 'High' ? '#ED0707' : methods.overallRatingLabel(methods.overallRating(spoof)) === 'medium' ? '#F7610D' : '#3AAC11'}">
-                  {{ methods.overallRatingLabel(methods.overallRating(spoof)) }}
+                :style="{'color': methods.overallRatingLabel(methods.overallRating(spoof), spoof) === 'High' ? '#ED0707' : methods.overallRatingLabel(methods.overallRating(spoof), spoof) === 'medium' ? '#F7610D' : '#3AAC11'}">
+                  {{ methods.overallRatingLabel(methods.overallRating(spoof), spoof) }}
                 </td>
                 <td class="py-1">
                   <Link :href="'/spoof/view/' + spoof.id"
                         class="w-16 py-1 mx-auto transition-all duration-150 ease-linear tableButton focus:outline-none"
-                        :style="{'background-color': methods.overallRatingLabel(methods.overallRating(spoof)) === 'High' ? '#F89999' : methods.overallRatingLabel(methods.overallRating(spoof)) === 'medium' ? '#FCBE9C' : '#AEDD9D'}"
+                        :style="{'background-color': methods.overallRatingLabel(methods.overallRating(spoof), spoof) === 'High' ? '#F89999' : methods.overallRatingLabel(methods.overallRating(spoof), spoof) === 'medium' ? '#FCBE9C' : '#AEDD9D'}"
 
                         >
                     View

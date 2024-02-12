@@ -42,19 +42,7 @@ class DomainController extends Controller
     }
 
     public function ReportSpoofySite(Request $request): RedirectResponse //UserReportSpoofingSite
-    {
-        // $ReportForm = new ReportformTakedownDetails;
-
-        // $ReportForm->abuse_type = $request->abuse_type;
-        // $ReportForm->evidence_urls = $request->evidence_urls;
-        // $ReportForm->additional_notes = $request->additional_notes;
-        // $ReportForm->observed_date = $request->observed_date;
-        // $ReportForm->attachments = $request->attachments;
-        // $ReportForm->carbon_copy_request_to = $request->carbon_copy_request_to;
-        // $ReportForm->reported_by_user_id = $request->reported_by_user_id;
-        // $ReportForm->reported_via = $request->reported_via;
-        // $ReportForm->save();
-
+    {       
         $request->validate([
             'abuse_type' => 'required|in:Spoofing,Phishing',
             'evidence_urls' => 'required|unique:reportform_takedown_details,evidence_urls',
@@ -65,14 +53,16 @@ class DomainController extends Controller
             'carbon_copy_request_to' => 'nullable|email',
             'attachment' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-
         $fileName = '';
         if ($request->hasFile('attachment')) {
-            $attachment = $request->file('attachment');
-            $fileType = $attachment->getClientOriginalExtension();
-            $fileName = $request->evidence_urls . '.' . $fileType;
-            $attachment->storeAs('public/assets/attachments', $fileName);
+        $attachment = $request->file('attachment');
+            if ($attachment->isValid()) {
+                $fileType = $attachment->getClientOriginalExtension();
+                $fileName = $request->evidence_urls . '.' . $fileType;
+                $path = $attachment->storeAs('public/assets/attachments', $fileName);
+            }
         }
+         
 
         ReportformTakedownDetails::create([
             'abuse_type' => $request->abuse_type,
@@ -142,22 +132,74 @@ class DomainController extends Controller
 
 
             $spoofId = SpoofedDomain::latest()->first();
-            return Redirect::route('spoof.view', ['spoofId' => $spoofId->id]); //profile
-            // return Redirect::route('InProgress');
+            // return Redirect::route('spoof.view', ['spoofId' => $spoofId->id]); //profile
+            return Redirect::route('InProgress');
         }
     }
     // Messages
     public function Messages(Request $request)
-    {
-        $user = auth()->user();
-        $messages = Messages::where('to_user_id', $user->id)->get();
-        $domains = Domain::where('user_id', $user->id)->get();
-        return Inertia::render('Messages', [
-            'info' => $user,
-            'messages' => $messages,
-            'domains' => $domains
-        ]);
+{
+    $user = auth()->user();
+    $messages = Messages::where('to_user_id', $user->id);
+
+    if ($request->from || $request->date || $request->subject) {
+        if ($request->from) {
+            $messages = $messages;
+        }
+        if ($request->date) {
+            // $messages->whereDate('created_at', $request->date);
+            $formattedDate = '%' . date('Y-m-d', strtotime($request->date)) . '%';
+            $messages->where('created_at', 'like', $formattedDate);
+        }
+        if ($request->subject) {
+            // $messages->where('subject', $request->subject);
+            $messages->where('subject', 'like', '%' . $request->subject . '%');
+        }
     }
+    $messages = $messages->get();
+    // echo'<pre>';
+    // print_r($request->subject ? $request->subject : '');
+
+    $domains = Domain::where('user_id', $user->id)->get();
+
+    return Inertia::render('Messages', [
+        'info' => $user,
+        'messages' => $messages,
+        'domains' => $domains
+    ]);
+}
+
+    // public function Messages(Request $request)
+    // {
+    //     $request->validate([
+    //         'from' => 'max:255',
+    //         'date' => 'date',
+    //         'subject' => 'max:255',
+    //     ]);
+
+    //     $user = auth()->user();
+    //     $messages = Messages::where('to_user_id', $user->id);
+    //     $domains = Domain::where('user_id', $user->id)->get();
+    //     if($request->from != '' || $request->date != '' || $request->subject != ''){
+    //         if($request->from != ''){
+    //             $messages = $messages;
+    //         }
+    //         if($request->date != ''){
+    //             $messages = $messages->whereDate('created_at', $request->date);
+    //         }
+    //         if($request->subject != ''){
+    //             $messages = $messages->where('subject', $request->subject);
+    //         }
+    //         $messages->get();
+    //     }else{
+    //         $messages->get();
+    //     }
+    //     return Inertia::render('Messages', [
+    //         'info' => $user,
+    //         'messages' => $messages,
+    //         'domains' => $domains
+    //     ]);
+    // }
 
     // public function store(Request $request)
     // {
@@ -177,4 +219,13 @@ class DomainController extends Controller
     //         ]);
     //     }
     // }
+    //stop take down
+    public function stopTakedown(Request $request): RedirectResponse
+    {       
+        ReportformTakedownDetails::where('id', $request->theId)->delete();
+    
+        return Redirect::route('domains');
+    }
+    
+    
 }

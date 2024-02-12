@@ -97,9 +97,9 @@ class LocationSslAndRedirectsJob implements ShouldQueue
         // $this->spoofed_domain->console_messages = $consoleMessages;
         $this->spoofed_domain->security_headers = $securityHeaders;
         $this->spoofed_domain->server_os  = $serverOs;
-        $this->spoofed_domain->spoof_status = 'REPORTED';
+        $this->spoofed_domain->spoof_status = 'NOT_REPORTED';
         $isInprogress = ReportformTakedownDetails::where('evidence_urls', $this->spoofed_domain->spoofed_domain);
-        if ($isInprogress) {
+        if ($isInprogress->exists()) {
             $this->spoofed_domain->spoof_status_new = 'inprogress';
         } else {
             $this->spoofed_domain->current_scan_status = 'scanned';

@@ -74,6 +74,9 @@ Route::middleware('auth', 'user_switch_data')->group(function () {
     Route::get('/spoof/{domainId}', [SpoofController::class, 'spoof'])->name('spoof.domain');
     Route::get('/spoof/view/{spoofId}', [SpoofViewController::class, 'spoofView'])->middleware(['auth', 'verified'])->name('spoof.view');
     Route::get('/spoof/requestAuthorization/{spoofId}', [SpoofViewController::class, 'requestAuthorization'])->name('spoof.requestAuthorization');
+    Route::get('/spoof/markAsNoRisk/{spoofId}', [SpoofViewController::class, 'markAsNoRisk'])->name('spoof.report');
+    Route::get('/spoof/markAsRisk/{spoofId}', [SpoofViewController::class, 'markAsRisk'])->name('spoof.report');
+    Route::get('/spoof/Monitor/{spoofId}', [SpoofViewController::class, 'Monitor'])->name('spoof.report');
     Route::get('/spoof/report/{spoofId}', [SpoofViewController::class, 'spoofReport'])->name('spoof.report');
     Route::get('/report', [ReportController::class, 'report'])->name('report');
 
@@ -114,6 +117,7 @@ Route::middleware('auth', 'user_switch_data')->group(function () {
     // Route::get('/domain', [DomainController::class, 'index'])->name('domain.detail');//details 
     Route::get('/ReportForm', [DomainController::class, 'ReportForm'])->name('ReportForm');
     Route::get('/Messages', [DomainController::class, 'Messages'])->name('Messages');
+    Route::post('/Messages', [DomainController::class, 'Messages'])->name('Messages');
     Route::post('/add_domain', [DomainController::class, 'store'])->name('add_domain');
     Route::get('/report/{domain}/{id}', [ReportController::class, 'index'])->name('report');
     // Route::get('/domains', [SpoofController::class, 'spoof'])->name('spoof.domain');
@@ -122,6 +126,7 @@ Route::middleware('auth', 'user_switch_data')->group(function () {
     Route::get('/Completed', [ScannedController::class, 'Completed'])->middleware(['auth', 'verified'])->name('Completed');
 
     Route::post('/ReportSpoofySite', [DomainController::class, 'ReportSpoofySite'])->middleware(['auth', 'verified'])->name('ReportSpoofySite');
+    Route::post('/stopTakedown', [DomainController::class, 'stopTakedown'])->middleware(['auth', 'verified'])->name('stopTakedown');
 
     Route::middleware('is_admin')->group(function () {
         Route::get('/users', [UsersController::class, 'index'])->name('users.list');

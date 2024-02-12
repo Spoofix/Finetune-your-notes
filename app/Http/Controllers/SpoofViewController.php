@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use App\Models\Domain;
+use App\Mail\newDomains;
 use Illuminate\Http\Request;
 use App\Models\SpoofedDomain;
-use App\Models\ReportformTakedownDetails;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Models\ReportformTakedownDetails;
 
 class SpoofViewController extends Controller
 {
@@ -43,9 +45,19 @@ class SpoofViewController extends Controller
             $list = $list->where('last_batch', $last_batch->last_batch);
         }
         $list = $list->get();
+         // $checkIfSpoofIdBelongsToUser = $spoofData->domain_id;
+        $spoofDat3a = SpoofedDomain::where('id', $spoofId)->first();
+        $isCompletedOrInprogress = ReportformTakedownDetails::where('evidence_urls', $spoofDat3a->spoofed_domain)->exists();
+        if($isCompletedOrInprogress){
+            $list =  SpoofedDomain::where('domain_id', $activedomain)->get();
+        }
+        $list = $list->filter(function ($lists) use ($isCompletedOrInprogress) {
+            $reported = ReportformTakedownDetails::where('evidence_urls', $lists->spoofed_domain)->first();
+            return $isCompletedOrInprogress ? $reported : !$reported;
+        });
         $spoofList = array_merge($spoofList, $list->toArray());
-        // $checkIfSpoofIdBelongsToUser = $spoofData->domain_id;
         return Inertia::render('Domain/View', [
+            'isValidTakedown' => $isCompletedOrInprogress,
             'spoofList' => $spoofList,
             'spoofData' => $spoofData,
             'userid' => auth()->id(),
@@ -169,5 +181,40 @@ class SpoofViewController extends Controller
 
         shell_exec($command);
         chdir($originalDir);
+    }
+    public function markAsNoRisk($spoofId)
+    {
+        $spoofData = SpoofedDomain::where('id', $spoofId)->first();
+        if ($spoofData) {
+            $spoofData->progress_status = 'norisk'; 
+            $spoofData->save();
+        }        
+        $url = route('domains');
+        return Inertia::location($url);
+    }
+    public function markAsRisk($spoofId)
+    {
+        $spoofData = SpoofedDomain::where('id', $spoofId)->first();
+        if ($spoofData) {
+            $spoofData->progress_status = 'new'; 
+            $spoofData->save();
+        }        
+        $url = route('domains');
+        return Inertia::location($url);
+    }
+    public function Monitor($spoofId)
+    {
+        $spoofData = SpoofedDomain::where('id', $spoofId)->first();
+        if ($spoofData) {
+            $spoofData->progress_status = 'monitoring'; 
+            $spoofData->save();
+        }        
+        $url = route('domains');
+        return Inertia::location($url);
+    }
+    public function newDomains(){
+        $user = Auth::user();
+        $data =[];
+        Mail::to($user->email)->queue(new newDomains($data));
     }
 }
