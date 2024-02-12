@@ -1,0 +1,59 @@
+[
+  {
+    "HTTP_Status_Code": 200
+  },
+  {
+    "Cookies": [
+      {
+        "name": "sid",
+        "value": "099b07c1-c9de-11ee-959e-40a3fd85e89e",
+        "domain": ".scoticbank.com",
+        "path": "/",
+        "expires": 3855250244,
+        "secure": true,
+        "httpOnly": true
+      }
+    ]
+  },
+  {
+    "Console_Messages": [
+      "window.location.replace('https://scoticbank.com/?ch=1&js=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJKb2tlbiIsImV4cCI6MTcwNzc3Mzc5NywiaWF0IjoxNzA3NzY2NTk3LCJpc3MiOiJKb2tlbiIsImpzIjoxLCJqdGkiOiIydXBqOWIxMjRxczQ2dWQ2dTgwN2xoNGQiLCJuYmYiOjE3MDc3NjY1OTcsInRzIjoxNzA3NzY2NTk3NjE1NDY0fQ.Jpn6PglbL2MB8LdkHvzoFXKsQ5gZeBNC2BIg7GBLhUo&sid=099b07c1-c9de-11ee-959e-40a3fd85e89e');"
+    ]
+  },
+  {
+    "Security_Headers": "X-XSS-Protection not found"
+  },
+  {
+    "Security_Headers": "X-XSS-Protection not found"
+  },
+  {
+    "Security_Headers": "X-XSS-Protection not found"
+  },
+  {
+    "Security_Headers": "X-XSS-Protection not found"
+  },
+  {
+    "Security_Headers": "X-XSS-Protection not found"
+  },
+  {
+    "Web_Server": "nginx"
+  },
+  {
+    "Geolocation_Information": {
+      "IP Address": "216.245.197.43",
+      "City": "Dallas",
+      "Region": "Texas",
+      "Country": "US",
+      "Latitude": "32.7831",
+      "Longitude": "-96.8067",
+      "Organization": "AS46475 Limestone Networks, Inc.",
+      "ISP": "Inc."
+    }
+  },
+  {
+    "IP_Address": "216.245.197.43"
+  },
+  {
+    "SSL-Certificate_Details": "Subject: {b'CN': b'scoticbank.com'}, Issuer: {b'C': b'US', b'O': b\"Let's Encrypt\", b'CN': b'R3'}"
+  }
+]
