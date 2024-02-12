@@ -155,9 +155,9 @@ function ratingsValues(cssRating, screenshotSimilarityRating, htmlRating, domain
             domainrating: 0.8
           },
           interface: {
-            cssRating: 0.2,
-            screenshotSimilarityRating: 0.4,
-            agedecay: 0.4,
+            cssRating: 0.25,
+            screenshotSimilarityRating: 0.55,
+            agedecay: 0.2,
           },
         };
       }
@@ -241,23 +241,23 @@ function ratingsValues(cssRating, screenshotSimilarityRating, htmlRating, domain
 
 const methods = {
   webflowRating(spoof) {
-    const [webflowRating, domainRating, interfaceRating, overallRating]  = ratingsValues(spoof.csscolor, spoof.phashes, spoof.htmls, spoof.domainsimilarityrate, calculateTimeDifference(spoof.registrationDate), true, spoof.domain_rating);
+    const [webflowRating, domainRating, interfaceRating, overallRating]  = ratingsValues(spoof.csscolor, spoof.phashes, spoof.htmls, spoof.domainsimilarityrate, calculateTimeDifference2(spoof.registrationDate), true, spoof.domain_rating);
     return webflowRating; 
     },
 
     domainRating(spoof) {
-    const [webflowRating, domainRating, interfaceRating, overallRating]  = ratingsValues(spoof.csscolor, spoof.phashes, spoof.htmls, spoof.domainsimilarityrate, calculateTimeDifference(spoof.registrationDate), true, spoof.domain_rating);
+    const [webflowRating, domainRating, interfaceRating, overallRating]  = ratingsValues(spoof.csscolor, spoof.phashes, spoof.htmls, spoof.domainsimilarityrate, calculateTimeDifference2(spoof.registrationDate), true, spoof.domain_rating);
 
       return domainRating; 
     },
     interfaceRating(spoof) {
       // Calculate interface rating for the spoof
-    const [webflowRating, domainRating, interfaceRating, overallRating]  = ratingsValues(spoof.csscolor, spoof.phashes, spoof.htmls, spoof.domainsimilarityrate, calculateTimeDifference(spoof.registrationDate), true, spoof.domain_rating);
+    const [webflowRating, domainRating, interfaceRating, overallRating]  = ratingsValues(spoof.csscolor, spoof.phashes, spoof.htmls, spoof.domainsimilarityrate, calculateTimeDifference2(spoof.registrationDate), true, spoof.domain_rating);
 
       return interfaceRating; 
     },
     overallRating(spoof) {
-    const [webflowRating, domainRating, interfaceRating, overallRating]  = ratingsValues(spoof.csscolor, spoof.phashes, spoof.htmls, spoof.domainsimilarityrate, calculateTimeDifference(spoof.registrationDate), true, spoof.domain_rating);
+    const [webflowRating, domainRating, interfaceRating, overallRating]  = ratingsValues(spoof.csscolor, spoof.phashes, spoof.htmls, spoof.domainsimilarityrate, calculateTimeDifference2(spoof.registrationDate), true, spoof.domain_rating);
       return overallRating; 
     },
     webflowRatingLabel(rating, spoof) {
@@ -293,7 +293,7 @@ const methods = {
     overallRatingLabel(rating) {
       const age = calculateTimeDifference2(props.spoofData.registrationDate);
       if(age > 3 && age < 5){
-        props.spoofData['overallRatingLabel'] = "No Risk";
+        props.spoofData['overallRatingLabel'] = "Low";
         return "Low";
       }
       if(age > 5){
@@ -495,8 +495,8 @@ const bladeViewUrl = ref("");
 onMounted(() => {
   // bladeViewUrl.value = "http://127.0.0.1:5500/resources/views/map.html"; /emails/reset_password// Replace with the actual relative path
  const spoofID = props.spoofData.id;
-//  bladeViewUrl.value = `http://127.0.0.1:8000/maps/${spoofID}`;
- bladeViewUrl.value = `https://uat.spoofix.com/maps/${spoofID}`;
+ bladeViewUrl.value = `http://127.0.0.1:8000/maps/${spoofID}`;
+//  bladeViewUrl.value = `https://uat.spoofix.com/maps/${spoofID}`;
 
 });
 

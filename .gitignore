@@ -20,7 +20,7 @@ yarn-error.log
 /.vscode
 /dnstwist
 public/assets/screenshots
-opensquat
-/domainsimilarity
-/storage
-/OtherDomainGenerationALgorithims
+opensquat/
+domainsimilarity/
+storage/
+OtherDomainGenerationALgorithims/

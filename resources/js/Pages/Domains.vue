@@ -54,7 +54,7 @@ function calculateWeightedSum(ratings, weights) {
 }
 
 function ratingsValues(cssRating, screenshotSimilarityRating, htmlRating, domainNameSimilarityRating, age, sslValidity, domainrating) {
-    const agedecay = ageContribution(age);
+  const agedecay = ageContribution(age);
     const ratings = {
         cssRating,
         screenshotSimilarityRating,
@@ -80,9 +80,9 @@ function ratingsValues(cssRating, screenshotSimilarityRating, htmlRating, domain
             domainrating: 0.8
           },
           interface: {
-            cssRating: 0.2,
-            screenshotSimilarityRating: 0.4,
-            agedecay: 0.4,
+            cssRating: 0.25,
+            screenshotSimilarityRating: 0.55,
+            agedecay: 0.2,
           },
         };
       }
@@ -250,7 +250,7 @@ const methods = {
     overallRatingLabel(rating, spoof) {
       const age = calculateTimeDifference(spoof.registrationDate);
       if(age > 3 && age < 5){
-        spoof['overallRatingLabel'] = "No Risk";
+        spoof['overallRatingLabel'] = "Low";
         return "Low";
       }
       if(age > 5){
@@ -392,7 +392,7 @@ const itemsPerPage = 7;
 // });
 // Define a function to sort the list
 const asc = ref(true);
-const whichSort = ref('interfaceRatingLabel');
+const whichSort = ref('overallRatingLabel');
 
 // // overallRatingLabel
 // // spoofed_domain
@@ -602,25 +602,25 @@ function sortbyvalue(update){
                 <td class="text-left py-auto" v-if="spoof.current_scan_status === 'not_scanned' && spoof.phashes === 'processing'">
                   <h1 class="border-l-white border-y-yellow-300 spinner-border border-r-yellow-100"></h1>
                 </td>
-                <td class="text-left py-auto" v-else>
+                <td class="text-left capitalize py-auto" v-else>
                   {{ methods.spoofStatus(spoof) }}
                 </td>
                 <td class="text-left py-auto" v-if="spoof.current_scan_status === 'not_scanned' && spoof.phashes === 'processing'">
                   <h1 class="border-l-white border-y-yellow-300 spinner-border border-r-yellow-100"></h1>
                 </td>
-                <td class="text-left py-auto" v-else>
+                <td class="text-left capitalize py-auto" v-else>
                   {{ methods.webflowRatingLabel(methods.webflowRating(spoof), spoof) }}
                 </td>
                 <td class="text-left py-auto" v-if="spoof.current_scan_status === 'not_scanned' && spoof.phashes === 'processing'">
                   <h1 class="border-l-white border-y-yellow-300 spinner-border border-r-yellow-100"></h1>
                 </td>
-                <td class="text-left py-auto" v-else>
+                <td class="text-left capitalize py-auto" v-else>
                   {{ methods.domainRatingLabel(methods.domainRating(spoof), spoof) }}
                 </td>
                 <td class="text-left py-auto" v-if="spoof.current_scan_status === 'not_scanned' && spoof.phashes === 'processing'">
                   <h1 class="border-l-white border-y-yellow-300 spinner-border border-r-yellow-100"></h1>
                 </td>
-                <td class="text-left py-auto" v-else>
+                <td class="text-left capitalize py-auto" v-else>
                   {{ methods.interfaceRatingLabel(methods.interfaceRating(spoof), spoof) }}
                 </td>
                 <td class="text-left py-auto" v-if="spoof.current_scan_status === 'not_scanned' && spoof.phashes === 'processing'">
@@ -630,6 +630,7 @@ function sortbyvalue(update){
                 v-else
                 :style="{'color': methods.overallRatingLabel(methods.overallRating(spoof), spoof) === 'High' ? '#ED0707' : methods.overallRatingLabel(methods.overallRating(spoof), spoof) === 'medium' ? '#F7610D' : '#3AAC11'}">
                   {{ methods.overallRatingLabel(methods.overallRating(spoof), spoof) }}
+                  <!-- {{spoof.overallRatingLabel}} -->
                 </td>
                 <td class="py-1">
                   <Link :href="'/spoof/view/' + spoof.id"
