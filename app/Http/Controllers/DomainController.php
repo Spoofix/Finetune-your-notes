@@ -83,8 +83,8 @@ class DomainController extends Controller
             $spoofDomain = SpoofedDomain::where('id', $request->id)->first();
             $spoofDomain->spoof_status_new = 'inprogress';
             $spoofDomain->save();
-            // return Redirect::route('spoof.view', ['spoofId' => $request->id]);
-            return Redirect::route('InProgress');
+            return Redirect::route('spoof.view', ['spoofId' => $request->id]);
+            // return Redirect::route('InProgress');
         } else {
             $domain_id = $target_domain->first()->id;
             try {

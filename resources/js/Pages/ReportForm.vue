@@ -61,17 +61,29 @@ const form = useForm({
     Confirm: '',
     targetDomain: '',
 });
+const reporte =ref('');
 
+const imageUrl = ref(null);
+
+const handleFileChange = (event) => {
+  form.attachments = event.target.files[0];
+  const fileInput = event.target;
+
+  if (fileInput.files.length > 0) {
+    const uploadedFile = fileInput.files[0];
+    form.attachment = uploadedFile;
+    const reader = new FileReader();
+
+    reader.onload = (e) => {
+      imageUrl.value = e.target.result;
+
+    };
+
+    reader.readAsDataURL(uploadedFile);
+  }
+};
 const submit = () => {
-    // Validate the form fields
-    // if (!form.abuse_type || !form.evidence_urls || !form.Confirm || !form.targetDomain) {
-        // Toast.fire({
-        //     icon: 'error',
-        //     title: 'All fields are required',
-        // });
-        // return;
-    // }
-    // console.log(form);
+
     const formData = new FormData();
     formData.append('abuse_type', form.abuse_type);
     formData.append('evidence_urls', form.evidence_urls);
@@ -82,7 +94,10 @@ const submit = () => {
 
     // Append the file to the FormData object if it's not an empty string
     if (form.attachment !== null) {
-        formData.append('attachment', file);
+        formData.append('attachment', form.attachment);
+        console.log('it is not null')
+    }else{
+      console.log('it is null')
     }
 
     formData.append('carbon_copy_request_to', form.carbon_copy_request_to);
@@ -102,24 +117,24 @@ const submit = () => {
    // router.push('/some-other-page');
    
 }
-const imageUrl = ref(null);
-const handleFileChange = (event) => {
-  form.attachments = event.target.files[0];
-  const fileInput = event.target;
+// const imageUrl = ref(null);
+// const handleFileChange = (event) => {
+//   form.attachments = event.target.files[0];
+//   const fileInput = event.target;
 
-  if (fileInput.files.length > 0) {
-    const uploadedFile = fileInput.files[0];
-    form.attachment = uploadedFile;
-    const reader = new FileReader();
+//   if (fileInput.files.length > 0) {
+//     const uploadedFile = fileInput.files[0];
+//     form.attachment = uploadedFile;
+//     const reader = new FileReader();
 
-    reader.onload = (e) => {
-      imageUrl.value = e.target.result;
+//     reader.onload = (e) => {
+//       imageUrl.value = e.target.result;
 
-    };
+//     };
 
-    reader.readAsDataURL(uploadedFile);
-  }
-};
+//     reader.readAsDataURL(uploadedFile);
+//   }
+// };
 const maxDate = computed(() => {
   return new Date().toISOString().split('T')[0];
 });

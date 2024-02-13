@@ -495,8 +495,8 @@ const bladeViewUrl = ref("");
 onMounted(() => {
   // bladeViewUrl.value = "http://127.0.0.1:5500/resources/views/map.html"; /emails/reset_password// Replace with the actual relative path
  const spoofID = props.spoofData.id;
-//  bladeViewUrl.value = `http://127.0.0.1:8000/maps/${spoofID}`;
- bladeViewUrl.value = `https://uat.spoofix.com/maps/${spoofID}`;
+ //bladeViewUrl.value = `http://127.0.0.1:8000/maps/${spoofID}`;
+bladeViewUrl.value = `https://uat.spoofix.com/maps/${spoofID}`;
 
 });
 
