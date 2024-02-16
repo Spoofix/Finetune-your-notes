@@ -45,13 +45,29 @@ class ScannedController extends Controller
             });
             $IdsList = array_merge($IdsList, $list->toArray());
         }
+        // foreach ($IdsList as $isNew) {
+        //     $isNewValue = $isNew['spoofed_domain'];
+        //     $firstSeen = SpoofedDomain::where('spoofed_domain', $isNewValue)->first()->created_at;
+        //     $isNew['first_seen'] = $firstSeen;
+        //     $modifiedIdsList = array_merge($modifiedIdsList, [$isNew]);
+        //     // Log::info($isNew);
+        // }
+
+        //Remove reals
+        function containsScotiabank($haystack, $needle) {
+            return strpos($haystack, $needle) !== false;
+        }
+
         foreach ($IdsList as $isNew) {
             $isNewValue = $isNew['spoofed_domain'];
             $firstSeen = SpoofedDomain::where('spoofed_domain', $isNewValue)->first()->created_at;
             $isNew['first_seen'] = $firstSeen;
-            $modifiedIdsList = array_merge($modifiedIdsList, [$isNew]);
-            // Log::info($isNew);
+            
+            if (!containsScotiabank($isNew['spoofed_domain'], "scotiabank.com")) {
+                $modifiedIdsList[] = $isNew;
+            }
         }
+
         return Inertia::render('Domains', [
             'spoofList' => $modifiedIdsList,
             'domainList' => Domain::where('user_id', auth()->id())->get()

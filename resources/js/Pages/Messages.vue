@@ -163,233 +163,208 @@ const submit = () => {
 </script>
 
 <template>
+
   <Head title="Messages" />
 
- <AuthenticatedLayout  class="overflow-x-hidden overflow-y-scroll fontFamily" style="height:100vh; background: #FFF;"> <!-- v-if=" props.userid === userId" -->
-   <div class="flex justify-between mt-6 mr-8 border-b-4 border-black max-w-100 lg;ml-6 md:ml-6 ml-0">
-    <div class="relative ">
-      <button class="absolute w-40 h-12 px-3 rounded-tr-full bg-dark tabsText" style="">Domain</button>
-      <button class="w-56 h-12 pr-4 bg-gray-300 rounded-tr-full tabsText pl-9" style="margin-left: 106px;">Social Media</button>
+  <AuthenticatedLayout class="overflow-x-hidden overflow-y-scroll fontFamily" style="height:100vh; background: #FFF;"> <!-- v-if=" props.userid === userId" -->
+    <div class="flex justify-between mt-6 mr-8 border-b-4 border-black max-w-100 lg;ml-6 md:ml-6 ml-0">
+      <div class="relative ">
+        <button class="absolute w-40 h-12 px-3 rounded-tr-full bg-dark tabsText" style="">Domain</button>
+        <button class="w-56 h-12 pr-4 bg-gray-300 rounded-tr-full tabsText pl-9" style="margin-left: 106px;">Social Media</button>
+      </div>
     </div>
-   </div>
-   <div
-   class="flex items-center justify-between my-2 cursor-pointer md:mx-3 lg:mx-4 h-14 hover:bg-gray-300 bigDropdownBg"
-   style="border-radius: 6px; box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25); "
-   id="myDiv"
-   @click="toggleTable(index, domain.id), scrollToElement(index)"
- >
-   <div class="ml-5 text-2xl font-semibold text-blueGray-700">
-     <h3 class="orgDomain">
-       <Link>messages</Link> 
-     </h3>
-   </div>
-   <div class="mr-5 botton" @click="openModal">
-     <i class="fa fa-magnifying-glass" aria-hidden="true"></i>
-     <div>Find & Filter</div>
-   </div>
- </div>
-         <!-- Modal -->
-         <div v-if="isModalVisible" class="absolute z-50 float-right p-2 -mt-3 bg-white rounded shadow-lg w-96 model h-96" style="buttom: calc(100% - 10px); right: 32px;">
-          <!-- <i @click="closeModal" class="justify-center w-6 h-6 text-yellow-300 align-middle bg-black rounded-full fa fa-x"></i> -->
-          <div class="relative w-full">
-            <img @click="closeModal" class="absolute flex items-center justify-center float-right mt-2 mr-2 cursor-pointer w-9 h-9 right-1" :src="'/assets/systemImages/Exit.svg'"/>
-            <div class="h-12 -mt-2 -ml-2 -mr-2 bg-gray-300 rounded-t-lg sm:flex sm:items-start">
-              <div class="mt-1 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                <h3 class="mt-2 text-lg font-medium text-gray-900 tabsText1" id="modal-headline">
-                  Find & Filter
-                </h3>
+    <div class="flex items-center justify-between my-2 cursor-pointer md:mx-3 lg:mx-4 h-14 hover:bg-gray-300 bigDropdownBg" style="border-radius: 6px; box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25); " id="myDiv" @click="toggleTable(index, domain.id), scrollToElement(index)">
+      <div class="ml-5 text-2xl font-semibold text-blueGray-700">
+        <h3 class="orgDomain">
+          <Link>messages</Link>
+        </h3>
+      </div>
+      <div class="mr-5 botton" @click="openModal">
+        <i class="fa fa-magnifying-glass" aria-hidden="true"></i>
+        <div>Find & Filter</div>
+      </div>
+    </div>
+    <!-- Modal -->
+    <div v-if="isModalVisible" class="absolute z-50 float-right p-2 -mt-3 bg-white rounded shadow-lg w-96 model h-96" style="buttom: calc(100% - 10px); right: 32px;">
+      <!-- <i @click="closeModal" class="justify-center w-6 h-6 text-yellow-300 align-middle bg-black rounded-full fa fa-x"></i> -->
+      <div class="relative w-full">
+        <img @click="closeModal" class="absolute flex items-center justify-center float-right mt-2 mr-2 cursor-pointer w-9 h-9 right-1" :src="'/assets/systemImages/Exit.svg'" />
+        <div class="h-12 -mt-2 -ml-2 -mr-2 bg-gray-300 rounded-t-lg sm:flex sm:items-start">
+          <div class="mt-1 text-center sm:mt-0 sm:ml-4 sm:text-left">
+            <h3 class="mt-2 text-lg font-medium text-gray-900 tabsText1" id="modal-headline">
+              Find & Filter
+            </h3>
+          </div>
+        </div>
+      </div>
+      <form action="" class="mt-2" @submit.prevent="submitForm">
+        <label for="from" class="block mt-3 mb-2 text-sm font-bold text-gray-700">From:</label>
+        <input v-model="form.from" type="text" name="from" class="w-full px-3 py-2 bg-yellow-100 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-200 focus:border-indigo-300"><br>
+
+        <label for="date" class="block mt-3 mb-2 text-sm font-bold text-gray-700">Date:</label>
+        <input v-model="form.date" type="date" name="date" class="w-full px-3 py-2 bg-yellow-100 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-200 focus:border-indigo-300"><br>
+
+        <label for="subject" class="block mt-3 mb-2 text-sm font-bold text-gray-700">Subject:</label>
+        <input v-model="form.subject" type="text" name="subject" class="w-full px-3 py-2 mb-3 bg-yellow-100 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-200 focus:border-indigo-300">
+
+        <div class="flex float-right mr-3">
+          <button class="my-auto mr-2 bg-yellow-100 buttons buttonsText" @click="closeModal">Cancel</button>
+          <button class="my-auto bg-yellow-300 buttons buttonsText" @click="submit" type="submit">Apply</button>
+        </div>
+      </form>
+
+    </div>
+    <div class="justify-between mx-4 mt-2 lg:flex lg:flex-row" style="">
+      <div style="min-width: 57%; height: 65vh;">
+        <button @click="openComposeModal" class="my-2 mb-2 bg-yellow-100 buttons buttonsText h-14"><i class="mx-1 fa fa-plus"></i>Compose Message </button>
+        <!-- <table class="w-full mt-3 text-sm" style="max-height: 20px;"> -->
+        <div class="max-h-full overflow-auto">
+          <table class="w-full mt-3 overflow-x-auto text-sm">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 tablehead">
+              <tr class="container justify-evenly">
+                <th class="py-3 pl-2">
+                  Date
+                </th>
+                <th class="py-3 text-left">
+                  From
+                </th>
+                <th class="py-3 text-left">
+                  To
+                </th>
+                <th class="py-3 text-left">
+                  Subject
+                </th>
+              </tr>
+            </thead>
+            <tbody v-if="props.messages">
+              <!-- <tr class="transition-colors duration-300 bg-yellow-100 cursor-pointer tableRow" -->
+              <tr class="duration-300 bg-yellow-100 cursor-pointer tableRow1" :class="{ 'bg-yellow-300': messageRef.id == message.id, 'bg-yellow-100 hover:bg-yellow-50': messageRef.id != message.id }" v-for="(message, index) in paginatedMessages" :key="index" @click="messaging(index, message.id, currentPage)">
+                <td class="pl-3 overflow-auto py-auto" style="max-width: 90px;">
+                  {{date(message.created_at)}}
+                </td>
+                <td class="text-left capitalize py-auto">
+                  Spoofix
+                </td>
+                <td class="text-left capitalize py-auto">
+                  {{info.name}} {{info.second_name}}
+                </td>
+                <td class="text-left py-auto">
+                  {{message.subject}}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="flex justify-center mt-4" style="">
+
+            <button v-if="currentPage > 1" class="px-3 py-2 mr-2 cursor-pointer round gray paginationButtons" @click="changePage(--currentPage)">
+              <i class="fa fa-chevron-left" aria-hidden="true"></i>
+            </button>
+            <div v-for="page in totalPages" :key="page">
+              <button v-if="page > currentPage - 4 && page < currentPage + 4" @click="changePage(page)" :class="{ 'primaryColor paginationButtons ': page === currentPage, 'paginationButtons gray text-gray-700': page !== currentPage }" class="px-3 py-2 mr-2 rounded cursor-pointer">
+                {{ page }}
+              </button>
+            </div>
+            <button v-if="currentPage < totalPages" class="px-3 py-2 mr-2 cursor-pointer round gray paginationButtons" @click="changePage(++currentPage)">
+              <i class="fa fa-chevron-right" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="w-full ml-2 box-style" style=" height: 65vh; min-width: 31%; margin-top: 60px; ">
+        <div v-if="props.messages != undefined && messageRef" class="ml-2 align-middle rounded-t-lg" style="height: 45px;  ">
+          From: info@spoofix.com <br>
+          To: {{info.email}} <br>
+          Subject: {{messageRef.subject}} <br>
+          Reference: MSG0000{{messageRef.id}}<br>
+          Date: {{date(messageRef.created_at)}} <br>
+          <br>
+          Dear <span class="capitalize">{{info.name}} {{info.second_name}}</span>, <br>
+
+          I hope this email finds you well. I am writing to inform you about [brief description of the purpose of the email]. We have noted your recent inquiry regarding '{{messageRef.subject}}', and I wanted to provide you with the following information: <br>
+          <br>
+          {{messageRef.messages}}<br>
+          <br>
+          If you have any further questions or concerns, please feel free to reach out to us. <br>
+
+          Thank you for your attention and cooperation. <br>
+          <br>
+          Best regards, <br>
+          <br>
+          Spoofix Management, <br>
+          <!-- [Your position], <br> -->
+          Spoofix<br>
+          info@spoofix.com <br>
+        </div>
+      </div>
+    </div>
+    <div class="relative justify-between pt-3 w-100"><!-- flex -->
+      <div class="flex justify-between float-right w-64 pr-14">
+      </div>
+    </div>
+
+    <!-- Compose Email Modal -->
+    <!-- Compose Email Modal -->
+    <div class="fixed inset-0 z-40 flex items-end justify-center px-4 py-6 pointer-events-none sm:p-0 sm:items-center sm:justify-end" x-show="isComposeModalOpen" @keydown.escape="closeComposeModal" v-if="ComposeModalVisible">
+      <div class="bottom-0 w-full max-w-lg bg-red-300 rounded-lg shadow-lg pointer-events-auto -mb-80">
+        <div class="bg-white rounded-lg sm:p-6 sm:pb-1">
+          <img @click="closeComposeModal" class="absolute items-center justify-center float-right mr-10 -mt-4 cursor-pointer w-9 h-9 right-1" :src="'/assets/systemImages/Exit.svg'" />
+          <div class="h-12 -mt-6 -ml-6 -mr-6 bg-gray-300 rounded-t-lg sm:flex sm:items-start">
+            <div class="mt-1 text-center sm:mt-0 sm:ml-4 sm:text-left">
+              <h3 class="mt-2 text-lg font-medium text-gray-900 tabsText1" id="modal-headline">
+                Compose Email
+              </h3>
+            </div>
+          </div>
+          <form class="mt-3 sm:mt-2" @submit.prevent="submitForm">
+            <div class="mb-3">
+              <label for="to" class="block mb-2 text-sm font-bold text-gray-700">To:</label>
+              <input type="text" id="to" name="to" placeholder="Recipient's email" required class="w-full px-3 py-2 bg-yellow-100 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-200 focus:border-indigo-300">
+            </div>
+            <div class="mb-4">
+              <label for="subject" class="block mb-2 text-sm font-bold text-gray-700">Subject:</label>
+              <input type="text" id="subject" name="subject" placeholder="Subject" class="w-full px-3 py-2 bg-yellow-100 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-200 focus:border-indigo-300">
+            </div>
+            <div class="mb-4">
+              <label for="message" class="block mb-2 text-sm font-bold text-gray-700">Message:</label>
+              <textarea id="message" name="message" rows="3" placeholder="Write your message..." class="w-full px-3 py-2 bg-yellow-100 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-200 focus:border-indigo-300"></textarea>
+            </div>
+            <div class="mt-3 mb-3 sm:mt-6 sm:flex sm:flex-row-reverse">
+              <div class="flex float-right mr-3">
+                <button class="my-auto mr-2 bg-yellow-100 buttons buttonsText" @click="closeComposeModal">Cancel</button>
+                <button class="my-auto bg-yellow-300 buttons buttonsText" @click="openModal1" type="submit">Send</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <transition name="modal-fade">
+      <div v-if="isModalVisible1" class="backlight" @click="closeModal1">
+        <div role="dialog" aria-modal="true" class="fade image-modal dark modal show backlight" tabindex="-1" style="padding-left: 14px; display: block;">
+          <div class="modal-dialog modal-xl modal-dialog-centered" style="">
+            <div class="modal-content">
+              <div class="">
+                <div class="mx-auto bg-white modelStyle" style="">
+                  <div class="relative w-100">
+                    <img class="float-right" :src="'/assets/systemImages/Exit.svg'" />
+                  </div>
+                  <div class="relative flex my-2 modelText">
+                    <img class="pr-3 " :src="'/assets/systemImages/Promo.svg'" />
+                    <img class="absolute m-2" :src="'/assets/systemImages/bookmark.svg'" />
+                    <div class="my-auto">Do you want to send email<span class="text-yellow-500">{{form.evidence_urls}}</span>?</div>
+                  </div>
+                  <div class="relative w-100">
+                    <button class="float-right px-4 bg-yellow-300 buttons buttonsText" @click="submit" type="submit">confirm</button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-          <form action="" class="mt-2" @submit.prevent="submitForm">
-            <label for="from" class="block mt-3 mb-2 text-sm font-bold text-gray-700">From:</label>
-            <input v-model="form.from" type="text" name="from" class="w-full px-3 py-2 bg-yellow-100 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-200 focus:border-indigo-300"><br>
-            
-            <label for="date" class="block mt-3 mb-2 text-sm font-bold text-gray-700">Date:</label>
-            <input v-model="form.date" type="date" name="date" class="w-full px-3 py-2 bg-yellow-100 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-200 focus:border-indigo-300"><br>
-            
-            <label for="subject"  class="block mt-3 mb-2 text-sm font-bold text-gray-700">Subject:</label>
-            <input v-model="form.subject" type="text" name="subject" class="w-full px-3 py-2 mb-3 bg-yellow-100 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-200 focus:border-indigo-300">
-            
-            <div class="flex float-right mr-3">
-              <button class="my-auto mr-2 bg-yellow-100 buttons buttonsText" @click="closeModal">Cancel</button>
-              <button class="my-auto bg-yellow-300 buttons buttonsText" @click="submit" type="submit">Apply</button>
-            </div>
-          </form>
-
-        </div>
-    <div class="justify-between mx-4 mt-2 lg:flex lg:flex-row" style="">
-    <div style="min-width: 57%; height: 65vh;">
-       <button @click="openComposeModal" class="my-2 mb-2 bg-yellow-100 buttons buttonsText h-14"><i class="mx-1 fa fa-plus"></i>Compose Message </button>
-       <!-- <table class="w-full mt-3 text-sm" style="max-height: 20px;"> -->
-        <div class="max-h-full overflow-auto" >
-        <table class="w-full mt-3 overflow-x-auto text-sm">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 tablehead">
-                <tr class="container justify-evenly">
-                    <th  class="py-3 pl-2" >
-                        Date
-                    </th>
-                    <th  class="py-3 text-left">
-                        From
-                    </th>
-                    <th  class="py-3 text-left">
-                        To
-                    </th>
-                    <th  class="py-3 text-left">
-                        Subject
-                    </th>
-                </tr>
-            </thead>
-            <tbody v-if="props.messages">
-                <!-- <tr class="transition-colors duration-300 bg-yellow-100 cursor-pointer tableRow" -->
-                  <tr class="duration-300 bg-yellow-100 cursor-pointer tableRow1"
-                  :class="{ 'bg-yellow-300': messageRef.id == message.id, 'bg-yellow-100 hover:bg-yellow-50': messageRef.id != message.id }"
-                v-for="(message, index) in paginatedMessages" :key="index"
-                    @click="messaging(index, message.id, currentPage)"
-                    >
-                    <td class="pl-3 overflow-auto py-auto" style="max-width: 90px;"  >
-                        {{date(message.created_at)}}
-                    </td>
-                    <td class="text-left capitalize py-auto">
-                        Spoofix
-                    </td>
-                    <td class="text-left capitalize py-auto">
-                        {{info.name}} {{info.second_name}}
-                    </td>
-                    <td class="text-left py-auto">
-                        {{message.subject}}
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="flex justify-center mt-4" style="">
-
-          <button v-if="currentPage > 1" class="px-3 py-2 mr-2 cursor-pointer round gray paginationButtons"  @click="changePage(--currentPage)">
-            <i class="fa fa-chevron-left" aria-hidden="true"></i>
-          </button>
-          <div v-for="page in totalPages"
-            :key="page">
-            <button
-            v-if="page > currentPage - 4 && page < currentPage + 4"
-            @click="changePage(page)"
-            :class="{ 'primaryColor paginationButtons ': page === currentPage, 'paginationButtons gray text-gray-700': page !== currentPage }"
-            class="px-3 py-2 mr-2 rounded cursor-pointer"
-          >
-            {{ page }}
-          </button >
-          </div>
-          <button v-if="currentPage < totalPages" class="px-3 py-2 mr-2 cursor-pointer round gray paginationButtons"  @click="changePage(++currentPage)">
-            <i class="fa fa-chevron-right" aria-hidden="true"></i>
-          </button>
-        </div>
-         </div>
-    </div>
-    <div class="w-full ml-2 box-style" style=" height: 65vh; min-width: 31%; margin-top: 60px; ">
-      <div v-if="props.messages != undefined && messageRef" class="ml-2 align-middle rounded-t-lg" style="height: 45px;  ">
-            From: info@spoofix.com <br>
-            To: {{info.email}} <br>
-            Subject: {{messageRef.subject}} <br>
-            Reference: MSG0000{{messageRef.id}}<br>
-            Date:  {{date(messageRef.created_at)}} <br>
-            <br>
-            Dear <span class="capitalize">{{info.name}} {{info.second_name}}</span>, <br>
-
-            I hope this email finds you well. I am writing to inform you about [brief description of the purpose of the email]. We have noted your recent inquiry regarding '{{messageRef.subject}}', and I wanted to provide you with the following information: <br>
-            <br>
-           {{messageRef.messages}}<br>
-            <br>
-            If you have any further questions or concerns, please feel free to reach out to us. <br>
-
-            Thank you for your attention and cooperation. <br>
-            <br>
-            Best regards, <br>
-            <br>
-            Spoofix Management, <br>
-            <!-- [Your position], <br> -->
-            Spoofix<br>
-            info@spoofix.com <br>
-      </div>
-    </div>
-   </div>
-   <div class="relative justify-between pt-3 w-100"><!-- flex -->
-    <div class="flex justify-between float-right w-64 pr-14">
-    </div>
-   </div>
-
-
-<!-- Compose Email Modal -->
-<!-- Compose Email Modal -->
-<div class="fixed inset-0 z-40 flex items-end justify-center px-4 py-6 pointer-events-none sm:p-0 sm:items-center sm:justify-end" x-show="isComposeModalOpen" @keydown.escape="closeComposeModal" v-if="ComposeModalVisible">
-  <div class="bottom-0 w-full max-w-lg bg-red-300 rounded-lg shadow-lg pointer-events-auto -mb-80">
-    <div class="bg-white rounded-lg sm:p-6 sm:pb-1">
-      <img @click="closeComposeModal" class="absolute items-center justify-center float-right mr-10 -mt-4 cursor-pointer w-9 h-9 right-1" :src="'/assets/systemImages/Exit.svg'"/>
-      <div class="h-12 -mt-6 -ml-6 -mr-6 bg-gray-300 rounded-t-lg sm:flex sm:items-start">
-        <div class="mt-1 text-center sm:mt-0 sm:ml-4 sm:text-left">
-          <h3 class="mt-2 text-lg font-medium text-gray-900 tabsText1" id="modal-headline">
-            Compose Email
-          </h3>
         </div>
       </div>
-      <form class="mt-3 sm:mt-2" @submit.prevent="submitForm">
-        <div class="mb-3">
-          <label for="to" class="block mb-2 text-sm font-bold text-gray-700">To:</label>
-          <input type="text" id="to" name="to" placeholder="Recipient's email" required class="w-full px-3 py-2 bg-yellow-100 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-200 focus:border-indigo-300">
-        </div>
-        <div class="mb-4">
-          <label for="subject" class="block mb-2 text-sm font-bold text-gray-700">Subject:</label>
-          <input type="text" id="subject" name="subject" placeholder="Subject" class="w-full px-3 py-2 bg-yellow-100 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-200 focus:border-indigo-300">
-        </div>
-        <div class="mb-4">
-          <label for="message" class="block mb-2 text-sm font-bold text-gray-700">Message:</label>
-          <textarea id="message" name="message" rows="3" placeholder="Write your message..." class="w-full px-3 py-2 bg-yellow-100 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-200 focus:border-indigo-300"></textarea>
-        </div>
-        <div class="mt-3 mb-3 sm:mt-6 sm:flex sm:flex-row-reverse">
-            <div class="flex float-right mr-3">
-              <button class="my-auto mr-2 bg-yellow-100 buttons buttonsText" @click="closeComposeModal">Cancel</button>
-              <button class="my-auto bg-yellow-300 buttons buttonsText" @click="openModal1" type="submit">Send</button>
-            </div>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
-
-  <!-- Modal -->
-  <transition name="modal-fade" >
-  <div v-if="isModalVisible1" class="backlight" @click="closeModal1">
-    <div
-      role="dialog"
-      aria-modal="true"
-      class="fade image-modal dark modal show backlight"
-      tabindex="-1"
-      style="padding-left: 14px; display: block;"
-    >
-      <div class="modal-dialog modal-xl modal-dialog-centered" style="">
-        <div class="modal-content">
-          <div class="">
-            <div
-              class="mx-auto bg-white modelStyle"
-              style=""
-            >
-            <div class="relative w-100"> 
-              <img class="float-right" :src="'/assets/systemImages/Exit.svg'"/>
-            </div>
-            <div class="relative flex my-2 modelText">
-                <img class="pr-3 " :src="'/assets/systemImages/Promo.svg'"/>
-                <img class="absolute m-2" :src="'/assets/systemImages/bookmark.svg'"/>
-              <div class="my-auto">Do you want to send email<span class="text-yellow-500">{{form.evidence_urls}}</span>?</div>
-            </div>
-            <div class="relative w-100">
-                <button  class="float-right px-4 bg-yellow-300 buttons buttonsText" @click="submit" type="submit">confirm</button>
-            </div>
-          </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</transition>
+    </transition>
 
   </AuthenticatedLayout>
 </template>

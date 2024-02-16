@@ -495,8 +495,8 @@ const bladeViewUrl = ref("");
 onMounted(() => {
   // bladeViewUrl.value = "http://127.0.0.1:5500/resources/views/map.html"; /emails/reset_password// Replace with the actual relative path
  const spoofID = props.spoofData.id;
- //bladeViewUrl.value = `http://127.0.0.1:8000/maps/${spoofID}`;
-bladeViewUrl.value = `https://uat.spoofix.com/maps/${spoofID}`;
+ bladeViewUrl.value = `http://127.0.0.1:8000/maps/${spoofID}`;
+// bladeViewUrl.value = `https://uat.spoofix.com/maps/${spoofID}`;
 
 });
 
@@ -1171,7 +1171,7 @@ const extraction = (dateString) => {
                <img class="pr-3 " :src="'/assets/systemImages/Promo.svg'"/>
                <img class="absolute m-2" :src="'/assets/systemImages/bookmark.svg'"/>
               <div class="my-auto">By clicking 'Mark as Norisk', you are indicating that <span class="text-yellow-500">{{spoofData.spoofed_domain}} will be ignored</span> . Are you sure you want to proceed?</div>
-            </div>
+        </div>
             <div class="relative w-100" >
               <!-- <button class="float-right px-4 mr-3 bg-gray-300 buttons buttonsText" @click="closeModal" type="button">cancel</button> -->
                <Link class="float-right px-4 bg-yellow-300 buttons buttonsText" :href="'/spoof/markAsNoRisk/' + spoofData.id">confirm</Link>

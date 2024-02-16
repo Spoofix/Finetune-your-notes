@@ -16,6 +16,7 @@ class SpoofViewController extends Controller
     public function spoofView($spoofId)
     {
         $user = Auth::user();
+
         try {
             $spoofData = SpoofedDomain::where('id', $spoofId)->first();
 
@@ -45,10 +46,10 @@ class SpoofViewController extends Controller
             $list = $list->where('last_batch', $last_batch->last_batch);
         }
         $list = $list->get();
-         // $checkIfSpoofIdBelongsToUser = $spoofData->domain_id;
+        // $checkIfSpoofIdBelongsToUser = $spoofData->domain_id;
         $spoofDat3a = SpoofedDomain::where('id', $spoofId)->first();
         $isCompletedOrInprogress = ReportformTakedownDetails::where('evidence_urls', $spoofDat3a->spoofed_domain)->exists();
-        if($isCompletedOrInprogress){
+        if ($isCompletedOrInprogress) {
             $list =  SpoofedDomain::where('domain_id', $activedomain)->get();
         }
         $list = $list->filter(function ($lists) use ($isCompletedOrInprogress) {
@@ -56,6 +57,18 @@ class SpoofViewController extends Controller
             return $isCompletedOrInprogress ? $reported : !$reported;
         });
         $spoofList = array_merge($spoofList, $list->toArray());
+        // Remove reals
+        function containsScotiabank($haystack, $needle)
+        {
+            return strpos($haystack, $needle) !== false;
+        }
+
+        // Filter the $spoofList directly to remove elements that don't contain 'scotiabank.com'
+        $spoofList = array_filter($spoofList, function ($isNew) {
+            return containsScotiabank($isNew['spoofed_domain'], "scotiabank.com");
+        });
+
+        print_r($spoofList);
         return Inertia::render('Domain/View', [
             'isValidTakedown' => $isCompletedOrInprogress,
             'spoofList' => $spoofList,
@@ -186,9 +199,9 @@ class SpoofViewController extends Controller
     {
         $spoofData = SpoofedDomain::where('id', $spoofId)->first();
         if ($spoofData) {
-            $spoofData->progress_status = 'norisk'; 
+            $spoofData->progress_status = 'norisk';
             $spoofData->save();
-        }        
+        }
         $url = route('domains');
         return Inertia::location($url);
     }
@@ -196,9 +209,9 @@ class SpoofViewController extends Controller
     {
         $spoofData = SpoofedDomain::where('id', $spoofId)->first();
         if ($spoofData) {
-            $spoofData->progress_status = 'new'; 
+            $spoofData->progress_status = 'new';
             $spoofData->save();
-        }        
+        }
         $url = route('domains');
         return Inertia::location($url);
     }
@@ -206,15 +219,16 @@ class SpoofViewController extends Controller
     {
         $spoofData = SpoofedDomain::where('id', $spoofId)->first();
         if ($spoofData) {
-            $spoofData->progress_status = 'monitoring'; 
+            $spoofData->progress_status = 'monitoring';
             $spoofData->save();
-        }        
+        }
         $url = route('domains');
         return Inertia::location($url);
     }
-    public function newDomains(){
+    public function newDomains()
+    {
         $user = Auth::user();
-        $data =[];
+        $data = [];
         Mail::to($user->email)->queue(new newDomains($data));
     }
 }
