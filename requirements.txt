@@ -1,0 +1,15 @@
+requests
+beautifulsoup4
+nltk
+scikit-learn
+requests_cache
+selenium
+distance
+whois
+scikit-image
+imagehash
+matplotlib
+pycountry
+cartopy
+pyOpenSSL
+dnstwist
