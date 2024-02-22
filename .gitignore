@@ -22,5 +22,5 @@ yarn-error.log
 public/assets/screenshots
 # opensquat/
 # domainsimilarity/
-storage/
+#storage/
 # OtherDomainGenerationALgorithims/
