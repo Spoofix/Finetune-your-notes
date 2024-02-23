@@ -1,32 +1,43 @@
 [
   {
+    "Redirects": [
+      "302 - https://digitalbusiness.cibc.com/",
+      "302 - https://digitalbusiness.cibc.com/wps/lrr?TAM_OP=login&ERROR_CODE=0x00000000&FAILREASON=&OLDSESSION=",
+      "302 - https://digitalbusiness.cibc.com/wps/portal/BBD/bbdsignon?TAM_OP=login&ERROR_CODE=0x00000000&FAILREASON=&OLDSESSION="
+    ]
+  },
+  {
+    "Final_URL": "https://digitalbusiness.cibc.com/wps/portal/BBD/bbdsignon/!ut/p/z1/04_Sj9CPykssy0xPLMnMz0vMAfIjo8zi3QNdHD0sgg18Lbw9TQ0cQzx8DczDgixc3cz0wwkpiAJKG-AAjgZA_VGElASn5ukX5EYY6DoqKgIArZduYA!!/dz/d5/L2dBISEvZ0FBIS9nQSEh/?TAM_OP=login&ERROR_CODE=0x00000000&FAILREASON=&OLDSESSION="
+  },
+  {
     "HTTP_Status_Code": 200
   },
   {
     "Cookies": [
       {
-        "name": "_abck",
-        "value": "55118DF8E652933A2DA64E7F84129EF7~-1~YAAQLJ82FwMvUxKNAQAANsGVPAvX150iannuLqc6L+AimUKGj+GEA9IZPxNx9BUnbRjyi4SzIz5vs1xhDzIKeTf3j8mTLZYPAVSGaC7dD2FtJ8KK0kD6DYBZn6q/MRU6Efu9xCoCS36nPqhvjhwgW1Cnj1rIV7z3ueocy19YoFdiFp9lclM4GXr3dXisOMJOqls7LZPwQ6cmxpJ6ikXdBKO7vJ7/1Mb+WdM8EB0BUL9cqqnaNTS7WZEcGF5kLAtgNCsbm9rWD+tbkg70g8D7yNRjI4OsljYgGh6blzzN+BqUMnnGIkoIxcnoxbN+2J2x8IoEy6IciRJwLCO5cEYo7ZXryqQimsSLrqrvPU5Yo9GqwCkFHrOnNybebIyu~-1~-1~-1",
-        "domain": ".scotiabank.com",
+        "name": "PDPA-S-SESSION-ID",
+        "value": "0_DxK1WDR0UvHkRhNCONRxt2IQIHhzpn2YnWYbAzki5meRhsuIfPk=",
+        "domain": ".cibc.com",
         "path": "/",
-        "expires": 1737654464,
+        "expires": null,
         "secure": true,
-        "httpOnly": false
+        "httpOnly": true
       },
       {
-        "name": "bm_sz",
-        "value": "D7804EA319A11D06BD89688599C7F513~YAAQLJ82FwQvUxKNAQAANsGVPBZHvKxscqhp+3lzju0wJynDUy+39rl4/zeC1elfAVPAPfm9SRDd3yOwnj+oKSAjrwUGsUY0IfXsOtfqvcxGsf1Q1hiBT/HRKAwQJ55rJP8Sv7mXuO5FG7I3MbwDUMSeXE7V8yYvk9KCWUISaNWD/7M2rzOlogroPCQuBvRrn6zPsUJx9IY0ovLXjZNEqc6lD/s3dOSYHb3vjnD5WfmHA8F9exgESkxssgZJ+hSw8bL5awESLJcMM/9oIzL2K8po7/BAd0lz4PH4OGU41Hsw4BDuc7PWhD672tFx/yfgDiL67gTUjYE3zr5Fa/WBN7aB~3486787~3552579",
-        "domain": ".scotiabank.com",
+        "name": "PORTALJSESSIONID",
+        "value": "0000oOC2Lytu459sBlcFi5H9KK2:1bjeedob1",
+        "domain": "digitalbusiness.cibc.com",
         "path": "/",
-        "expires": 1706132864,
-        "secure": false,
-        "httpOnly": false
+        "expires": null,
+        "secure": true,
+        "httpOnly": true
       }
     ]
   },
   {
     "Console_Messages": [
-      "\n<!--\n function redirect()\n { \n  window.location = \"http://www.scotiabank.com/pa/es/0,,3784,00.html\"\n }\n setTimeout(\"redirect();\", 0)\n//-->\n"
+      "var threatmetrix=threatmetrix||{};threatmetrix.version=4,threatmetrix.create_url=function(t,e,r,n,c){function i(){return Math.floor(2742745743359*Math.random())}function a(){return o(i())}function o(t){return(t+78364164096).toString(36)}var m=i(),u=i(),l=885187064159;u=((u=u-u%256+threatmetrix.version)+m)%2742745743359,l=(l+m)%2742745743359;var s=\"https://\"+t+\"/\"+(m=a()+o(m))+e,h=[(u=o(l)+o(u))+\"=\"+r,a()+a()+\"=\"+n];return void 0!==c&&c.length>0&&h.push(a()+a()+\"=\"+c),s+\"?\"+h.join(\"&\")},threatmetrix.beacon=function(t,e,r,n){var c=\"turn:aa.online-metrix.net?transport=\",i=\"1:\"+e+\":\"+r,a={iceServers:[{urls:c+\"tcp\",username:i,credential:r},{urls:c+\"udp\",username:i,credential:r}]};try{var o=new RTCPeerConnection(a);o.createDataChannel(Math.random().toString());var m=function(){},u=function(t){o.setLocalDescription(t,m,m)};\"undefined\"==typeof Promise||o.createOffer.length>0?o.createOffer(u,m):o.createOffer().then(u,m),setInterval(function(){o.close()},1e4)}catch(t){}},threatmetrix.load_tags=function(t,e,r,n){threatmetrix.beacon(t,e,r,n);var c=document.getElementsByTagName(\"head\").item(0),i=document.createElement(\"script\");i.id=\"tmx_tags_js\",i.setAttribute(\"type\",\"text/javascript\");var a=threatmetrix.create_url(t,\".js\",e,r,n);i.setAttribute(\"src\",a),threatmetrix.set_csp_nonce(i),c.appendChild(i)},threatmetrix.csp_nonce=null,threatmetrix.register_csp_nonce=function(t){if(void 0!==t.currentScript&&null!==t.currentScript){var e=t.currentScript.getAttribute(\"nonce\");null!=e&&\"\"!==e?threatmetrix.csp_nonce=e:void 0!==t.currentScript.nonce&&null!==t.currentScript.nonce&&\"\"!==t.currentScript.nonce&&(threatmetrix.csp_nonce=t.currentScript.nonce)}},threatmetrix.set_csp_nonce=function(t){null!==threatmetrix.csp_nonce&&(t.setAttribute(\"nonce\",threatmetrix.csp_nonce),t.getAttribute(\"nonce\")!==threatmetrix.csp_nonce&&(t.nonce=threatmetrix.csp_nonce))},threatmetrix.cleanup=function(){for(;null!==(hp_frame=document.getElementById(\"tdz_ifrm\"));)hp_frame.parentElement.removeChild(hp_frame);for(;null!==(tmx_frame=document.getElementById(\"tmx_tags_iframe\"));)tmx_frame.parentElement.removeChild(tmx_frame);for(;null!==(tmx_script=document.getElementById(\"tmx_tags_js\"));)tmx_script.parentElement.removeChild(tmx_script)},tmxProfile=function(t,e,r,n){void 0!==t&&void 0!==e&&void 0!==r&&8===e.length&&(threatmetrix.cleanup(),threatmetrix.register_csp_nonce(document),threatmetrix.load_tags(t,e,r,n))};",
+      "\n\tfunction showSignOnSpinner() {\n\t\t/*\n\t\tjQuery('.form-button-holder .spinner').addClass('active');\n\t\tjQuery('.form-button-holder .spinner-icon').addClass('active'); \n\t\t*/\n\t\tjQuery('.form-button-holder').addClass('active');\n\t}\n"
     ]
   },
   {
@@ -45,24 +56,24 @@
     "Security_Headers": "X-XSS-Protection not found"
   },
   {
-    "Web_Server": "AkamaiNetStorage"
+    "Web_Server": "none"
   },
   {
     "Geolocation_Information": {
-      "IP Address": "2.21.98.80",
-      "City": "Edenvale",
-      "Region": "Gauteng",
-      "Country": "ZA",
-      "Latitude": "-26.1333",
-      "Longitude": "28.1833",
+      "IP Address": "2.17.161.72",
+      "City": "Mombasa",
+      "Region": "Mombasa",
+      "Country": "KE",
+      "Latitude": "-4.0547",
+      "Longitude": "39.6636",
       "Organization": "AS20940 Akamai International B.V.",
       "ISP": "B.V."
     }
   },
   {
-    "IP_Address": "2.21.98.80"
+    "IP_Address": "2.17.161.72"
   },
   {
-    "SSL-Certificate_Details": "Subject: {b'C': b'CA', b'ST': b'Ontario', b'L': b'Toronto', b'O': b'Bank of Nova Scotia', b'CN': b'scotiabank.ca'}, Issuer: {b'C': b'US', b'O': b'Entrust, Inc.', b'OU': b'(c) 2012 Entrust, Inc. - for authorized use only', b'CN': b'Entrust Certification Authority - L1K'}"
+    "SSL-Certificate_Details": "Subject: {b'C': b'CA', b'ST': b'Ontario', b'L': b'Toronto', b'O': b'Canadian Imperial Bank of Commerce', b'CN': b'www.digitalbusiness.cibc.com'}, Issuer: {b'C': b'US', b'O': b'DigiCert Inc', b'CN': b'DigiCert SHA2 Secure Server CA'}"
   }
 ]
