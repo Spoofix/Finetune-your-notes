@@ -12,6 +12,6 @@ class UserSwitch extends Model
     protected $table = "user_switches";
 
     protected $fillable = [
-        'admin_id', 'user_id', 'switched_at', 'updated_at', 'admin_ip'
+        'admin_id', 'user_id', 'switched_at', 'updated_at', 'admin_ip','status'
     ];
 }

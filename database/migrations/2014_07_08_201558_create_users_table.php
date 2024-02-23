@@ -22,6 +22,7 @@ return new class extends Migration
             $table->enum('requires_password_update', ['1', '']);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('temp_password')->nullable();
+            
             $table->integer('role_id')->nullable();
             $table->enum('status', ['PENDING', 'ACTIVE', 'LOCKED'])->default('ACTIVE');
             $table->string('remember_token', 100)->nullable();

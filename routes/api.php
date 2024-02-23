@@ -23,4 +23,6 @@ Route::post('/auth/login', [AuthenticationController::class, 'login']);
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/auth/user', [AuthenticationController::class, 'authUser']);
     Route::post('/auth/logout', [AuthenticationController::class, 'logout']);
+    Route::post('/auth/admin_switch_to_user', [AuthenticationController::class, 'adminSwitchToUser']);
+    Route::post('/auth/user_switch_to_admin', [AuthenticationController::class, 'userSwitchToAdmin']);
 });

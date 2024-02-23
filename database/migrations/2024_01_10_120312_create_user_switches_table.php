@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('admin_id')->constrained('users');
             $table->foreignId('user_id')->constrained('users');
             $table->timestamp('switched_at')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }
