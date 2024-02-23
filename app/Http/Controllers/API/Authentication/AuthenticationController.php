@@ -57,4 +57,9 @@ class AuthenticationController extends Controller
             'message' => 'Logged out'
         ];
     }
+
+    public function authUser()
+    {
+        return auth()->user();
+    }
 }
