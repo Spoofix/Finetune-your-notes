@@ -1,153 +1,60 @@
 [
   {
-    "Redirects": [
-      "302 - https://changeyourperspectivecomm.com/"
-    ]
-  },
-  {
-    "Final_URL": "https://changeyourperspectivecomm.com/password"
-  },
-  {
     "HTTP_Status_Code": 200
   },
   {
     "Cookies": [
       {
-        "name": "_cmp_a",
-        "value": "%7B%22purposes%22%3A%7B%22a%22%3Atrue%2C%22p%22%3Atrue%2C%22m%22%3Atrue%2C%22t%22%3Atrue%7D%2C%22display_banner%22%3Afalse%2C%22sale_of_data_region%22%3Afalse%7D",
-        "domain": ".changeyourperspectivecomm.com",
+        "name": "dps_site_id",
+        "value": "ap-south-1",
+        "domain": "cleanyourmarina.com",
         "path": "/",
-        "expires": 1708799762,
-        "secure": false,
-        "httpOnly": false
-      },
-      {
-        "name": "_landing_page",
-        "value": "%2Fpassword",
-        "domain": ".changeyourperspectivecomm.com",
-        "path": "/",
-        "expires": 1709922962,
-        "secure": false,
-        "httpOnly": true
-      },
-      {
-        "name": "_orig_referrer",
-        "value": "",
-        "domain": ".changeyourperspectivecomm.com",
-        "path": "/",
-        "expires": 1709922962,
-        "secure": false,
-        "httpOnly": true
-      },
-      {
-        "name": "_shopify_s",
-        "value": "618dca1c-7975-4a2b-a7a8-4c0bfb5b9ee2",
-        "domain": ".changeyourperspectivecomm.com",
-        "path": "/",
-        "expires": 1708715162,
-        "secure": false,
-        "httpOnly": false
-      },
-      {
-        "name": "_shopify_y",
-        "value": "430a42e6-fcb6-4a76-89fd-d906fa6ad15f",
-        "domain": ".changeyourperspectivecomm.com",
-        "path": "/",
-        "expires": 1740249362,
-        "secure": false,
-        "httpOnly": false
-      },
-      {
-        "name": "_tracking_consent",
-        "value": "%7B%22lim%22%3A%5B%22CMP%22%5D%2C%22v%22%3A%222.1%22%2C%22reg%22%3A%22%22%2C%22con%22%3A%7B%22CMP%22%3A%7B%22a%22%3A%22%22%2C%22p%22%3A%22%22%2C%22s%22%3A%22%22%2C%22m%22%3A%22%22%7D%7D%2C%22region%22%3A%22KE30%22%7D",
-        "domain": ".changeyourperspectivecomm.com",
-        "path": "/",
-        "expires": 1740249362,
-        "secure": false,
-        "httpOnly": false
-      },
-      {
-        "name": "cart_currency",
-        "value": "USD",
-        "domain": "changeyourperspectivecomm.com",
-        "path": "/",
-        "expires": 1709922962,
-        "secure": false,
-        "httpOnly": false
-      },
-      {
-        "name": "localization",
-        "value": "US",
-        "domain": "changeyourperspectivecomm.com",
-        "path": "/",
-        "expires": 1740335762,
-        "secure": false,
-        "httpOnly": false
-      },
-      {
-        "name": "secure_customer_sig",
-        "value": "",
-        "domain": "changeyourperspectivecomm.com",
-        "path": "/",
-        "expires": 1740335762,
+        "expires": null,
         "secure": true,
-        "httpOnly": true
+        "httpOnly": false
       }
     ]
   },
   {
     "Console_Messages": [
-      "window.performance && window.performance.mark && window.performance.mark('shopify.content_for_header.start');",
-      "var Shopify = Shopify || {};\nShopify.shop = \"750477-5.myshopify.com\";\nShopify.locale = \"en\";\nShopify.currency = {\"active\":\"USD\",\"rate\":\"1.0\"};\nShopify.country = \"US\";\nShopify.theme = {\"name\":\"Spotlight\",\"id\":135315488967,\"theme_store_id\":1891,\"role\":\"main\"};\nShopify.theme.handle = \"null\";\nShopify.theme.style = {\"id\":null,\"handle\":null};\nShopify.cdnHost = \"changeyourperspectivecomm.com/cdn\";\nShopify.routes = Shopify.routes || {};\nShopify.routes.root = \"/\";",
-      "!function(o){(o.Shopify=o.Shopify||{}).modules=!0}(window);",
-      "!function(o){function n(){var o=[];function n(){o.push(Array.prototype.slice.apply(arguments))}return n.q=o,n}var t=o.Shopify=o.Shopify||{};t.loadFeatures=n(),t.autoloadFeatures=n()}(window);",
-      "var __st={\"a\":64503349447,\"offset\":-25200,\"reqid\":\"ab1dffa0-cd92-41ef-b7d6-b693912474e1\",\"pageurl\":\"changeyourperspectivecomm.com\\/password\",\"u\":\"57cc0721beae\",\"p\":\"password\"};",
-      "window.ShopifyPaypalV4VisibilityTracking = true;",
-      "!function(o){o.addEventListener(\"DOMContentLoaded\",function(){window.Shopify=window.Shopify||{},window.Shopify.recaptchaV3=window.Shopify.recaptchaV3||{siteKey:\"6LeHG2ApAAAAAO4rPaDW-qVpPKPOBfjbCpzJB9ey\"};var t=['form[action*=\"/contact\"] input[name=\"form_type\"][value=\"contact\"]','form[action*=\"/comments\"] input[name=\"form_type\"][value=\"new_comment\"]','form[action*=\"/account\"] input[name=\"form_type\"][value=\"customer_login\"]','form[action*=\"/account\"] input[name=\"form_type\"][value=\"recover_customer_password\"]','form[action*=\"/account\"] input[name=\"form_type\"][value=\"create_customer\"]','form[action*=\"/contact\"] input[name=\"form_type\"][value=\"customer\"]'].join(\",\");function n(e){e=e.target;null==e||null!=(e=function e(t,n){if(null==t.parentElement)return null;if(\"FORM\"!=t.parentElement.tagName)return e(t.parentElement,n);for(var o=t.parentElement.action,r=0;r<n.length;r++)if(-1!==o.indexOf(n[r]))return t.parentElement;return null}(e,[\"/contact\",\"/comments\",\"/account\"]))&&null!=e.querySelector(t)&&((e=o.createElement(\"script\")).setAttribute(\"src\",\"https://cdn.shopify.com/shopifycloud/storefront-recaptcha-v3/v0.6/index.js\"),o.body.appendChild(e),o.removeEventListener(\"focus\",n,!0),o.removeEventListener(\"change\",n,!0),o.removeEventListener(\"click\",n,!0))}o.addEventListener(\"click\",n,!0),o.addEventListener(\"change\",n,!0),o.addEventListener(\"focus\",n,!0)})}(document);",
-      "window.performance && window.performance.mark && window.performance.mark('shopify.content_for_header.end');",
-      "\n      document.documentElement.className = document.documentElement.className.replace('no-js', 'js');\n    ",
-      "(function(){if (\"sendBeacon\" in navigator && \"performance\" in window) {var session_token = document.cookie.match(/_shopify_s=([^;]*)/);function handle_abandonment_event(e) {var entries = performance.getEntries().filter(function(entry) {return /monorail-edge.shopifysvc.com/.test(entry.name);});if (!window.abandonment_tracked && entries.length === 0) {window.abandonment_tracked = true;var currentMs = Date.now();var navigation_start = performance.timing.navigationStart;var payload = {shop_id: 64503349447,url: window.location.href,navigation_start,duration: currentMs - navigation_start,session_token: session_token && session_token.length === 2 ? session_token[1] : \"\",page_type: \"password\"};window.navigator.sendBeacon(\"https://monorail-edge.shopifysvc.com/v1/produce\", JSON.stringify({schema_id: \"online_store_buyer_site_abandonment/1.1\",payload: payload,metadata: {event_created_at_ms: currentMs,event_sent_at_ms: currentMs}}));}}window.addEventListener('pagehide', handle_abandonment_event);}}());",
-      "(function e(e,n,a,t,r){var o=\"function\"==typeof BigInt&&-1!==BigInt.toString().indexOf(\"[native code]\")?\"modern\":\"legacy\";window.Shopify=window.Shopify||{};var i=window.Shopify;i.analytics=i.analytics||{};var s=i.analytics;s.replayQueue=[],s.publish=function(e,n,a){return s.replayQueue.push([e,n,a]),!0};try{self.performance.mark(\"wpm:start\")}catch(e){}var l=[a,\"/wpm\",\"/b\",r,o.substring(0,1),\".js\"].join(\"\");!function(e){var n=e.src,a=e.async,t=void 0===a||a,r=e.onload,o=e.onerror,i=document.createElement(\"script\"),s=document.head,l=document.body;i.async=t,i.src=n,r&&i.addEventListener(\"load\",r),o&&i.addEventListener(\"error\",o),s?s.appendChild(i):l?l.appendChild(i):console.error(\"Did not find a head or body element to append the script\")}({src:l,async:!0,onload:function(){var a=window.webPixelsManager.init(e);n(a);var t=window.Shopify.analytics;t.replayQueue.forEach((function(e){var n=e[0],t=e[1],r=e[2];a.publishCustomEvent(n,t,r)})),t.replayQueue=[],t.publish=a.publishCustomEvent,t.visitor=a.visitor},onerror:function(){var n=e.storefrontBaseUrl.replace(/\\/$/,\"\"),a=\"\".concat(n,\"/.well-known/shopify/monorail/unstable/produce_batch\"),r=JSON.stringify({metadata:{event_sent_at_ms:(new Date).getTime()},events:[{schema_id:\"web_pixels_manager_load/2.0\",payload:{version:t||\"latest\",page_url:self.location.href,status:\"failed\",error_msg:\"\".concat(l,\" has failed to load\")},metadata:{event_created_at_ms:(new Date).getTime()}}]});try{if(self.navigator.sendBeacon.bind(self.navigator)(a,r))return!0}catch(e){}var o=new XMLHttpRequest;try{return o.open(\"POST\",a,!0),o.setRequestHeader(\"Content-Type\",\"text/plain\"),o.send(r),!0}catch(e){console&&console.warn&&console.warn(\"[Web Pixels Manager] Got an unhandled error while logging a load error.\")}return!1}})})({shopId: 64503349447,storefrontBaseUrl: \"https://changeyourperspectivecomm.com\",cdnBaseUrl: \"https://changeyourperspectivecomm.com/cdn\",surface: \"storefront-renderer\",enabledBetaFlags: [],webPixelsConfigList: [{\"id\":\"shopify-app-pixel\",\"configuration\":\"{}\",\"eventPayloadVersion\":\"v1\",\"runtimeContext\":\"STRICT\",\"scriptVersion\":\"0575\",\"apiClientId\":\"shopify-pixel\",\"type\":\"APP\",\"purposes\":[\"ANALYTICS\"]},{\"id\":\"shopify-custom-pixel\",\"eventPayloadVersion\":\"v1\",\"runtimeContext\":\"LAX\",\"scriptVersion\":\"0575\",\"apiClientId\":\"shopify-pixel\",\"type\":\"CUSTOM\",\"purposes\":[\"ANALYTICS\"]}],initData: {\"cart\":null,\"checkout\":null,\"customer\":null,\"productVariants\":[]},},function pageEvents(webPixelsManagerAPI) {webPixelsManagerAPI.publish(\"page_viewed\");},\"https://changeyourperspectivecomm.com/cdn\",\"0.0.444\",\"3698dd31wbfa453bap448c3218md5149de6\",);",
-      "window.ShopifyAnalytics = window.ShopifyAnalytics || {};\nwindow.ShopifyAnalytics.meta = window.ShopifyAnalytics.meta || {};\nwindow.ShopifyAnalytics.meta.currency = 'USD';\nvar meta = {\"page\":{\"pageType\":\"password\"}};\nfor (var attr in meta) {\n  window.ShopifyAnalytics.meta[attr] = meta[attr];\n}",
-      "window.ShopifyAnalytics.merchantGoogleAnalytics = function() {\n  \n};\n",
-      "(function () {\n    var customDocumentWrite = function(content) {\n      var jquery = null;\n\n      if (window.jQuery) {\n        jquery = window.jQuery;\n      } else if (window.Checkout && window.Checkout.$) {\n        jquery = window.Checkout.$;\n      }\n\n      if (jquery) {\n        jquery('body').append(content);\n      }\n    };\n\n    var hasLoggedConversion = function(token) {\n      if (token) {\n        return document.cookie.indexOf('loggedConversion=' + token) !== -1;\n      }\n      return false;\n    }\n\n    var setCookieIfConversion = function(token) {\n      if (token) {\n        var twoMonthsFromNow = new Date(Date.now());\n        twoMonthsFromNow.setMonth(twoMonthsFromNow.getMonth() + 2);\n\n        document.cookie = 'loggedConversion=' + token + '; expires=' + twoMonthsFromNow;\n      }\n    }\n\n    var trekkie = window.ShopifyAnalytics.lib = window.trekkie = window.trekkie || [];\n    if (trekkie.integrations) {\n      return;\n    }\n    trekkie.methods = [\n      'identify',\n      'page',\n      'ready',\n      'track',\n      'trackForm',\n      'trackLink'\n    ];\n    trekkie.factory = function(method) {\n      return function() {\n        var args = Array.prototype.slice.call(arguments);\n        args.unshift(method);\n        trekkie.push(args);\n        return trekkie;\n      };\n    };\n    for (var i = 0; i < trekkie.methods.length; i++) {\n      var key = trekkie.methods[i];\n      trekkie[key] = trekkie.factory(key);\n    }\n    trekkie.load = function(config) {\n      trekkie.config = config || {};\n      trekkie.config.initialDocumentCookie = document.cookie;\n      var first = document.getElementsByTagName('script')[0];\n      var script = document.createElement('script');\n      script.type = 'text/javascript';\n      script.onerror = function(e) {\n        var scriptFallback = document.createElement('script');\n        scriptFallback.type = 'text/javascript';\n        scriptFallback.onerror = function(error) {\n                var Monorail = {\n      produce: function produce(monorailDomain, schemaId, payload) {\n        var currentMs = new Date().getTime();\n        var event = {\n          schema_id: schemaId,\n          payload: payload,\n          metadata: {\n            event_created_at_ms: currentMs,\n            event_sent_at_ms: currentMs\n          }\n        };\n        return Monorail.sendRequest(\"https://\" + monorailDomain + \"/v1/produce\", JSON.stringify(event));\n      },\n      sendRequest: function sendRequest(endpointUrl, payload) {\n        // Try the sendBeacon API\n        if (window && window.navigator && typeof window.navigator.sendBeacon === 'function' && typeof window.Blob === 'function' && !Monorail.isIos12()) {\n          var blobData = new window.Blob([payload], {\n            type: 'text/plain'\n          });\n\n          if (window.navigator.sendBeacon(endpointUrl, blobData)) {\n            return true;\n          } // sendBeacon was not successful\n\n        } // XHR beacon\n\n        var xhr = new XMLHttpRequest();\n\n        try {\n          xhr.open('POST', endpointUrl);\n          xhr.setRequestHeader('Content-Type', 'text/plain');\n          xhr.send(payload);\n        } catch (e) {\n          console.log(e);\n        }\n\n        return false;\n      },\n      isIos12: function isIos12() {\n        return window.navigator.userAgent.lastIndexOf('iPhone; CPU iPhone OS 12_') !== -1 || window.navigator.userAgent.lastIndexOf('iPad; CPU OS 12_') !== -1;\n      }\n    };\n    Monorail.produce('monorail-edge.shopifysvc.com',\n      'trekkie_storefront_load_errors/1.1',\n      {shop_id: 64503349447,\n      theme_id: 135315488967,\n      app_name: \"storefront\",\n      context_url: window.location.href,\n      source_url: \"//changeyourperspectivecomm.com/cdn/s/trekkie.storefront.4cd2e3324844ec508679a5cd021150832227ceb5.min.js\"});\n\n        };\n        scriptFallback.async = true;\n        scriptFallback.src = '//changeyourperspectivecomm.com/cdn/s/trekkie.storefront.4cd2e3324844ec508679a5cd021150832227ceb5.min.js';\n        first.parentNode.insertBefore(scriptFallback, first);\n      };\n      script.async = true;\n      script.src = '//changeyourperspectivecomm.com/cdn/s/trekkie.storefront.4cd2e3324844ec508679a5cd021150832227ceb5.min.js';\n      first.parentNode.insertBefore(script, first);\n    };\n    trekkie.load(\n      {\"Trekkie\":{\"appName\":\"storefront\",\"development\":false,\"defaultAttributes\":{\"shopId\":64503349447,\"isMerchantRequest\":null,\"themeId\":135315488967,\"themeCityHash\":\"2171645615669078393\",\"contentLanguage\":\"en\",\"currency\":\"USD\"},\"isServerSideCookieWritingEnabled\":true,\"monorailRegion\":\"shop_domain\"},\"Session Attribution\":{},\"S2S\":{\"facebookCapiEnabled\":false,\"source\":\"trekkie-storefront-renderer\"}}\n    );\n\n    var loaded = false;\n    trekkie.ready(function() {\n      if (loaded) return;\n      loaded = true;\n\n      window.ShopifyAnalytics.lib = window.trekkie;\n\n  \n      var originalDocumentWrite = document.write;\n      document.write = customDocumentWrite;\n      try { window.ShopifyAnalytics.merchantGoogleAnalytics.call(this); } catch(error) {};\n      document.write = originalDocumentWrite;\n\n      window.ShopifyAnalytics.lib.page(null,{\"pageType\":\"password\"});\n\n      var match = window.location.pathname.match(/checkouts\\/(.+)\\/(thank_you|post_purchase)/)\n      var token = match? match[1]: undefined;\n      if (!hasLoggedConversion(token)) {\n        setCookieIfConversion(token);\n        \n      }\n    });\n\n\n        var eventsListenerScript = document.createElement('script');\n        eventsListenerScript.async = true;\n        eventsListenerScript.src = \"//changeyourperspectivecomm.com/cdn/shopifycloud/shopify/assets/shop_events_listener-a7c63dba65ccddc484f77541dc8ca437e60e1e9e297fe1c3faebf6523a0ede9b.js\";\n        document.getElementsByTagName('head')[0].appendChild(eventsListenerScript);\n\n})();",
-      "\n(function () {\n  if (window.BOOMR && (window.BOOMR.version || window.BOOMR.snippetExecuted)) {\n    return;\n  }\n  window.BOOMR = window.BOOMR || {};\n  window.BOOMR.snippetStart = new Date().getTime();\n  window.BOOMR.snippetExecuted = true;\n  window.BOOMR.snippetVersion = 12;\n  window.BOOMR.application = \"storefront-renderer\";\n  window.BOOMR.themeName = \"Spotlight\";\n  window.BOOMR.themeVersion = \"12.0.0\";\n  window.BOOMR.shopId = 64503349447;\n  window.BOOMR.themeId = 135315488967;\n  window.BOOMR.renderRegion = \"gcp-us-central1\";\n  window.BOOMR.url =\n    \"https://changeyourperspectivecomm.com/cdn/shopifycloud/boomerang/shopify-boomerang-1.0.0.min.js\";\n  var where = document.currentScript || document.getElementsByTagName(\"script\")[0];\n  var parentNode = where.parentNode;\n  var promoted = false;\n  var LOADER_TIMEOUT = 3000;\n  function promote() {\n    if (promoted) {\n      return;\n    }\n    var script = document.createElement(\"script\");\n    script.id = \"boomr-scr-as\";\n    script.src = window.BOOMR.url;\n    script.async = true;\n    parentNode.appendChild(script);\n    promoted = true;\n  }\n  function iframeLoader(wasFallback) {\n    promoted = true;\n    var dom, bootstrap, iframe, iframeStyle;\n    var doc = document;\n    var win = window;\n    window.BOOMR.snippetMethod = wasFallback ? \"if\" : \"i\";\n    bootstrap = function(parent, scriptId) {\n      var script = doc.createElement(\"script\");\n      script.id = scriptId || \"boomr-if-as\";\n      script.src = window.BOOMR.url;\n      BOOMR_lstart = new Date().getTime();\n      parent = parent || doc.body;\n      parent.appendChild(script);\n    };\n    if (!window.addEventListener && window.attachEvent && navigator.userAgent.match(/MSIE [67]./)) {\n      window.BOOMR.snippetMethod = \"s\";\n      bootstrap(parentNode, \"boomr-async\");\n      return;\n    }\n    iframe = document.createElement(\"IFRAME\");\n    iframe.src = \"about:blank\";\n    iframe.title = \"\";\n    iframe.role = \"presentation\";\n    iframe.loading = \"eager\";\n    iframeStyle = (iframe.frameElement || iframe).style;\n    iframeStyle.width = 0;\n    iframeStyle.height = 0;\n    iframeStyle.border = 0;\n    iframeStyle.display = \"none\";\n    parentNode.appendChild(iframe);\n    try {\n      win = iframe.contentWindow;\n      doc = win.document.open();\n    } catch (e) {\n      dom = document.domain;\n      iframe.src = \"javascript:var d=document.open();d.domain='\" + dom + \"';void(0);\";\n      win = iframe.contentWindow;\n      doc = win.document.open();\n    }\n    if (dom) {\n      doc._boomrl = function() {\n        this.domain = dom;\n        bootstrap();\n      };\n      doc.write(\"<body onload='document._boomrl();'>\");\n    } else {\n      win._boomrl = function() {\n        bootstrap();\n      };\n      if (win.addEventListener) {\n        win.addEventListener(\"load\", win._boomrl, false);\n      } else if (win.attachEvent) {\n        win.attachEvent(\"onload\", win._boomrl);\n      }\n    }\n    doc.close();\n  }\n  var link = document.createElement(\"link\");\n  if (link.relList &&\n    typeof link.relList.supports === \"function\" &&\n    link.relList.supports(\"preload\") &&\n    (\"as\" in link)) {\n    window.BOOMR.snippetMethod = \"p\";\n    link.href = window.BOOMR.url;\n    link.rel = \"preload\";\n    link.as = \"script\";\n    link.addEventListener(\"load\", promote);\n    link.addEventListener(\"error\", function() {\n      iframeLoader(true);\n    });\n    setTimeout(function() {\n      if (!promoted) {\n        iframeLoader(true);\n      }\n    }, LOADER_TIMEOUT);\n    BOOMR_lstart = new Date().getTime();\n    parentNode.appendChild(link);\n  } else {\n    iframeLoader(false);\n  }\n  function boomerangSaveLoadTime(e) {\n    window.BOOMR_onload = (e && e.timeStamp) || new Date().getTime();\n  }\n  if (window.addEventListener) {\n    window.addEventListener(\"load\", boomerangSaveLoadTime, false);\n  } else if (window.attachEvent) {\n    window.attachEvent(\"onload\", boomerangSaveLoadTime);\n  }\n  if (document.addEventListener) {\n    document.addEventListener(\"onBoomerangLoaded\", function(e) {\n      e.detail.BOOMR.init({\n        ResourceTiming: {\n          enabled: true,\n          trackedResourceTypes: [\"script\", \"img\", \"css\"]\n        },\n      });\n      e.detail.BOOMR.t_end = new Date().getTime();\n    });\n  } else if (document.attachEvent) {\n    document.attachEvent(\"onpropertychange\", function(e) {\n      if (!e) e=event;\n      if (e.propertyName === \"onBoomerangLoaded\") {\n        e.detail.BOOMR.init({\n          ResourceTiming: {\n            enabled: true,\n            trackedResourceTypes: [\"script\", \"img\", \"css\"]\n          },\n        });\n        e.detail.BOOMR.t_end = new Date().getTime();\n      }\n    });\n  }\n})();"
+      "\"use strict\";\n\nif ('serviceWorker' in navigator) {\n  window.addEventListener('load', function () {\n    navigator.serviceWorker.register('/sw.js');\n  });\n}",
+      "\"IntersectionObserver\"in window&&\"Intl\"in window&&\"Locale\"in window.Intl||document.write(`\\x3Cscript src=\"https://img1.wsimg.com/poly/v3/polyfill.min.js?rum=0&unknown=polyfill&flags=gated&features=Intl.~locale.en-US\">\\x3C/script>`)"
     ]
   },
   {
-    "Security_Headers": "X-XSS-Protection: 1; mode=block (X-XSS-Protection header)"
+    "Security_Headers": "X-XSS-Protection not found"
   },
   {
-    "Security_Headers": "X-XSS-Protection: 1; mode=block (X-XSS-Protection header)"
+    "Security_Headers": "X-XSS-Protection not found"
   },
   {
-    "Security_Headers": "X-XSS-Protection: 1; mode=block (X-XSS-Protection header)"
+    "Security_Headers": "X-XSS-Protection not found"
   },
   {
-    "Security_Headers": "X-XSS-Protection: 1; mode=block (X-XSS-Protection header)"
+    "Security_Headers": "X-XSS-Protection not found"
   },
   {
-    "Security_Headers": "X-XSS-Protection: 1; mode=block (X-XSS-Protection header)"
+    "Security_Headers": "X-XSS-Protection not found"
   },
   {
-    "Web_Server": "cloudflare"
+    "Web_Server": "DPS/2.0.0+sha-e228ef5"
   },
   {
     "Geolocation_Information": {
-      "IP Address": "23.227.38.71",
-      "City": "Ottawa",
-      "Region": "Ontario",
-      "Country": "CA",
-      "Latitude": "45.4166",
-      "Longitude": "-75.6904",
-      "Organization": "AS13335 Cloudflare, Inc.",
+      "IP Address": "13.248.243.5",
+      "City": "Seattle",
+      "Region": "Washington",
+      "Country": "US",
+      "Latitude": "47.6339",
+      "Longitude": "-122.3476",
+      "Organization": "AS16509 Amazon.com, Inc.",
       "ISP": "Inc."
     }
   },
   {
-    "IP_Address": "23.227.38.71"
+    "IP_Address": "13.248.243.5"
   },
   {
-    "SSL-Certificate_Details": "Subject: {b'CN': b'changeyourperspectivecomm.com'}, Issuer: {b'C': b'US', b'O': b\"Let's Encrypt\", b'CN': b'R3'}"
+    "SSL-Certificate_Details": "Subject: {b'CN': b'cleanyourmarina.com'}, Issuer: {b'C': b'US', b'ST': b'Arizona', b'L': b'Scottsdale', b'O': b'GoDaddy.com, Inc.', b'OU': b'http://certs.godaddy.com/repository/', b'CN': b'Go Daddy Secure Certificate Authority - G2'}"
   }
 ]
