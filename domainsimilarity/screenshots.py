@@ -1,26 +1,10 @@
-# # pip install selenium requests_cache beautifulsoup4 nltk scikit-learn
-
-with open('keywords.txt', 'r') as file:
-    contents = file.read()
-
-domain_string = contents
-
-
-domain_list = domain_string.split(',')
-
-domainOne = domain_list[0].strip() 
-domainTwo = domain_list[1].strip()
-
-
-
+# pip install selenium requests_cache beautifulsoup4 nltk scikit-learn
 import os
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.chrome.options import Options as ChromeOptions
-from selenium.webdriver.common.by import By
 from urllib.parse import urlparse
-
-
+from datetime import datetime
 
 def take_screenshot(url):
     try:
@@ -33,14 +17,20 @@ def take_screenshot(url):
         driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
 
         driver.get(url)
-        #
 
         # Create the 'screenshots' subdirectory if it doesn't exist
         if not os.path.exists("../public/assets/screenshots"):
             os.makedirs("../public/assets/screenshots")
 
         domain_name = urlparse(url).netloc
-        screenshot_file = os.path.join("../public/assets/screenshots", f"{domain_name}.png")
+        # Create subfolder of the domain name if it does not exist
+        domain_folder = os.path.join("../public/assets/screenshots", domain_name)
+        if not os.path.exists(domain_folder):
+            os.makedirs(domain_folder)
+        
+        timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
+        screenshot_file = os.path.join(domain_folder, f"{domain_name}_{timestamp}.png")
+        # Append a timestamp before png extension to give the file a unique identifier
         driver.save_screenshot(screenshot_file)
         print(f"Screenshot saved as: {screenshot_file}")
 
@@ -50,10 +40,15 @@ def take_screenshot(url):
         driver.quit()
 
 if __name__ == "__main__":
-    web_page_url1 =  f'https://{domainOne}' # Replace with the URL of the first web page
-    web_page_url2 =  f'https://{domainTwo}'    # Replace with the URL of the second web page
-try:
-    take_screenshot(web_page_url1)
-    take_screenshot(web_page_url2)
-except:
-    1+1
+    with open('keywords.txt', 'r') as file:
+        contents = file.read()
+
+    domain_string = contents.strip()
+    domain_list = domain_string.split(',')
+
+    for domain in domain_list:
+        web_page_url = f'https://{domain.strip()}'
+        try:
+            take_screenshot(web_page_url)
+        except Exception as e:
+            print(f"Error taking screenshot for {web_page_url}: {e}")

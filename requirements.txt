@@ -13,3 +13,16 @@ pycountry
 cartopy
 pyOpenSSL
 dnstwist
+strsimpy
+confusable_homoglyphs
+homoglyphs
+colorama
+numpy
+pytest
+pytest-cov
+codecov
+coverage
+black
+flake8
+dnspython
+packaging

@@ -11,9 +11,6 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->timestamp('last_login')->default(now());
-        });
 
         Schema::table('organizations', function (Blueprint $table) {
             $table->timestamp('last_search')->default(now());

@@ -32,7 +32,8 @@ class User extends Authenticatable
         'org_id',
         'org_role_id',
         'profile',
-        'profile_pic'
+        'profile_pic',
+        'is_switched'
     ];
 
     /**

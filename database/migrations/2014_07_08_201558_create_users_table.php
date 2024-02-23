@@ -14,17 +14,22 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('organization');
-            $table->string('phone_number');
+            $table->string('second_name')->nullable();
+            $table->string('organization')->nullable();
+            $table->string('phone_number')->nullable();
             $table->string('email')->unique();
             $table->string('password');
-            $table->enum('requires_password_update', [true, false])->default('');
+            $table->enum('requires_password_update', ['1', '']);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('temp_password')->nullable();
-            $table->integer('role_id')->default(2);
+            
+            $table->integer('role_id')->nullable();
             $table->enum('status', ['PENDING', 'ACTIVE', 'LOCKED'])->default('ACTIVE');
-            $table->rememberToken();
-
+            $table->string('remember_token', 100)->nullable();
+            $table->timestamp('last_login')->nullable()->default('2024-02-22 21:03:45');
+            $table->integer('org_id')->nullable();
+            $table->integer('org_role_id')->nullable();
+            $table->string('profile')->nullable();
             $table->timestamps();
         });
     }
