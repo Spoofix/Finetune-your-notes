@@ -44,6 +44,8 @@ class AuthenticationController extends Controller
         if (!Auth::attempt($attr)) {
             return $this->error('Credentials not match', 401);
         }
+        //TODO
+        //check the lastest active Userswitch. use user_id to prevent login
 
         return $this->success([
             'user'=>auth()->user(),
@@ -85,6 +87,7 @@ class AuthenticationController extends Controller
             'status' => 'active',
             'switched_at' => Carbon::now(),
         ]);
+        //user table field can_log_in=false
         //log out the current user
         $logged_in_user->tokens()->delete();
         
