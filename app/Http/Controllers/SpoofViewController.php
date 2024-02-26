@@ -58,17 +58,17 @@ class SpoofViewController extends Controller
         });
         $spoofList = array_merge($spoofList, $list->toArray());
         // Remove reals
-        function containsScotiabank($haystack, $needle)
-        {
-            return strpos($haystack, $needle) !== false;
-        }
+        // function containsScotiabank($haystack, $needle)
+        // {
+        //     return strpos($haystack, $needle) !== false;
+        // }
 
         // Filter the $spoofList directly to remove elements that don't contain 'scotiabank.com'
-        $spoofList = array_filter($spoofList, function ($isNew) {
-            return containsScotiabank($isNew['spoofed_domain'], "scotiabank.com");
-        });
+        // $spoofList = array_filter($spoofList, function ($isNew) {
+        //     return containsScotiabank($isNew['spoofed_domain'], "scotiabank.com");
+        // });
 
-        print_r($spoofList);
+        // print_r($spoofList);
         return Inertia::render('Domain/View', [
             'isValidTakedown' => $isCompletedOrInprogress,
             'spoofList' => $spoofList,

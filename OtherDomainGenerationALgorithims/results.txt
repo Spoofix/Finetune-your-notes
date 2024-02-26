@@ -7,3 +7,20 @@ bs.scotiabank.com
 scotiabank.com
 unsubscribe.scotiabank.com
 scotiabank.cl
+<<<<<<< HEAD
+cibc.com
+swiftcode.cibc.com
+fxonline.cibc.com
+cibc.net
+cibc.mediaroom.com
+advisor.cibc.com
+ficcstrategy.cibc.com
+=======
+swiftcode.cibc.com
+digitalbusiness.cibc.com
+cibc.com
+cibc.mediaroom.com
+cibc.cl
+fxonline.cibc.com
+advisor.cibc.com
+>>>>>>> 1309ce7724ea5bbbc32f32bc6da0cdbc1b8f263b

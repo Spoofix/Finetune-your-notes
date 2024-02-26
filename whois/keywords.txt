@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 scotiabanks.ca
+=======
+cloverforyou.com
+>>>>>>> 5e8015e82063b94233269cbad0e1d4b53e564661
