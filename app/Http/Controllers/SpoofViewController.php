@@ -227,11 +227,11 @@ class SpoofViewController extends Controller
     }
     public function stopMonitoring($spoofId)
     {
-        // $spoofData = SpoofedDomain::where('id', $spoofId)->first();
-        // if ($spoofData) {
-        //     $spoofData->progress_status = 'stop_monitoring';
-        //     $spoofData->save();
-        // }
+        $spoofData = SpoofedDomain::where('id', $spoofId)->first();
+        if ($spoofData) {
+            $spoofData->progress_status = 'stop_monitoring';
+            $spoofData->save();
+        }
         $url = route('domains');
         return Inertia::location($url);
     }
