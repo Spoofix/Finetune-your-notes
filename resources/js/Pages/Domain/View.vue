@@ -668,7 +668,7 @@ const extraction = (dateString) => {
  <AuthenticatedLayout v-if=" props.userid === userId" class="overflow-scroll fontFamily" style="height:100vh; background: #FFF;"> 
    <div class="flex justify-between mt-6 w-100">
     <div class="relative ml-6">
-      <button class="absolute w-40 h-12 px-3 rounded-tr-full bg-dark tabsText" style="">Domain</button>
+      <button class="absolute w-40 h-12 px-3 rounded-tr-full bg-dark tabsText" style="">{{props.domain[0].domain_name}}</button>
       <button class="w-56 h-12 pr-4 bg-gray-300 rounded-tr-full tabsText pl-9" style="margin-left: 106px;">Social Media</button>
     </div>
       <Link v-if="isValidTakedown" class="my-auto buttons buttonsText mr-9 hover:bg-yellow-300" :href="'/InProgress'"><i class="pr-2 fa fa-chevron-left" aria-hidden="true" preserve-scroll></i> Back</Link>
@@ -1050,7 +1050,8 @@ const extraction = (dateString) => {
    <div class="flex justify-between pt-3 mb-6">
     <div class="flex justify-between w-96 pl-7">
        <button class="my-2 buttons buttonsText hover:bg-yellow-300 sm:hidden lg:flex md:flex hidding" title="Mark As No Risk" @click="openModalr">Mark As No Risk</button>
-        <button class="my-auto bg-yellow-100 buttons buttonsText hover:bg-yellow-300 sm:hidden lg:flex md:flex hidding" @click="openModalm">Monitor</button>
+        <button v-if="props.spoofData.progress_status == 'monitoring'" class="my-auto bg-yellow-100 buttons buttonsText hover:bg-yellow-300 sm:hidden lg:flex md:flex hidding" @click="openModalm">Stop Monitoring</button>
+        <button v-else class="my-auto bg-yellow-100 buttons buttonsText hover:bg-yellow-300 sm:hidden lg:flex md:flex hidding" @click="openModalm">Monitor</button>
           <button v-if="isValidTakedown" class="my-auto bg-yellow-300 buttons buttonsText hover:bg-yellow-400" as='button' @click="reported">Stop TakeDown</button>   <!-- || spoofData.spoof_status_new == 'inprogress'|| response  || spoofData.spoof_status_new == 'completed' || spoofData.spoof_status_new == 'inprogress' <i class="text-xl fa-solid fa-ban"></i>-->
           <button v-else class="my-auto bg-yellow-300 buttons buttonsText hover:bg-yellow-300" @click="openModalt">Take Down</button>
          
@@ -1139,6 +1140,42 @@ const extraction = (dateString) => {
             <div class="relative w-100" >
               <!-- <button class="float-right px-4 mr-3 bg-gray-300 buttons buttonsText" @click="closeModal" type="button">cancel</button> -->
                <Link class="float-right px-4 bg-yellow-300 buttons buttonsText" :href="'/spoof/Monitor/' + spoofData.id">confirm</Link>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</transition>
+<!--stop monitoring Modal -->
+<transition name="modal-fade" >
+  <div v-if="isModalVisiblem" class="backlight" @click="closeModalm">
+    <div
+      role="dialog"
+      aria-modal="true"
+      class="fade image-modal dark modal show backlight"
+      tabindex="-1"
+      style="padding-left: 14px; display: block;"
+    >
+      <div class="modal-dialog modal-xl modal-dialog-centered" style="">
+        <div class="modal-content">
+          <div class="">
+            <div
+              class="mx-auto bg-white modelStyle"
+              style=""
+            >
+            <div class="relative w-100"> 
+              <img class="float-right" :src="'/assets/systemImages/Exit.svg'"/>
+            </div>
+            <div class="relative flex my-2 modelText">
+               <img class="pr-3 mb-3" :src="'/assets/systemImages/Promo.svg'"/>
+               <img class="absolute m-2" :src="'/assets/systemImages/bookmark.svg'"/>
+              <div class="my-auto">By setting the status to 'stop-monitoring', you are indicating that <span class="text-yellow-500">{{spoofData.spoofed_domain}} will stop being under constant surveillance</span> . Are you sure you want to proceed?</div>
+            </div>
+            <div class="relative w-100" >
+              <!-- <button class="float-right px-4 mr-3 bg-gray-300 buttons buttonsText" @click="closeModal" type="button">cancel</button> -->
+               <Link class="float-right px-4 bg-yellow-300 buttons buttonsText" :href="'/spoof/stop_monitoring/' + spoofData.id">confirm</Link>
             </div>
           </div>
           </div>

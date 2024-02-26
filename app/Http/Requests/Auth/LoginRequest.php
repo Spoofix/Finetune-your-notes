@@ -67,7 +67,13 @@ class LoginRequest extends FormRequest
     public function find_user()
     {
         $user = User::where('email', $this->email)->first();
-        if (!$user || $user->status != "ACTIVE") {
+        if (!$user) {
+            throw ValidationException::withMessages([
+                'email' => 'No account found associated with the email',
+            ]);
+        }
+
+        if ($user->status != "ACTIVE") {
             throw ValidationException::withMessages([
                 'email' => 'Account Not Active Please contact Admin',
             ]);

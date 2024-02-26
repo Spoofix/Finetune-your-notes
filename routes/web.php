@@ -77,6 +77,7 @@ Route::middleware('auth', 'user_switch_data')->group(function () {
     Route::get('/spoof/markAsNoRisk/{spoofId}', [SpoofViewController::class, 'markAsNoRisk'])->name('spoof.report');
     Route::get('/spoof/markAsRisk/{spoofId}', [SpoofViewController::class, 'markAsRisk'])->name('spoof.report');
     Route::get('/spoof/Monitor/{spoofId}', [SpoofViewController::class, 'Monitor'])->name('spoof.report');
+    Route::get('/spoof/stop_monitoring/{spoofId}', [SpoofViewController::class, 'stopMonitoring'])->name('spoof.report');
     Route::get('/spoof/report/{spoofId}', [SpoofViewController::class, 'spoofReport'])->name('spoof.report');
     Route::get('/report', [ReportController::class, 'report'])->name('report');
 
