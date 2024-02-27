@@ -73,7 +73,7 @@ class LocationSslAndRedirectsJob implements ShouldQueue
         $longitude = $phpOutput['Geolocation_Information']['Longitude'] ?? '';
         $organization = $phpOutput['Geolocation_Information']['Organization'] ?? '';
         $isp = $phpOutput['Geolocation_Information']['ISP'] ?? '';
-        $sslCertificateDetails = $phpOutput['SSL_Certificate_Details'] ?? '';
+        $sslCertificateDetails = $phpOutput['SSL-Certificate_Details']['Issuer']['O'] ?? '';
         $redirectUrls = $phpOutput['Redirects'] ?? '';
         $httpStatusCode = $phpOutput['HTTP_Status_Code'] ?? '';
         $cookies = $phpOutput['Cookies'] ?? '';

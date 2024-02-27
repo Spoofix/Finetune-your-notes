@@ -658,376 +658,375 @@ const extraction = (dateString) => {
 </script>
 
 <template>
-    <Head v-if="spoofData.spoof_status_new == 'completed'" title="ScannedCompleted" /> 
-  <Head v-else-if="spoofData.spoof_status_new == 'inprogress' || isValidTakedown"  title="ScannedInProgress" /> 
-  <Head v-else title="Domain" /> 
 
+  <Head v-if="spoofData.spoof_status_new == 'completed'" title="ScannedCompleted" />
+
+  <Head v-else-if="spoofData.spoof_status_new == 'inprogress' || isValidTakedown" title="ScannedInProgress" />
+
+  <Head v-else title="Domain" />
 
   <!-- ScannedCompleted-->
 
- <AuthenticatedLayout v-if=" props.userid === userId" class="overflow-scroll fontFamily" style="height:100vh; background: #FFF;"> 
-   <div class="flex justify-between mt-6 w-100">
-    <div class="relative ml-6">
-      <button class="absolute w-40 h-12 px-3 rounded-tr-full bg-dark tabsText" style="">Domain</button>
-      <button class="w-56 h-12 pr-4 bg-gray-300 rounded-tr-full tabsText pl-9" style="margin-left: 106px;">Social Media</button>
-    </div>
+  <AuthenticatedLayout v-if=" props.userid === userId" class="overflow-scroll fontFamily" style="height:100vh; background: #FFF;">
+    <div class="flex justify-between mt-6 w-100">
+      <div class="relative ml-6">
+        <button class="absolute w-40 h-12 px-3 rounded-tr-full bg-dark tabsText" style="">Domain</button>
+        <button class="w-56 h-12 pr-4 bg-gray-300 rounded-tr-full tabsText pl-9" style="margin-left: 106px;">Social Media</button>
+      </div>
       <Link v-if="isValidTakedown" class="my-auto buttons buttonsText mr-9 hover:bg-yellow-300" :href="'/InProgress'"><i class="pr-2 fa fa-chevron-left" aria-hidden="true" preserve-scroll></i> Back</Link>
       <Link v-else class="my-auto buttons buttonsText mr-9 hover:bg-yellow-300" :href="'/domains'"><i class="pr-2 fa fa-chevron-left" aria-hidden="true" preserve-scroll></i> Back</Link>
-   </div>
-   <div class="flex flex-row mx-4 mt-3 bg-yellow-100 h-14 rounded-t-xl">
-    <h2 class="my-auto text-gray-600 pl-7 h3 riskpush">{{ spoofData.spoofed_domain }}</h2>
-    <div class="flex my-auto overflow-x-visible py-auto min-w-60" v-if="spoofData.current_scan_status === 'not_scanned' && spoofData.phashes === 'processing'">
-      <h1 class="border-l-white border-y-yellow-300 spinner-border border-r-yellow-100 "></h1>
-      <h1 class="my-auto ml-6 text-gray-300 py-auto h6">Scanning . . . This may take a while. . . </h1>
     </div>
-    <h2 class="my-auto font-bold text-center capitalize py-auto risk h3"
-        v-else
-        style="min-width:fit-content;"
-        :style="{'color': methods.overallRatingLabel(methods.overallRating(spoofData )) === 'High' ? '#ED0707' : methods.overallRatingLabel(methods.overallRating(spoofData )) === 'medium' ? '#F7610D' : '#3AAC11'}">
-        {{ methods.overallRatingLabel(methods.overallRating(spoofData )) }}  Risk
-    </h2>
-   </div>
-    <div class="flex flex-row justify-between mx-4 mt-2">
-    <div class="widthSetting" style=" min-height: 65vh;">
-      <div class="flex justify-between mt-2 shadow- rounded-xl" style="height: 60px;" @click="changePageContent('Scan Details')" :class="{'bg-gray-200': heading === 'Scan Details', 'bg-yellow-100': heading !== 'Scan Details'}">
-        <h2 class="my-auto ml-4 detailsNav">Scan Details</h2>
-        <button class="px-4 my-auto detailsButton mr-9">Details<i class="pl-5 text-sm fa " :class="heading === 'Scan Details' ? 'fa-chevron-down' : 'fa-chevron-right'" aria-hidden="true"></i></button>
+    <div class="flex flex-row mx-4 mt-3 bg-yellow-100 h-14 rounded-t-xl">
+      <h2 class="my-auto text-gray-600 pl-7 h3 riskpush">{{ spoofData.spoofed_domain }}</h2>
+      <div class="flex my-auto overflow-x-visible py-auto min-w-60" v-if="spoofData.current_scan_status === 'not_scanned' && spoofData.phashes === 'processing'">
+        <h1 class="border-l-white border-y-yellow-300 spinner-border border-r-yellow-100 "></h1>
+        <h1 class="my-auto ml-6 text-gray-300 py-auto h6">Scanning . . . This may take a while. . . </h1>
       </div>
-      <!-- scan details on small -->
-          <div class="ml-1 overflow-y-auto box-style widthSetting largeHidden" style=" height: 350px; width: 99%;"  v-if=" heading ==  'Scan Details'">
+      <h2 class="my-auto font-bold text-center capitalize py-auto risk h3" v-else style="min-width:fit-content;" :style="{'color': methods.overallRatingLabel(methods.overallRating(spoofData )) === 'High' ? '#ED0707' : methods.overallRatingLabel(methods.overallRating(spoofData )) === 'medium' ? '#F7610D' : '#3AAC11'}">
+        {{ methods.overallRatingLabel(methods.overallRating(spoofData )) }} Risk
+      </h2>
+    </div>
+    <div class="flex flex-row justify-between mx-4 mt-2">
+      <div class="widthSetting" style=" min-height: 65vh;">
+        <div class="flex justify-between mt-2 shadow- rounded-xl" style="height: 60px;" @click="changePageContent('Scan Details')" :class="{'bg-gray-200': heading === 'Scan Details', 'bg-yellow-100': heading !== 'Scan Details'}">
+          <h2 class="my-auto ml-4 detailsNav">Scan Details</h2>
+          <button class="px-4 my-auto detailsButton mr-9">Details<i class="pl-5 text-sm fa " :class="heading === 'Scan Details' ? 'fa-chevron-down' : 'fa-chevron-right'" aria-hidden="true"></i></button>
+        </div>
+        <!-- scan details on small -->
+        <div class="ml-1 overflow-y-auto box-style widthSetting largeHidden" style=" height: 350px; width: 99%;" v-if=" heading ==  'Scan Details'">
           <!-- scan Details -->
-        <div class="w-full overflow-auto " v-if=" heading ==  'Scan Details'">
-              <!-- loader -->
+          <div class="w-full overflow-auto " v-if=" heading ==  'Scan Details'">
+            <!-- loader -->
             <div class="flex mx-auto my-auto overflow-x-visible bg-gray-200 rounded-lg py-auto min-w-60 mt-7" style="height: 200px; width:200px;" v-if="spoofData.current_scan_status === 'not_scanned' && spoofData.phashes === 'processing'">
               <h1 class="my-auto ml-3 border-l-white border-y-yellow-300 spinner-border border-r-yellow-100"></h1>
-              <h1 class="my-auto ml-4 text-black py-auto h6">Scanning . . .  </h1>
-            </div> 
-            <div class="flex mt-2 hover:bg-yellow-300 DetailsTableRow" v-else  v-for="ScanDetail in scanDetails" :key="ScanDetail.value">
+              <h1 class="my-auto ml-4 text-black py-auto h6">Scanning . . . </h1>
+            </div>
+            <div class="flex mt-2 hover:bg-yellow-300 DetailsTableRow" v-else v-for="ScanDetail in scanDetails" :key="ScanDetail.value">
               <div class="mt-3 ml-3 w-50 DetailsTableRowText">{{ScanDetail.key}}</div>
-              <div class="mt-3 ml-50 w-100 DetailsTableRowText"  v-if="Array.isArray(makeToArray(spoofData[ScanDetail.value]))">
+              <div class="mt-3 ml-50 w-100 DetailsTableRowText" v-if="Array.isArray(makeToArray(spoofData[ScanDetail.value]))">
                 <div class="mt-2" v-for="(data, index) in  makeToArray(spoofData[ScanDetail.value])" :key="index">
                   <div v-if="spoofData[ScanDetail.value] === '' || typeof spoofData[ScanDetail.value] === 'undefined' || !spoofData[ScanDetail.value]" class="text-gray-400">info not available</div>
                   <div v-else>{{ spoofData[ScanDetail.value] }}</div>
                   <!-- {{spoofData[ScanDetail.value]}} -->
                 </div>
               </div>
-              <div class="mt-3 ml-50 w-100 DetailsTableRowText" v-else >
+              <div class="mt-3 ml-50 w-100 DetailsTableRowText" v-else>
                 <!-- {{ makeToArray(spoofData[ScanDetail.value]) }} -->
-               <div v-if="spoofData[ScanDetail.value] === '' || typeof spoofData[ScanDetail.value] === 'undefined' || !spoofData[ScanDetail.value]" class="text-gray-400">info not available</div>
+                <div v-if="spoofData[ScanDetail.value] === '' || typeof spoofData[ScanDetail.value] === 'undefined' || !spoofData[ScanDetail.value]" class="text-gray-400">info not available</div>
                 <div v-else>{{ makeToArray(spoofData[ScanDetail.value])  }}</div>
-              </div>  
+              </div>
             </div>
           </div>
           <!-- <div class="w-full overflow-auto">
               <img class="w-full" :src="'/assets/screenshots/' + spoofData.spoofed_domain + '.png'" alt="...">/spoof//{spoofId}
           </div> -->
-    </div>
-      <!-- scan detais on small end -->
-       <div class="flex justify-between mt-2 shadow- rounded-xl" style="height: 60px;" @click="changePageContent('Page Statistics')" :class="{'bg-gray-200': heading === 'Page Statistics', 'bg-yellow-100': heading !== 'Page Statistics'}">
-        <h2 class="my-auto ml-4 detailsNav">Page Statistics</h2>
-        <button class="px-4 my-auto detailsButton mr-9">Details<i class="pl-5 text-sm fa " :class="heading === 'Page Statistics' ? 'fa-chevron-down' : 'fa-chevron-right'" aria-hidden="true"></i></button>
-      </div>
-      <!-- ...on small -->
-      <div class="ml-1 overflow-y-auto box-style widthSetting largeHidden" style=" height: 350px; width: 99%;"  v-if=" heading ==  'Page Statistics'">
-        <!-- page statistics -->
-           <div class="w-full overflow-auto" v-if=" heading ==  'Page Statistics'">
-             <!-- loader -->
-            <div class="flex mx-auto my-auto overflow-x-visible bg-gray-200 rounded-lg py-auto min-w-60 mt-7" style="height: 200px; width:200px;" v-if="spoofData.current_scan_status === 'not_scanned' && spoofData.phashes === 'processing'">
-              <h1 class="my-auto ml-3 border-l-white border-y-yellow-300 spinner-border border-r-yellow-100"></h1>
-              <h1 class="my-auto ml-4 text-black py-auto h6">Scanning . . .  </h1>
-            </div>
-            <div class="flex mt-2 hover:bg-yellow-300 DetailsTableRow" v-else v-for="pageStatistic in pageStatistics" :key="pageStatistic.value">
-              <div class="mt-3 ml-3 w-50 DetailsTableRowText">{{pageStatistic.key}}</div>
-              <div class="mt-3 ml-50 w-100 DetailsTableRowText"  v-if="Array.isArray(makeToArray(spoofData[pageStatistic.value]))">
-                <div class="mt-2" v-for="(data, index) in  makeToArray(spoofData[pageStatistic.value])" :key="index">
-                  <!-- {{spoofData[pageStatistic.value]}} -->
-                <div v-if="spoofData[pageStatistic.value] === '' || typeof spoofData[pageStatistic.value] === 'undefined' || !spoofData[pageStatistic.value]" class="text-gray-400">info not available</div>
-                <div v-else>{{ spoofData[pageStatistic.value]  }}</div>                  
-                </div>
-              </div>
-              <div class="mt-3 ml-50 w-100 DetailsTableRowText" v-else >
-                <!-- {{ makeToArray(spoofData[pageStatistic.value]) }} -->
-                <div v-if="spoofData[pageStatistic.value] === '' || typeof spoofData[pageStatistic.value] === 'undefined' || !spoofData[pageStatistic.value]" class="text-gray-400">info not available</div>
-                <div v-else>{{ spoofData[pageStatistic.value] }}</div>
-              </div>  
-            </div>
-          </div>
-      </div>
-       <div class="flex justify-between mt-2 shadow- rounded-xl" style="height: 60px;" @click="changePageContent('Domain Details')" :class="{'bg-gray-200': heading === 'Domain Details', 'bg-yellow-100': heading !== 'Domain Details'}">
-        <h2 class="my-auto ml-4 detailsNav">Domain Details</h2>
-        <button class="px-4 my-auto detailsButton mr-9">Details<i class="pl-5 text-sm fa " :class="heading === 'Domain Details' ? 'fa-chevron-down' : 'fa-chevron-right'" aria-hidden="true"></i></button>
-      </div>
-      <!-- .on small. -->
-
-      <div class="ml-1 box-style largeHidden" style=" height: 350px; width: 99%; overflow: scroll;" v-if=" heading ==  'Domain Details'">
-                  <!-- domain details -->
-            <div class="w-full overflow-auto" v-if=" heading ==  'Domain Details'">
-                            <!-- loader -->
-            <div class="flex mx-auto my-auto overflow-x-visible bg-gray-200 rounded-lg py-auto min-w-60 mt-7" style="height: 200px; width:200px;" v-if="spoofData.current_scan_status === 'not_scanned' && spoofData.phashes === 'processing'">
-              <h1 class="my-auto ml-3 border-l-white border-y-yellow-300 spinner-border border-r-yellow-100"></h1>
-              <h1 class="my-auto ml-4 text-black py-auto h6">Scanning . . .  </h1>
-            </div>
-            <div class="flex mt-2 hover:bg-yellow-300 DetailsTableRow" v-else v-for="domainDetail in domainDetails" :key="domainDetail.value">
-              <div class="mt-3 ml-3 w-50 DetailsTableRowText">{{domainDetail.key}}</div>
-              <div class="mt-3 ml-50 w-100 DetailsTableRowText"  v-if="Array.isArray(makeToArray(spoofData[domainDetail.value]))">
-                <!-- <div class="mt-2" v-for="(data, index) in  spoofData[domainDetail.value]" :key="index"> -->
-                 <div v-if="spoofData[domainDetail.value] === '' || typeof spoofData[domainDetail.value] === 'undefined' || !spoofData[domainDetail.value]" class="text-gray-400">info not available</div>
-                  <div v-else>{{extraction(spoofData[domainDetail.value])}}</div>
-                <!-- </div> -->
-              </div>
-              <div class="mt-3 ml-50 w-100 DetailsTableRowText" v-else >
-                <!-- {{ makeToArray(spoofData[domainDetail.value]) }} -->
-                 <div v-if="spoofData[domainDetail.value] === '' || typeof spoofData[domainDetail.value] === 'undefined' || !spoofData[domainDetail.value]" class="text-gray-400">info not available</div>
-                <div v-else>{{ spoofData[domainDetail.value]  }}</div>
-              </div>  
-            </div>
-          </div>
-      </div>
-      <!-- location -->
-       <div class="flex justify-between mt-2 shadow- rounded-xl" style="height: 60px;" @click="changePageContent('Locations')" :class="{'bg-gray-200': heading === 'Locations', 'bg-yellow-100': heading !== 'Locations'}">
-        <h2 class="my-auto ml-4 detailsNav">Locations</h2>
-       <button class="px-4 my-auto detailsButton mr-9">Details<i class="pl-5 text-sm fa " :class="heading === 'Locations' ? 'fa-chevron-down' : 'fa-chevron-right'" aria-hidden="true"></i></button>
-      </div>
-      <!-- location -->
-      <div class="ml-1 overflow-y-auto box-style largeHidden" style=" height: 350px; width: 99%;" v-if=" heading ==  'Locations'">
-          <div class="w-full overflow-auto">
-                           <!-- loader -->
-            <div class="flex mx-auto my-auto overflow-x-visible bg-gray-200 rounded-lg py-auto min-w-60 mt-7" style="height: 200px; width:200px;" v-if="spoofData.current_scan_status === 'not_scanned' && spoofData.phashes === 'processing'">
-              <h1 class="my-auto ml-3 border-l-white border-y-yellow-300 spinner-border border-r-yellow-100"></h1>
-              <h1 class="my-auto ml-4 text-black py-auto h6">Scanning . . .  </h1>
-            </div>
-               <iframe v-else :src="bladeViewUrl" width="100%" height="500"></iframe>
-               <!-- <div v-html="emailTemplate" width="100%" height="500"></div> -->
-             <!-- <iframe src="../../../views/map.html" width="100%" height="500px" frameborder="0"></iframe> -->
-          </div>
-      </div>
-      <!-- screenshots -->
-       <div class="flex justify-between mt-2 shadow- rounded-xl" style="height: 60px;" @click="changePageContent('Screenshots')" :class="{'bg-gray-200': heading === 'Screenshots', 'bg-yellow-100': heading !== 'Screenshots'}">
-        <h2 class="my-auto ml-4 detailsNav">Screenshots</h2>
-        <button class="px-4 my-auto detailsButton mr-9">Details<i class="pl-5 text-sm fa" :class="heading === 'Screenshots' ? 'fa-chevron-down' : 'fa-chevron-right'" aria-hidden="true"></i></button>
-      </div>
-      <!-- screenshots -->
-      <div class="ml-1 overflow-y-scroll box-style largeHidden" style=" max-height: 350px; width: 99%;" v-if=" heading ==  'Screenshots'">
-        <!-- will do js here -->
-          <div class="w-full" @click="openModal" >
-                            <!-- loader -->
-            <div class="flex mx-auto my-auto overflow-x-visible bg-gray-200 rounded-lg py-auto min-w-60 mt-7" style="height: 200px; width:200px;" v-if="spoofData.current_scan_status === 'not_scanned' && spoofData.phashes === 'processing'">
-              <h1 class="my-auto ml-3 border-l-white border-y-yellow-300 spinner-border border-r-yellow-100"></h1>
-              <h1 class="my-auto ml-4 text-black py-auto h6">Scanning . . .  </h1>
-            </div>
-              <img v-else class="w-full" :src="'/assets/screenshots/' + spoofData.spoofed_domain + '.png'" alt="SORRY ( : ,IMAGE NOT FOUND" > <!-- v-if="spoofData.screenshot !== null">-->
-              <!-- <img class="w-full" :src="'/assets/systemImages/screenshotplaceholder.png'" alt="..." v-if="spoofData.screenshot === null"> -->
-          </div>
         </div>
-      <!-- .. -->
-       <div class="flex justify-between mt-2 shadow- rounded-xl" style="height: 60px;" @click="changePageContent('HTTP Redirects')" :class="{'bg-gray-200': heading === 'HTTP Redirects', 'bg-yellow-100': heading !== 'HTTP Redirects'}">
-        <h2 class="my-auto ml-4 detailsNav">HTTP Redirects</h2>
-        <button class="px-4 my-auto detailsButton mr-9">Details<i class="pl-5 text-sm fa " :class="heading === 'HTTP Redirects' ? 'fa-chevron-down' : 'fa-chevron-right'" aria-hidden="true"></i></button>
-      </div>
-       <!-- ...on small -->
-      <div class="ml-1 overflow-y-auto box-style widthSetting largeHidden" style=" height: 350px; width: 99%;"  v-if=" heading ==  'HTTP Redirects'">
-        <!-- http redirects -->
-         <div class="w-full overflow-auto" v-if=" heading ==  'HTTP Redirects'">
+        <!-- scan detais on small end -->
+        <div class="flex justify-between mt-2 shadow- rounded-xl" style="height: 60px;" @click="changePageContent('Page Statistics')" :class="{'bg-gray-200': heading === 'Page Statistics', 'bg-yellow-100': heading !== 'Page Statistics'}">
+          <h2 class="my-auto ml-4 detailsNav">Page Statistics</h2>
+          <button class="px-4 my-auto detailsButton mr-9">Details<i class="pl-5 text-sm fa " :class="heading === 'Page Statistics' ? 'fa-chevron-down' : 'fa-chevron-right'" aria-hidden="true"></i></button>
+        </div>
+        <!-- ...on small -->
+        <div class="ml-1 overflow-y-auto box-style widthSetting largeHidden" style=" height: 350px; width: 99%;" v-if=" heading ==  'Page Statistics'">
+          <!-- page statistics -->
+          <div class="w-full overflow-auto" v-if=" heading ==  'Page Statistics'">
             <!-- loader -->
             <div class="flex mx-auto my-auto overflow-x-visible bg-gray-200 rounded-lg py-auto min-w-60 mt-7" style="height: 200px; width:200px;" v-if="spoofData.current_scan_status === 'not_scanned' && spoofData.phashes === 'processing'">
               <h1 class="my-auto ml-3 border-l-white border-y-yellow-300 spinner-border border-r-yellow-100"></h1>
-              <h1 class="my-auto ml-4 text-black py-auto h6">Scanning . . .  </h1>
+              <h1 class="my-auto ml-4 text-black py-auto h6">Scanning . . . </h1>
+            </div>
+            <div class="flex mt-2 hover:bg-yellow-300 DetailsTableRow" v-else v-for="pageStatistic in pageStatistics" :key="pageStatistic.value">
+              <div class="mt-3 ml-3 w-50 DetailsTableRowText">{{pageStatistic.key}}</div>
+              <div class="mt-3 ml-50 w-100 DetailsTableRowText" v-if="Array.isArray(makeToArray(spoofData[pageStatistic.value]))">
+                <div class="mt-2" v-for="(data, index) in  makeToArray(spoofData[pageStatistic.value])" :key="index">
+                  <!-- {{spoofData[pageStatistic.value]}} -->
+                  <div v-if="spoofData[pageStatistic.value] === '' || typeof spoofData[pageStatistic.value] === 'undefined' || !spoofData[pageStatistic.value]" class="text-gray-400">info not available</div>
+                  <div v-else>{{ spoofData[pageStatistic.value]  }}</div>
+                </div>
+              </div>
+              <div class="mt-3 ml-50 w-100 DetailsTableRowText" v-else>
+                <!-- {{ makeToArray(spoofData[pageStatistic.value]) }} -->
+                <div v-if="spoofData[pageStatistic.value] === '' || typeof spoofData[pageStatistic.value] === 'undefined' || !spoofData[pageStatistic.value]" class="text-gray-400">info not available</div>
+                <div v-else>{{ spoofData[pageStatistic.value] }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex justify-between mt-2 shadow- rounded-xl" style="height: 60px;" @click="changePageContent('Domain Details')" :class="{'bg-gray-200': heading === 'Domain Details', 'bg-yellow-100': heading !== 'Domain Details'}">
+          <h2 class="my-auto ml-4 detailsNav">Domain Details</h2>
+          <button class="px-4 my-auto detailsButton mr-9">Details<i class="pl-5 text-sm fa " :class="heading === 'Domain Details' ? 'fa-chevron-down' : 'fa-chevron-right'" aria-hidden="true"></i></button>
+        </div>
+        <!-- .on small. -->
+
+        <div class="ml-1 box-style largeHidden" style=" height: 350px; width: 99%; overflow: scroll;" v-if=" heading ==  'Domain Details'">
+          <!-- domain details -->
+          <div class="w-full overflow-auto" v-if=" heading ==  'Domain Details'">
+            <!-- loader -->
+            <div class="flex mx-auto my-auto overflow-x-visible bg-gray-200 rounded-lg py-auto min-w-60 mt-7" style="height: 200px; width:200px;" v-if="spoofData.current_scan_status === 'not_scanned' && spoofData.phashes === 'processing'">
+              <h1 class="my-auto ml-3 border-l-white border-y-yellow-300 spinner-border border-r-yellow-100"></h1>
+              <h1 class="my-auto ml-4 text-black py-auto h6">Scanning . . . </h1>
+            </div>
+            <div class="flex mt-2 hover:bg-yellow-300 DetailsTableRow" v-else v-for="domainDetail in domainDetails" :key="domainDetail.value">
+              <div class="mt-3 ml-3 w-50 DetailsTableRowText">{{domainDetail.key}}</div>
+              <div class="mt-3 ml-50 w-100 DetailsTableRowText" v-if="Array.isArray(makeToArray(spoofData[domainDetail.value]))">
+                <!-- <div class="mt-2" v-for="(data, index) in  spoofData[domainDetail.value]" :key="index"> -->
+                <div v-if="spoofData[domainDetail.value] === '' || typeof spoofData[domainDetail.value] === 'undefined' || !spoofData[domainDetail.value]" class="text-gray-400">info not available</div>
+                <div v-else>{{extraction(spoofData[domainDetail.value])}}</div>
+                <!-- </div> -->
+              </div>
+              <div class="mt-3 ml-50 w-100 DetailsTableRowText" v-else>
+                <!-- {{ makeToArray(spoofData[domainDetail.value]) }} -->
+                <div v-if="spoofData[domainDetail.value] === '' || typeof spoofData[domainDetail.value] === 'undefined' || !spoofData[domainDetail.value]" class="text-gray-400">info not available</div>
+                <div v-else>{{ spoofData[domainDetail.value]  }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- location -->
+        <div class="flex justify-between mt-2 shadow- rounded-xl" style="height: 60px;" @click="changePageContent('Locations')" :class="{'bg-gray-200': heading === 'Locations', 'bg-yellow-100': heading !== 'Locations'}">
+          <h2 class="my-auto ml-4 detailsNav">Locations</h2>
+          <button class="px-4 my-auto detailsButton mr-9">Details<i class="pl-5 text-sm fa " :class="heading === 'Locations' ? 'fa-chevron-down' : 'fa-chevron-right'" aria-hidden="true"></i></button>
+        </div>
+        <!-- location -->
+        <div class="ml-1 overflow-y-auto box-style largeHidden" style=" height: 350px; width: 99%;" v-if=" heading ==  'Locations'">
+          <div class="w-full overflow-auto">
+            <!-- loader -->
+            <div class="flex mx-auto my-auto overflow-x-visible bg-gray-200 rounded-lg py-auto min-w-60 mt-7" style="height: 200px; width:200px;" v-if="spoofData.current_scan_status === 'not_scanned' && spoofData.phashes === 'processing'">
+              <h1 class="my-auto ml-3 border-l-white border-y-yellow-300 spinner-border border-r-yellow-100"></h1>
+              <h1 class="my-auto ml-4 text-black py-auto h6">Scanning . . . </h1>
+            </div>
+            <iframe v-else :src="bladeViewUrl" width="100%" height="500"></iframe>
+            <!-- <div v-html="emailTemplate" width="100%" height="500"></div> -->
+            <!-- <iframe src="../../../views/map.html" width="100%" height="500px" frameborder="0"></iframe> -->
+          </div>
+        </div>
+        <!-- screenshots -->
+        <div class="flex justify-between mt-2 shadow- rounded-xl" style="height: 60px;" @click="changePageContent('Screenshots')" :class="{'bg-gray-200': heading === 'Screenshots', 'bg-yellow-100': heading !== 'Screenshots'}">
+          <h2 class="my-auto ml-4 detailsNav">Screenshots</h2>
+          <button class="px-4 my-auto detailsButton mr-9">Details<i class="pl-5 text-sm fa" :class="heading === 'Screenshots' ? 'fa-chevron-down' : 'fa-chevron-right'" aria-hidden="true"></i></button>
+        </div>
+        <!-- screenshots -->
+        <div class="ml-1 overflow-y-scroll box-style largeHidden" style=" max-height: 350px; width: 99%;" v-if=" heading ==  'Screenshots'">
+          <!-- will do js here -->
+          <div class="w-full" @click="openModal">
+            <!-- loader -->
+            <div class="flex mx-auto my-auto overflow-x-visible bg-gray-200 rounded-lg py-auto min-w-60 mt-7" style="height: 200px; width:200px;" v-if="spoofData.current_scan_status === 'not_scanned' && spoofData.phashes === 'processing'">
+              <h1 class="my-auto ml-3 border-l-white border-y-yellow-300 spinner-border border-r-yellow-100"></h1>
+              <h1 class="my-auto ml-4 text-black py-auto h6">Scanning . . . </h1>
+            </div>
+            <img v-else class="w-full" :src="'/assets/screenshots/' + spoofData.spoofed_domain + '.png'" alt="SORRY ( : ,IMAGE NOT FOUND"> <!-- v-if="spoofData.screenshot !== null">-->
+            <!-- <img class="w-full" :src="'/assets/systemImages/screenshotplaceholder.png'" alt="..." v-if="spoofData.screenshot === null"> -->
+          </div>
+        </div>
+        <!-- .. -->
+        <div class="flex justify-between mt-2 shadow- rounded-xl" style="height: 60px;" @click="changePageContent('HTTP Redirects')" :class="{'bg-gray-200': heading === 'HTTP Redirects', 'bg-yellow-100': heading !== 'HTTP Redirects'}">
+          <h2 class="my-auto ml-4 detailsNav">HTTP Redirects</h2>
+          <button class="px-4 my-auto detailsButton mr-9">Details<i class="pl-5 text-sm fa " :class="heading === 'HTTP Redirects' ? 'fa-chevron-down' : 'fa-chevron-right'" aria-hidden="true"></i></button>
+        </div>
+        <!-- ...on small -->
+        <div class="ml-1 overflow-y-auto box-style widthSetting largeHidden" style=" height: 350px; width: 99%;" v-if=" heading ==  'HTTP Redirects'">
+          <!-- http redirects -->
+          <div class="w-full overflow-auto" v-if=" heading ==  'HTTP Redirects'">
+            <!-- loader -->
+            <div class="flex mx-auto my-auto overflow-x-visible bg-gray-200 rounded-lg py-auto min-w-60 mt-7" style="height: 200px; width:200px;" v-if="spoofData.current_scan_status === 'not_scanned' && spoofData.phashes === 'processing'">
+              <h1 class="my-auto ml-3 border-l-white border-y-yellow-300 spinner-border border-r-yellow-100"></h1>
+              <h1 class="my-auto ml-4 text-black py-auto h6">Scanning . . . </h1>
             </div>
             <div class="flex mt-2 hover:bg-yellow-300 DetailsTableRow" v-else v-for="httpRedirect in httpRedirects" :key="httpRedirect.value">
               <div class="mt-3 ml-3 w-50 DetailsTableRowText">{{httpRedirect.key}}</div>
-              <div class="mt-3 ml-50 w-100 DetailsTableRowText"  v-if="Array.isArray(makeToArray(spoofData[httpRedirect.value]))">
+              <div class="mt-3 ml-50 w-100 DetailsTableRowText" v-if="Array.isArray(makeToArray(spoofData[httpRedirect.value]))">
                 <div class="mt-2" v-for="(data, index) in  makeToArray(spoofData[httpRedirect.value])" :key="index">
                   <!-- {{spoofData[httpRedirect.value]}} -->
-                 <div v-if="spoofData[httpRedirect.value] == '' || spoofData[httpRedirect.value] == null" class="text-gray-400"> info not available</div>
-                 <div v-else> {{ spoofData[httpRedirect.value]}}</div>
+                  <div v-if="spoofData[httpRedirect.value] == '' || spoofData[httpRedirect.value] == null" class="text-gray-400"> info not available</div>
+                  <div v-else> {{ spoofData[httpRedirect.value]}}</div>
                 </div>
               </div>
-              <div class="mt-3 ml-50 w-100 DetailsTableRowText" v-else >
+              <div class="mt-3 ml-50 w-100 DetailsTableRowText" v-else>
                 <div v-if="spoofData[httpRedirect.value] === '' || typeof spoofData[httpRedirect.value] === 'undefined' || !spoofData[ScanDetail.value]" class="text-gray-400">info not available</div>
                 <div v-else>{{ spoofData[httpRedirect.value] }}</div>
-              </div>  
+              </div>
             </div>
           </div>
-      </div>
+        </div>
 
-       <div class="flex justify-between mt-2 shadow- rounded-xl" style="height: 60px;"  @click="changePageContent('Risk Rating')" :class="{'bg-gray-200': heading === 'Risk Rating', 'bg-yellow-100': heading !== 'Risk Rating'}">
-        <h2 class="my-auto ml-4 detailsNav">Risk Rating</h2>
-        <button class="px-4 my-auto detailsButton mr-9">Details<i class="pl-5 text-sm fa " :class="heading === 'Risk Rating' ? 'fa-chevron-down' : 'fa-chevron-right'" aria-hidden="true"></i></button>
-    </div>
-     <!-- ...on small -->
-      <div class="ml-1 overflow-y-auto box-style widthSetting largeHidden" style=" height: 350px; width: 99%;"  v-if=" heading ==  'Risk Rating'">
-        <!-- risk ratings -->
-           <div class="w-full overflow-auto" v-if=" heading ==  'Risk Rating'">
-                          <!-- loader -->
+        <div class="flex justify-between mt-2 shadow- rounded-xl" style="height: 60px;" @click="changePageContent('Risk Rating')" :class="{'bg-gray-200': heading === 'Risk Rating', 'bg-yellow-100': heading !== 'Risk Rating'}">
+          <h2 class="my-auto ml-4 detailsNav">Risk Rating</h2>
+          <button class="px-4 my-auto detailsButton mr-9">Details<i class="pl-5 text-sm fa " :class="heading === 'Risk Rating' ? 'fa-chevron-down' : 'fa-chevron-right'" aria-hidden="true"></i></button>
+        </div>
+        <!-- ...on small -->
+        <div class="ml-1 overflow-y-auto box-style widthSetting largeHidden" style=" height: 350px; width: 99%;" v-if=" heading ==  'Risk Rating'">
+          <!-- risk ratings -->
+          <div class="w-full overflow-auto" v-if=" heading ==  'Risk Rating'">
+            <!-- loader -->
             <div class="flex mx-auto my-auto overflow-x-visible bg-gray-200 rounded-lg py-auto min-w-60 mt-7" style="height: 200px; width:200px;" v-if="spoofData.current_scan_status === 'not_scanned' && spoofData.phashes === 'processing'">
               <h1 class="my-auto ml-3 border-l-white border-y-yellow-300 spinner-border border-r-yellow-100"></h1>
-              <h1 class="my-auto ml-4 text-black py-auto h6">Scanning . . .  </h1>
+              <h1 class="my-auto ml-4 text-black py-auto h6">Scanning . . . </h1>
             </div>
             <div class="flex mt-2 hover:bg-yellow-300 DetailsTableRow" v-else v-for="riskRating in riskRatings" :key="riskRating.value">
               <div class="mt-3 ml-3 w-50 DetailsTableRowText">{{riskRating.key}}</div>
-              <div class="mt-3 ml-50 w-100 DetailsTableRowText"  v-if="Array.isArray(makeToArray(spoofData[riskRating.value]))">
+              <div class="mt-3 ml-50 w-100 DetailsTableRowText" v-if="Array.isArray(makeToArray(spoofData[riskRating.value]))">
                 <div class="mt-2" v-for="(data, index) in  makeToArray(spoofData[riskRating.value])" :key="index">
-                 <div v-if="spoofData[riskRating.value] == '' || spoofData[riskRating.value] == null" class="text-gray-400"> info not available</div>
-                 <div v-else> {{spoofData[riskRating.value]}}</div>
+                  <div v-if="spoofData[riskRating.value] == '' || spoofData[riskRating.value] == null" class="text-gray-400"> info not available</div>
+                  <div v-else> {{spoofData[riskRating.value]}}</div>
                 </div>
               </div>
-              <div class="mt-3 ml-50 w-100 DetailsTableRowText" v-else >
+              <div class="mt-3 ml-50 w-100 DetailsTableRowText" v-else>
                 <div v-if="spoofData[riskRating.value]  === '' || typeof spoofData[riskRating.value] === 'undefined' && riskRating.value !== 'High' && riskRating.value !== 'low' && riskRating.value !== 'medium' && riskRating.key !== 'Age'" class="text-gray-400">info not available</div>
                 <div v-else>{{ spoofData[riskRating.value]  }}</div>
-                 <div v-if="riskRating.value === 'High' || riskRating.value === 'low' || riskRating.value === 'medium' || riskRating.key === 'Age'"> {{riskRating.value}}</div>
+                <div v-if="riskRating.value === 'High' || riskRating.value === 'low' || riskRating.value === 'medium' || riskRating.key === 'Age'"> {{riskRating.value}}</div>
 
-              </div>  
+              </div>
             </div>
           </div>
-      </div>
-
-    </div>
-    <div class="ml-1 overflow-y-auto box-style smallHidden widthSetting" style=" height: 65vh; width: 64%;">
-      <div class="align-middle bg-gray-100 rounded-t-lg" style="height: 45px; width: 100%;">
-        <div class="py-3 pl-3 chechdetails" v-if="heading == 'Domain Details'">
-          <span class="ml-1">Area</span>
-          <span class="pl-16 ml-56 ">Details</span>
         </div>
-        <div class="py-3 pl-3 chechdetails" v-else>{{ heading }}</div>
-        <!-- will do js here -->
-          <div class="relative w-full overflow-auto"  v-if="heading == 'Screenshots'">
-                          <!-- loader -->
+
+      </div>
+      <div class="ml-1 overflow-y-auto box-style smallHidden widthSetting" style=" height: 65vh; width: 64%;">
+        <div class="align-middle bg-gray-100 rounded-t-lg" style="height: 45px; width: 100%;">
+          <div class="py-3 pl-3 chechdetails" v-if="heading == 'Domain Details'">
+            <span class="ml-1">Area</span>
+            <span class="pl-16 ml-56 ">Details</span>
+          </div>
+          <div class="py-3 pl-3 chechdetails" v-else>{{ heading }}</div>
+          <!-- will do js here -->
+          <div class="relative w-full overflow-auto" v-if="heading == 'Screenshots'">
+            <!-- loader -->
             <div class="flex mx-auto my-auto overflow-x-visible bg-gray-200 rounded-lg py-auto min-w-60 mt-7" style="height: 200px; width:200px; " v-if="spoofData.current_scan_status === 'not_scanned' && spoofData.phashes === 'processing'">
               <h1 class="my-auto ml-3 border-l-white border-y-yellow-300 spinner-border border-r-yellow-100"></h1>
-              <h1 class="my-auto ml-4 text-black py-auto h6">Scanning . . .  </h1>
+              <h1 class="my-auto ml-4 text-black py-auto h6">Scanning . . . </h1>
             </div>
             <img v-else class="w-full" :src="'/assets/screenshots/' + spoofData.spoofed_domain + '.png'" @click="openModal" alt="SORRY, IMAGE NOT FOUND . . .">
-            <Link class="absolute z-50 m-4 my-auto bg-yellow-100 right-3 bottom-6 hover:bg-yellow-300 -mt-9 buttons buttonsText w-fit" :href="'/screenshot/'+ spoofData.id"  v-if="spoofData.current_scan_status !== 'not_scanned'">>Live Screenshot</Link>
+            <Link class="absolute z-50 m-4 my-auto bg-yellow-100 right-3 bottom-6 hover:bg-yellow-300 -mt-9 buttons buttonsText w-fit" :href="'/screenshot/'+ spoofData.id" v-if="spoofData.current_scan_status !== 'not_scanned'">Live Screenshot</Link>
             <!-- <img class="w-full" :src="'/assets/systemImages/screenshotplaceholder.png'" alt="..." v-if="spoofData.screenshot === null"> -->
           </div>
 
           <!-- location -->
           <div class="w-full overflow-auto" v-if=" heading ==  'Locations'">
-               <!-- loader -->
-            <div class="flex mx-auto my-auto overflow-x-visible bg-gray-200 rounded-lg py-auto min-w-60 mt-7" style="height: 200px; width:200px;" v-if="spoofData.current_scan_status === 'not_scanned' && spoofData.phashes === 'processing'">
-              <h1 class="my-auto ml-3 border-l-white border-y-yellow-300 spinner-border border-r-yellow-100"></h1>
-              <h1 class="my-auto ml-4 text-black py-auto h6">Scanning . . .  </h1>
-            </div>
-            <iframe :src="bladeViewUrl" width="100%" height="500" v-else></iframe>
-               <!-- <div v-html="emailTemplate" width="100%" height="500"></div> -->
-             <!-- <iframe src="../../../views/map.html" width="100%" height="500px" frameborder="0"></iframe> -->
-          </div>
-            <!-- domain details -->
-            <div class="w-full overflow-auto" v-if=" heading ==  'Domain Details'">
-                            <!-- loader -->
-            <div class="flex mx-auto my-auto overflow-x-visible bg-gray-200 rounded-lg py-auto min-w-60 mt-7" style="height: 200px; width:200px;" v-if="spoofData.current_scan_status === 'not_scanned' && spoofData.phashes === 'processing'">
-              <h1 class="my-auto ml-3 border-l-white border-y-yellow-300 spinner-border border-r-yellow-100"></h1>
-              <h1 class="my-auto ml-4 text-black py-auto h6">Scanning . . .  </h1>
-            </div>
-            <div class="flex mt-2 hover:bg-yellow-300 DetailsTableRow" v-else v-for="domainDetail in domainDetails" :key="domainDetail.value">
-              <div class="mt-3 ml-3 w-50 DetailsTableRowText">{{domainDetail.key}}</div>
-              <div class="mt-3 ml-50 w-100 DetailsTableRowText"  v-if="Array.isArray(makeToArray(spoofData[domainDetail.value]))">
-                <!-- <div class="mt-2" v-for="(data, index) in  spoofData[domainDetail.value]" :key="index"> -->
-                 <div v-if="spoofData[domainDetail.value] === '' || typeof spoofData[domainDetail.value] === 'undefined' || !spoofData[domainDetail.value]" class="text-gray-400">info not available</div>
-                  <div v-else>{{extraction(spoofData[domainDetail.value])}}</div>
-                <!-- </div> -->
-              </div>
-              <div class="mt-3 ml-50 w-100 DetailsTableRowText" v-else >
-                <!-- {{ makeToArray(spoofData[domainDetail.value]) }} -->
-                 <div v-if="spoofData[domainDetail.value] === '' || typeof spoofData[domainDetail.value] === 'undefined' || !spoofData[domainDetail.value]" class="text-gray-400">info not available</div>
-                <div v-else>{{ spoofData[domainDetail.value]  }}</div>
-              </div>  
-            </div>
-          </div>
-          <!-- scan Details -->
-            <div class="w-full overflow-auto " v-if=" heading ==  'Scan Details'">
-              <!-- loader -->
-            <div class="flex mx-auto my-auto overflow-x-visible bg-gray-200 rounded-lg py-auto min-w-60 mt-7" style="height: 200px; width:200px;" v-if="spoofData.current_scan_status === 'not_scanned' && spoofData.phashes === 'processing'">
-              <h1 class="my-auto ml-3 border-l-white border-y-yellow-300 spinner-border border-r-yellow-100"></h1>
-              <h1 class="my-auto ml-4 text-black py-auto h6">Scanning . . .  </h1>
-            </div> 
-            <div class="flex mt-2 hover:bg-yellow-300 DetailsTableRow" v-else  v-for="ScanDetail in scanDetails" :key="ScanDetail.value">
-              <div class="mt-3 ml-3 w-50 DetailsTableRowText">{{ScanDetail.key}}</div>
-              <div class="mt-3 ml-50 w-100 DetailsTableRowText"  v-if="Array.isArray(makeToArray(spoofData[ScanDetail.value]))">
-                <!-- <div class="mt-2" v-for="(data, index) in  makeToArray(spoofData[ScanDetail.value])" :key="index"> -->
-                  <div v-if="spoofData[ScanDetail.value] === '' || typeof spoofData[ScanDetail.value] === 'undefined' || !spoofData[ScanDetail.value]" class="text-gray-400">info not available</div>
-                  <div v-else>
-                    <div v-if="ScanDetail.key == 'Scan Id'">{{ spoofData[ScanDetail.value] }}</div>
-                    <div v-else>{{ spoofData[ScanDetail.value] }}</div>
-                  </div>
-                  
-                <!-- </div> -->
-              </div>
-              <div class="mt-3 ml-50 w-100 DetailsTableRowText" v-else >
-                <!-- {{ makeToArray(spoofData[ScanDetail.value]) }} -->
-                <div v-if="ScanDetail.key === 'First Seen' || ScanDetail.key === 'Last Seen'">{{ScanDetail.value}} ago</div>
-               <div v-else-if="spoofData[ScanDetail.value] === '' || typeof spoofData[ScanDetail.value] === 'undefined' || !spoofData[ScanDetail.value]" class="text-gray-400">info not available</div>
-                <div v-else>{{ makeToArray(spoofData[ScanDetail.value])  }}</div>
-                 
-              </div>  
-            </div>
-          </div>
-          <!-- page statistics -->
-           <div class="w-full overflow-auto" v-if=" heading ==  'Page Statistics'">
-             <!-- loader -->
-            <div class="flex mx-auto my-auto overflow-x-visible bg-gray-200 rounded-lg py-auto min-w-60 mt-7" style="height: 200px; width:200px;" v-if="spoofData.current_scan_status === 'not_scanned' && spoofData.phashes === 'processing'">
-              <h1 class="my-auto ml-3 border-l-white border-y-yellow-300 spinner-border border-r-yellow-100"></h1>
-              <h1 class="my-auto ml-4 text-black py-auto h6">Scanning . . .  </h1>
-            </div>
-            <div class="flex mt-2 hover:bg-yellow-300 DetailsTableRow" v-else v-for="pageStatistic in pageStatistics" :key="pageStatistic.value">
-              <div class="mt-3 ml-3 w-50 DetailsTableRowText">{{pageStatistic.key}}</div>
-              <div class="mt-3 ml-50 w-100 DetailsTableRowText"  v-if="Array.isArray(makeToArray(spoofData[pageStatistic.value]))">
-                <div class="mt-2" v-for="(data, index) in  makeToArray(spoofData[pageStatistic.value])" :key="index">
-                  <!-- {{spoofData[pageStatistic.value]}} -->
-                <div v-if="spoofData[pageStatistic.value] === '' || typeof spoofData[pageStatistic.value] === 'undefined' || !spoofData[pageStatistic.value]" class="text-gray-400">info not available</div>
-                <div v-else>{{ spoofData[pageStatistic.value]  }}</div>                  
-                </div>
-              </div>
-              <div class="mt-3 ml-50 w-100 DetailsTableRowText" v-else >
-                <!-- {{ makeToArray(spoofData[pageStatistic.value]) }} -->
-                <div v-if="spoofData[pageStatistic.value] === '' || typeof spoofData[pageStatistic.value] === 'undefined' || !spoofData[pageStatistic.value]" class="text-gray-400">info not available</div>
-                <div v-else>{{ spoofData[pageStatistic.value] }}</div>
-              </div>  
-            </div>
-          </div>
-           <!-- http redirects -->
-           <div class="w-full overflow-auto" v-if=" heading ==  'HTTP Redirects'">
             <!-- loader -->
             <div class="flex mx-auto my-auto overflow-x-visible bg-gray-200 rounded-lg py-auto min-w-60 mt-7" style="height: 200px; width:200px;" v-if="spoofData.current_scan_status === 'not_scanned' && spoofData.phashes === 'processing'">
               <h1 class="my-auto ml-3 border-l-white border-y-yellow-300 spinner-border border-r-yellow-100"></h1>
-              <h1 class="my-auto ml-4 text-black py-auto h6">Scanning . . .  </h1>
+              <h1 class="my-auto ml-4 text-black py-auto h6">Scanning . . . </h1>
+            </div>
+            <iframe :src="bladeViewUrl" width="100%" height="500" v-else></iframe>
+            <!-- <div v-html="emailTemplate" width="100%" height="500"></div> -->
+            <!-- <iframe src="../../../views/map.html" width="100%" height="500px" frameborder="0"></iframe> -->
+          </div>
+          <!-- domain details -->
+          <div class="w-full overflow-auto" v-if=" heading ==  'Domain Details'">
+            <!-- loader -->
+            <div class="flex mx-auto my-auto overflow-x-visible bg-gray-200 rounded-lg py-auto min-w-60 mt-7" style="height: 200px; width:200px;" v-if="spoofData.current_scan_status === 'not_scanned' && spoofData.phashes === 'processing'">
+              <h1 class="my-auto ml-3 border-l-white border-y-yellow-300 spinner-border border-r-yellow-100"></h1>
+              <h1 class="my-auto ml-4 text-black py-auto h6">Scanning . . . </h1>
+            </div>
+            <div class="flex mt-2 hover:bg-yellow-300 DetailsTableRow" v-else v-for="domainDetail in domainDetails" :key="domainDetail.value">
+              <div class="mt-3 ml-3 w-50 DetailsTableRowText">{{domainDetail.key}}</div>
+              <div class="mt-3 ml-50 w-100 DetailsTableRowText" v-if="Array.isArray(makeToArray(spoofData[domainDetail.value]))">
+                <!-- <div class="mt-2" v-for="(data, index) in  spoofData[domainDetail.value]" :key="index"> -->
+                <div v-if="spoofData[domainDetail.value] === '' || typeof spoofData[domainDetail.value] === 'undefined' || !spoofData[domainDetail.value]" class="text-gray-400">info not available</div>
+                <div v-else>{{extraction(spoofData[domainDetail.value])}}</div>
+                <!-- </div> -->
+              </div>
+              <div class="mt-3 ml-50 w-100 DetailsTableRowText" v-else>
+                <!-- {{ makeToArray(spoofData[domainDetail.value]) }} -->
+                <div v-if="spoofData[domainDetail.value] === '' || typeof spoofData[domainDetail.value] === 'undefined' || !spoofData[domainDetail.value]" class="text-gray-400">info not available</div>
+                <div v-else>{{ spoofData[domainDetail.value]  }}</div>
+              </div>
+            </div>
+          </div>
+          <!-- scan Details -->
+          <div class="w-full overflow-auto " v-if=" heading ==  'Scan Details'">
+            <!-- loader -->
+            <div class="flex mx-auto my-auto overflow-x-visible bg-gray-200 rounded-lg py-auto min-w-60 mt-7" style="height: 200px; width:200px;" v-if="spoofData.current_scan_status === 'not_scanned' && spoofData.phashes === 'processing'">
+              <h1 class="my-auto ml-3 border-l-white border-y-yellow-300 spinner-border border-r-yellow-100"></h1>
+              <h1 class="my-auto ml-4 text-black py-auto h6">Scanning . . . </h1>
+            </div>
+            <div class="flex mt-2 hover:bg-yellow-300 DetailsTableRow" v-else v-for="ScanDetail in scanDetails" :key="ScanDetail.value">
+              <div class="mt-3 ml-3 w-50 DetailsTableRowText">{{ScanDetail.key}}</div>
+              <div class="mt-3 ml-50 w-100 DetailsTableRowText" v-if="Array.isArray(makeToArray(spoofData[ScanDetail.value]))">
+                <!-- <div class="mt-2" v-for="(data, index) in  makeToArray(spoofData[ScanDetail.value])" :key="index"> -->
+                <div v-if="spoofData[ScanDetail.value] === '' || typeof spoofData[ScanDetail.value] === 'undefined' || !spoofData[ScanDetail.value]" class="text-gray-400">info not available</div>
+                <div v-else>
+                  <div v-if="ScanDetail.key == 'Scan Id'">{{ spoofData[ScanDetail.value] }}</div>
+                  <div v-else>{{ spoofData[ScanDetail.value] }}</div>
+                </div>
+
+                <!-- </div> -->
+              </div>
+              <div class="mt-3 ml-50 w-100 DetailsTableRowText" v-else>
+                <!-- {{ makeToArray(spoofData[ScanDetail.value]) }} -->
+                <div v-if="ScanDetail.key === 'First Seen' || ScanDetail.key === 'Last Seen'">{{ScanDetail.value}} ago</div>
+                <div v-else-if="spoofData[ScanDetail.value] === '' || typeof spoofData[ScanDetail.value] === 'undefined' || !spoofData[ScanDetail.value]" class="text-gray-400">info not available</div>
+                <div v-else>{{ makeToArray(spoofData[ScanDetail.value])  }}</div>
+
+              </div>
+            </div>
+          </div>
+          <!-- page statistics -->
+          <div class="w-full overflow-auto" v-if=" heading ==  'Page Statistics'">
+            <!-- loader -->
+            <div class="flex mx-auto my-auto overflow-x-visible bg-gray-200 rounded-lg py-auto min-w-60 mt-7" style="height: 200px; width:200px;" v-if="spoofData.current_scan_status === 'not_scanned' && spoofData.phashes === 'processing'">
+              <h1 class="my-auto ml-3 border-l-white border-y-yellow-300 spinner-border border-r-yellow-100"></h1>
+              <h1 class="my-auto ml-4 text-black py-auto h6">Scanning . . . </h1>
+            </div>
+            <div class="flex mt-2 hover:bg-yellow-300 DetailsTableRow" v-else v-for="pageStatistic in pageStatistics" :key="pageStatistic.value">
+              <div class="mt-3 ml-3 w-50 DetailsTableRowText">{{pageStatistic.key}}</div>
+              <div class="mt-3 ml-50 w-100 DetailsTableRowText" v-if="Array.isArray(makeToArray(spoofData[pageStatistic.value]))">
+                <div class="mt-2" v-for="(data, index) in  makeToArray(spoofData[pageStatistic.value])" :key="index">
+                  <!-- {{spoofData[pageStatistic.value]}} -->
+                  <div v-if="spoofData[pageStatistic.value] === '' || typeof spoofData[pageStatistic.value] === 'undefined' || !spoofData[pageStatistic.value]" class="text-gray-400">info not available</div>
+                  <div v-else>{{ spoofData[pageStatistic.value]  }}</div>
+                </div>
+              </div>
+              <div class="mt-3 ml-50 w-100 DetailsTableRowText" v-else>
+                <!-- {{ makeToArray(spoofData[pageStatistic.value]) }} -->
+                <div v-if="spoofData[pageStatistic.value] === '' || typeof spoofData[pageStatistic.value] === 'undefined' || !spoofData[pageStatistic.value]" class="text-gray-400">info not available</div>
+                <div v-else>{{ spoofData[pageStatistic.value] }}</div>
+              </div>
+            </div>
+          </div>
+          <!-- http redirects -->
+          <div class="w-full overflow-auto" v-if=" heading ==  'HTTP Redirects'">
+            <!-- loader -->
+            <div class="flex mx-auto my-auto overflow-x-visible bg-gray-200 rounded-lg py-auto min-w-60 mt-7" style="height: 200px; width:200px;" v-if="spoofData.current_scan_status === 'not_scanned' && spoofData.phashes === 'processing'">
+              <h1 class="my-auto ml-3 border-l-white border-y-yellow-300 spinner-border border-r-yellow-100"></h1>
+              <h1 class="my-auto ml-4 text-black py-auto h6">Scanning . . . </h1>
             </div>
             <div class="flex mt-2 hover:bg-yellow-300 DetailsTableRow" v-else v-for="httpRedirect in httpRedirects" :key="httpRedirect.value">
               <div class="mt-3 ml-3 w-50 DetailsTableRowText">{{httpRedirect.key}}</div>
-              <div class="mt-3 ml-50 w-100 DetailsTableRowText"  v-if="Array.isArray(makeToArray(spoofData[httpRedirect.value]))">
+              <div class="mt-3 ml-50 w-100 DetailsTableRowText" v-if="Array.isArray(makeToArray(spoofData[httpRedirect.value]))">
                 <!-- <div class="mt-2" v-for="(data, index) in  makeToArray(spoofData[httpRedirect.value])" :key="index"> -->
-                  <!-- {{spoofData[httpRedirect.value]}} -->
-                 <div v-if="spoofData[httpRedirect.value] == '' || spoofData[httpRedirect.value] == null" class="text-gray-400"> info not available</div>
-                 <div v-else> {{spoofData[httpRedirect.value].replace(/[\[\]\\\"]/g, '')}}</div>
+                <!-- {{spoofData[httpRedirect.value]}} -->
+                <div v-if="spoofData[httpRedirect.value] == '' || spoofData[httpRedirect.value] == null" class="text-gray-400"> info not available</div>
+                <div v-else> {{spoofData[httpRedirect.value].replace(/[\[\]\\\"]/g, '')}}</div>
                 <!-- </div> -->
               </div>
-              <div class="mt-3 ml-50 w-100 DetailsTableRowText" v-else >
+              <div class="mt-3 ml-50 w-100 DetailsTableRowText" v-else>
                 <div v-if="spoofData[httpRedirect.value] === '' || typeof spoofData[httpRedirect.value] === 'undefined' || !spoofData[ScanDetail.value]" class="text-gray-400">info not available</div>
                 <div v-else>{{ spoofData[httpRedirect.value] }}</div>
-              </div>  
+              </div>
             </div>
           </div>
-           <!-- risk Rating -->
-           <div class="w-full overflow-auto" v-if=" heading ==  'Risk Rating'">
-                          <!-- loader -->
+          <!-- risk Rating -->
+          <div class="w-full overflow-auto" v-if=" heading ==  'Risk Rating'">
+            <!-- loader -->
             <div class="flex mx-auto my-auto overflow-x-visible bg-gray-200 rounded-lg py-auto min-w-60 mt-7" style="height: 200px; width:200px;" v-if="spoofData.current_scan_status === 'not_scanned' && spoofData.phashes === 'processing'">
               <h1 class="my-auto ml-3 border-l-white border-y-yellow-300 spinner-border border-r-yellow-100"></h1>
-              <h1 class="my-auto ml-4 text-black py-auto h6">Scanning . . .  </h1>
+              <h1 class="my-auto ml-4 text-black py-auto h6">Scanning . . . </h1>
             </div>
             <div class="flex mt-2 hover:bg-yellow-300 DetailsTableRow" v-else v-for="riskRating in riskRatings" :key="riskRating.value">
               <div class="mt-3 ml-3 w-50 DetailsTableRowText">{{riskRating.key}}</div>
-              <div class="mt-3 ml-50 w-100 DetailsTableRowText"  v-if="Array.isArray(makeToArray(spoofData[riskRating.value]))">
+              <div class="mt-3 ml-50 w-100 DetailsTableRowText" v-if="Array.isArray(makeToArray(spoofData[riskRating.value]))">
                 <div class="mt-2" v-for="(data, index) in  makeToArray(spoofData[riskRating.value])" :key="index">
-                 <div v-if="spoofData[riskRating.value] == '' || spoofData[riskRating.value] == null" class="text-gray-400"> info not available</div>
-                 <div v-else-if="riskRating.key === 'Status'">
-                  <div v-if="spoofData[riskRating.value] === '200' || spoofData[riskRating.value] === 200" class="p-1 -mt-3 bg-yellow-300 rounded-lg shadow-xl w-fit bottom-2">active</div>
-                  <div v-else-if="spoofData[riskRating.value] === null">...</div>
-                  <div v-else class="p-1 -mt-3 bg-green-300 rounded-lg shadow-xl w-fit bottom-2">not active</div>
-                </div>
-                 <div v-else> {{spoofData[riskRating.value]}}</div>
+                  <div v-if="spoofData[riskRating.value] == '' || spoofData[riskRating.value] == null" class="text-gray-400"> info not available</div>
+                  <div v-else-if="riskRating.key === 'Status'">
+                    <div v-if="spoofData[riskRating.value] === '200' || spoofData[riskRating.value] === 200" class="p-1 -mt-3 bg-yellow-300 rounded-lg shadow-xl w-fit bottom-2">active</div>
+                    <div v-else-if="spoofData[riskRating.value] === null">...</div>
+                    <div v-else class="p-1 -mt-3 bg-green-300 rounded-lg shadow-xl w-fit bottom-2">not active</div>
+                  </div>
+                  <div v-else> {{spoofData[riskRating.value]}}</div>
                 </div>
               </div>
-              <div class="mt-3 ml-50 w-100 DetailsTableRowText" v-else >
+              <div class="mt-3 ml-50 w-100 DetailsTableRowText" v-else>
                 <div v-if="spoofData[riskRating.value]  === '' || typeof spoofData[riskRating.value] === 'undefined' && riskRating.value !== 'High' && riskRating.value !== 'low' && riskRating.value !== 'No ' && riskRating.value !== 'medium' && riskRating.key !== 'Age'" class="text-gray-400">info not available</div>
                 <!-- <div v-else-if="spoofData[riskRating.key] === 'Status'">
                   <div v-if="spoofData[riskRating.value] === 200">active</div>
@@ -1035,32 +1034,32 @@ const extraction = (dateString) => {
                   <div v-else>not active</div>
                 </div> -->
                 <div v-else>{{ spoofData[riskRating.value]  }} </div>
-                 <div v-if="riskRating.value === 'High' || riskRating.value === 'low' || riskRating.value === 'medium' || riskRating.key === 'Age'" > {{riskRating.value}}</div>
-                 <div v-if="riskRating.value === 'No '" > {{riskRating.value}}Risk</div>
+                <div v-if="riskRating.value === 'High' || riskRating.value === 'low' || riskRating.value === 'medium' || riskRating.key === 'Age'"> {{riskRating.value}}</div>
+                <div v-if="riskRating.value === 'No '"> {{riskRating.value}}Risk</div>
 
-              </div>  
+              </div>
             </div>
           </div>
           <!-- <div class="w-full overflow-auto">
               <img class="w-full" :src="'/assets/screenshots/' + spoofData.spoofed_domain + '.png'" alt="...">/spoof//{spoofId}
           </div> -->
+        </div>
       </div>
     </div>
-   </div>
-   <div class="flex justify-between pt-3 mb-6">
-    <div class="flex justify-between w-96 pl-7">
-       <button class="my-2 buttons buttonsText hover:bg-yellow-300 sm:hidden lg:flex md:flex hidding" title="Mark As No Risk" @click="openModalr">Mark As No Risk</button>
+    <div class="flex justify-between pt-3 mb-6">
+      <div class="flex justify-between w-96 pl-7">
+        <button class="my-2 buttons buttonsText hover:bg-yellow-300 sm:hidden lg:flex md:flex hidding" title="Mark As No Risk" @click="openModalr">Mark As No Risk</button>
         <button class="my-auto bg-yellow-100 buttons buttonsText hover:bg-yellow-300 sm:hidden lg:flex md:flex hidding" @click="openModalm">Monitor</button>
-          <button v-if="isValidTakedown" class="my-auto bg-yellow-300 buttons buttonsText hover:bg-yellow-400" as='button' @click="reported">Stop TakeDown</button>   <!-- || spoofData.spoof_status_new == 'inprogress'|| response  || spoofData.spoof_status_new == 'completed' || spoofData.spoof_status_new == 'inprogress' <i class="text-xl fa-solid fa-ban"></i>-->
-          <button v-else class="my-auto bg-yellow-300 buttons buttonsText hover:bg-yellow-300" @click="openModalt">Take Down</button>
-         
-    </div>
-    <div class="flex justify-between mr-6 w-80">
-       <Link class="my-auto buttons buttonsText hover:bg-yellow-300" @click="changeID(spoofData.id)" :href="'/spoof/view/' + nextId2"><i class="pr-2 fa fa-chevron-left" aria-hidden="true"></i> Previous Item</Link>
+        <button v-if="isValidTakedown" class="my-auto bg-yellow-300 buttons buttonsText hover:bg-yellow-400" as='button' @click="reported">Stop TakeDown</button> <!-- || spoofData.spoof_status_new == 'inprogress'|| response  || spoofData.spoof_status_new == 'completed' || spoofData.spoof_status_new == 'inprogress' <i class="text-xl fa-solid fa-ban"></i>-->
+        <button v-else class="my-auto bg-yellow-300 buttons buttonsText hover:bg-yellow-300" @click="openModalt">Take Down</button>
+
+      </div>
+      <div class="flex justify-between mr-6 w-80">
+        <Link class="my-auto buttons buttonsText hover:bg-yellow-300" @click="changeID(spoofData.id)" :href="'/spoof/view/' + nextId2"><i class="pr-2 fa fa-chevron-left" aria-hidden="true"></i> Previous Item</Link>
         <Link class="my-auto buttons buttonsText hover:bg-yellow-300" @click="changeIDPlus(spoofData.id)" :href="'/spoof/view/' + nextId ">Next Item<i class="pr-2 fa fa-chevron-right" aria-hidden="true"></i> </Link>
+      </div>
     </div>
-   </div>
-   <!-- Modal -->
+    <!-- Modal -->
     <!-- <transition name="modal-fade" >
       <div v-if="isModalVisible && spoofData.screenshot !== null" class="backlight" @click="closeModal">
         <div
@@ -1086,141 +1085,103 @@ const extraction = (dateString) => {
       </div>
     </transition> -->
     <!--image Modal -->
-<transition name="modal-fade">
-  <div v-if="isModalVisible " class="backlight" @click="closeModal">
-    <!-- && spoofData.screenshot !== null -->
-    <div
-      role="dialog"
-      aria-modal="true"
-      class="fade image-modal dark modal show backlight lgPadding "
-      tabindex="-1"
-      style=" display: block;"
-    >
-      <div class="modal-dialog modal-xl modal-dialog-centered full_sm">
-        <div class="modal-content">
-          <div class="image-modal-content full_sm">
-            <img
-              class="card-img full-screen-image add-white-background full_sm mg_top"
-              :src="'/assets/screenshots/' + spoofData.spoofed_domain + '.png'"
-              alt="scan result screenshot"
-              style="max-height: 78vh; "
-            />
+    <transition name="modal-fade">
+      <div v-if="isModalVisible " class="backlight" @click="closeModal">
+        <!-- && spoofData.screenshot !== null -->
+        <div role="dialog" aria-modal="true" class="fade image-modal dark modal show backlight lgPadding " tabindex="-1" style=" display: block;">
+          <div class="modal-dialog modal-xl modal-dialog-centered full_sm">
+            <div class="modal-content">
+              <div class="image-modal-content full_sm">
+                <img class="card-img full-screen-image add-white-background full_sm mg_top" :src="'/assets/screenshots/' + spoofData.spoofed_domain + '.png'" alt="scan result screenshot" style="max-height: 78vh; " />
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</transition>
-<!--moniter Modal -->
-<transition name="modal-fade" >
-  <div v-if="isModalVisiblem" class="backlight" @click="closeModalm">
-    <div
-      role="dialog"
-      aria-modal="true"
-      class="fade image-modal dark modal show backlight"
-      tabindex="-1"
-      style="padding-left: 14px; display: block;"
-    >
-      <div class="modal-dialog modal-xl modal-dialog-centered" style="">
-        <div class="modal-content">
-          <div class="">
-            <div
-              class="mx-auto bg-white modelStyle"
-              style=""
-            >
-            <div class="relative w-100"> 
-              <img class="float-right" :src="'/assets/systemImages/Exit.svg'"/>
+    </transition>
+    <!--moniter Modal -->
+    <transition name="modal-fade">
+      <div v-if="isModalVisiblem" class="backlight" @click="closeModalm">
+        <div role="dialog" aria-modal="true" class="fade image-modal dark modal show backlight" tabindex="-1" style="padding-left: 14px; display: block;">
+          <div class="modal-dialog modal-xl modal-dialog-centered" style="">
+            <div class="modal-content">
+              <div class="">
+                <div class="mx-auto bg-white modelStyle" style="">
+                  <div class="relative w-100">
+                    <img class="float-right" :src="'/assets/systemImages/Exit.svg'" />
+                  </div>
+                  <div class="relative flex my-2 modelText">
+                    <img class="pr-3 mb-3" :src="'/assets/systemImages/Promo.svg'" />
+                    <img class="absolute m-2" :src="'/assets/systemImages/bookmark.svg'" />
+                    <div class="my-auto">By setting the status to 'monitoring', you are indicating that <span class="text-yellow-500">{{spoofData.spoofed_domain}} will be under constant surveillance</span> . Are you sure you want to proceed?</div>
+                  </div>
+                  <div class="relative w-100">
+                    <!-- <button class="float-right px-4 mr-3 bg-gray-300 buttons buttonsText" @click="closeModal" type="button">cancel</button> -->
+                    <Link class="float-right px-4 bg-yellow-300 buttons buttonsText" :href="'/spoof/Monitor/' + spoofData.id">confirm</Link>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="relative flex my-2 modelText">
-               <img class="pr-3 mb-3" :src="'/assets/systemImages/Promo.svg'"/>
-               <img class="absolute m-2" :src="'/assets/systemImages/bookmark.svg'"/>
-              <div class="my-auto">By setting the status to 'monitoring', you are indicating that <span class="text-yellow-500">{{spoofData.spoofed_domain}} will be under constant surveillance</span> . Are you sure you want to proceed?</div>
-            </div>
-            <div class="relative w-100" >
-              <!-- <button class="float-right px-4 mr-3 bg-gray-300 buttons buttonsText" @click="closeModal" type="button">cancel</button> -->
-               <Link class="float-right px-4 bg-yellow-300 buttons buttonsText" :href="'/spoof/Monitor/' + spoofData.id">confirm</Link>
-            </div>
-          </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</transition>
-<!--norisk Modal -->
-<transition name="modal-fade" >
-  <div v-if="isModalVisibler" class="backlight" @click="closeModalr">
-    <div
-      role="dialog"
-      aria-modal="true"
-      class="fade image-modal dark modal show backlight"
-      tabindex="-1"
-      style="padding-left: 14px; display: block;"
-    >
-      <div class="modal-dialog modal-xl modal-dialog-centered" style="">
-        <div class="modal-content">
-          <div class="">
-            <div
-              class="mx-auto bg-white modelStyle"
-              style=""
-            >
-            <div class="relative w-100"> 
-              <img class="float-right" :src="'/assets/systemImages/Exit.svg'"/>
+    </transition>
+    <!--norisk Modal -->
+    <transition name="modal-fade">
+      <div v-if="isModalVisibler" class="backlight" @click="closeModalr">
+        <div role="dialog" aria-modal="true" class="fade image-modal dark modal show backlight" tabindex="-1" style="padding-left: 14px; display: block;">
+          <div class="modal-dialog modal-xl modal-dialog-centered" style="">
+            <div class="modal-content">
+              <div class="">
+                <div class="mx-auto bg-white modelStyle" style="">
+                  <div class="relative w-100">
+                    <img class="float-right" :src="'/assets/systemImages/Exit.svg'" />
+                  </div>
+                  <div class="relative flex my-2 modelText">
+                    <img class="pr-3 " :src="'/assets/systemImages/Promo.svg'" />
+                    <img class="absolute m-2" :src="'/assets/systemImages/bookmark.svg'" />
+                    <div class="my-auto">By clicking 'Mark as Norisk', you are indicating that <span class="text-yellow-500">{{spoofData.spoofed_domain}} will be ignored</span> . Are you sure you want to proceed?</div>
+                  </div>
+                  <div class="relative w-100">
+                    <!-- <button class="float-right px-4 mr-3 bg-gray-300 buttons buttonsText" @click="closeModal" type="button">cancel</button> -->
+                    <Link class="float-right px-4 bg-yellow-300 buttons buttonsText" :href="'/spoof/markAsNoRisk/' + spoofData.id">confirm</Link>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="relative flex my-2 modelText">
-               <img class="pr-3 " :src="'/assets/systemImages/Promo.svg'"/>
-               <img class="absolute m-2" :src="'/assets/systemImages/bookmark.svg'"/>
-              <div class="my-auto">By clicking 'Mark as Norisk', you are indicating that <span class="text-yellow-500">{{spoofData.spoofed_domain}} will be ignored</span> . Are you sure you want to proceed?</div>
-        </div>
-            <div class="relative w-100" >
-              <!-- <button class="float-right px-4 mr-3 bg-gray-300 buttons buttonsText" @click="closeModal" type="button">cancel</button> -->
-               <Link class="float-right px-4 bg-yellow-300 buttons buttonsText" :href="'/spoof/markAsNoRisk/' + spoofData.id">confirm</Link>
-            </div>
-          </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</transition>
-<!--norisk Modal -->
-<transition name="modal-fade" >
-  <div v-if="isModalVisiblet" class="backlight" @click="closeModalt">
-    <div
-      role="dialog"
-      aria-modal="true"
-      class="fade image-modal dark modal show backlight"
-      tabindex="-1"
-      style="padding-left: 14px; display: block;"
-    >
-      <div class="modal-dialog modal-xl modal-dialog-centered" style="">
-        <div class="modal-content">
-          <div class="">
-            <div
-              class="mx-auto bg-white modelStyle"
-              style=""
-            >
-            <div class="relative w-100"> 
-              <img class="float-right" :src="'/assets/systemImages/Exit.svg'"/>
+    </transition>
+    <!--norisk Modal -->
+    <transition name="modal-fade">
+      <div v-if="isModalVisiblet" class="backlight" @click="closeModalt">
+        <div role="dialog" aria-modal="true" class="fade image-modal dark modal show backlight" tabindex="-1" style="padding-left: 14px; display: block;">
+          <div class="modal-dialog modal-xl modal-dialog-centered" style="">
+            <div class="modal-content">
+              <div class="">
+                <div class="mx-auto bg-white modelStyle" style="">
+                  <div class="relative w-100">
+                    <img class="float-right" :src="'/assets/systemImages/Exit.svg'" />
+                  </div>
+                  <div class="relative flex my-2 modelText">
+                    <img class="pr-3 " :src="'/assets/systemImages/Promo.svg'" />
+                    <img class="absolute m-2" :src="'/assets/systemImages/bookmark.svg'" />
+                    <div class="my-auto"><span v-if="reporte == ''">Do you want to report <span class="text-yellow-500">{{spoofData.spoofed_domain}}</span> for takedown?</span><span v-if="reporte != ''">{{reporte}} </span></div>
+                  </div>
+                  <div class="relative w-100">
+                    <!-- <button class="float-right px-4 mr-3 bg-gray-300 buttons buttonsText" @click="closeModal" type="button">cancel</button> -->
+                    <Link v-if="reporte == ''" class="float-right px-4 bg-yellow-300 buttons buttonsText" :href="'/spoof/requestAuthorization/' + spoofData.id">confirm</Link>
+                    <!-- <Link @click="closeModalt" v-if="reporte != ''" class="float-right px-4 bg-yellow-300 buttons buttonsText">cancel</Link> -->
+                    <button v-if="reporte != ''" class="float-right px-4 bg-yellow-300 buttons buttonsText" @click="submit()"> stop Takedown </button>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="relative flex my-2 modelText">
-               <img class="pr-3 " :src="'/assets/systemImages/Promo.svg'"/>
-               <img class="absolute m-2" :src="'/assets/systemImages/bookmark.svg'"/>
-              <div class="my-auto"><span v-if="reporte == ''">Do you want to report <span class="text-yellow-500">{{spoofData.spoofed_domain}}</span> for takedown?</span><span v-if="reporte != ''">{{reporte}} </span></div>
-            </div>
-            <div class="relative w-100" >
-              <!-- <button class="float-right px-4 mr-3 bg-gray-300 buttons buttonsText" @click="closeModal" type="button">cancel</button> -->
-               <Link v-if="reporte == ''" class="float-right px-4 bg-yellow-300 buttons buttonsText" :href="'/spoof/requestAuthorization/' + spoofData.id">confirm</Link>
-               <!-- <Link @click="closeModalt" v-if="reporte != ''" class="float-right px-4 bg-yellow-300 buttons buttonsText">cancel</Link> -->
-               <button v-if="reporte != ''" class="float-right px-4 bg-yellow-300 buttons buttonsText" @click="submit()"> stop Takedown </button>
-            </div>
-          </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</transition>
+    </transition>
   </AuthenticatedLayout>
 </template>
 

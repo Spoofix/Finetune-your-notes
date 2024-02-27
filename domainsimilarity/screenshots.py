@@ -5,6 +5,34 @@ from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from urllib.parse import urlparse
 from datetime import datetime
+import time
+
+#check if new screenshot in folder path before screenshot to reduse repetition
+def file_modified_within_last_day(folder_path):
+    # Get the current time
+    current_time = time.time()
+
+    # Iterate through the files in the folder
+    for filename in os.listdir(folder_path):
+        filepath = os.path.join(folder_path, filename)
+        
+        # Check if it's a file
+        if os.path.isfile(filepath):
+            # Get the file's modification time
+            modified_time = os.stat(filepath).st_mtime
+            
+            # Calculate the time difference in seconds
+            time_diff_seconds = current_time - modified_time
+            
+            # Convert time difference to days
+            time_diff_days = time_diff_seconds / (24 * 3600)
+            
+            # If the file was modified within the last day, return True
+            if time_diff_days < 1:
+                return True
+    
+    # If no file was modified within the last day, return False
+    return False
 
 def take_screenshot(url):
     try:
@@ -45,10 +73,29 @@ if __name__ == "__main__":
 
     domain_string = contents.strip()
     domain_list = domain_string.split(',')
-
     for domain in domain_list:
-        web_page_url = f'https://{domain.strip()}'
-        try:
-            take_screenshot(web_page_url)
-        except Exception as e:
-            print(f"Error taking screenshot for {web_page_url}: {e}")
+        #check if less than one day
+        folder_path = f'../public/assets/screenshots/{domain.strip()}'
+        if not os.path.exists(folder_path):
+            web_page_url = f'https://{domain.strip()}'
+            try:
+                take_screenshot(web_page_url)
+            except Exception as e:
+                web_page_url = f'http://{domain.strip()}'
+                try:
+                    take_screenshot(web_page_url)
+                except Exception as e:
+                    print(f"Error taking screenshot for {web_page_url}: {e}")
+        elif file_modified_within_last_day(folder_path):
+            print("At least one file modified less than 24hrs ago") 
+        else:
+            print("No file modified less than 24hrs ago")
+            web_page_url = f'https://{domain.strip()}'
+            try:
+                take_screenshot(web_page_url)
+            except Exception as e:
+                web_page_url = f'http://{domain.strip()}'
+                try:
+                    take_screenshot(web_page_url)
+                except Exception as e:
+                    print(f"Error taking screenshot for {web_page_url}: {e}")

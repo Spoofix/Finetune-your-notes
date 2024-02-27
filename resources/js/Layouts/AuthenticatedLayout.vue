@@ -102,217 +102,205 @@ setTimeout(function() {
 
 
 <template>
-    <div class="" style="min-height: 100vh; max-height: auto; overflow-y: hidden;" >
-        <div class="relative flex flex-row" id="page-container">   <!-- id="page-container class="sidebar-o"" -->
-         <!-- sidebar hear-->
-        <div class="hidden1" >
-          <nav class="absolute top-0 bottom-0 left-0 flex py-2 transition-all duration-300 ease-in-out transform shadow-xl smooth bg-blue flex-nowrap md:z-10 z-9999 md:translate-x-0"  style="z-index: 3; background: var(--dark-neutral-dark-neutral-10, #262626); top-0; min-height: 100vh;  position: fixed;" :class="{'navWidth px-2 ': isSidebarOpen, 'navWidthColups w-24 -mx-3 -translate-x-full ': !isSidebarOpen }" >
-            <!-- id="sidebar" -->
+  <div class="" style="min-height: 100vh; max-height: auto; overflow-y: hidden;">
+    <div class="relative flex flex-row" id="page-container"> <!-- id="page-container class="sidebar-o"" -->
+      <!-- sidebar hear-->
+      <div class="hidden1">
+        <nav class="absolute top-0 bottom-0 left-0 flex py-2 transition-all duration-300 ease-in-out transform shadow-xl smooth bg-blue flex-nowrap md:z-10 z-9999 md:translate-x-0" style="z-index: 3; background: var(--dark-neutral-dark-neutral-10, #262626); top-0; min-height: 700px; overflow-y: auto; position: fixed; max-height: 100vh;" :class="{'navWidth px-2 ': isSidebarOpen, 'navWidthColups w-24 -mx-3 -translate-x-full ': !isSidebarOpen }">
+          <!-- id="sidebar" -->
 
-            <!-- Sidebar Content -->
-            <div class="sticky top-0 sidebar-content" id="smoothTextId">
-              <!-- Side Header -->
-              <div class="content-header justify-content-lg-between">
-                <div>
-                   <div class="justify-between w-full d-flex"  v-if="isSidebarOpen" >
-                    <!-- Logo -->
-                    <Link class="pl-9 logo-div" >
-                      <span class="logo">Spoo</span>
-                      <span class="logo-fix">fix</span>
-                    </Link>
-                  </div>
-                    <div class="justify-between d-flex" v-else>
-                     <Link class="-mt-5 pl-7"  >
-                      <span class="logo">S</span>
-                      <span class="logo-fix">f</span>
-                    </Link>
-                      <!-- END Logo -->
+          <!-- Sidebar Content -->
+          <div class="sticky top-0 sidebar-content" id="smoothTextId">
+            <!-- Side Header -->
+            <div class="content-header justify-content-lg-between">
+              <div>
+                <div class="justify-between w-full d-flex" v-if="isSidebarOpen">
+                  <!-- Logo -->
+                  <Link class="pl-9 logo-div">
+                  <span class="logo">Spoo</span>
+                  <span class="logo-fix">fix</span>
+                  </Link>
+                </div>
+                <div class="justify-between d-flex" v-else>
+                  <Link class="-mt-5 pl-7">
+                  <span class="logo">S</span>
+                  <span class="logo-fix">f</span>
+                  </Link>
+                  <!-- END Logo -->
                 </div>
               </div>
             </div>
-             
+
             <div @click="toggleSidebar">
               <i class="text-xl fa-solid" style="color:#FFCC00;" :class="{'fa-angles-left -mr-9 float-right': isSidebarOpen, 'fa-angles-right ml-16': !isSidebarOpen }"></i>
             </div>
-              <div class="relative">
-                <!-- js-sidebar-scroll -->
-                <div class=" content-side content-side-full">
-                  <ul class="nav-main">
-                    <li class="nav-main-items"  :class="{'pl-4': isSidebarOpen, 'pl-3 w-6': !isSidebarOpen }">
-                      <Link class="nav-main-link" :href="route('dashboard')" @click="active('Scanned')">
-                          <i class="justify-center pt-1 my-2 text-xl text-black rounded nav-icons-background h-9 align-center w-9 nav-main-link-icon fa fa-house-user hover:active-bg" :class="pageTitle === 'Dashboard - Spoofix' ? 'active-bg' : 'nav-icons-background'"></i>
-                        <span class="nav-main-link-name sidenav_text hover:!active-text" v-if="isSidebarOpen" :class="pageTitle === 'Dashboard - Spoofix' ? 'active-text sidenav_text' : 'sidenav_text'">Dashboard</span>
-                      </Link>
-                    </li>
-                    <li class="nav-main-item" :class="{'pl-4': isSidebarOpen, 'pl-3 w-6': !isSidebarOpen }" v-if="$page.props.auth.user.role_id == 2">
-                        <Link class="nav-main-link" :href="route('domains')" @click="active('Active', 'Active2')">
-                        <i class="justify-center pt-1 my-2 text-xl text-black rounded h-9 align-center w-9 nav-main-link-icon fa fa-server nav-icons-background" :class="pageTitle === 'Scanned - Spoofix' || pageTitle === 'RequestAuthorization - Spoofix' || pageTitle === 'Domain - Spoofix' ? 'active-bg' : 'nav-icons-background'"></i>
-                        <span class="nav-main-link-name sidenav_text hover:active-text" :class="pageTitle === 'Scanned - Spoofix' || pageTitle === 'RequestAuthorization - Spoofix' || pageTitle === 'Domain - Spoofix' ? 'active-text sidenav_text' : 'sidenav_text'">Scanned</span>
-                      </Link>
-                    </li>
-                    <li class="nav-main-item"  :class="{'pl-4': isSidebarOpen, 'pl-3 w-6': !isSidebarOpen }" v-if="$page.props.auth.user.role_id == 2">
-                      <Link class="nav-main-link" :href="route('ReportForm')" @click="active('Scanned')">
-                        <i class="justify-center pt-1 my-2 text-xl text-black rounded nav-icons-background h-9 align-center w-9 nav-main-link-icon fa-regular fa-pen-to-square" :class="pageTitle === 'ReportForm - Spoofix' ? 'active-bg' : 'nav-icons-background'"></i>
-                        <span class="nav-main-link-name sidenav_text hover:active-text min-w-max" v-if="isSidebarOpen" :class="pageTitle === 'ReportForm - Spoofix' ? 'active-text sidenav_text' : 'sidenav_text'">Report Form</span>
-                      </Link>
-                    </li>
-                       <li class="nav-main-item"  :class="{'pl-4': isSidebarOpen, 'pl-3 w-6': !isSidebarOpen }" v-if="$page.props.auth.user.role_id == 2">
-                      <Link class="nav-main-link" :href="route('InProgress')" @click="active('Scanned')">
-                        <i class="justify-center pt-1 my-2 text-xl text-black rounded nav-icons-background h-9 align-center w-9 nav-main-link-icon fa-solid fa-square-poll-vertical" :class="pageTitle === 'InProgress - Spoofix'|| pageTitle === 'ScannedInProgress - Spoofix' ? 'active-bg' : 'nav-icons-background'"></i>
-                        <span class="nav-main-link-name sidenav_text hover:active-text min-w-max" v-if="isSidebarOpen" :class="pageTitle === 'InProgress - Spoofix' || pageTitle === 'ScannedInProgress - Spoofix' ? 'active-text sidenav_text' : 'sidenav_text'">In Progress</span>
-                      </Link>
-                    </li>
-                       <li class="nav-main-item"  :class="{'pl-4': isSidebarOpen, 'pl-3 w-6': !isSidebarOpen }" v-if="$page.props.auth.user.role_id == 2">
-                      <Link class="nav-main-link" :href="route('Completed')">
-                        <i class="justify-center pt-1 my-2 text-xl text-black rounded nav-icons-background h-9 align-center w-9 nav-main-link-icon fa fa-check" :class="pageTitle === 'Completed - Spoofix' || pageTitle === 'ScannedCompleted - Spoofix' ? 'active-bg' : 'nav-icons-background'"></i>
-                        <span class="nav-main-link-name sidenav_text hover:active-text" v-if="isSidebarOpen" :class="pageTitle === 'Completed - Spoofix' || pageTitle === 'ScannedCompleted - Spoofix'? 'active-text sidenav_text' : 'sidenav_text'">Completed</span>
-                      </Link>
-                    </li>
-                       <li class="nav-main-item "  :class="{'pl-4': isSidebarOpen, 'pl-3 w-6': !isSidebarOpen }">
-                      <Link class="nav-main-link" :href="route('Messages')">
-                        <i class="justify-center pt-1 my-2 text-xl text-black rounded nav-icons-background h-9 align-center w-9 nav-main-link-icon fa fa-message" :class="pageTitle === 'Messages - Spoofix' ? 'active-bg' : 'nav-icons-background'"></i>
-                        <span class="nav-main-link-name sidenav_text hover:active-text" v-if="isSidebarOpen" :class="pageTitle === 'Messages - Spoofix' ? 'active-text sidenav_text' : 'sidenav_text'">Messages</span>
-                      </Link>
-                    </li>
-                    <!-- <li class="nav-main-item" v-if="$page.props.auth.user.role_id == 1">
+            <div class="relative">
+              <!-- js-sidebar-scroll -->
+              <div class=" content-side content-side-full">
+                <ul class="nav-main">
+                  <li class="nav-main-items" :class="{'pl-4': isSidebarOpen, 'pl-3 w-6': !isSidebarOpen }">
+                    <Link class="nav-main-link" :href="route('dashboard')" @click="active('Scanned')">
+                    <i class="justify-center pt-1 my-2 text-xl text-black rounded nav-icons-background h-9 align-center w-9 nav-main-link-icon fa fa-house-user hover:active-bg" :class="pageTitle === 'Dashboard - Spoofix' ? 'active-bg' : 'nav-icons-background'"></i>
+                    <span class="nav-main-link-name sidenav_text hover:!active-text" v-if="isSidebarOpen" :class="pageTitle === 'Dashboard - Spoofix' ? 'active-text sidenav_text' : 'sidenav_text'">Dashboard</span>
+                    </Link>
+                  </li>
+                  <li class="nav-main-item" :class="{'pl-4': isSidebarOpen, 'pl-3 w-6': !isSidebarOpen }" v-if="$page.props.auth.user.role_id == 2">
+                    <Link class="nav-main-link" :href="route('domains')" @click="active('Active', 'Active2')">
+                    <i class="justify-center pt-1 my-2 text-xl text-black rounded h-9 align-center w-9 nav-main-link-icon fa fa-server nav-icons-background" :class="pageTitle === 'Scanned - Spoofix' || pageTitle === 'RequestAuthorization - Spoofix' || pageTitle === 'Domain - Spoofix' ? 'active-bg' : 'nav-icons-background'"></i>
+                    <span class="nav-main-link-name sidenav_text hover:active-text" :class="pageTitle === 'Scanned - Spoofix' || pageTitle === 'RequestAuthorization - Spoofix' || pageTitle === 'Domain - Spoofix' ? 'active-text sidenav_text' : 'sidenav_text'">Scanned</span>
+                    </Link>
+                  </li>
+                  <li class="nav-main-item" :class="{'pl-4': isSidebarOpen, 'pl-3 w-6': !isSidebarOpen }" v-if="$page.props.auth.user.role_id == 2">
+                    <Link class="nav-main-link" :href="route('ReportForm')" @click="active('Scanned')">
+                    <i class="justify-center pt-1 my-2 text-xl text-black rounded nav-icons-background h-9 align-center w-9 nav-main-link-icon fa-regular fa-pen-to-square" :class="pageTitle === 'ReportForm - Spoofix' ? 'active-bg' : 'nav-icons-background'"></i>
+                    <span class="nav-main-link-name sidenav_text hover:active-text min-w-max" v-if="isSidebarOpen" :class="pageTitle === 'ReportForm - Spoofix' ? 'active-text sidenav_text' : 'sidenav_text'">Report Form</span>
+                    </Link>
+                  </li>
+                  <li class="nav-main-item" :class="{'pl-4': isSidebarOpen, 'pl-3 w-6': !isSidebarOpen }" v-if="$page.props.auth.user.role_id == 2">
+                    <Link class="nav-main-link" :href="route('InProgress')" @click="active('Scanned')">
+                    <i class="justify-center pt-1 my-2 text-xl text-black rounded nav-icons-background h-9 align-center w-9 nav-main-link-icon fa-solid fa-square-poll-vertical" :class="pageTitle === 'InProgress - Spoofix'|| pageTitle === 'ScannedInProgress - Spoofix' ? 'active-bg' : 'nav-icons-background'"></i>
+                    <span class="nav-main-link-name sidenav_text hover:active-text min-w-max" v-if="isSidebarOpen" :class="pageTitle === 'InProgress - Spoofix' || pageTitle === 'ScannedInProgress - Spoofix' ? 'active-text sidenav_text' : 'sidenav_text'">In Progress</span>
+                    </Link>
+                  </li>
+                  <li class="nav-main-item" :class="{'pl-4': isSidebarOpen, 'pl-3 w-6': !isSidebarOpen }" v-if="$page.props.auth.user.role_id == 2">
+                    <Link class="nav-main-link" :href="route('Completed')">
+                    <i class="justify-center pt-1 my-2 text-xl text-black rounded nav-icons-background h-9 align-center w-9 nav-main-link-icon fa fa-check" :class="pageTitle === 'Completed - Spoofix' || pageTitle === 'ScannedCompleted - Spoofix' ? 'active-bg' : 'nav-icons-background'"></i>
+                    <span class="nav-main-link-name sidenav_text hover:active-text" v-if="isSidebarOpen" :class="pageTitle === 'Completed - Spoofix' || pageTitle === 'ScannedCompleted - Spoofix'? 'active-text sidenav_text' : 'sidenav_text'">Completed</span>
+                    </Link>
+                  </li>
+                  <li class="nav-main-item " :class="{'pl-4': isSidebarOpen, 'pl-3 w-6': !isSidebarOpen }">
+                    <Link class="nav-main-link" :href="route('Messages')">
+                    <i class="justify-center pt-1 my-2 text-xl text-black rounded nav-icons-background h-9 align-center w-9 nav-main-link-icon fa fa-message" :class="pageTitle === 'Messages - Spoofix' ? 'active-bg' : 'nav-icons-background'"></i>
+                    <span class="nav-main-link-name sidenav_text hover:active-text" v-if="isSidebarOpen" :class="pageTitle === 'Messages - Spoofix' ? 'active-text sidenav_text' : 'sidenav_text'">Messages</span>
+                    </Link>
+                  </li>
+                  <!-- <li class="nav-main-item" v-if="$page.props.auth.user.role_id == 1">
                       <Link class="nav-main-link" :href="route('users.list')">
                         <i class="text-xl nav-main-link-icon fa fa-grip-vertical"></i>
                         <span class="nav-main-link-name sidenav_text" v-if="isSidebarOpen">Users</span>
                       </Link>
                     </li> -->
-                <!-- <li class="text-yellow-300">{{$page.props.user_switch_data}} </li> -->
-                   
-                  </ul>
-                  </div>
-                   <div class=" content-side content-side-full">
-                  <ul class="nav-main " v-if="$page.props.auth.user.role_id == 2">
-                     <div class="absolute bottom-0 mb-3 float" style="position: fixed;">
-                      
-                  <li class="nav-main-item"  :class="{'pl-4': isSidebarOpen, 'pl-3 w-6': !isSidebarOpen }">
+                  <!-- <li class="text-yellow-300">{{$page.props.user_switch_data}} </li> -->
+
+                </ul>
+              </div>
+              <div class=" content-side content-side-full">
+                <ul class="nav-main " v-if="$page.props.auth.user.role_id == 2">
+                  <div class="absolute bottom-0 mb-3 float" style="position: fixed;">
+
+                    <li class="nav-main-item" :class="{'pl-4': isSidebarOpen, 'pl-3 w-6': !isSidebarOpen }">
                       <Link class="nav-main-link" :href="route('domains')">
-                        <i class="justify-center pt-1 my-2 text-xl text-black bg-white rounded h-9 align-center w-9 nav-main-link-icon fa-solid fa-circle-question"></i>
-                        <span class="nav-main-link-name sidenav_text min-w-max" v-if="isSidebarOpen">Help Center</span>
+                      <i class="justify-center pt-1 my-2 text-xl text-black bg-white rounded h-9 align-center w-9 nav-main-link-icon fa-solid fa-circle-question"></i>
+                      <span class="nav-main-link-name sidenav_text min-w-max" v-if="isSidebarOpen">Help Center</span>
                       </Link>
                     </li>
-                     <li class="nav-main-item"  :class="{'pl-4': isSidebarOpen, 'pl-3 w-6': !isSidebarOpen }">
+                    <li class="nav-main-item" :class="{'pl-4': isSidebarOpen, 'pl-3 w-6': !isSidebarOpen }">
                       <Link class="nav-main-link" :href="route('domains')">
-                        <i class="justify-center pt-1 my-2 text-xl text-black bg-white rounded h-9 align-center w-9 nav-main-link-icon fa fa-lightbulb"></i>
-                        <span class="nav-main-link-name sidenav_text" v-if="isSidebarOpen">Feedback</span>
+                      <i class="justify-center pt-1 my-2 text-xl text-black bg-white rounded h-9 align-center w-9 nav-main-link-icon fa fa-lightbulb"></i>
+                      <span class="nav-main-link-name sidenav_text" v-if="isSidebarOpen">Feedback</span>
                       </Link>
                     </li>
                   </div>
                 </ul>
-                </div>
-                
-                <!-- END Side Navigation -->
               </div>
-              <!-- END Sidebar Scrolling -->
+
+              <!-- END Side Navigation -->
             </div>
-            <!-- Sidebar Content -->
-         </nav>
-         <!-- nav colups -->
-        
-        </div>
-          <!-- END Sidebar -->
+            <!-- END Sidebar Scrolling -->
+          </div>
+          <!-- Sidebar Content -->
+        </nav>
+        <!-- nav colups -->
 
-          
-        <!-- div 2 -->
-          <div class="bg-white small w-100 " :class="{'div2Opened smallScreen ': isSidebarOpen, 'div2Closed': !isSidebarOpen }" >
-            <!-- style="padding-left:296px;" -->
-            <!-- Header -->
-          <header class="flex justify-between positioning container-fluid headerr WidthOnSmall "  style="z-index: 2;"> 
-            <!-- style="padding-left:296px;" -->
-            <!-- dropdown -->
-              <div class="flex pl-3 my-auto" >
-                <div class="mt-2 text-2xl font-bold" @click="toggleSidebar">
-                  <i class="fa fa-bars bars hover:bounce"  aria-hidden="true"></i>
-                </div>
-                 <!-- User Dropdown -->
-                <div class="dropdown d-inline-block">
-                  <button type="button" class="w-40 border-none md:w-52 btn btn-sm hover:bg-yellow-300 active:bg-yellow-300 d-flex" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    
-                    <img
-                    v-if="!$page.props.auth.user.profile_pic"
-                    class="h-8 w-8 rounded-full object-cover d-lg=none mx-3"
-                    src="https://randomuser.me/api/portraits/men/30.jpg"
-                    alt=""
-                  />
-                    <img v-else 
-                    :src="$page.props.auth.user.profile_pic"
-                     alt="Profile Picture"
-                    class="h-8 w-8 rounded-full object-cover d-lg=none mx-3"
-                    />             
-                  <div class="my-auto userName text-capitalize" style="">
-                    <span class="">{{ $page.props.auth.user.name }}</span>
-                    
-                  </div>
-                  </button>
-                  <div class="p-0 ml-10 dropdown-menu dropdown-menu-md dropdown-menu-end" aria-labelledby="page-header-user-dropdown">
-                    <div class="px-2 py-3 bg-yellow-100 rounded-top">
-                      <h5 class="mb-0 text-center h6 text-capitalize">
-                        welcome {{ $page.props.auth.user.name }}
-                      </h5>
-                    </div>
-                    <div class="p-2 ">
-                      <Link class="space-x-1 font-black dropdown-item d-flex align-items-center justify-content-between hover:bg-yellow-100" :href="route('settings.account')" v-if="$page.props.auth.user.role_id == 2">
-                        <span>Profile</span>
-                        <i class="opacity-50 hover:opacity-25 fa fa-fw fa-user"></i>
-                      </Link>
-                      <div class="dropdown-divider"></div>
-                      <Link class="space-x-1 font-black dropdown-item d-flex align-items-center justify-content-between hover:bg-yellow-100" as="button" :href="route('logout')" method="post" >
-                        <span>Log Out</span>
-                        <i class="opacity-50 hover:opacity-25 fa fa-fw fa-sign-out-alt"></i>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-                <!-- END User Dropdown -->
+      </div>
+      <!-- END Sidebar -->
 
-              </div>
-            <!-- header buttons -->
-              <div class="flex flex-row" :class="{ 'mt-5': $page.props.auth.user.role_id === 1 }">
-                <Link class="-mr-8 nav-main-link" :href="route('settings.notifications')" v-if="$page.props.auth.user.role_id == 2">
-                    <i class="justify-center pt-1 text-xl text-black rounded nav-icons-background h-9 align-center w-9 nav-main-link-icon fa fa-bell"></i>
+      <!-- div 2 -->
+      <div class="bg-white small w-100 " :class="{'div2Opened smallScreen ': isSidebarOpen, 'div2Closed': !isSidebarOpen }">
+        <!-- style="padding-left:296px;" -->
+        <!-- Header -->
+        <header class="flex justify-between positioning container-fluid headerr WidthOnSmall " style="z-index: 2;">
+          <!-- style="padding-left:296px;" -->
+          <!-- dropdown -->
+          <div class="flex pl-3 my-auto">
+            <div class="mt-2 text-2xl font-bold" @click="toggleSidebar">
+              <i class="fa fa-bars bars hover:bounce" aria-hidden="true"></i>
+            </div>
+            <!-- User Dropdown -->
+            <div class="dropdown d-inline-block">
+              <button type="button" class="w-40 border-none md:w-52 btn btn-sm hover:bg-yellow-300 active:bg-yellow-300 d-flex" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                <img v-if="!$page.props.auth.user.profile_pic" class="h-8 w-8 rounded-full object-cover d-lg=none mx-3" src="https://randomuser.me/api/portraits/men/30.jpg" alt="" />
+                <img v-else :src="$page.props.auth.user.profile_pic" alt="Profile Picture" class="h-8 w-8 rounded-full object-cover d-lg=none mx-3" />
+                <div class="my-auto userName text-capitalize" style="">
+                  <span class="">{{ $page.props.auth.user.name }}</span>
+
+                </div>
+              </button>
+              <div class="p-0 ml-10 dropdown-menu dropdown-menu-md dropdown-menu-end" aria-labelledby="page-header-user-dropdown">
+                <div class="px-2 py-3 bg-yellow-100 rounded-top">
+                  <h5 class="mb-0 text-center h6 text-capitalize">
+                    welcome {{ $page.props.auth.user.name }}
+                  </h5>
+                </div>
+                <div class="p-2 ">
+                  <Link class="space-x-1 font-black dropdown-item d-flex align-items-center justify-content-between hover:bg-yellow-100" :href="route('settings.account')" v-if="$page.props.auth.user.role_id == 2">
+                  <span>Profile</span>
+                  <i class="opacity-50 hover:opacity-25 fa fa-fw fa-user"></i>
                   </Link>
-                <Link class="nav-main-link" :href="route('settings.account')" v-if="$page.props.auth.user.role_id == 2">
-                  <i class="justify-center pt-1 text-xl text-black rounded nav-icons-background h-9 align-center w-9 nav-main-link-icon fa fa-gear"></i>
-                </Link>
+                  <div class="dropdown-divider"></div>
+                  <Link class="space-x-1 font-black dropdown-item d-flex align-items-center justify-content-between hover:bg-yellow-100" as="button" :href="route('logout')" method="post">
+                  <span>Log Out</span>
+                  <i class="opacity-50 hover:opacity-25 fa fa-fw fa-sign-out-alt"></i>
+                  </Link>
+                </div>
               </div>
-          </header>
-          <!-- END Header -->
+            </div>
+            <!-- END User Dropdown -->
 
-          <!-- Main Container -->
-          <main id="" >
-            <!-- Page Content -->
-            <div class="relative overflow-auto -mt-14 WidthOnSmall" >
-              <!-- style="margin-left: 295px;" -->
-              <!-- && uuid -->
-              <!-- && uuid -->
-              <div v-if="$page.props.user_switch_data " >
-             <div v-if="$page.props.auth.user.role_id == 2 && $page.props.auth.user.id === $page.props.user_switch_data.user_id " 
-                   class="fixed bottom-0 right-0 z-10 flex items-center p-4 m-4 text-lg font-extrabold text-black bg-yellow-400 rounded-lg shadow-2xl hover:shadow-yellow-800">
-            <Link :href="'/back_to_admin/' + $page.props.user_switch_data.admin_id" as="button">
+          </div>
+          <!-- header buttons -->
+          <div class="flex flex-row" :class="{ 'mt-5': $page.props.auth.user.role_id === 1 }">
+            <Link class="-mr-8 nav-main-link" :href="route('settings.notifications')" v-if="$page.props.auth.user.role_id == 2">
+            <i class="justify-center pt-1 text-xl text-black rounded nav-icons-background h-9 align-center w-9 nav-main-link-icon fa fa-bell"></i>
+            </Link>
+            <Link class="nav-main-link" :href="route('settings.account')" v-if="$page.props.auth.user.role_id == 2">
+            <i class="justify-center pt-1 text-xl text-black rounded nav-icons-background h-9 align-center w-9 nav-main-link-icon fa fa-gear"></i>
+            </Link>
+          </div>
+        </header>
+        <!-- END Header -->
+
+        <!-- Main Container -->
+        <main id="">
+          <!-- Page Content -->
+          <div class="relative overflow-auto -mt-14 WidthOnSmall">
+            <!-- style="margin-left: 295px;" -->
+            <!-- && uuid -->
+            <!-- && uuid -->
+            <div v-if="$page.props.user_switch_data ">
+              <div v-if="$page.props.auth.user.role_id == 2 && $page.props.auth.user.id === $page.props.user_switch_data.user_id " class="fixed bottom-0 right-0 z-10 flex items-center p-4 m-4 text-lg font-extrabold text-black bg-yellow-400 rounded-lg shadow-2xl hover:shadow-yellow-800">
+                <Link :href="'/back_to_admin/' + $page.props.user_switch_data.admin_id" as="button">
                 <!-- {{$page.props.user_switch_data.admin_ip}} -->
                 <span class="capitalize">Exit {{$page.props.auth.user.name}}</span>
                 <i class="ml-4 fas fa-arrow-left"></i>
-              </Link>
-            </div>
+                </Link>
+              </div>
 
             </div>
             <slot />
 
-            </div>
-            <!-- END Page Content -->
-          </main>
-          <!-- END Main Container -->
+          </div>
+          <!-- END Page Content -->
+        </main>
+        <!-- END Main Container -->
 
-     
-     <footer class="justify-center w-full pb-1 bg-white" style="position: fixed; bottom: 0; left: 0; text-align: center;">
-      <div class="m-auto mt-1 w-fit copyright">Copyright  Spoofix @2023  All Rights Reserved</div>
-    </footer>
-        </div>
-        </div>
+        <footer class="justify-center w-full pb-1 bg-white" style="position: fixed; bottom: 0; left: 0; text-align: center;">
+          <div class="m-auto mt-1 w-fit copyright">Copyright Spoofix @{{new Date().getFullYear()}} All Rights Reserved</div>
+        </footer>
+      </div>
     </div>
+  </div>
 </template>
 <!-- /* Sidebar styles */ -->
 <style>
