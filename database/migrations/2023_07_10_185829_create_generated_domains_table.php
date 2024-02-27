@@ -61,7 +61,7 @@ return new class extends Migration
             $table->string('security_headers')->nullable();
             $table->enum('spoof_status_new', ['scanned', 'inprogress', 'completed'])->default('scanned');
             $table->enum('current_scan_status', ['scanned', 'not_scanned'])->default('not_scanned');
-            $table->enum('progress_status', ['new', 'monitoring', 'pending_authentication'])->default('new');
+            $table->enum('progress_status', ['new', 'stop_monitoring','monitoring', 'pending_authentication'])->default('new');
             $table->timestamps();
         });
     }
