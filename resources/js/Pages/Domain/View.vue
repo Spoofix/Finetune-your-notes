@@ -5,7 +5,7 @@ import Swal from 'sweetalert2'
 import { Link } from "@inertiajs/vue3"
 import { defineComponent } from 'vue';
 import { defineProps, onMounted } from 'vue';
-import { ref, watch } from 'vue';
+import { ref, watch,  } from 'vue';
 
 const props = defineProps({
   domain: {
@@ -18,7 +18,7 @@ const props = defineProps({
     type: Object,
   },
   userid: {
-    type: Object,
+    type: Number,
   },
   spoofList: {
     type: Object,
@@ -27,12 +27,30 @@ const props = defineProps({
     type: Object,
   },
   firstSeen:{
-    type: Object,
+    type: String,
   },
   isValidTakedown:{
-    type: Object
+    type: Boolean,
   }
-  
+});
+
+
+
+// get screenshots urls
+const filenames = ref([]);
+
+onMounted(async () => {
+  try {
+    const domain = props.spoofData.spoofed_domain;
+    const response = await fetch(`http://127.0.0.1:8000/latest_screenshots/${domain}`);
+    if (!response.ok) {
+      throw new Error('Failed to fetch latest screenshots');
+    }
+    const data = await response.json();
+    filenames.value = data.filenames;
+  } catch (error) {
+    console.error(error.message);
+  }
 });
 
 function ageContribution(age) {
@@ -81,7 +99,7 @@ const calculateTimeDifference = (dateString) => {
       }
     }
 
-    return 'Past';
+    return '0 hours';
   } else if (Array.isArray(dateString)) {
     const firstDateString = dateString[0];
 
@@ -530,19 +548,35 @@ if (!props.isValidTakedown) {
     nextId = ref(nextIdIndex !== -1 ? props.spoofList[nextIdIndex].id : props.spoofData.id);
     nextId2 = ref(nextId2Index !== -1 ? props.spoofList[nextId2Index].id : props.spoofData.id);
 }
+// let nextId, nextId2;
+
+// if (!props.isValidTakedown) {
+//     const nextIdIndex = Array.isArray(props.spoofList) ? props.spoofList.findIndex(obj => Object.values(obj).includes(props.spoofData.id + 1)) : -1;
+//     const nextId2Index = Array.isArray(props.spoofList) ? props.spoofList.findIndex(obj => Object.values(obj).includes(props.spoofData.id - 1)) : -1;
+
+//     nextId = ref(nextIdIndex !== -1 ? props.spoofList[nextIdIndex].id : props.spoofData.id);
+//     nextId2 = ref(nextId2Index !== -1 ? props.spoofList[nextId2Index].id : props.spoofData.id);
+// } else {
+//     const nextIdIndex = Array.isArray(props.spoofList) ? props.spoofList.findIndex(obj => Object.values(obj).includes(props.spoofData.id + 1)) : -1;
+//     const nextId2Index = Array.isArray(props.spoofList) ? props.spoofList.findIndex(obj => Object.values(obj).includes(props.spoofData.id - 1)) : -1;
+
+//     nextId = ref(nextIdIndex !== -1 ? props.spoofList[nextIdIndex].id : props.spoofData.id);
+//     nextId2 = ref(nextId2Index !== -1 ? props.spoofList[nextId2Index].id : props.spoofData.id);
+// }
+
 
 
 const scanDetails = [
   { key: 'Domain Name', value: 'spoofed_domain' },
   { key: 'First Seen', value: calculateTimeDifference(props.firstSeen)},//'created_at' 
   { key: 'Last Seen', value:  calculateTimeDifference(props.spoofData.updated_at) },//'updated_at'
-  { key: 'Scan Id', value: 'id' },
+  //{ key: 'Scan Id', value: 'id' },
   { key: 'Country Registered', value: 'country' },
   { key: 'Server Country', value: 'server_country' },
   { key: 'Server Region', value: 'region' },
   { key: 'Server City', value: 'server_city' },
   { key: 'IP Address', value: 'ip_address' },
-  { key: 'Organization', value: 'org' },
+  { key: 'Organization', value: 'organization' },
   // location
     // { key: 'Server Country', value: 'server_country' },
   { key: 'Logitude ', value: 'longitude' },
@@ -552,10 +586,10 @@ const pageStatistics = [
   { key: 'Internet servise provider', value: 'isp' },
   { key: 'Secure Sockets Layer', value: 'ssl_certificate_details' },
   { key: 'Server Os', value: 'server_os' },
-  { key: 'Organization', value: 'org' },
+  { key: 'Organization', value: 'organization' },
   { key: 'Security Headers', value: 'security_headers' },
-  { key: 'Console Messages', value: 'console_messages' },
-  { key: 'Cookies', value: 'cookies' },
+  // { key: 'Console Messages', value: 'console_messages' },
+  // { key: 'Cookies', value: 'cookies' },
   
 ];
 const domainDetails = [
@@ -563,14 +597,14 @@ const domainDetails = [
   { key: 'Registration Date', value: 'registrationDate' },
   { key: 'Registrar', value: 'registrar' },
   { key: 'Domain Update Date', value: 'update_date' },
-  { key: 'Referal Urls', value: 'referral_url' },
+  // { key: 'Referal Urls', value: 'referral_url' },
   { key: 'Domain Expiry Date', value: 'expiration_date' },
   { key: 'City', value: 'city' },
   { key: 'Name Servers', value: 'name_servers' },
   { key: 'Domain Name System Security Extensions', value: 'dnssec' },
   { key: 'Address', value: 'address' },
   { key: 'State', value: 'state' },
-  { key: 'Registrant Postal Code', value: 'regestrant_postal_code' },
+  { key: 'Registrant Postal Code', value: 'registrant_postal_code' },
   
 ];
 const location = [
@@ -583,8 +617,8 @@ const location = [
 const httpRedirects = [
   { key: 'Http Redirects', value: 'redirect_urls' },
   { key: 'Http Status Code', value: 'http_status_code' },
-  { key: 'Cookies Information', value: '' },
-  { key: 'Console Messages', value: '' },
+  // { key: 'Cookies Information', value: '' },
+  // { key: 'Console Messages', value: '' },
   
 ];
 // methods.webflowRatingLabel(methods.webflowRating(spoofData))
@@ -655,6 +689,21 @@ const extraction = (dateString) => {
 //     });
 // }
 // }
+
+// image history
+const imageId = ref(0);
+
+function imageLeft() {
+  if (imageId.value > 0) {
+    imageId.value = imageId.value - 1;
+  }
+}
+
+function imageRight() {
+  if (imageId.value < filenames.length - 1) {
+    imageId.value = imageId.value + 1;
+  }
+}
 </script>
 
 <template>
@@ -666,8 +715,16 @@ const extraction = (dateString) => {
   <Head v-else title="Domain" />
 
   <!-- ScannedCompleted-->
-
+  <!-- testing  -->
+  <!-- <div v-if="1==1" style="z-index: 1000; background-color: white;">
+    <h1>Latest Screenshots</h1>
+    <ul>
+      <li v-for="filename in filenames" :key="filename">{{ filename }}</li>
+      <li>{{filenames[0]}}</li>
+    </ul>
+  </div> -->
   <AuthenticatedLayout v-if=" props.userid === userId" class="overflow-scroll fontFamily" style="height:100vh; background: #FFF;">
+
     <div class="flex justify-between mt-6 w-100">
       <div class="relative ml-6">
         <button class="absolute w-40 h-12 px-3 rounded-tr-full bg-dark tabsText" style="">{{props.domain[0].domain_name}}</button>
@@ -814,8 +871,12 @@ const extraction = (dateString) => {
               <h1 class="my-auto ml-3 border-l-white border-y-yellow-300 spinner-border border-r-yellow-100"></h1>
               <h1 class="my-auto ml-4 text-black py-auto h6">Scanning . . . </h1>
             </div>
-            <img v-else class="w-full" :src="'/assets/screenshots/' + spoofData.spoofed_domain + '.png'" alt="SORRY ( : ,IMAGE NOT FOUND"> <!-- v-if="spoofData.screenshot !== null">-->
-            <!-- <img class="w-full" :src="'/assets/systemImages/screenshotplaceholder.png'" alt="..." v-if="spoofData.screenshot === null"> -->
+            <div v-else>
+              <img v-if="filenames[0]" class="w-full" :src="'/assets/screenshots/' + spoofData.spoofed_domain + '/' + filenames[0]" alt="SORRY ( : ,IMAGE NOT FOUND" @click="openModal">
+
+              <img v-else class="w-full" :src="'/assets/systemImages/screenshotplaceholder.png'" alt="..." />
+            </div>
+
           </div>
         </div>
         <!-- .. -->
@@ -895,8 +956,11 @@ const extraction = (dateString) => {
               <h1 class="my-auto ml-3 border-l-white border-y-yellow-300 spinner-border border-r-yellow-100"></h1>
               <h1 class="my-auto ml-4 text-black py-auto h6">Scanning . . . </h1>
             </div>
-            <img v-else class="w-full" :src="'/assets/screenshots/' + spoofData.spoofed_domain + '.png'" @click="openModal" alt="SORRY, IMAGE NOT FOUND . . .">
-            <Link class="absolute z-50 m-4 my-auto bg-yellow-100 right-3 bottom-6 hover:bg-yellow-300 -mt-9 buttons buttonsText w-fit" :href="'/screenshot/'+ spoofData.id" v-if="spoofData.current_scan_status !== 'not_scanned'">Live Screenshot</Link>
+            <div v-else>
+              <img v-if="filenames[0]" class="w-full" :src="'/assets/screenshots/' + spoofData.spoofed_domain + '/' + filenames[0]" alt="SORRY ( : ,IMAGE NOT FOUND" @click="openModal">
+              <img v-else class="w-full" :src="'/assets/systemImages/screenshotplaceholder.png'" alt="..." />
+            </div>
+            <Link class="absolute z-50 m-4 my-auto bg-yellow-100 right-3 bottom-6 hover:bg-yellow-300 -mt-9 buttons buttonsText w-fit" :href="'/screenshot/'+ spoofData.id" v-if="spoofData.current_scan_status !== 'not_scanned'">>Live Screenshot</Link>
             <!-- <img class="w-full" :src="'/assets/systemImages/screenshotplaceholder.png'" alt="..." v-if="spoofData.screenshot === null"> -->
           </div>
 
@@ -1021,22 +1085,21 @@ const extraction = (dateString) => {
                   <div v-else-if="riskRating.key === 'Status'">
                     <div v-if="spoofData[riskRating.value] === '200' || spoofData[riskRating.value] === 200" class="p-1 -mt-3 bg-yellow-300 rounded-lg shadow-xl w-fit bottom-2">active</div>
                     <div v-else-if="spoofData[riskRating.value] === null">...</div>
-                    <div v-else class="p-1 -mt-3 bg-green-300 rounded-lg shadow-xl w-fit bottom-2">not active</div>
+                    <div v-else class="p-1 -mt-3 rounded-lg shadow-xl w-fit bottom-2" style="background-color: #aedd9d2a;">not active</div>
                   </div>
                   <div v-else> {{spoofData[riskRating.value]}}</div>
                 </div>
               </div>
               <div class="mt-3 ml-50 w-100 DetailsTableRowText" v-else>
-                <div v-if="spoofData[riskRating.value]  === '' || typeof spoofData[riskRating.value] === 'undefined' && riskRating.value !== 'High' && riskRating.value !== 'low' && riskRating.value !== 'No ' && riskRating.value !== 'medium' && riskRating.key !== 'Age'" class="text-gray-400">info not available</div>
+                <div v-if="spoofData[riskRating.value]  === '' || typeof spoofData[riskRating.value] === 'undefined' && riskRating.value !== 'High' && riskRating.value !== 'low' && riskRating.value !== 'Low' && riskRating.value !== 'No ' && riskRating.value !== 'medium' && riskRating.key !== 'Age'" class="text-gray-400">info not available</div>
                 <!-- <div v-else-if="spoofData[riskRating.key] === 'Status'">
                   <div v-if="spoofData[riskRating.value] === 200">active</div>
                   <div v-else-if="spoofData[riskRating.value] === null">...</div>
                   <div v-else>not active</div>
                 </div> -->
                 <div v-else>{{ spoofData[riskRating.value]  }} </div>
-                <div v-if="riskRating.value === 'High' || riskRating.value === 'low' || riskRating.value === 'medium' || riskRating.key === 'Age'"> {{riskRating.value}}</div>
+                <div v-if="riskRating.value === 'High' || riskRating.value === 'low' || riskRating.value === 'Low' || riskRating.value === 'medium' || riskRating.key === 'Age'"> {{riskRating.value}}</div>
                 <div v-if="riskRating.value === 'No '"> {{riskRating.value}}Risk</div>
-
               </div>
             </div>
           </div>
@@ -1046,35 +1109,23 @@ const extraction = (dateString) => {
         </div>
       </div>
     </div>
-    <<<<<<< HEAD <div class="flex justify-between pt-3 mb-6">
+    <div class="flex justify-between pt-3 mb-6">
       <div class="flex justify-between w-96 pl-7">
-        <button class="my-2 buttons buttonsText hover:bg-yellow-300 sm:hidden lg:flex md:flex hidding" title="Mark As No Risk" @click="openModalr">Mark As No Risk</button>
-        <button class="my-auto bg-yellow-100 buttons buttonsText hover:bg-yellow-300 sm:hidden lg:flex md:flex hidding" @click="openModalm">Monitor</button>
+        <button class="my-2 buttons buttonsText hover:bg-yellow-300 sm:hidden lg:flex md:flex hidding" title="Mark Safe" @click="openModalr">Mark Safe</button>
+        <!-- <button class="my-auto bg-yellow-100 buttons buttonsText hover:bg-yellow-300 sm:hidden lg:flex md:flex hidding" @click="openModalm">Monitor</button> -->
+        <button v-if="props.spoofData.progress_status == 'monitoring'" class="my-auto bg-yellow-100 buttons buttonsText hover:bg-yellow-300 sm:hidden lg:flex md:flex hidding" @click="openModalm">Stop Monitoring</button>
+        <button v-else class="my-auto bg-yellow-100 buttons buttonsText hover:bg-yellow-300 sm:hidden lg:flex md:flex hidding" @click="openModalm">Monitor</button>
         <button v-if="isValidTakedown" class="my-auto bg-yellow-300 buttons buttonsText hover:bg-yellow-400" as='button' @click="reported">Stop TakeDown</button> <!-- || spoofData.spoof_status_new == 'inprogress'|| response  || spoofData.spoof_status_new == 'completed' || spoofData.spoof_status_new == 'inprogress' <i class="text-xl fa-solid fa-ban"></i>-->
         <button v-else class="my-auto bg-yellow-300 buttons buttonsText hover:bg-yellow-300" @click="openModalt">Take Down</button>
 
       </div>
       <div class="flex justify-between mr-6 w-80">
         <Link class="my-auto buttons buttonsText hover:bg-yellow-300" @click="changeID(spoofData.id)" :href="'/spoof/view/' + nextId2"><i class="pr-2 fa fa-chevron-left" aria-hidden="true"></i> Previous Item</Link>
-        =======
+        <Link class="my-auto buttons buttonsText hover:bg-yellow-300" @click="changeIDPlus(spoofData.id)" :href="'/spoof/view/' + nextId ">Next Item<i class="pr-2 fa fa-chevron-right" aria-hidden="true"></i> </Link>
       </div>
-      <div class="flex justify-between pt-3 mb-6">
-        <div class="flex justify-between w-96 pl-7">
-          <button class="my-2 buttons buttonsText hover:bg-yellow-300 sm:hidden lg:flex md:flex hidding" title="Mark As No Risk" @click="openModalr">Mark As No Risk</button>
-          <button v-if="props.spoofData.progress_status == 'monitoring'" class="my-auto bg-yellow-100 buttons buttonsText hover:bg-yellow-300 sm:hidden lg:flex md:flex hidding" @click="openModalm">Stop Monitoring</button>
-          <button v-else class="my-auto bg-yellow-100 buttons buttonsText hover:bg-yellow-300 sm:hidden lg:flex md:flex hidding" @click="openModalm">Monitor</button>
-          <button v-if="isValidTakedown" class="my-auto bg-yellow-300 buttons buttonsText hover:bg-yellow-400" as='button' @click="reported">Stop TakeDown</button> <!-- || spoofData.spoof_status_new == 'inprogress'|| response  || spoofData.spoof_status_new == 'completed' || spoofData.spoof_status_new == 'inprogress' <i class="text-xl fa-solid fa-ban"></i>-->
-          <button v-else class="my-auto bg-yellow-300 buttons buttonsText hover:bg-yellow-300" @click="openModalt">Take Down</button>
-
-        </div>
-        <div class="flex justify-between mr-6 w-80">
-          <Link class="my-auto buttons buttonsText hover:bg-yellow-300" @click="changeID(spoofData.id)" :href="'/spoof/view/' + nextId2"><i class="pr-2 fa fa-chevron-left" aria-hidden="true"></i> Previous Item</Link>
-          >>>>>>> 27c8ae42c888897ced185abc192c16c641416d4d
-          <Link class="my-auto buttons buttonsText hover:bg-yellow-300" @click="changeIDPlus(spoofData.id)" :href="'/spoof/view/' + nextId ">Next Item<i class="pr-2 fa fa-chevron-right" aria-hidden="true"></i> </Link>
-        </div>
-      </div>
-      <!-- Modal -->
-      <!-- <transition name="modal-fade" >
+    </div>
+    <!-- Modal -->
+    <!-- <transition name="modal-fade" >
       <div v-if="isModalVisible && spoofData.screenshot !== null" class="backlight" @click="closeModal">
         <div
           role="dialog"
@@ -1098,150 +1149,156 @@ const extraction = (dateString) => {
         </div>
       </div>
     </transition> -->
-      <!--image Modal -->
-      <transition name="modal-fade">
-        <div v-if="isModalVisible " class="backlight" @click="closeModal">
-          <!-- && spoofData.screenshot !== null -->
-          <div role="dialog" aria-modal="true" class="fade image-modal dark modal show backlight lgPadding " tabindex="-1" style=" display: block;">
-            <div class="modal-dialog modal-xl modal-dialog-centered full_sm">
-              <div class="modal-content">
-                <div class="image-modal-content full_sm">
-                  <img class="card-img full-screen-image add-white-background full_sm mg_top" :src="'/assets/screenshots/' + spoofData.spoofed_domain + '.png'" alt="scan result screenshot" style="max-height: 78vh; " />
+    <!--image Modal -->
+    <transition name="modal-fade">
+      <div v-if="isModalVisible " class="backlight" @click="closeModal">
+        <!-- && spoofData.screenshot !== null -->
+        <div role="dialog" aria-modal="true" class="fade image-modal dark modal show backlight lgPadding " tabindex="-1" style=" display: block;">
+          <div class="modal-dialog modal-xl modal-dialog-centered full_sm">
+            <!-- <div class="modal-content">
+              <div class="image-modal-content full_sm">
+                <img class="card-img full-screen-image add-white-background full_sm mg_top" :src="'/assets/screenshots/' + spoofData.spoofed_domain+'/'+filenames[0]" alt="scan result screenshot" style="max-height: 78vh; " />
+                <button><i></i></button>
+                <button><i></i></button>
+              </div>
+            </div> -->
+            <div class="modal-content">
+              <div class="relative image-modal-content full_sm">
+                <img class="card-img full-screen-image add-white-background full_sm mg_top" :src="'/assets/screenshots/' + spoofData.spoofed_domain + '/' + filenames[imageId]" alt="scan result screenshot" style="max-height: 78vh;" />
+                <button @click="imageLeft" class="arrow-button left"><i class="fas fa-chevron-left"></i></button>
+                <button @click="imageRight" class="arrow-button right"><i class="fas fa-chevron-right"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </transition>
+    <!--moniter Modal -->
+    <transition name="modal-fade">
+      <div v-if="isModalVisiblem" class="backlight" @click="closeModalm">
+        <div role="dialog" aria-modal="true" class="fade image-modal dark modal show backlight" tabindex="-1" style="padding-left: 14px; display: block;">
+          <div class="modal-dialog modal-xl modal-dialog-centered" style="">
+            <div class="modal-content">
+              <div class="">
+                <div class="mx-auto bg-white modelStyle" style="">
+                  <div class="relative w-100">
+                    <img class="float-right" :src="'/assets/systemImages/Exit.svg'" />
+                  </div>
+                  <div class="relative flex my-2 modelText">
+                    <img class="pr-3 mb-3" :src="'/assets/systemImages/Promo.svg'" />
+                    <img class="absolute m-2" :src="'/assets/systemImages/bookmark.svg'" />
+                    <div class="my-auto" v-if="props.spoofData.progress_status != 'monitoring'">
+                      By setting the status to 'monitoring', you are indicating that
+                      <span class="text-yellow-500">{{spoofData.spoofed_domain}} will be under constant surveillance</span>.
+                      Are you sure you want to proceed?
+                    </div>
+                    <!-- stop monitoring -->
+                    <div class="my-auto" v-else>
+                      By setting the status to 'stop-monitoring', you are indicating that
+                      <span class="text-yellow-500">{{spoofData.spoofed_domain}} will stop being under constant surveillance</span>.
+                      Are you sure you want to proceed?
+                    </div>
+                  </div>
+                  <div class="relative -mt-4 w-100">
+                    <Link v-if="props.spoofData.progress_status != 'monitoring'" class="float-right px-4 bg-yellow-300 buttons buttonsText" :href="'/spoof/Monitor/' + spoofData.id">confirm</Link>
+                    <Link v-else class="float-right px-4 bg-yellow-300 buttons buttonsText" :href="'/spoof/stop_monitoring/' + spoofData.id">confirm</Link>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </transition>
+
+    <!--norisk Modal -->
+    <transition name="modal-fade">
+      <div v-if="isModalVisibler" class="backlight" @click="closeModalr">
+        <div role="dialog" aria-modal="true" class="fade image-modal dark modal show backlight" tabindex="-1" style="padding-left: 14px; display: block;">
+          <div class="modal-dialog modal-xl modal-dialog-centered" style="">
+            <div class="modal-content">
+              <div class="">
+                <div class="mx-auto bg-white modelStyle" style="">
+                  <div class="relative w-100">
+                    <img class="float-right" :src="'/assets/systemImages/Exit.svg'" />
+                  </div>
+                  <div class="relative flex my-2 modelText">
+                    <img class="pr-3 " :src="'/assets/systemImages/Promo.svg'" />
+                    <img class="absolute m-2" :src="'/assets/systemImages/bookmark.svg'" />
+                    <div class="my-auto">By clicking 'Mark as Norisk', you are indicating that <span class="text-yellow-500">{{spoofData.spoofed_domain}} will be ignored</span> . Are you sure you want to proceed?</div>
+                  </div>
+                  <div class="relative w-100">
+                    <!-- <button class="float-right px-4 mr-3 bg-gray-300 buttons buttonsText" @click="closeModal" type="button">cancel</button> -->
+                    <Link class="float-right px-4 bg-yellow-300 buttons buttonsText" :href="'/spoof/markAsNoRisk/' + spoofData.id">confirm</Link>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </transition>
-      <!--moniter Modal -->
-      <transition name="modal-fade">
-        <div v-if="isModalVisiblem" class="backlight" @click="closeModalm">
-          <div role="dialog" aria-modal="true" class="fade image-modal dark modal show backlight" tabindex="-1" style="padding-left: 14px; display: block;">
-            <div class="modal-dialog modal-xl modal-dialog-centered" style="">
-              <div class="modal-content">
-                <div class="">
-                  <div class="mx-auto bg-white modelStyle" style="">
-                    <div class="relative w-100">
-                      <img class="float-right" :src="'/assets/systemImages/Exit.svg'" />
-                    </div>
-                    <div class="relative flex my-2 modelText">
-                      <img class="pr-3 mb-3" :src="'/assets/systemImages/Promo.svg'" />
-                      <img class="absolute m-2" :src="'/assets/systemImages/bookmark.svg'" />
-                      <div class="my-auto">By setting the status to 'monitoring', you are indicating that <span class="text-yellow-500">{{spoofData.spoofed_domain}} will be under constant surveillance</span> . Are you sure you want to proceed?</div>
-                    </div>
-                    <div class="relative w-100">
-                      <!-- <button class="float-right px-4 mr-3 bg-gray-300 buttons buttonsText" @click="closeModal" type="button">cancel</button> -->
-                      <Link class="float-right px-4 bg-yellow-300 buttons buttonsText" :href="'/spoof/Monitor/' + spoofData.id">confirm</Link>
-                    </div>
+      </div>
+    </transition>
+    <!--norisk Modal -->
+    <transition name="modal-fade">
+      <div v-if="isModalVisiblet" class="backlight" @click="closeModalt">
+        <div role="dialog" aria-modal="true" class="fade image-modal dark modal show backlight" tabindex="-1" style="padding-left: 14px; display: block;">
+          <div class="modal-dialog modal-xl modal-dialog-centered" style="">
+            <div class="modal-content">
+              <div class="">
+                <div class="mx-auto bg-white modelStyle" style="">
+                  <div class="relative w-100">
+                    <img class="float-right" :src="'/assets/systemImages/Exit.svg'" />
+                  </div>
+                  <div class="relative flex my-2 modelText">
+                    <img class="pr-3 " :src="'/assets/systemImages/Promo.svg'" />
+                    <img class="absolute m-2" :src="'/assets/systemImages/bookmark.svg'" />
+                    <div class="my-auto"><span v-if="reporte == ''">Do you want to report <span class="text-yellow-500">{{spoofData.spoofed_domain}}</span> for takedown?</span><span v-if="reporte != ''">{{reporte}} </span></div>
+                  </div>
+                  <div class="relative w-100">
+                    <!-- <button class="float-right px-4 mr-3 bg-gray-300 buttons buttonsText" @click="closeModal" type="button">cancel</button> -->
+                    <Link v-if="reporte == ''" class="float-right px-4 bg-yellow-300 buttons buttonsText" :href="'/spoof/requestAuthorization/' + spoofData.id">confirm</Link>
+                    <!-- <Link @click="closeModalt" v-if="reporte != ''" class="float-right px-4 bg-yellow-300 buttons buttonsText">cancel</Link> -->
+                    <button v-if="reporte != ''" class="float-right px-4 bg-yellow-300 buttons buttonsText" @click="submit()"> stop Takedown </button>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <<<<<<< HEAD </transition>
-          <!--norisk Modal -->
-          <transition name="modal-fade">
-            <div v-if="isModalVisibler" class="backlight" @click="closeModalr">
-              <div role="dialog" aria-modal="true" class="fade image-modal dark modal show backlight" tabindex="-1" style="padding-left: 14px; display: block;">
-                <div class="modal-dialog modal-xl modal-dialog-centered" style="">
-                  <div class="modal-content">
-                    <div class="">
-                      <div class="mx-auto bg-white modelStyle" style="">
-                        <div class="relative w-100">
-                          <img class="float-right" :src="'/assets/systemImages/Exit.svg'" />
-                        </div>
-                        <div class="relative flex my-2 modelText">
-                          <img class="pr-3 " :src="'/assets/systemImages/Promo.svg'" />
-                          <img class="absolute m-2" :src="'/assets/systemImages/bookmark.svg'" />
-                          <div class="my-auto">By clicking 'Mark as Norisk', you are indicating that <span class="text-yellow-500">{{spoofData.spoofed_domain}} will be ignored</span> . Are you sure you want to proceed?</div>
-                        </div>
-                        <div class="relative w-100">
-                          <!-- <button class="float-right px-4 mr-3 bg-gray-300 buttons buttonsText" @click="closeModal" type="button">cancel</button> -->
-                          <Link class="float-right px-4 bg-yellow-300 buttons buttonsText" :href="'/spoof/markAsNoRisk/' + spoofData.id">confirm</Link>
-                        </div>
-                      </div>
-                    </div>
-                    =======
-                  </div>
-                </div>
-          </transition>
-          <!--stop monitoring Modal -->
-          <transition name="modal-fade">
-            <div v-if="isModalVisiblem" class="backlight" @click="closeModalm">
-              <div role="dialog" aria-modal="true" class="fade image-modal dark modal show backlight" tabindex="-1" style="padding-left: 14px; display: block;">
-                <div class="modal-dialog modal-xl modal-dialog-centered" style="">
-                  <div class="modal-content">
-                    <div class="">
-                      <div class="mx-auto bg-white modelStyle" style="">
-                        <div class="relative w-100">
-                          <img class="float-right" :src="'/assets/systemImages/Exit.svg'" />
-                        </div>
-                        <div class="relative flex my-2 modelText">
-                          <img class="pr-3 mb-3" :src="'/assets/systemImages/Promo.svg'" />
-                          <img class="absolute m-2" :src="'/assets/systemImages/bookmark.svg'" />
-                          <div class="my-auto">By setting the status to 'stop-monitoring', you are indicating that <span class="text-yellow-500">{{spoofData.spoofed_domain}} will stop being under constant surveillance</span> . Are you sure you want to proceed?</div>
-                        </div>
-                        <div class="relative w-100">
-                          <!-- <button class="float-right px-4 mr-3 bg-gray-300 buttons buttonsText" @click="closeModal" type="button">cancel</button> -->
-                          <Link class="float-right px-4 bg-yellow-300 buttons buttonsText" :href="'/spoof/stop_monitoring/' + spoofData.id">confirm</Link>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </transition>
-          <!--norisk Modal -->
-          <transition name="modal-fade">
-            <div v-if="isModalVisibler" class="backlight" @click="closeModalr">
-              <div role="dialog" aria-modal="true" class="fade image-modal dark modal show backlight" tabindex="-1" style="padding-left: 14px; display: block;">
-                <div class="modal-dialog modal-xl modal-dialog-centered" style="">
-                  <div class="modal-content">
-                    <div class="">
-                      <div class="mx-auto bg-white modelStyle" style="">
-                        <div class="relative w-100">
-                          <img class="float-right" :src="'/assets/systemImages/Exit.svg'" />
-                          >>>>>>> 27c8ae42c888897ced185abc192c16c641416d4d
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-          </transition>
-          <!--norisk Modal -->
-          <transition name="modal-fade">
-            <div v-if="isModalVisiblet" class="backlight" @click="closeModalt">
-              <div role="dialog" aria-modal="true" class="fade image-modal dark modal show backlight" tabindex="-1" style="padding-left: 14px; display: block;">
-                <div class="modal-dialog modal-xl modal-dialog-centered" style="">
-                  <div class="modal-content">
-                    <div class="">
-                      <div class="mx-auto bg-white modelStyle" style="">
-                        <div class="relative w-100">
-                          <img class="float-right" :src="'/assets/systemImages/Exit.svg'" />
-                        </div>
-                        <div class="relative flex my-2 modelText">
-                          <img class="pr-3 " :src="'/assets/systemImages/Promo.svg'" />
-                          <img class="absolute m-2" :src="'/assets/systemImages/bookmark.svg'" />
-                          <div class="my-auto"><span v-if="reporte == ''">Do you want to report <span class="text-yellow-500">{{spoofData.spoofed_domain}}</span> for takedown?</span><span v-if="reporte != ''">{{reporte}} </span></div>
-                        </div>
-                        <div class="relative w-100">
-                          <!-- <button class="float-right px-4 mr-3 bg-gray-300 buttons buttonsText" @click="closeModal" type="button">cancel</button> -->
-                          <Link v-if="reporte == ''" class="float-right px-4 bg-yellow-300 buttons buttonsText" :href="'/spoof/requestAuthorization/' + spoofData.id">confirm</Link>
-                          <!-- <Link @click="closeModalt" v-if="reporte != ''" class="float-right px-4 bg-yellow-300 buttons buttonsText">cancel</Link> -->
-                          <button v-if="reporte != ''" class="float-right px-4 bg-yellow-300 buttons buttonsText" @click="submit()"> stop Takedown </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </transition>
+      </div>
+    </transition>
   </AuthenticatedLayout>
 </template>
 
 <style scoped>
+/*image history*/
+.arrow-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgb(255, 255, 0);
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 18px;
+    color: rgb(0, 0, 0);
+    border-radius: 50%;
+    width: 50px;
+    z-index: 1000%;
+}
+.arrow:hover {
+    background-color: rgb(115, 115, 2);
+}
+
+.arrow-button.left {
+    left: 10px;
+}
+
+.arrow-button.right {
+    right: 10px;
+}
+/*image history end*/
 .modelStyle{
   max-width: 624px;
   height: 237px;

@@ -66,12 +66,13 @@ const passwordDetails = () => {
 </script>
 
 <template >
-    <Head title="Log in" />
-    <div class=""><!-- bg-image -->
-   
+
+  <Head title="Log in" />
+  <div class=""><!-- bg-image -->
+
     <div class="overflow-hidden rounded-lg lg:flex md:flex" style="width:fit-content; margin: auto; padding-top: 100px; " v-if="!$props.token">
 
-            <!-- <div class="hide" style="max-width: 500px; min-width: 500px; min-height: 100%;">
+      <!-- <div class="hide" style="max-width: 500px; min-width: 500px; min-height: 100%;">
                 <img
                 class=" rounded-xl"
                     src="/assets/media/photos/R.jpeg"
@@ -80,136 +81,102 @@ const passwordDetails = () => {
 
                 />
             </div> -->
-         <div style="min-width: 500px; ">
-            <form @submit.prevent="submit">
-            <div class="block block-themed block-fx-shadow rounded-xl ">
-                <div class="bg-yellow-500"></div>
-                <div class="block-content " >
-                <div class="py-4 text-center" >
-                    <h1 class="mt-4 mb-2 h3 fw-bold">Login to your account</h1>
+      <div style="min-width: 500px; ">
+        <form @submit.prevent="submit">
+          <div class="block block-themed block-fx-shadow rounded-xl ">
+            <div class="bg-yellow-500"></div>
+            <div class="block-content ">
+              <div class="py-4 text-center">
+                <h1 class="mt-4 mb-2 h3 fw-bold">Login to your account</h1>
+              </div>
+              <div class="mb-4 form-floating">
+                <div class="relative">
+                  <input type="text" id="login-username_outline" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-white rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-yellw-300 focus:outline-none focus:ring-0 focus:border-yellow-300 peer" :class="{ 'is-invalid': form.errors.email}" v-model="form.email" required placeholder=" " />
+                  <label for="login-username_outline" class="absolute round text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-yellow-300 peer-focus:dark:text-yellow-300 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Email</label>
+                  <small v-if="form.errors.email" class="invalid-feedback animated fadeIn">
+                    {{ form.errors.email }}</small>
                 </div>
-                    <div class="mb-4 form-floating">
-                        <div class="relative">
-                            <input type="text" id="login-username_outline" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-white rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-yellw-300 focus:outline-none focus:ring-0 focus:border-yellow-300 peer" :class="{ 'is-invalid': form.errors.email}"
-                                   v-model="form.email"
-                                    required placeholder=" " />
-                            <label for="login-username_outline" class="absolute round text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-yellow-300 peer-focus:dark:text-yellow-300 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Email</label>
-                            <small v-if="form.errors.email"
-                                   class="invalid-feedback animated fadeIn"
-                            >
-                                {{ form.errors.email }}</small>
-                        </div>
-                    </div>
-                    <div class="relative">
-                        <input :type="!passwordVisible ? 'password' : 'text'" id="login-password_outlined"  v-model="form.password" class="passwordThing block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-white rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-yellow-300 focus:outline-none focus:ring-0 focus:border-yellow-300 peer" :class="{ 'is-invalid': form.errors.password }" required  placeholder=" " />
-                        <i v-if="passwordVisible" class="absolute z-50 w-8 h-6 text-center cursor-pointer fa-regular fa-eye top-7 right-3" @click="passwordDetails()"></i>
-                        <i v-else class="absolute top-7 right-3 fa-regular fa-eye-slash"  @click="passwordDetails()"></i>
-                        <label for="login-password_outlined" class="absolute round text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-yellow-300 peer-focus:dark:text-yellow-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1" >Password</label>
-                        <small  v-if="form.errors.password" class="text-red-600 invalid-feedback animated fadeIn" >{{ form.errors.password }}</small>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6 d-sm-flex align-items-center push">
-                            <div class="form-check">
-                                <input
-                                    class="text-yellow-400 form-check-input "
-                                    type="checkbox"
-                                    id="login-remember-me"
-                                    v-model="form.remember"
-                                />
-                                <label
-                                    class="form-check-label"
-                                    for="login-remember-me"
-                                    >Remember Me</label
-                                >
-                            </div>
-                        </div>
-                        <div class="col-sm-6 text-sm-end push">
-                            <button
-                                class="bg-yellow-300 btn btn-lg fw-medium"
-                                :class="{ 'opacity-25': form.processing }"
-                                :disabled="form.processing"
-                            >
-                                Sign In
-                            </button>
+              </div>
+              <div class="relative">
+                <input :type="!passwordVisible ? 'password' : 'text'" id="login-password_outlined" v-model="form.password" class="passwordThing block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-white rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-yellow-300 focus:outline-none focus:ring-0 focus:border-yellow-300 peer" :class="{ 'is-invalid': form.errors.password }" required placeholder=" " />
+                <i v-if="passwordVisible" class="absolute z-50 w-8 h-6 text-center cursor-pointer fa-regular fa-eye top-7 right-3" @click="passwordDetails()"></i>
+                <i v-else class="absolute top-7 right-3 fa-regular fa-eye-slash" @click="passwordDetails()"></i>
+                <label for="login-password_outlined" class="absolute round text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-yellow-300 peer-focus:dark:text-yellow-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Password</label>
+                <small v-if="form.errors.password" class="text-red-600 invalid-feedback animated fadeIn">{{ form.errors.password }}</small>
+              </div>
+              <div class="row">
+                <div class="col-sm-6 d-sm-flex align-items-center push">
+                  <div class="form-check">
+                    <input class="text-yellow-400 form-check-input " type="checkbox" id="login-remember-me" v-model="form.remember" />
+                    <label class="form-check-label" for="login-remember-me">Remember Me</label>
+                  </div>
+                </div>
+                <div class="col-sm-6 text-sm-end push">
+                  <button class="bg-yellow-300 btn btn-lg fw-medium" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    Sign In
+                  </button>
 
-                        </div>
-                    </div>
                 </div>
-
-                <div
-                    class="text-center block-content block-content-full bg-body-light d-flex justify-content-between"
-                >
-                    <Link class="mb-1 fs-sm fw-medium link-fx text-muted me-2 d-inline-block" :href="route('register')">
-                                    <i class="opacity-50 fa fa-plus me-1"></i> Create Account
-                    </Link>
-                    <Link
-                        class="mb-1 fs-sm fw-medium link-fx text-muted me-2 d-inline-block"
-                        :href="route('password.request')"
-                    >
-                        Forgot Password
-                    </Link>
-                </div>
+              </div>
             </div>
-          </form>
-        </div>
-        </div>
-        <!-- END Sign In Form -->
 
+            <div class="text-center block-content block-content-full bg-body-light d-flex justify-content-between">
+              <Link class="mb-1 fs-sm fw-medium link-fx text-muted me-2 d-inline-block" :href="route('register')">
+              <i class="opacity-50 fa fa-plus me-1"></i> Create Account
+              </Link>
+              <Link class="mb-1 fs-sm fw-medium link-fx text-muted me-2 d-inline-block" :href="route('password.request')">
+              Forgot Password
+              </Link>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- END Sign In Form -->
 
     <div class="m-auto overflow-hidden content content-full" v-else>
-        <!-- Header -->
-     
-        <!-- END Header -->
+      <!-- Header -->
 
-        <form class="m-auto " @submit.prevent="submitToken">
-            <div class="">
-            <div class="block m-auto mt-8 bg-yellow-100 block-themed block-fx-shadow" style="max-width: 600px;">
-                <div class="bg-yellow-300 "></div>
-                   <div class="py-2 text-center ">
-            <h1 class="mt-1 mb-1 text-black h3 fw-bold">OTP Token</h1>
+      <!-- END Header -->
+
+      <form class="m-auto " @submit.prevent="submitToken">
+        <div class="">
+          <div class="block m-auto mt-8 bg-yellow-100 block-themed block-fx-shadow" style="max-width: 600px;">
+            <div class="bg-yellow-300 "></div>
+            <div class="py-2 text-center ">
+              <h1 class="mt-1 mb-1 text-black h3 fw-bold">OTP Token</h1>
+              <h1 class="mt-1 mb-1 text-center text-gray-700 h5 fw-bold">Please provide the OTP we have sent to your email.</h1>
+            </div>
+            <div class="bg-yellow-100 block-content">
+              <div class="relative">
+                <input type="text" id="login-username" :class="{ 'is-invalid': form.errors.otp }" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-white rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" v-model="form.otp" required placeholder=" " />
+                <label for="login-username" class="absolute round text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Otp</label>
+                <small v-if="form.errors.otp" class="text-red-600 invalid-feedback animated fadeIn">{{ form.errors.otp }}</small>
+              </div>
+
+              <div class="row ">
+                <div class="col-sm-12 text-sm-end push">
+                  <button class="bg-yellow-300 btn btn-lg fw-medium" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    Verify
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="text-center bg-yellow-100 block-content block-content-full bg-body-light d-flex justify-content-between">
+              <Link class="mb-1 fs-sm fw-medium link-fx text-muted me-2 d-inline-block" :href="route('register')">
+              <i class="opacity-50 fa fa-plus me-1"></i> Create
+              Account
+              </Link>
+              <Link class="mb-1 fs-sm fw-medium link-fx text-muted me-2 d-inline-block" :href="route('password.request')">
+              Forgot Password
+              </Link>
+            </div>
+          </div>
         </div>
-                <div class="bg-yellow-100 block-content">
-                    <div class="relative">
-                        <input type="text" id="login-username" :class="{ 'is-invalid': form.errors.otp }" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-white rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" v-model="form.otp" required  placeholder=" " />
-                        <label for="login-username" class="absolute round text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Otp</label>
-                        <small v-if="form.errors.otp" class="text-red-600 invalid-feedback animated fadeIn">{{ form.errors.otp }}</small>
-                    </div>
-
-                    <div class="row ">
-                        <div class="col-sm-12 text-sm-end push">
-                            <button
-                                class="bg-yellow-300 btn btn-lg fw-medium"
-                                :class="{ 'opacity-25': form.processing }"
-                                :disabled="form.processing"
-                            >
-                                Verify
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div
-                    class="text-center bg-yellow-100 block-content block-content-full bg-body-light d-flex justify-content-between"
-                >
-                    <Link
-                        class="mb-1 fs-sm fw-medium link-fx text-muted me-2 d-inline-block"
-                        :href="route('register')"
-                    >
-                        <i class="opacity-50 fa fa-plus me-1"></i> Create
-                        Account
-                    </Link>
-                    <Link
-                        class="mb-1 fs-sm fw-medium link-fx text-muted me-2 d-inline-block"
-                        :href="route('password.request')"
-                    >
-                        Forgot Password
-                    </Link>
-                </div>
-            </div>
-            </div>
-        </form>
-        <!-- END Sign In Form -->
+      </form>
+      <!-- END Sign In Form -->
     </div>
- </div>
+  </div>
 </template>
 <style>
 .bg-image{

@@ -73,6 +73,7 @@ class LocationSslAndRedirectsJob implements ShouldQueue
         $longitude = $phpOutput['Geolocation_Information']['Longitude'] ?? '';
         $organization = $phpOutput['Geolocation_Information']['Organization'] ?? '';
         $isp = $phpOutput['Geolocation_Information']['ISP'] ?? '';
+        $ISP_Abuse = $phpOutput['Geolocation_Information']['ISP_Abuse'] ?? '';
         $sslCertificateDetails = $phpOutput['SSL-Certificate_Details']['Issuer']['O'] ?? '';
         $redirectUrls = $phpOutput['Redirects'] ?? '';
         $httpStatusCode = $phpOutput['HTTP_Status_Code'] ?? '';
@@ -90,6 +91,7 @@ class LocationSslAndRedirectsJob implements ShouldQueue
         $this->spoofed_domain->longitude = $longitude;
         $this->spoofed_domain->organization = $organization;
         $this->spoofed_domain->isp  = $isp;
+        $this->spoofed_domain->ISP_Abuse  = $ISP_Abuse;
         $this->spoofed_domain->ssl_certificate_details  = $sslCertificateDetails;
         $this->spoofed_domain->redirect_urls = $redirectUrls;
         $this->spoofed_domain->http_status_code  = $httpStatusCode;

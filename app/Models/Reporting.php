@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Reporting extends Model
 {
     use HasFactory;
-    protected $table="reporting";
+    protected $table = "reporting";
 
     protected $fillable = [
-        'report_to', 'email', 'link_to_form'
+        "name", "email", "form_url", "Can_Report"
     ];
 }

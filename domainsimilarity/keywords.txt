@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-sascu.com, sasku.com
-=======
-you.com, cloverforyou.com
->>>>>>> 27c8ae42c888897ced185abc192c16c641416d4d
+google.com

@@ -17,6 +17,7 @@ import cv2
 from PIL import Image
 from skimage.metrics import structural_similarity as ssim
 import imagehash
+import os
 
 def image_similarity(image_path1, image_path2):
     # Open and convert images to grayscale for similarity comparison
@@ -36,9 +37,29 @@ def image_similarity(image_path1, image_path2):
 
     return similarity_rating
 
-# Example usage
-image1_path = f"../public/assets/screenshots/{domainOne}.png" # first image
-image2_path = f"../public/assets/screenshots/{domainTwo}.png" # second image
+
+# Function to get the last modified file in a folder
+def get_last_modified_file(folder_path):
+    files = os.listdir(folder_path)
+    files = [f for f in files if os.path.isfile(os.path.join(folder_path, f))]
+    file_paths = [os.path.join(folder_path, f) for f in files]
+    return max(file_paths, key=os.path.getmtime)
+
+# Directory containing the screenshot files
+screenshot_folder_path_domainOne = f"../public/assets/screenshots/{domainOne}"
+screenshot_folder_path_domainTwo = f"../public/assets/screenshots/{domainTwo}"
+
+# Get the last modified screenshot file for domainOne and domainTwo
+latest_screenshot_domainOne = get_last_modified_file(screenshot_folder_path_domainOne)
+latest_screenshot_domainTwo = get_last_modified_file(screenshot_folder_path_domainTwo)
+
+# Get the filenames from the paths
+latest_domainOne_file = os.path.basename(latest_screenshot_domainOne)
+latest_domainTwo_file = os.path.basename(latest_screenshot_domainTwo)
+
+# Construct the image paths
+image1_path = f"../public/assets/screenshots/{domainOne}/{latest_domainOne_file}"  # First image
+image2_path = f"../public/assets/screenshots/{domainTwo}/{latest_domainTwo_file}"  # Second image
 
 average_rating  = image_similarity(image1_path, image2_path)
 # print(f"{average_rating:.2f}")

@@ -69,7 +69,7 @@ class LoginRequest extends FormRequest
         $user = User::where('email', $this->email)->first();
         if (!$user) {
             throw ValidationException::withMessages([
-                'email' => 'No account found associated with the email',
+                'email' => 'Please enter correct account Email or Password',
             ]);
         }
 

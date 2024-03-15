@@ -18,7 +18,7 @@ class SpoofedDomain extends Model
         'domain_rating', 'spoof_status', //new
         'ip_address', 'server_city', 'region', 'server_country', 'latitude', 'longitude', 'organization', 'isp',
         'server_os', 'ssl_certificate_details', 'redirect_urls', 'http_status_code', 'cookies', 'console_messages', 'security_headers',
-        'spoof_status','norink'
+        'spoof_status', 'norink', "ISP_Abuse"
     ];
 
     public static function processingDomains()

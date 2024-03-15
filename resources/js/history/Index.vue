@@ -52,35 +52,38 @@ const sites = [
 </script>
 
 <template>
-    <Head title="Organization" />
 
-    <AuthenticatedLayout>
-        <div class="col-md-12">
-            <div class="block block-rounded">
-                <div class="px-5 block-header">
-                    <Link class="mr-3 btn btn-info text-capitalize" :href="route('organization')">Back</Link>
-                    <h2 class="block-title">Report</h2>
-                </div>
-                <div class="px-5 pb-5 block-content">
-                    <table class="table table-borderless table-striped">
-                        <thead>
-                            <tr>
-                                <th>S/N</th>
-                                <th>Report</th>
-                                <th style="width: 200px;">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="(site, index) in sites">
-                                <td><a class="fw-semibold">{{ ++index }}</a></td>
-                                <td><a class="fw-semibold">{{ site.name }}</a></td>
-                                <td><Link class="fw-semibold btn btn-danger" :href="site.link" target="__blank">Goto site</Link></td>
-                            </tr>
+  <Head title="Organization" />
 
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+  <AuthenticatedLayout>
+    <div class="col-md-12">
+      <div class="block block-rounded">
+        <div class="px-5 block-header">
+          <Link class="mr-3 btn btn-info text-capitalize" :href="route('organization')">Back</Link>
+          <h2 class="block-title">Report</h2>
         </div>
-    </AuthenticatedLayout>
+        <div class="px-5 pb-5 block-content">
+          <table class="table table-borderless table-striped">
+            <thead>
+              <tr>
+                <th>S/N</th>
+                <th>Report</th>
+                <th style="width: 200px;">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- <tr v-for="(site, index) in sites"> -->
+              <td><a class="fw-semibold">{{ ++index }}</a></td>
+              <td><a class="fw-semibold">{{ site.name }}</a></td>
+              <td>
+                <Link class="fw-semibold btn btn-danger" :href="site.link" target="__blank">Goto site</Link>
+              </td>
+              <!-- </tr> -->
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </AuthenticatedLayout>
 </template>

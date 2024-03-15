@@ -7,6 +7,44 @@ import { defineComponent } from 'vue';
 import { defineProps, onMounted } from 'vue';
 import { ref, watch, computed} from 'vue';
 
+
+const props = defineProps({
+  domain: {
+    type: Object,
+  },
+  details: {
+    type: Object,
+  },
+  spoofData: {
+    type: Object,
+  },
+  userid: {
+    type: Object,
+  },
+  spoofList: {
+    type: Object,
+  }
+  
+});
+
+// get screenshots urls
+const filenames = ref([]);
+
+onMounted(async () => {
+  try {
+    const domain = props.spoofData.spoofed_domain;
+    const response = await fetch(`http://127.0.0.1:8000/latest_screenshots/${domain}`);
+    if (!response.ok) {
+      throw new Error('Failed to fetch latest screenshots');
+    }
+    const data = await response.json();
+    filenames.value = data.filenames;
+  } catch (error) {
+    console.error(error.message);
+  }
+});
+
+
 const isModalVisible = ref(false);
 
 const openModal = () => {
@@ -68,25 +106,6 @@ const Toast = Swal.mixin({
   }
 })
 
-
-const props = defineProps({
-  domain: {
-    type: Object,
-  },
-  details: {
-    type: Object,
-  },
-  spoofData: {
-    type: Object,
-  },
-  userid: {
-    type: Object,
-  },
-  spoofList: {
-    type: Object,
-  }
-  
-});
 
 function ageContribution(age) {
     const decayFactor = 1.9; //decayValue
@@ -529,7 +548,7 @@ const submit = () => {
   <AuthenticatedLayout v-if=" props.userid === userId" class="overflow-scroll fontFamily" style="height:100vh; background: #FFF;">
     <div class="flex justify-between mt-6 w-100">
       <div class="relative ml-6">
-        <button class="absolute w-40 h-12 px-3 rounded-tr-full bg-dark tabsText" style="">Domain</button>
+        <button class="absolute w-40 h-12 px-3 rounded-tr-full bg-dark tabsText" style="">{{props.domain[0].domain_name}}</button>
         <button class="w-56 h-12 pr-4 bg-gray-300 rounded-tr-full tabsText pl-9" style="margin-left: 106px;">Social Media</button>
       </div>
       <Link class="my-auto buttons buttonsText mr-9" :href="'/spoof/view/' + spoofData.id"><i class="pr-2 fa fa-chevron-left" aria-hidden="true" preserve-scroll></i> Back</Link>
@@ -647,11 +666,13 @@ const submit = () => {
           </div>
           <div v-if="form.evidence_urls "><!-- && form.abuse_type -->
             <br>
-            <p>Reporting <span class="text-lg text-bold h3">{{form.evidence_urls}}</span> <span v-if="form.targetDomain">for {{form.abuse_type}} <span class="text-lg text-bold h3">{{props.spoofData.domain_name}}</span></span></p>
+            <p>Reporting <span class="text-lg text-bold h3">{{form.evidence_urls}}</span> <span v-if="form.targetDomain">for {{form.abuse_type}} <span class="text-lg text-bold h3">{{props.domain[0].domain_name}}</span></span></p>
           </div>
           <div v-if="form.attachments">
             <img v-if="imageUrl" :src="imageUrl" alt="Please Upload Image!" style="height: 300px; width: auto;" />
           </div>
+          <!-- our screenshot -->
+          <img v-if="filenames[0]" class="w-full" :src="'/assets/screenshots/' + spoofData.spoofed_domain + '/' + filenames[0]" alt="SORRY ( : ,IMAGE NOT FOUND" @click="openModal">
           <!-- risk Rating -->
           <div class="flex mt-2 hover:bg-yellow-300 DetailsTableRow" v-for="riskRating in riskRatings" :key="riskRating.value">
             <div class="mt-3 ml-3 w-50 DetailsTableRowText">{{riskRating.key}}</div>

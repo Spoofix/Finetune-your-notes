@@ -7,6 +7,7 @@ from urllib.parse import urlparse
 from datetime import datetime
 import time
 
+
 #check if new screenshot in folder path before screenshot to reduse repetition
 def file_modified_within_last_day(folder_path):
     # Get the current time
@@ -45,6 +46,12 @@ def take_screenshot(url):
         driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
 
         driver.get(url)
+
+        # Adjust window size to fit entire content
+        # total_width = driver.execute_script("return document.body.offsetWidth")
+        # total_height = driver.execute_script("return document.body.scrollHeight")
+        # driver.set_window_size(total_width, total_height)
+
 
         # Create the 'screenshots' subdirectory if it doesn't exist
         if not os.path.exists("../public/assets/screenshots"):

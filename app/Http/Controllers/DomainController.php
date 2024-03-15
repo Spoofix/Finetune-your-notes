@@ -42,7 +42,7 @@ class DomainController extends Controller
     }
 
     public function ReportSpoofySite(Request $request): RedirectResponse //UserReportSpoofingSite
-    {       
+    {
         $request->validate([
             'abuse_type' => 'required|in:Spoofing,Phishing',
             'evidence_urls' => 'required|unique:reportform_takedown_details,evidence_urls',
@@ -55,14 +55,14 @@ class DomainController extends Controller
         ]);
         $fileName = '';
         if ($request->hasFile('attachment')) {
-        $attachment = $request->file('attachment');
+            $attachment = $request->file('attachment');
             if ($attachment->isValid()) {
                 $fileType = $attachment->getClientOriginalExtension();
                 $fileName = $request->evidence_urls . '.' . $fileType;
                 $path = $attachment->storeAs('public/assets/attachments', $fileName);
             }
         }
-         
+
 
         ReportformTakedownDetails::create([
             'abuse_type' => $request->abuse_type,
@@ -138,36 +138,36 @@ class DomainController extends Controller
     }
     // Messages
     public function Messages(Request $request)
-{
-    $user = auth()->user();
-    $messages = Messages::where('to_user_id', $user->id);
+    {
+        $user = auth()->user();
+        $messages = Messages::where('to_user_id', $user->id);
 
-    if ($request->from || $request->date || $request->subject) {
-        if ($request->from) {
-            $messages = $messages;
+        if ($request->from || $request->date || $request->subject) {
+            if ($request->from) {
+                $messages = $messages;
+            }
+            if ($request->date) {
+                // $messages->whereDate('created_at', $request->date);
+                $formattedDate = '%' . date('Y-m-d', strtotime($request->date)) . '%';
+                $messages->where('created_at', 'like', $formattedDate);
+            }
+            if ($request->subject) {
+                // $messages->where('subject', $request->subject);
+                $messages->where('subject', 'like', '%' . $request->subject . '%');
+            }
         }
-        if ($request->date) {
-            // $messages->whereDate('created_at', $request->date);
-            $formattedDate = '%' . date('Y-m-d', strtotime($request->date)) . '%';
-            $messages->where('created_at', 'like', $formattedDate);
-        }
-        if ($request->subject) {
-            // $messages->where('subject', $request->subject);
-            $messages->where('subject', 'like', '%' . $request->subject . '%');
-        }
+        $messages = $messages->get();
+        // echo'<pre>';
+        // print_r($request->subject ? $request->subject : '');
+
+        $domains = Domain::where('user_id', $user->id)->get();
+
+        return Inertia::render('Messages', [
+            'info' => $user,
+            'messages' => $messages,
+            'domains' => $domains
+        ]);
     }
-    $messages = $messages->get();
-    // echo'<pre>';
-    // print_r($request->subject ? $request->subject : '');
-
-    $domains = Domain::where('user_id', $user->id)->get();
-
-    return Inertia::render('Messages', [
-        'info' => $user,
-        'messages' => $messages,
-        'domains' => $domains
-    ]);
-}
 
     // public function Messages(Request $request)
     // {
@@ -221,11 +221,9 @@ class DomainController extends Controller
     // }
     //stop take down
     public function stopTakedown(Request $request): RedirectResponse
-    {       
+    {
         ReportformTakedownDetails::where('id', $request->theId)->delete();
-    
+
         return Redirect::route('domains');
     }
-    
-    
 }

@@ -23,9 +23,9 @@ class EmailController extends Controller
             $data = ['name' => 'Recipient Name']; // Replace with any data needed for the email view
 
             $fromEmail = 'info@spoofix.com';
-            $fromName = 'ernest'; // Replace with your name or any desired sender name
-            $fromOrganization = 'Spoofix'; // Replace with your organization name
-            $employeePosition = 'Employee Position'; // Replace with the employee position
+            $fromName = 'ernest';
+            $fromOrganization = 'Spoofix';
+            $employeePosition = 'Employee Position';
 
             foreach ($emailAddresses as $email) {
                 Mail::to($email)->send(new SpoofDomainReporting($data, $subject));

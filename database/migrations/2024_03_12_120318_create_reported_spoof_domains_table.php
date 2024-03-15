@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('org_domains', function (Blueprint $table) {
+        Schema::create('reported_spoof_domains', function (Blueprint $table) {
             $table->id();
-            $table->integer('organization_id');
-            $table->string('name');
-            $table->string('location')->nullable();
+            $table->foreignId('spoof_id')->nullable();
+            $table->string('reportingName')->nullable();
+            $table->foreignId('admin_id')->nullable();
+            $table->foreignId('reported_via')->nullable();
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('org_domains');
+        Schema::dropIfExists('reported_spoof_domains');
     }
 };

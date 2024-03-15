@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('spoofed_domains', function (Blueprint $table) {
-           
+
             $table->id();
             $table->unsignedBigInteger('domain_id')->nullable();
             $table->string('spoofed_domain')->nullable();
@@ -52,16 +52,19 @@ return new class extends Migration
             $table->double('longitude', 10, 6)->nullable();
             $table->string('organization')->nullable();
             $table->string('isp')->nullable();
+            $table->string('ISP_Abuse')->nullable();
             $table->string('server_os')->nullable();
             $table->string('ssl_certificate_details')->nullable();
             $table->string('redirect_urls')->nullable();
             $table->string('http_status_code')->nullable();
             $table->string('cookies')->nullable();
             $table->longText('console_messages')->nullable();
+            $table->string('webrisk_response')->nullable();
+            $table->string('webrisk_ranking')->nullable();
             $table->string('security_headers')->nullable();
             $table->enum('spoof_status_new', ['scanned', 'inprogress', 'completed'])->default('scanned');
             $table->enum('current_scan_status', ['scanned', 'not_scanned'])->default('not_scanned');
-            $table->enum('progress_status', ['new', 'stop_monitoring','monitoring', 'pending_authentication'])->default('new');
+            $table->enum('progress_status', ['new', 'stop_monitoring', 'monitoring', 'pending_authentication'])->default('new');
             $table->timestamps();
         });
     }

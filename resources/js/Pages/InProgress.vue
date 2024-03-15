@@ -220,145 +220,124 @@ function startDate(inputDateString) {
 </script>
 
 <template>
-    <Head title="InProgress" />
 
-    <AuthenticatedLayout class="overflow-scroll " style="height: 100vh;">
-        <section class="py-1 pt-6 bg-blueGray-50">
-          
-        <!-- testing place -->
-          <div class="lg:mr-7" v-for="(domain, index) in domainList" :key="index">
-            <div
-              class="flex items-center justify-between w-full my-2 cursor-pointer lg:mx-4 h-14 hover:bg-gray-300"
-                 style="border-radius: 6px; box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);"
-                id="myDiv"
-                :class="showTable && index == indexStore ? 'bigDropdownBgActive' : 'bigDropdownBg'"     
-              @click="toggleTable(index, domain.id), scrollToElement(index)"
-            >
-              <div class="ml-5 text-2xl font-semibold text-blueGray-700">
-                  <h3 class="orgDomain ">{{ domain.domain_name }}</h3>
-              </div>
-              <div class="mr-5 botton ">
-                <i
-                  class="fa"
-                  :class="showTable && index == indexStore ? 'fa-chevron-down' : 'fa-chevron-left'"
-                  aria-hidden="true"
-                ></i>
-                  <div>
-                  Spoofing sites 
-                </div>
-              </div>
-            </div>
-             <div
-                v-if="showTable && index === indexStore"
-                class="items-center overflow-auto bg-transparent border-collapse lg:ml-6 md:ml-6 smooth"
-                :class="{ 'smoothDropDown': showTable }"
-                id="smoothDropDown"
-                  > 
-              <div class="overflow-x-auto ">
-                <table class="w-full text-sm " style="min-width: 700px;" v-if="paginatedSpoofList.length !== 0">
-                  <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                      <tr class="container justify-evenly">
-                          <th  class="py-3 pl-2 min-w-max" >
-                              Domain
-                          </th>
-                          <th  class="py-3 text-left">
-                              Source
-                          </th>
-                          <th  class="py-3 text-left">
-                               User
-                          </th>
-                          <th  class="py-3 text-left">
-                               Authorization
-                          </th>
-                          <th  class="py-3 text-left">
-                              Start Date
-                          </th>
-                          <th  class="py-3 text-left">
-                              Progress
-                          </th>
-                          <th  class="py-3 text-left">
-                              Time Elapsed
-                          </th>
-                          <th  class="py-3 text-center">
-                              Action
-                          </th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                      <tr class=" tableRow
-                      transition-colors duration-300 hover:!bg-yellow-50"
-                      v-for="(spoof, index) in paginatedSpoofList" :key="index"
-                          :style="{ background: index % 2 !== 1 ? '#FDE6E6' : '#F7E6E4' }"
-                          >
-                          <td class="pl-3 overflow-auto py-auto" style="max-width: 190px;">
-                              {{ spoof.spoofed_domain }}
-                          </td>
-                          <td class="text-left py-auto" v-if="spoof.reported_via === 'report_form'">
-                              Self Reported
-                          </td>
-                           <td class="text-left py-auto" v-else>
-                              System Scan
-                          </td>
-                          <td class="text-left capitalize py-auto">
-                              {{spoof.user_name}}
-                          </td>
-                          <td class="text-left py-auto">
-                              {{formating(new Date(spoof.created_at))}}
-                          </td>
-                          <td class="text-left py-auto">
-                              {{startDate(new Date(spoof.created_at))}}
-                          </td><!--Oct 13, 23-->
-                          <td class="text-left py-auto">
-                              Initiated 
-                          </td>
-                          <td class="text-left py-auto">
-                              {{timing(new Date(spoof.created_at))}}
-                          </td>
-                          <td class="py-1 ">
-                            <Link :href="'/spoof/view/' + spoof.id2" class="w-16 py-1 mx-auto transition-all duration-150 ease-linear tableButton visited:bg-pink-300 active:bg-yellow-200 hover:bg-yellow-200 focus:outline-none" preserve-scroll>
-                               <div class="px-4 my-auto">View</div> 
-                            </Link>
-                          </td>
-                      </tr>
-                  </tbody>
-              </table>
-              
-               <div class="bg-white" style="width: 100%; height: 330px" v-if="paginatedSpoofList.length === 0">
-                <div class="mx-auto ">
-                  <h1 class="pt-6 text-center max-w-60 h6">No spoofing site takedown currently in progress for domain "{{domain.domain_name }}". <br>We'll update takedown progress here if any! If you have any questions or need further assistance, feel free to reach out.<br> Your satisfaction is our priority.</h1>
-                  <div style="display: flex; justify-content: center; align-items: center; height: 50px;">
-                    <h1 class="border-l-white border-y-yellow-300 spinner-border border-r-yellow-100"></h1>
-                  </div>
-                </div>
-               </div>
+  <Head title="InProgress" />
 
-              </div>
+  <AuthenticatedLayout class="overflow-scroll " style="height: 100vh;">
+    <section class="py-1 pt-6 bg-blueGray-50">
 
-               <div class="flex justify-center mt-4" style="">
-
-                  <button v-if="currentPage > 1" class="px-3 py-2 mr-2 cursor-pointer round gray paginationButtons"  @click="changePage(--currentPage)">
-                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
-                  </button>
-                  <div v-for="page in totalPages"
-                    :key="page">
-                    <button
-                    v-if="page > currentPage - 4 && page < currentPage + 4"
-                    @click="changePage(page)"
-                    :class="{ 'primaryColor paginationButtons ': page === currentPage, 'paginationButtons gray text-gray-700': page !== currentPage }"
-                    class="px-3 py-2 mr-2 rounded cursor-pointer"
-                  >
-                    {{ page }}
-                  </button >
-                  </div>
-                  <button v-if="currentPage < totalPages" class="px-3 py-2 mr-2 cursor-pointer round gray paginationButtons"  @click="changePage(++currentPage)">
-                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
-                  </button>
-                </div>
-            </div>
-                       
+      <!-- testing place -->
+      <div class="lg:mr-7" v-for="(domain, index) in domainList" :key="index">
+        <div class="flex items-center justify-between w-full my-2 cursor-pointer lg:mx-4 h-14 hover:bg-gray-300" style="border-radius: 6px; box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);" id="myDiv" :class="showTable && index == indexStore ? 'bigDropdownBgActive' : 'bigDropdownBg'" @click="toggleTable(index, domain.id), scrollToElement(index)">
+          <div class="ml-5 text-2xl font-semibold text-blueGray-700">
+            <h3 class="orgDomain ">{{ domain.domain_name }}</h3>
           </div>
-        </section>
-    </AuthenticatedLayout>
+          <div class="mr-5 botton ">
+            <i class="fa" :class="showTable && index == indexStore ? 'fa-chevron-down' : 'fa-chevron-left'" aria-hidden="true"></i>
+            <div>
+              Spoofing sites
+            </div>
+          </div>
+        </div>
+        <div v-if="showTable && index === indexStore" class="items-center overflow-auto bg-transparent border-collapse lg:ml-6 md:ml-6 smooth" :class="{ 'smoothDropDown': showTable }" id="smoothDropDown">
+          <div class="overflow-x-hidden hover:overflow-x-auto">
+            <table class="w-full text-sm " style="min-width: 700px;" v-if="paginatedSpoofList.length !== 0">
+              <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr class="container justify-evenly">
+                  <th class="py-3 pl-2 min-w-max">
+                    Domain
+                  </th>
+                  <th class="py-3 text-left">
+                    Source
+                  </th>
+                  <th class="py-3 text-left">
+                    User
+                  </th>
+                  <th class="py-3 text-left">
+                    Authorization
+                  </th>
+                  <th class="py-3 text-left">
+                    Start Date
+                  </th>
+                  <th class="py-3 text-left">
+                    Progress
+                  </th>
+                  <th class="py-3 text-left">
+                    Time Elapsed
+                  </th>
+                  <th class="py-3 text-center">
+                    Action
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class=" tableRow
+                      transition-colors duration-300 hover:!bg-yellow-50" v-for="(spoof, index) in paginatedSpoofList" :key="index" :style="{ background: index % 2 !== 1 ? '#FDE6E6' : '#F7E6E4' }">
+                  <td class="pl-3 overflow-auto py-auto" style="max-width: 190px;">
+                    {{ spoof.spoofed_domain }}
+                  </td>
+                  <td class="text-left py-auto" v-if="spoof.reported_via === 'report_form'">
+                    Self Reported
+                  </td>
+                  <td class="text-left py-auto" v-else>
+                    System Scan
+                  </td>
+                  <td class="text-left capitalize py-auto">
+                    {{spoof.user_name}}
+                  </td>
+                  <td class="text-left py-auto">
+                    <!-- {{formating(new Date(spoof.created_at))}} -->
+                    {{startDate(new Date(spoof.created_at))}}
+
+                  </td>
+                  <td class="text-left py-auto">
+                    {{startDate(new Date(spoof.created_at))}}
+                  </td><!--Oct 13, 23-->
+                  <td class="text-left py-auto">
+                    Initiated
+                  </td>
+                  <td class="text-left py-auto">
+                    {{timing(new Date(spoof.created_at))}}
+                  </td>
+                  <td class="py-1 ">
+                    <Link :href="'/spoof/view/' + spoof.id2" class="w-16 py-1 mx-auto transition-all duration-150 ease-linear tableButton visited:bg-pink-300 active:bg-yellow-200 hover:bg-yellow-200 focus:outline-none" preserve-scroll>
+                    <div class="px-4 my-auto">View</div>
+                    </Link>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="bg-white" style="width: 100%; height: 330px" v-if="paginatedSpoofList.length === 0">
+              <div class="mx-auto ">
+                <h1 class="pt-6 text-center max-w-60 h6">No spoofing site takedown currently in progress for domain "{{domain.domain_name }}". <br>We'll update takedown progress here if any! If you have any questions or need further assistance, feel free to reach out.<br> Your satisfaction is our priority.</h1>
+                <div style="display: flex; justify-content: center; align-items: center; height: 50px;">
+                  <h1 class="border-l-white border-y-yellow-300 spinner-border border-r-yellow-100"></h1>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="flex justify-center mt-4" style="">
+
+            <button v-if="currentPage > 1" class="px-3 py-2 mr-2 cursor-pointer round gray paginationButtons" @click="changePage(--currentPage)">
+              <i class="fa fa-chevron-left" aria-hidden="true"></i>
+            </button>
+            <div v-for="page in totalPages" :key="page">
+              <button v-if="page > currentPage - 4 && page < currentPage + 4" @click="changePage(page)" :class="{ 'primaryColor paginationButtons ': page === currentPage, 'paginationButtons gray text-gray-700': page !== currentPage }" class="px-3 py-2 mr-2 rounded cursor-pointer">
+                {{ page }}
+              </button>
+            </div>
+            <button v-if="currentPage < totalPages" class="px-3 py-2 mr-2 cursor-pointer round gray paginationButtons" @click="changePage(++currentPage)">
+              <i class="fa fa-chevron-right" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </AuthenticatedLayout>
 </template>
 <style>
 .height{

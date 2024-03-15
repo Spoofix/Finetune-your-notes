@@ -24,7 +24,7 @@ class UserSeeder extends Seeder
             'org_id' => 1,
             'org_role_id' => 1,
             'second_name' => "kiromo",
-            'profile' => ''
+            'profile_pic' => ''
         ]);
     }
 }

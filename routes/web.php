@@ -19,9 +19,10 @@ use App\Http\Controllers\ScannedController;
 use App\Http\Controllers\SettingsController;
 use App\Console\Commands\ScanSpoofingDomains;
 use App\Http\Controllers\SpoofViewController;
+use App\Http\Middleware\UserSwitchMiddleware;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\UserSwitchesController;
-use App\Http\Middleware\UserSwitchMiddleware;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,7 +62,7 @@ Route::get('/dashboard', function () {
         'users' => User::all()
     ]);
 })->middleware(['auth', 'verified', 'user_switch_data'])->name('dashboard');
-Route::get('/dashboard/{user_id}', [UserSwitchesController::class, 'index'])->middleware('user_switch_data')->name('dashboard2');
+Route::get('/admin/dashboard/{user_id}', [UserSwitchesController::class, 'index'])->middleware('user_switch_data')->name('dashboard2');
 Route::get('/back_to_admin/{admin_id}', [UserSwitchesController::class, 'back_to_admin'])->middleware('user_switch_data')->name('back_to_admin');
 
 Route::get('/search-domain', [SearchController::class, 'index'])->name('search.domain');
@@ -78,8 +79,13 @@ Route::middleware('auth', 'user_switch_data')->group(function () {
     Route::get('/spoof/markAsRisk/{spoofId}', [SpoofViewController::class, 'markAsRisk'])->name('spoof.report');
     Route::get('/spoof/Monitor/{spoofId}', [SpoofViewController::class, 'Monitor'])->name('spoof.report');
     Route::get('/spoof/stop_monitoring/{spoofId}', [SpoofViewController::class, 'stopMonitoring'])->name('spoof.report');
-    Route::get('/spoof/report/{spoofId}', [SpoofViewController::class, 'spoofReport'])->name('spoof.report');
     Route::get('/report', [ReportController::class, 'report'])->name('report');
+
+    // Admin dashboard 
+    Route::middleware('is_admin')->group(function () {
+        Route::get('admin/dashboard', [AdminController::class, 'index'])->middleware(['auth', 'verified'])->name('admin.dashboard');
+        Route::get('admin/Org_Users', [AdminController::class, 'Org_Users'])->middleware(['auth', 'verified', 'user_switch_data'])->name('Org_Users');
+    });
 
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::get('/profile-update', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -95,6 +101,8 @@ Route::middleware('auth', 'user_switch_data')->group(function () {
     Route::get('/organization/{domain}/{id}/latest', [OrganizationController::class, 'view_latest'])->name('organization.view.latest');
     Route::post('/organization-search', [OrganizationController::class, 'search'])->name('organization.search');
 
+    //screenshots api for now latest_screenshots
+    Route::get('/latest_screenshots/{domain}', [SpoofViewController::class, 'getLatestScreenshots'])->name('screenshots');
     // settings 
     Route::get('/settings/account', [SettingsController::class, 'index'])->name('settings.account');
     Route::get('/settings/notifications', [SettingsController::class, 'notifications'])->name('settings.notifications');
@@ -120,7 +128,16 @@ Route::middleware('auth', 'user_switch_data')->group(function () {
     Route::get('/Messages', [DomainController::class, 'Messages'])->name('Messages');
     Route::post('/Messages', [DomainController::class, 'Messages'])->name('Messages');
     Route::post('/add_domain', [DomainController::class, 'store'])->name('add_domain');
+    // reporting
     Route::get('/report/{domain}/{id}', [ReportController::class, 'index'])->name('report');
+    Route::get('/Report', [ReportController::class, 'Report'])->middleware(['auth', 'verified'])->name('Report');
+    Route::get('/ReportView/{domain}/{id}', [ReportController::class, 'index'])->name('ReportView');
+    Route::get('/spoof/report/{spoofId}', [ReportController::class, 'spoofReport'])->name('spoof.report');
+    Route::get('/reporting/view/{spoofId}', [ReportController::class, 'reportSpoofView'])->name('report.view');
+    //send email
+    Route::get('/report/sendReport/{spoofId}/{email}/{reportingId}', [ReportController::class, 'sendReport'])->name('report.sendReport');
+    Route::get('/report/formReport/{spoofId}/{reportingId}', [ReportController::class, 'formReport'])->name('report.formReport');
+
     // Route::get('/domains', [SpoofController::class, 'spoof'])->name('spoof.domain');
     Route::get('/domains', [ScannedController::class, 'index'])->middleware(['auth', 'verified'])->name('domains');
     Route::get('/InProgress', [ScannedController::class, 'InProgress'])->middleware(['auth', 'verified'])->name('InProgress');
@@ -140,9 +157,11 @@ Route::middleware('auth', 'user_switch_data')->group(function () {
         Route::post('/user-create', [UsersController::class, 'store'])->name('user.create');
     });
     // will work on
+    // Route::middleware(!'is_admin')->group(function () {
     Route::post('/user/approve', [UsersController::class, 'approve'])->name('user.approve');
     Route::post('/user/lock', [UsersController::class, 'lock'])->name('user.lock');
     // Route::get('/user/{user_id}', [UsersController::class, 'view'])->name('user.view');
+    // });
 });
 
 require __DIR__ . '/auth.php';

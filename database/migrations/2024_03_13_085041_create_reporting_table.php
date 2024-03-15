@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('reporting', function (Blueprint $table) {
             $table->id();
-            $table->string("report_to");
+            $table->string("name");
             $table->string("email");
-            $table->string("link_to_form");
+            $table->string("form_url");
+            $table->enum("Can_Report", ["true", "false"]);
             $table->timestamps();
         });
     }

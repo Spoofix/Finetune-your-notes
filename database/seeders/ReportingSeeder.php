@@ -14,89 +14,143 @@ class ReportingSeeder extends Seeder
     public function run(): void
     {
         Reporting::create([
-            'report_to' => "Google SafeBrowsing ",
+            'name' => "Google SafeBrowsing",
             'email' => " ",
-            'link_to_form' => "https://safebrowsing.google.com/safebrowsing/report_phish/"
+            'form_url' => "https://safebrowsing.google.com/safebrowsing/report_phish/",
+            'Can_Report' => "true"
+
         ]);
         Reporting::create([
-            'report_to' => "Microsoft",
+            'name' => "Microsoft",
             'email' => "phish@office365.microsoft.com",
-            'link_to_form' => "https://www.microsoft.com/en-us/wdsi/support/report-unsafe-site-guest"
+            'form_url' => "https://www.microsoft.com/en-us/wdsi/support/report-unsafe-site-guest",
+            'Can_Report' => "true"
+
         ]);
         Reporting::create([
-            'report_to' => "fortguard",
+            'name' => "Cloudfare",
+            'email' => "",
+            'form_url' => "https://abuse.cloudflare.com/registrar_tm",
+            'Can_Report' => "true"
+
+        ]);
+        Reporting::create([
+            'name' => "Phishing Database",
+            'email' => "",
+            'form_url' => "",
+            'Can_Report' => "true"
+
+        ]);
+        Reporting::create([
+            'name' => "Global Cyber Alliance",
+            'email' => "contact@globalcyberalliance.org",
+            'form_url' => "",
+            'Can_Report' => "true"
+
+        ]);
+        Reporting::create([
+            'name' => "fortguard",
             'email' => "submitspam@fortinet.com",
-            'link_to_form' => "https://www.fortiguard.com/webfilter"
+            'form_url' => "https://www.fortiguard.com/webfilter",
+            'Can_Report' => "true"
+
         ]);
         Reporting::create([
-            'report_to' => "BrightCloud",
+            'name' => "BrightCloud",
             'email' => " ",
-            'link_to_form' => "https://www.brightcloud.com/tools/url-ip-lookup.php"
+            'form_url' => "https://www.brightcloud.com/tools/url-ip-lookup.php",
+            'Can_Report' => "true"
+
         ]);
         Reporting::create([
-            'report_to' => "CRDF",
+            'name' => "CRDF",
             'email' => " ",
-            'link_to_form' => "https://threatcenter.crdf.fr/submit_url.html"
+            'form_url' => "https://threatcenter.crdf.fr/submit_url.html",
+            'Can_Report' => "true"
+
         ]);
         Reporting::create([
-            'report_to' => "Netcraft",
+            'name' => "Netcraft",
             'email' => " ",
-            'link_to_form' => "https://report.netcraft.com/report"
+            'form_url' => "https://report.netcraft.com/report",
+            'Can_Report' => "true"
+
         ]);
         Reporting::create([
-            'report_to' => "Palo Alto Networks ",
+            'name' => "Palo Alto Networks ",
             'email' => " ",
-            'link_to_form' => "https://urlfiltering.paloaltonetworks.com/"
+            'form_url' => "https://urlfiltering.paloaltonetworks.com/",
+            'Can_Report' => "true"
+
         ]);
         Reporting::create([
-            'report_to' => "ESET",
+            'name' => "ESET",
             'email' => "samples@eset.com",
-            'link_to_form' => "https://phishing.eset.com/en-us/report"
+            'form_url' => "https://phishing.eset.com/en-us/report",
+            'Can_Report' => "true"
+
         ]);
         Reporting::create([
-            'report_to' => "Trend Micro",
+            'name' => "Trend Micro",
             'email' => "spam@support.trendmicro.com",
-            'link_to_form' => "https://global.sitesafety.trendmicro.com/index.php"
+            'form_url' => "https://global.sitesafety.trendmicro.com/index.php",
+            'Can_Report' => "true"
+
         ]);
         Reporting::create([
-            'report_to' => "BitDefender",
+            'name' => "BitDefender",
             'email' => "",
-            'link_to_form' => "https://www.bitdefender.com/consumer/support/answer/29358/"
+            'form_url' => "https://www.bitdefender.com/consumer/support/answer/29358/",
+            'Can_Report' => "true"
+
         ]);
         Reporting::create([
-            'report_to' => "McAfee",
+            'name' => "McAfee",
             'email' => "reportphishing@mcafee.com", //phishing@mcafee.com
-            'link_to_form' => "https://sitelookup.mcafee.com/"
+            'form_url' => "https://sitelookup.mcafee.com/",
+            'Can_Report' => "true"
+
         ]);
         Reporting::create([
-            'report_to' => "Forcepoint",
+            'name' => "Forcepoint",
             'email' => "",
-            'link_to_form' => "https://csi.forcepoint.com/"
+            'form_url' => "https://csi.forcepoint.com/",
+            'Can_Report' => "true"
+
         ]);
         Reporting::create([
-            'report_to' => "Symantec",
+            'name' => "Symantec",
             'email' => "spamsample@symantec.com",
-            'link_to_form' => "https://sitereview.symantec.com/#/"
+            'form_url' => "https://sitereview.symantec.com/#/",
+            'Can_Report' => "true"
+
         ]);
         Reporting::create([
-            'report_to' => "Spam404 ",
+            'name' => "Spam404 ",
             'email' => " ",
-            'link_to_form' => "https://www.spam404.com/report.html"
+            'form_url' => "https://www.spam404.com/report.html",
+            'Can_Report' => "true"
+
         ]);
         Reporting::create([
-            'report_to' => "Kaspersky",
+            'name' => "Kaspersky",
             'email' => " ",
-            'link_to_form' => "https://opentip.kaspersky.com/"
+            'form_url' => "https://opentip.kaspersky.com/",
+            'Can_Report' => "true"
+
         ]);
         Reporting::create([
-            'report_to' => "Cisco Talos",
+            'name' => "Cisco Talos",
             'email' => "phish@access.ironport.com",
-            'link_to_form' => "https://talosintelligence.com/reputation_center"
+            'form_url' => "https://talosintelligence.com/reputation_center",
+            'Can_Report' => "true"
+
         ]);
         Reporting::create([
-            'report_to' => "Anti-Phishing Working Group",
+            'name' => "APWG (Anti-Phishing Working Group)",
             'email' => "reportphishing@apwg.org",
-            'link_to_form' => ""
+            'form_url' => "",
+            'Can_Report' => "true"
         ]);
     }
 }

@@ -15,6 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->integer('user_id');
+            $table->string('email');
+            $table->string('phone');
+            $table->string('terms_and_conditions');
+            $table->string('plan_id');
+            $table->timestamp('last_search')->default(now());
+            $table->enum('status', ['ACTIVE', 'LOCKED'])->default('ACTIVE');
             $table->timestamps();
         });
     }

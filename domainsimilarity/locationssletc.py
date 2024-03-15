@@ -13,6 +13,7 @@ domain_list = domain_string.split(',')
 # domainOne = domain_list[0].strip()  # Use strip() to remove any leading or trailing whitespaces
 domainTwo = domain_list[0].strip()
 #run as sudo in the terminal
+import re
 import requests
 import socket
 import subprocess
@@ -80,24 +81,104 @@ def get_server_os(domain):
 # Function to get basic SSL certificate details
 def get_ssl_certificate(domain):
     try:
+        # Create a default SSL context
         context = ssl.create_default_context()
+        
+        # Establish a secure connection to the domain
         with context.wrap_socket(socket.socket(), server_hostname=domain) as ssock:
             ssock.connect((domain, 443))
+            
+            # Retrieve the SSL certificate presented by the server
             cert = ssock.getpeercert(binary_form=True)
+            
+            # Load the SSL certificate into an OpenSSL.crypto.X509 object
             x509 = OpenSSL.crypto.load_certificate(OpenSSL.crypto.FILETYPE_ASN1, cert)
-            subject = dict(x509.get_subject().get_components())
-            issuer = dict(x509.get_issuer().get_components())
-            return f"Subject: {subject}, Issuer: {issuer}"
+            
+            # Extract subject and issuer information
+            subject = dict((name.decode(), value.decode()) for name, value in x509.get_subject().get_components())
+            issuer = dict((name.decode(), value.decode()) for name, value in x509.get_issuer().get_components())
+            
+            # Construct the data dictionary
+            data = {
+                'Subject': subject,
+                'Issuer': issuer
+            }
+            # Serialize the data dictionary to a JSON string
+            # data_str = json.dumps(data)
+            
+            return data
     except Exception as e:
         print(f"Error getting SSL certificate details: {e}")
-        return "No SSL certificate details available"
+        return None
 
 # Replace with the domain name you want to look up
 domain_name = domainTwo
 
 # Get the IP address of the domain
 ip_address = get_ip_address(domain_name)
+#get isp with whois "ip address"
+def get_netname_from_whois(ip_address):
+    try:
+        # Run the whois command and capture the output
+        whois_output = subprocess.check_output(["whois", ip_address]).decode("utf-8")
 
+        # Define the regular expression pattern to search for the netname key
+        # pattern = re.compile(r"netname\s*:\s*(.*?)$", re.IGNORECASE | re.MULTILINE)
+        pattern = re.compile(r"Organization\s*:\s*(.*?)$", re.IGNORECASE | re.MULTILINE)
+
+        # Search for the netname key in the whois output
+        match = re.search(pattern, whois_output)
+
+        if match:
+            # Return the netname value
+            return match.group(1).strip()
+        else:
+            return None
+
+    except subprocess.CalledProcessError as e:
+        print(f"Error running whois command: {e}")
+        return None
+    except Exception as e:
+        print(f"Error: {e}")
+        return None
+
+def get_email_from_whois(ip_address):
+    try:
+        # Run the whois command and capture the output
+        whois_output = subprocess.check_output(["whois", ip_address]).decode("utf-8")
+
+        # Define the regular expression pattern to search for the netname key
+        # pattern = re.compile(r"netname\s*:\s*(.*?)$", re.IGNORECASE | re.MULTILINE)
+        pattern = re.compile(r"email\s*:\s*(.*?)$", re.IGNORECASE | re.MULTILINE)
+
+        # Search for the netname key in the whois output
+        match = re.search(pattern, whois_output)
+
+        if match:
+            # Return the netname value
+            return match.group(1).strip()
+        else:
+            return None
+
+    except subprocess.CalledProcessError as e:
+        print(f"Error running whois command: {e}")
+        return None
+    except Exception as e:
+        print(f"Error: {e}")
+        return None
+    
+#full country name
+def get_country_name(code):
+    try:
+        country = pycountry.countries.get(alpha_2=code)
+        if country:
+            return country.name
+        else:
+            return "Unknown"
+    except Exception as e:
+        print(f"Error retrieving country name: {e}")
+        return "Unknown"
+    
 # Function to get geolocation information for an IP address using ipinfo.io
 def get_geolocation_info(ip):
     try:
@@ -109,11 +190,13 @@ def get_geolocation_info(ip):
             "IP Address": data.get("ip"),
             "City": data.get("city"),
             "Region": data.get("region"),
-            "Country": data.get("country"),
+            "Country": get_country_name(data.get("country")),
             "Latitude": data.get("loc").split(",")[0],
             "Longitude": data.get("loc").split(",")[1],
             "Organization": data.get("org"),
-            "ISP": data.get("org").split()[-1] if data.get("org") else None,
+            # "ISP": data.get("org").split()[-1] if data.get("org") else None,
+            "ISP": get_netname_from_whois(ip),
+            "ISP_Abuse": get_email_from_whois(ip),
         }
     except Exception as e:
         print(f"Error getting geolocation information: {e}")
@@ -167,10 +250,12 @@ if ip_address:
     # Get server's operating system
     server_os = get_server_os(domain_name)
     # print(f"Server_Operating_System: {server_os}")
-
+    
     # Get basic SSL certificate details
     ssl_certificate = get_ssl_certificate(domain_name)
-    # print(f"SSL Certificate Details:\n{ssl_certificate}")
+    
+
+
     sslInfo ={}
     sslInfo['SSL-Certificate_Details'] = ssl_certificate
     results_values.append(sslInfo)
@@ -194,60 +279,3 @@ with open('returnDraft.txt', 'r') as file:
 with open(file_path, 'w') as file:
     json_data = json.dumps(Data, indent=2)
     file.write("%s\n" % json_data)
-
-    # print(json_data)
-# ... Your existing Python code ...
-
-# Function to create a location image using Google Maps
-# def create_location_map(domain_name, lat, lon):
-    # Define a JavaScript template to display Google Maps
-    # map_template = f"""
-    # <html>
-    #   <head>
-    #     <style>
-    #       /* Set the size of the map container */
-    #       #map-container {{
-    #         height: 400px;
-    #         width: 100%;
-    #       }}
-    #     </style>
-    #   </head>
-    #   <body>
-    #     <h1>Location for {domain_name}</h1>
-    #     <div id="map-container"></div>
-    #     <script>
-    #       // Create a function to initialize the map
-    #       function initMap() {{
-    #         var map = new google.maps.Map(document.getElementById('map-container'), {{
-    #           center: {{ lat: {lat}, lng: {lon} }},
-    #           zoom: 8 // Adjust the zoom level as needed
-    #         }});
-
-    #         var marker = new google.maps.Marker({{
-    #           position: {{ lat: {lat}, lng: {lon} }},
-    #           map: map,
-    #           title: '{domain_name}'
-    #         }});
-    #       }}
-    #     </script>
-    #     <!-- Include the Google Maps API script -->
-    #     <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
-    #   </body>
-    # </html>
-    # """
-
-    # Create an HTML file with the map code
-    # with open(f"{domain_name}_map.html", "w") as map_file:
-    #     map_file.write(map_template)
-
-
-# Replace with your domain name, latitude, and longitude values
-# domain_name = "google.com"
-# latitude = -4.0547
-# longitude = 39.6636
-# latitude = float(geolocation_info.get("Latitude", 0))
-# longitude = float(geolocation_info.get("Longitude", 0))
-
-# Create a location map for the specified domain
-# create_location_map(domain_name, latitude, longitude)
-

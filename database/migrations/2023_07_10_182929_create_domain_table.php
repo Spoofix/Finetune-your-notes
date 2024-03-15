@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('domain_name');
-            $table->enum('status',['SCANNED','PROCESSING','NOT_SCANNED'])->default('NOT_SCANNED');
+            $table->enum('status', ['SCANNED', 'PROCESSING', 'NOT_SCANNED'])->default('NOT_SCANNED');
+            $table->integer('org_id');
             $table->timestamps();
         });
     }

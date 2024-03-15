@@ -98,7 +98,7 @@ class RegisteredUserController extends Controller
             'role_id' => 2,
             'org_role_id' => 1,
             'status' => 'ACTIVE',
-            'profile' => '',
+            'profile_pic' => '',
             'second_name' => $second_name,
             'password' => Hash::make($request->password),
         ]);

@@ -14,7 +14,6 @@ class PaymentPlanSeeder extends Seeder
      */
     public function run(): void
     {
-
         PaymentPlan::create([
             'plan' => "Free",
         ]);

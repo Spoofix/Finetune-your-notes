@@ -10,6 +10,8 @@ use App\Models\SpoofedDomain;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Models\ReportformTakedownDetails;
+use Illuminate\Support\Facades\File;
+
 
 class SpoofViewController extends Controller
 {
@@ -40,8 +42,8 @@ class SpoofViewController extends Controller
         // $spoofList = SpoofedDomain::where('domain_id', $activedomain)->first();
         $spoofList = array();
 
-        $last_batch = SpoofedDomain::where('domain_id', $activedomain)->orderBy('id', 'desc')->first();
-        $list =  SpoofedDomain::validDomains()->where('domain_id', $activedomain);
+        $last_batch = SpoofedDomain::where('current_scan_status', 'scanned')->where('domain_id', $activedomain)->orderBy('id', 'desc')->first();
+        $list =  SpoofedDomain::validDomains()->where('current_scan_status', 'scanned')->where('domain_id', $activedomain);
         if ($last_batch) {
             $list = $list->where('last_batch', $last_batch->last_batch);
         }
@@ -58,20 +60,42 @@ class SpoofViewController extends Controller
         });
         $spoofList = array_merge($spoofList, $list->toArray());
         // Remove reals
-        // function containsScotiabank($haystack, $needle)
-        // {
-        //     return strpos($haystack, $needle) !== false;
-        // }
+        function containsScotiabank($haystack, $needle)
+        {
+            // Check if the needle string is found in the haystack
+            if (strpos($haystack, $needle) !== false) {
+                return true;
+            }
+            // Check for subdomains
+            $parts = explode('.', $haystack);
+            foreach ($parts as $part) {
+                // If any part of the domain contains the needle string, return true
+                if (strpos($part, $needle) !== false) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        // Filter out subdomains and elements containing "Scotiabank"
+        foreach ($spoofList as $isNew) {
+            $isNewValue = $isNew['spoofed_domain'];
+            $firstSeen = SpoofedDomain::where('spoofed_domain', $isNewValue)->first()->created_at;
+            $isNew['first_seen'] = $firstSeen;
+            $domainy = Domain::where('user_id', auth()->id())->where('id', $isNew['domain_id'])->first();
+            if (!containsScotiabank($isNew['spoofed_domain'], $domainy->domain_name)) {
+                $modifiedIdsList[] = $isNew;
+            }
+        }
 
-        // Filter the $spoofList directly to remove elements that don't contain 'scotiabank.com'
-        // $spoofList = array_filter($spoofList, function ($isNew) {
-        //     return containsScotiabank($isNew['spoofed_domain'], "scotiabank.com");
-        // });
+        //catch legits
+        $domain = Domain::where('user_id', auth()->id())->where('id', $spoofData['domain_id'])->first();
+        if ($spoofData['spoofDomain'] == $domain->domain_name && containsScotiabank($spoofData['spoofDomain'], $domain->domain_name)) {
+            return redirect()->to($spoofData['id'] + 1);
+        }
 
-        // print_r($spoofList);
         return Inertia::render('Domain/View', [
             'isValidTakedown' => $isCompletedOrInprogress,
-            'spoofList' => $spoofList,
+            'spoofList' => $modifiedIdsList,
             'spoofData' => $spoofData,
             'userid' => auth()->id(),
             'domain' => Domain::where('user_id', auth()->id())->get(),
@@ -131,16 +155,7 @@ class SpoofViewController extends Controller
         // }
     }
 
-    public function spoofReport($spoofId)
-    {
 
-        $spoofData = SpoofedDomain::where('id', $spoofId)->first();
-
-        return Inertia::render('Domain/Report', [
-            'spoofData' => $spoofData,
-            'initValueHere' => $this->htmlFromat($spoofData)
-        ]);
-    }
 
     private function htmlFromat($spoofData)
     {
@@ -229,7 +244,7 @@ class SpoofViewController extends Controller
     {
         $spoofData = SpoofedDomain::where('id', $spoofId)->first();
         if ($spoofData) {
-            $spoofData->progress_status = 'stop_monitoring';
+            $spoofData->progress_status = 'new';
             $spoofData->save();
         }
         $url = route('domains');
@@ -240,5 +255,28 @@ class SpoofViewController extends Controller
         $user = Auth::user();
         $data = [];
         Mail::to($user->email)->queue(new newDomains($data));
+    }
+    public function getLatestScreenshots($domain)
+    {
+        $folderPath = base_path("./public/assets/screenshots/{$domain}");
+        // Check if the folder exists
+        if (!File::exists($folderPath)) {
+            return response()->json(['error' => 'Folder does not exist'], 404);
+        }
+
+        // Get all files in the folder
+        $files = File::files($folderPath);
+
+        // Sort the files by their last modified time in descending order
+        usort($files, function ($a, $b) {
+            return File::lastModified($b) <=> File::lastModified($a);
+        });
+
+        // Extract the filenames
+        $filenames = array_map(function ($file) {
+            return $file->getFilename();
+        }, $files);
+
+        return response()->json(['filenames' => $filenames]);
     }
 }

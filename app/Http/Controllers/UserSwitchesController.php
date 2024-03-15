@@ -64,7 +64,8 @@ class UserSwitchesController extends Controller
 
             // return Inertia::render('Dashboard', $data);
             // return redirect()->back();
-            return response()->redirectTo(url()->previous());
+            // return response()->redirectTo(url()->previous());
+            return redirect()->route('domains');
             // return response();
         }
         return redirect()->back()->with('error', 'error.');
@@ -88,7 +89,7 @@ class UserSwitchesController extends Controller
             // $response->withCookie(cookie()->forget('user_id'));
         }
 
-        return Inertia::location(route('dashboard'));
+        return Inertia::location(route('admin.dashboard'));
         // return Inertia::location(route('dashboard'))->toResponse(request());
     }
 }
