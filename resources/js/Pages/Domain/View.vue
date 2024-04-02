@@ -31,6 +31,9 @@ const props = defineProps({
   },
   isValidTakedown:{
     type: Boolean,
+  },
+  user_role: {
+    type: Number,
   }
 });
 
@@ -723,7 +726,7 @@ function imageRight() {
       <li>{{filenames[0]}}</li>
     </ul>
   </div> -->
-  <AuthenticatedLayout v-if=" props.userid === userId" class="overflow-scroll fontFamily" style="height:100vh; background: #FFF;">
+  <AuthenticatedLayout v-if=" props.userid === userId || props.user_role == 1" class="overflow-scroll fontFamily" style="height:100vh; background: #FFF;">
 
     <div class="flex justify-between mt-6 w-100">
       <div class="relative ml-6">

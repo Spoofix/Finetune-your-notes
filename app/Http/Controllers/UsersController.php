@@ -37,16 +37,14 @@ class UsersController extends Controller
 
     public function view(Request $request, $user_id)
     {
-        $user = User::where('id', $user_id)->first();
+        $auth_user = User::where('id', $user_id)->first();
 
-        if (!$user) {
-            return to_route('users.list');
+        if (!$auth_user) {
+            return to_route('Org_Users');
         }
 
         return Inertia::render('Users/Profile', [
-            'user' => $user,
-            'provinces' => config('provinces'),
-            'timezones' => config('timezones'),
+            'auth_user' => $auth_user,
         ]);
     }
 

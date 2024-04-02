@@ -6,6 +6,7 @@ use App\Models\User;
 use Inertia\Inertia;
 use App\Models\Domain;
 use App\Models\DomainDetail;
+use App\Models\Organization;
 use Illuminate\Http\Request;
 use App\Models\SpoofedDomain;
 use Illuminate\Routing\Controller;
@@ -19,7 +20,11 @@ class ScannedController extends Controller
     // Domains
     public function index()
     {
-        $DomainDetail = Domain::where('user_id', auth()->id())->get();
+        if (auth()->user()->role_id == 2) {
+            $DomainDetail = Domain::where('user_id', auth()->id())->get();
+        } else {
+            $DomainDetail = Domain::all();
+        }
         $IdsList = array();
         $modifiedIdsList = array();
         foreach ($DomainDetail as $Id) {
@@ -82,15 +87,38 @@ class ScannedController extends Controller
             $isNewValue = $isNew['spoofed_domain'];
             $firstSeen = SpoofedDomain::where('spoofed_domain', $isNewValue)->first()->created_at;
             $isNew['first_seen'] = $firstSeen;
-            $domainy = Domain::where('user_id', auth()->id())->where('id', $isNew['domain_id'])->first();
-            if (!containsScotiabank($isNew['spoofed_domain'], $domainy->domain_name)) {
+
+            // $domainy = Domain::where('user_id', auth()->id())->where('id', $isNew['domain_id'])->first();
+            $domainy = Domain::where('id', $isNew['domain_id']);
+
+            if (auth()->user()->role_id == 2) {
+                $domainy->where('user_id', auth()->id());
+            }
+
+            $domainy = $domainy->first();
+            // if (!containsScotiabank($isNew['spoofed_domain'], $domainy->domain_name)) {
+            //     $modifiedIdsList[] = $isNew;
+            // }
+            if ($domainy && !containsScotiabank($isNew['spoofed_domain'], $domainy->domain_name)) {
                 $modifiedIdsList[] = $isNew;
             }
+            if (auth()->user()->role_id == 2) {
+                $domainList = Domain::where('user_id', auth()->id())->get();
+                foreach ($domainList as $domainn) {
+                    $domainn['Organization'] = '';
+                }
+            } else {
+                $domainList = Domain::all();
+                foreach ($domainList as $domainn) {
+                    $Org_id = $domainn->org_id;
+                    $Org = Organization::where('id', $Org_id)->first()->name;
+                    $domainn['Organization'] = $Org;
+                }
+            }
         }
-
         return Inertia::render('Domains', [
             'spoofList' => $modifiedIdsList,
-            'domainList' => Domain::where('user_id', auth()->id())->get()
+            'domainList' => $domainList
         ]);
     }
     // InProgress method
@@ -138,7 +166,12 @@ class ScannedController extends Controller
     // Completed
     public function Completed()
     {
-        $DomainDetail = Domain::where('user_id', auth()->id())->get();
+        $user = Auth::user();
+        if ($user->role_id == 2) {
+            $DomainDetail = Domain::where('user_id', auth()->id())->get();
+        } else {
+            $DomainDetail = Domain::all();
+        }
         $IdsList = array();
         foreach ($DomainDetail as $Id) {
             // if (is_array($Id)) {
@@ -155,7 +188,7 @@ class ScannedController extends Controller
         }
         return Inertia::render('Completed', [
             'spoofList' => $IdsList,
-            'domainList' => Domain::where('user_id', auth()->id())->get()
+            'domainList' => $user->role_id == 2 ? Domain::where('user_id', auth()->id())->get() : Domain::all(),
         ]);
     }
 }

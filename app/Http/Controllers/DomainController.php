@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Inertia\Inertia;
+use Inertia\Response;
 use App\Models\Domain;
 use Inertia\Controller;
+use App\Models\Messages;
 use App\Jobs\ScanDomains;
 use App\Jobs\WhoIsRating;
 use App\Models\OrgDomain;
@@ -14,13 +16,13 @@ use Illuminate\Http\Request;
 use App\Models\SpoofedDomain;
 use App\Services\WhoIsSearch;
 use App\Jobs\ScanDomainRatings;
+use App\Services\SpoofixEmails;
 use Illuminate\Http\RedirectResponse;
 use App\Jobs\LocationSslAndRedirectsJob;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\ReportformTakedownDetails;
 use App\Http\Requests\UserReportSpoofingSite;
-use App\Models\Messages;
-use Inertia\Response;
+use App\Models\Spoofix_Email;
 
 class DomainController extends Controller
 {
@@ -140,23 +142,34 @@ class DomainController extends Controller
     public function Messages(Request $request)
     {
         $user = auth()->user();
-        $messages = Messages::where('to_user_id', $user->id);
+        if ($user->role_id == 1) {
+            $messages = Spoofix_Email::all();
+        } else {
+            $messages = Spoofix_Email::where('to_user_id', $user->id);
+        }
+
+        // llllllllll
+        // SpoofixEmails::fetchEmails();
+        // llllllllll
 
         if ($request->from || $request->date || $request->subject) {
             if ($request->from) {
-                $messages = $messages;
+                // $messages = $messages;
+                $messages->where('from_address', 'like', '%' . $request->from . '%');
             }
             if ($request->date) {
                 // $messages->whereDate('created_at', $request->date);
-                $formattedDate = '%' . date('Y-m-d', strtotime($request->date)) . '%';
-                $messages->where('created_at', 'like', $formattedDate);
+                @$formattedDate = '%' . date('Y-m-d', strtotime($request->date)) . '%';
+                @$messages->where('date', 'like', $formattedDate);
             }
             if ($request->subject) {
                 // $messages->where('subject', $request->subject);
                 $messages->where('subject', 'like', '%' . $request->subject . '%');
             }
         }
-        $messages = $messages->get();
+        if ($user->role_id !== 1) {
+            $messages = $messages->get();
+        }
         // echo'<pre>';
         // print_r($request->subject ? $request->subject : '');
 

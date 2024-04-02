@@ -39,7 +39,17 @@ class ReportController extends Controller
                     $spoofDetails = array_merge($spoofDetailArray, $reported->toArray());
 
                     $user = User::find($spoofDetails['reported_by_user_id']);
+                    $Reported_to = ReportedSpoofDomains::where('spoof_id', $spoofDetail->id)->get();
 
+
+                    if ($Reported_to) {
+                        $count = $Reported_to->count();
+                        $emailsArray = explode('","', $spoofDetail->emails);
+
+                        $overCount = 21 + count($emailsArray);
+                        $spoofDetails['Reported_to_value'] = $overCount;
+                        $spoofDetails['Reported_to'] = $count;
+                    }
                     if ($user) {
                         $spoofDetails['user_name'] = $user->name;
                         $uniqueReportDetails[$spoofDetail->spoofed_domain] = $spoofDetails;
@@ -212,7 +222,17 @@ class ReportController extends Controller
 
         try {
             $spoofData = SpoofedDomain::where('id', $spoofId)->first();
+            $Reported_to = ReportedSpoofDomains::where('spoof_id', $spoofData->id)->get();
 
+
+            if ($Reported_to) {
+                $count = $Reported_to->count();
+                $emailsArray = explode('","', $spoofData->emails);
+
+                $overCount = 21 + count($emailsArray);
+                $spoofData['Reported_to_value'] = $overCount;
+                $spoofData['Reported_to'] = $count;
+            }
             if ($spoofData) {
                 $userDomainTest = Domain::where('id', $spoofData->domain_id)->first();
             } else {

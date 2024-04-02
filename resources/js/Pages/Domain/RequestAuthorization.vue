@@ -23,8 +23,10 @@ const props = defineProps({
   },
   spoofList: {
     type: Object,
+  },
+  user_role: {
+    type: Number,
   }
-  
 });
 
 // get screenshots urls
@@ -545,7 +547,7 @@ const submit = () => {
   <Head v-else title="RequestAuthorization" />
   <!-- <Head title="RequestAuthorization" /> -->
 
-  <AuthenticatedLayout v-if=" props.userid === userId" class="overflow-scroll fontFamily" style="height:100vh; background: #FFF;">
+  <AuthenticatedLayout v-if="props.userid === userId || props.user_role == 1" class="overflow-scroll fontFamily" style="height:100vh; background: #FFF;">
     <div class="flex justify-between mt-6 w-100">
       <div class="relative ml-6">
         <button class="absolute w-40 h-12 px-3 rounded-tr-full bg-dark tabsText" style="">{{props.domain[0].domain_name}}</button>

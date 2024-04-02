@@ -21,7 +21,6 @@ class SpoofViewController extends Controller
 
         try {
             $spoofData = SpoofedDomain::where('id', $spoofId)->first();
-
             if ($spoofData) {
                 $userDomainTest = Domain::where('id', $spoofData->domain_id)->first();
             } else {
@@ -30,7 +29,7 @@ class SpoofViewController extends Controller
         } catch (\Exception $e) {
             return Inertia::render('DefaultPage');
         }
-        if ($user->id !== $userDomainTest->user_id) {
+        if ($user->id !== $userDomainTest->user_id && $user->role_id == 2) {
             return Inertia::render('DefaultPage');
         }
 
@@ -81,14 +80,22 @@ class SpoofViewController extends Controller
             $isNewValue = $isNew['spoofed_domain'];
             $firstSeen = SpoofedDomain::where('spoofed_domain', $isNewValue)->first()->created_at;
             $isNew['first_seen'] = $firstSeen;
-            $domainy = Domain::where('user_id', auth()->id())->where('id', $isNew['domain_id'])->first();
+            if ($user->role_id == 2) {
+                $domainy = Domain::where('user_id', auth()->id())->where('id', $isNew['domain_id'])->first();
+            } else {
+                $domainy = Domain::where('id', $isNew['domain_id'])->first();
+            }
             if (!containsScotiabank($isNew['spoofed_domain'], $domainy->domain_name)) {
                 $modifiedIdsList[] = $isNew;
             }
         }
 
         //catch legits
-        $domain = Domain::where('user_id', auth()->id())->where('id', $spoofData['domain_id'])->first();
+        if ($user->role_id == 2) {
+            $domain = Domain::where('user_id', auth()->id())->where('id', $spoofData['domain_id'])->first();
+        } else {
+            $domain = Domain::where('id', $spoofData['domain_id'])->first();
+        }
         if ($spoofData['spoofDomain'] == $domain->domain_name && containsScotiabank($spoofData['spoofDomain'], $domain->domain_name)) {
             return redirect()->to($spoofData['id'] + 1);
         }
@@ -98,7 +105,8 @@ class SpoofViewController extends Controller
             'spoofList' => $modifiedIdsList,
             'spoofData' => $spoofData,
             'userid' => auth()->id(),
-            'domain' => Domain::where('user_id', auth()->id())->get(),
+            'user_role' => $user->role_id,
+            'domain' => Domain::where('id', $spoofData->domain_id)->get(),
             'firstSeen' => $firstSeen
             // 'response' => true,
         ]);
@@ -117,7 +125,7 @@ class SpoofViewController extends Controller
         } catch (\Exception $e) {
             return Inertia::render('DefaultPage');
         }
-        if ($user->id !== $userDomainTest->user_id) {
+        if ($user->id !== $userDomainTest->user_id && $user->role_id == 2) {
             return Inertia::render('DefaultPage');
         }
         $spoofData = SpoofedDomain::where('id', $spoofId)->first();
@@ -136,13 +144,15 @@ class SpoofViewController extends Controller
         $spoofList = array_merge($spoofList, $list->toArray());
         // $checkIfSpoofIdBelongsToUser = $spoofData->domain_id;
         // if ($spoofId === ) { requestAuthorization
+
         if ($check) {
             // return Inertia::json('Domain/View', ['response' => $check]);
             return Inertia('Domain/View', [
                 'spoofList' => $spoofList,
                 'spoofData' => $spoofData,
                 'userid' => auth()->id(),
-                'domain' => Domain::where('user_id', auth()->id())->get(),
+                'user_role' => $user->role_id,
+                'domain' => Domain::where('id', $spoofData->domain_id)->get(),
                 'response' => true,
             ]);
         }
@@ -150,6 +160,7 @@ class SpoofViewController extends Controller
             'spoofList' => $spoofList,
             'spoofData' => $spoofData,
             'userid' => auth()->id(),
+            'user_role' => $user->role_id,
             'domain' => Domain::where('user_id', auth()->id())->get()
         ]);
         // }

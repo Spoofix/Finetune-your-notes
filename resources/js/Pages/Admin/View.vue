@@ -608,7 +608,7 @@ function imageRight() {
       <Link v-if="isValidTakedown" class="my-auto buttons buttonsText mr-9 hover:bg-yellow-300" :href="'/Report'"><i class="pr-2 fa fa-chevron-left" aria-hidden="true" preserve-scroll></i> Back</Link>
       <Link v-else class="my-auto buttons buttonsText mr-9 hover:bg-yellow-300" :href="'/domains'"><i class="pr-2 fa fa-chevron-left" aria-hidden="true" preserve-scroll></i> Back</Link>
     </div>
-    <div class="flex flex-row mx-4 mt-3 bg-yellow-100 h-14 rounded-t-xl">
+    <div class="relative flex flex-row mx-4 mt-3 bg-yellow-100 h-14 rounded-t-xl">
       <h2 class="my-auto text-gray-600 pl-7 h3 riskpush">{{ spoofData.spoofed_domain }}</h2>
       <div class="flex my-auto overflow-x-visible py-auto min-w-60" v-if="spoofData.current_scan_status === 'not_scanned' && spoofData.phashes === 'processing'">
         <h1 class="border-l-white border-y-yellow-300 spinner-border border-r-yellow-100 "></h1>
@@ -617,6 +617,7 @@ function imageRight() {
       <h2 class="my-auto font-bold text-center capitalize py-auto risk h3" v-else style="min-width:fit-content;" :style="{'color': methods.overallRatingLabel(methods.overallRating(spoofData )) === 'High' ? '#ED0707' : methods.overallRatingLabel(methods.overallRating(spoofData )) === 'medium' ? '#F7610D' : '#3AAC11'}">
         {{ methods.overallRatingLabel(methods.overallRating(spoofData )) }} Risk
       </h2>
+      <h2 class="flex flex-row font-bold text-center text-gray-600 capitalize py-auto Reported" style="min-width: fit-content; margin-bottom: 30px;"><span class="mb-2">Reported: </span><span class="mb-2 text-orange-400">{{spoofData.Reported_to }}/{{spoofData.Reported_to_value}}</span></h2>
     </div>
     <div class="flex flex-row justify-between mx-4 mt-2">
       <div class="widthSetting" style=" min-height: 65vh;">
@@ -1321,6 +1322,25 @@ font-style: normal;
 font-weight: 600;
 line-height: 120%; /* 24px */
 }
+.Reported {
+  display: flex;
+  width: 150px;
+  height: 12.574px;
+  flex-direction: column;
+  justify-content: flex-end; /* Changed from 'center' to 'flex-end' */
+  margin-top: 18px;
+  margin-right: 8px;
+  flex-shrink: 0;
+  position: absolute; /* Assuming you want to position it absolutely */
+  right: 0;
+  /* Semibold/Heading 5/Semibold */
+  font-family: Poppins;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120%; /* 24px */
+}
+
 .buttons{
   display: flex;
 height: 39px;

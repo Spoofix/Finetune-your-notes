@@ -6,6 +6,7 @@ import { Link } from "@inertiajs/vue3"
 import { defineComponent } from 'vue';
 import { defineProps, onMounted } from 'vue';
 import { ref, watch, computed } from 'vue';
+import he from 'he';
 
 
 const isModalVisible = ref(false);
@@ -160,6 +161,11 @@ const submit = () => {
       form.post(route('Messages'));
     // }
 }
+
+const activeOne = ref('Inbox');
+const menu =(now) => {
+  activeOne.value = now;
+}
 </script>
 
 <template>
@@ -168,15 +174,17 @@ const submit = () => {
 
   <AuthenticatedLayout class="overflow-x-hidden overflow-y-scroll fontFamily" style="height:100vh; background: #FFF;"> <!-- v-if=" props.userid === userId" -->
     <div class="flex justify-between mt-6 mr-8 border-b-4 border-black max-w-100 lg;ml-6 md:ml-6 ml-0">
-      <div class="relative ">
-        <button class="absolute w-40 h-12 px-3 rounded-tr-full bg-dark tabsText" style="">Domain</button>
-        <button class="w-56 h-12 pr-4 bg-gray-300 rounded-tr-full tabsText pl-9" style="margin-left: 106px;">Social Media</button>
+
+      <div class="relative">
+        <button @click="menu('Inbox')" class="absolute h-10 rounded-tr-full lg:h-12 md:h-12 w-36 lg:px-3 lg:w-40 tabsText md:w-40" :class="activeOne === 'Inbox' ? 'bg-dark' : 'bg-gray-300'" style="">Inbox</button>
+        <button @click="menu('Sent')" class="h-10 pl-5 rounded-tr-full md:h-12 lg:h-12 lg:pr-4 w-44 lg:w-56 tabsText bg-gray-300 lg:pl-9 md:pl-9 md:w-56 rightTab" style="margin-left: 106px;" :class="activeOne === 'Sent' ? 'bg-dark' : 'bg-gray-300'">Sent</button>
       </div>
+
     </div>
-    <div class="flex items-center justify-between my-2 cursor-pointer md:mx-3 lg:mx-4 h-14 hover:bg-gray-300 bigDropdownBg" style="border-radius: 6px; box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25); " id="myDiv" @click="toggleTable(index, domain.id), scrollToElement(index)">
+    <div class="flex items-center justify-between my-2 mt-2 ml-3 cursor-pointer md:mx-3 lg:mx-4 h-14 hover:bg-gray-300 bigDropdownBg" style="border-radius: 6px; box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25); " id="myDiv" @click="toggleTable(index, domain.id), scrollToElement(index)">
       <div class="ml-5 text-2xl font-semibold text-blueGray-700">
         <h3 class="orgDomain">
-          <Link>messages</Link>
+          <Link>Messages</Link>
         </h3>
       </div>
       <div class="mr-5 botton" @click="openModal">
@@ -225,10 +233,10 @@ const submit = () => {
                 <th class="py-3 pl-2">
                   Date
                 </th>
-                <th class="py-3 text-left">
+                <th class="py-3 text-left" v-if="activeOne === 'Inbox'">
                   From
                 </th>
-                <th class="py-3 text-left">
+                <th class="py-3 text-left" v-if="activeOne !== 'Inbox'">
                   To
                 </th>
                 <th class="py-3 text-left">
@@ -240,16 +248,19 @@ const submit = () => {
               <!-- <tr class="transition-colors duration-300 bg-yellow-100 cursor-pointer tableRow" -->
               <tr class="duration-300 bg-yellow-100 cursor-pointer tableRow1" :class="{ 'bg-yellow-300': messageRef.id == message.id, 'bg-yellow-100 hover:bg-yellow-50': messageRef.id != message.id }" v-for="(message, index) in paginatedMessages" :key="index" @click="messaging(index, message.id, currentPage)">
                 <td class="pl-3 overflow-auto py-auto" style="max-width: 90px;">
-                  {{date(message.created_at)}}
+                  {{date(message.date)}}
                 </td>
-                <td class="text-left capitalize py-auto">
-                  Spoofix
+                <td class="text-left py-auto" v-if="activeOne === 'Inbox'">
+                  <!-- Spoofix -->
+                  <!-- {{ message.from_address.substring(0, message.from_address.indexOf('<')) }} -->
+                  {{ message.subject && message.subject.length > 16 ? message.from_address.substring(0, message.from_address.indexOf('<')).substring(0, 16) + '...' : message.from_address.substring(0, message.from_address.indexOf('<')) }}
                 </td>
-                <td class="text-left capitalize py-auto">
-                  {{info.name}} {{info.second_name}}
+                <td class="text-left py-auto" v-if="activeOne !== 'Inbox'">
+                  <!-- {{info.name}} {{info.second_name}} -->
+                  info.spoofix.com
                 </td>
-                <td class="text-left py-auto">
-                  {{message.subject}}
+                <td class="overflow-hidden text-left py-auto" style="dispaly:none;">
+                  {{ message.subject && message.subject.length > 40 ? message.subject.substring(0, 40) + '...' : message.subject }}
                 </td>
               </tr>
             </tbody>
@@ -271,14 +282,14 @@ const submit = () => {
         </div>
       </div>
       <div class="w-full ml-2 box-style" style=" height: 65vh; min-width: 31%; margin-top: 60px; ">
-        <div v-if="props.messages != undefined && messageRef" class="ml-2 align-middle rounded-t-lg" style="height: 45px;  ">
-          From: info@spoofix.com <br>
-          To: {{info.email}} <br>
-          Subject: {{messageRef.subject}} <br>
-          Reference: MSG0000{{messageRef.id}}<br>
-          Date: {{date(messageRef.created_at)}} <br>
+        <div v-if="props.messages != undefined && props.info.role_id == 2 || props.info.role_id == 1 && messageRef && activeOne !== 'Inbox'" class="ml-2 align-middle rounded-t-lg" style="height: 45px;  ">
+          <pre style="width: 100%; white-space: pre-wrap"><span class="font-bold">From:</span> info@spoofix.com </pre>
+          <pre class="width: 100%; white-space: pre-wrap"><span class="font-bold">To:</span> {{info.email}} </pre>
+          <pre style="width: 100%; white-space: pre-wrap"><span class="font-bold">Subject:</span> {{messageRef.subject}} </pre>
+          <pre style="width: 100%; white-space: pre-wrap"><span class="font-bold">Reference:</span> MSG0000{{messageRef.id}}</pre>
+          <pre style="width: 100%; white-space: pre-wrap"><span class="font-bold">Date:</span> {{date(messageRef.created_at)}}</pre>
           <br>
-          Dear <span class="capitalize">{{info.name}} {{info.second_name}}</span>, <br>
+          Dear <span class="capitalize">{{info.name}} {{info.second_name}}</span>, <br><br>
 
           I hope this email finds you well. I am writing to inform you about [brief description of the purpose of the email]. We have noted your recent inquiry regarding '{{messageRef.subject}}', and I wanted to provide you with the following information: <br>
           <br>
@@ -294,6 +305,18 @@ const submit = () => {
           <!-- [Your position], <br> -->
           Spoofix<br>
           info@spoofix.com <br>
+        </div>
+        <div v-if="props.messages != undefined && props.info.role_id == 1 && messageRef  && activeOne == 'Inbox'" class="ml-2 align-middle rounded-t-lg" style="height: 60vh; overflow-y:auto; width: 100%;">
+          <!-- From: info@spoofix.com <br>
+          To: {{info.email}} <br> -->
+          <br>
+          <pre style="width: 100%; white-space: pre-wrap;"><span class="font-bold">Subject:</span> {{messageRef.subject}} </pre>
+          <pre style="width: 100%; white-space: pre-wrap;"><span class="font-bold">Reference:</span> {{messageRef.message_id}}</pre>
+          <pre style="width: 100%; white-space: pre-wrap;"><span class="font-bold">From:</span> {{messageRef.from_address}}</pre>
+          <pre style="width: 90%; white-space: pre-wrap;"><span class="font-bold">Date:</span> {{date(messageRef.date)}}</pre>
+          <br>
+          <pre style="width: 90%; white-space: pre-wrap;">{{ messageRef.body }}</pre>
+          <!-- <div v-html="he.decode(messageRef.body)" class="w-full"></div> -->
         </div>
       </div>
     </div>
@@ -582,6 +605,7 @@ line-height: 120%; /* 14.4px */
 .bigDropdownBg{
   background: #FFEFB0;
   margin-right: 30px;
+  margin-left: 26px;
   right: -300px;
 }
 .tableRow1{

@@ -202,8 +202,8 @@ setTimeout(function() {
                   </li>
                   <li class="nav-main-item " :class="{'pl-4': isSidebarOpen, 'pl-3 w-6': !isSidebarOpen }" v-if="$page.props.auth.user.role_id == 1">
                     <Link class="nav-main-link" :href="route('Org_Users')">
-                    <i class="justify-center pt-1 my-2 text-xl text-black rounded nav-icons-background h-9 align-center w-9 nav-main-link-icon fa-solid fa-users" :class="pageTitle === 'Org&Users - Spoofix' ? 'active-bg' : 'nav-icons-background'"></i>
-                    <span class="nav-main-link-name sidenav_text hover:active-text" v-if="isSidebarOpen" :class="pageTitle === 'Org&Users - Spoofix' ? 'active-text sidenav_text' : 'sidenav_text'">Org & Users</span>
+                    <i class="justify-center pt-1 my-2 text-xl text-black rounded nav-icons-background h-9 align-center w-9 nav-main-link-icon fa-solid fa-users" :class="pageTitle === 'Org&Users - Spoofix' || pageTitle === 'User Profile - Spoofix' ? 'active-bg' : 'nav-icons-background'"></i>
+                    <span class="nav-main-link-name sidenav_text hover:active-text" v-if="isSidebarOpen" :class="pageTitle === 'Org&Users - Spoofix' || pageTitle === 'User Profile - Spoofix' ? 'active-text sidenav_text' : 'sidenav_text'">Org & Users</span>
                     </Link>
                   </li>
                   <li class="nav-main-item " :class="{'pl-4': isSidebarOpen, 'pl-3 w-6': !isSidebarOpen }" v-if="$page.props.auth.user.role_id == 1">

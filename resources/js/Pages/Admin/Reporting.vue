@@ -265,6 +265,9 @@ function startDate(inputDateString) {
                   <th class="py-3 text-left">
                     Time Elapsed
                   </th>
+                  <th class="py-3 text-left">
+                    Reported To
+                  </th>
                   <th class="w-24 py-0 text-center">
                     Action
                   </th>
@@ -298,6 +301,9 @@ function startDate(inputDateString) {
                   </td>
                   <td class="text-left py-auto">
                     {{timing(new Date(spoof.created_at))}}
+                  </td>
+                  <td class="text-left text-orange-600 py-auto">
+                    {{ spoof.Reported_to }}/{{spoof.Reported_to_value}}
                   </td>
                   <td class="flex flex-row py-1 max-w-3">
                     <!-- <Link :href="'/spoof/report/' + spoof.id2" class="w-16 py-1 mx-auto transition-all duration-150 ease-linear bg-white tableButton visited:bg-gray-200 active:bg-green-200 hover:bg-yellow-200 focus:outline-none " preserve-scroll>

@@ -522,14 +522,14 @@ function sortbyvalue(update){
 
   <AuthenticatedLayout class="overflow-scroll " style="height: 100vh;">
     <section class="py-1 pt-6 bg-blueGray-50">
-
       <!--  place -->
       <div class="mr-4 lg:mr-7" v-for="(domain, index) in domainList" :key="index">
         <div class="flex items-center justify-between w-full my-2 cursor-pointer md:mx-3 lg:mx-4 h-14 hover:bg-gray-300" style="border-radius: 6px; box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);" id="myDiv" :class="showTable && index == indexStore ? 'bigDropdownBgActive' : 'bigDropdownBg'" @click="toggleTable(index, domain.id), scrollToElement(index)">
-          <div class="ml-5 text-2xl font-semibold text-blueGray-700">
-            <h3 class="orgDomain">
-              <Link :href="'rescan-domain/' + domain.id">{{ domain.domain_name }}</Link>
+          <div class="flex ml-5 font-semibold text-blueGray-700">
+            <h3 class="text-2xl orgDomain">
+              <Link :href="'rescan-domain/' + domain.id"> {{ domain.Organization ? domain.Organization + ':' : "" }} {{ domain.domain_name }}</Link>
             </h3>
+            <!-- <h4 class="my-auto ml-5 text-black">Organization:</h4> -->
           </div>
           <div class="mr-5 botton ">
             <i class="fa" :class="showTable && index == indexStore ? 'fa-chevron-down' : 'fa-chevron-left'" aria-hidden="true"></i>
